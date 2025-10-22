@@ -16,7 +16,7 @@ export default defineNuxtConfig({
   modules: ['@nuxt/image'],
   routeRules: {
     '/api/**': {
-      proxy: 'http://192.168.1.9:1337/api/**', // 将所有 /api 请求代理到您的后端
+      proxy: 'https://zsbzj1zv.p2link.483n.com/api/**', // 将所有 /api 请求代理到您的后端
     },
   },
   css: [
