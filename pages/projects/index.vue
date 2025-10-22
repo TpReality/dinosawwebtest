@@ -146,7 +146,7 @@
                             <div class="more-button-container">
                                 <div class="more-button-wrapper">
                                     <NuxtLink :to="item.url">
-                                    <span class="more-button-text">More</span>
+                                    <span class="more-button-text">{{projectDetail.more_text}}</span>
                                     </NuxtLink>
                                 </div>
                             </div>

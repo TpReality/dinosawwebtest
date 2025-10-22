@@ -92,7 +92,7 @@
         </div>
 
         <h1 class="title">{{ productDetail.affordable_industrial_machine_for_sale_title }}</h1>
-
+<!-- <ClientOnly> -->
         <!-- CNC Wire Saw Machine 部分 - 对应Figma 19:11796 -->
         <template v-for="(item) in wireSawMachineSectionList">
             <div class="wire-saw-machine-section">
@@ -231,7 +231,7 @@
                                             </div>
                                             <div class="product-title-section">
                                                 <div class="product-title-frame">
-                                                    <h3 class="product-title">{{product.title}}</h3>
+                                                    <h3 class="product-title">{{product.h1_page_inner_title}}</h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -255,7 +255,7 @@
                 </div>
             </div>
         </template>
-
+<!-- </ClientOnly> -->
         <!-- What Is An Industry Machine 部分 - 对应Figma 19:13123 -->
         <div class="industry-machine-section">
             <div class="industry-machine-container">
@@ -593,11 +593,11 @@ watch(productDetailRes, (newPosts) => {
         productDetail.value = data
         console.log(newPosts)
         useHead({
-            title: data.metaTitle,
+            title: data.meta_title,
             meta: [
                 {
                     name: 'description',
-                    content: data.metaDescription
+                    content: data.meta_description
                 }
             ],
         })
@@ -617,8 +617,12 @@ watch(topProductDetailRes, (newPosts) => {
                 return sortA - sortB
             })
         }
-        
-        topProduct.value = data
+
+        data.forEach(item => {
+            if(item.home_page_is_show){
+                topProduct.value.push(item)
+            }
+        })
         
         // 确保 productDetail 已经加载完成后再处理关联逻辑
         // if (productDetail.value && Object.keys(productDetail.value).length > 0) {
@@ -1056,7 +1060,7 @@ onMounted(() => {
                 flex-direction: column;
                 align-items: center;
                 width: 100px;
-                height: 136px;
+                height: 116px;
                 background: #fcfcfc;
                 border-radius: 8px;
                 flex-shrink: 0;
@@ -1064,7 +1068,7 @@ onMounted(() => {
 
             img {
                 width: 100px;
-                height: 100px;
+                height: 60px;
                 object-fit: cover;
             }
 
@@ -1669,7 +1673,7 @@ onMounted(() => {
 
     .main-content,
     .content-wrapper {
-        width: 100%;
+        width: 100% !important;
         max-width: 720px;
     }
 
@@ -1698,53 +1702,7 @@ onMounted(() => {
     }
 }
 
-@media (max-width: 768px) {
-    .content-container {
-        flex-direction: column;
-        gap: 20px;
-    }
 
-    .main-title {
-        font-size: 32px;
-    }
-
-    .materials-grid {
-        gap: 8px;
-    }
-
-    .material-item {
-        min-width: 60px;
-        height: 70px;
-    }
-
-    .material-image-mask {
-        width: 36px;
-        height: 36px;
-    }
-
-    .material-title {
-        font-size: 10px;
-    }
-
-    .products-container {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .product-card {
-        width: 100%;
-        max-width: 300px;
-    }
-
-    .discover-more-section {
-        width: 300px;
-        height: 50px;
-    }
-
-    .discover-more-text {
-        font-size: 18px;
-    }
-}
 
 
 
@@ -2692,11 +2650,12 @@ onMounted(() => {
     .expert-guide-main-title {
         font-size: 20px;
         line-height: 1.2em;
-        text-align: center;
+        text-align: left;
         margin-bottom: 16px;
     }
 
     .expert-guide-image-section {
+        display:none;
         width: 100%;
         max-width: 200px;
         height: auto;
@@ -2843,6 +2802,65 @@ onMounted(() => {
     .product-card {
         width: auto;
         max-width: 280px;
+    }
+}
+@media (max-width: 768px) {
+    .wire-saw-container{
+        padding:0 5px;
+    }
+    .content-container {
+        flex-direction: column;
+        gap: 20px;
+        padding:0;
+    }
+
+    .main-title {
+        font-weight:700;
+        font-size: 32px;
+        &.tl{
+            text-align:center !important;
+        }
+
+        .title{
+            font-weight:700;
+        }
+    }
+
+    .materials-grid {
+        gap: 8px;
+    }
+
+    .material-item {
+        min-width: 60px;
+        height: 70px;
+    }
+
+    .material-image-mask {
+        width: 36px;
+        height: 36px;
+    }
+
+    .material-title {
+        font-size: 10px;
+    }
+
+    .products-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .product-card {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .discover-more-section {
+        width: 300px;
+        height: 50px;
+    }
+
+    .discover-more-text {
+        font-size: 18px;
     }
 }
 </style>

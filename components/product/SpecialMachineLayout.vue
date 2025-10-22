@@ -15,7 +15,7 @@
                             <div class="breadcrumb-link">
                                 <div class="breadcrumb-text">
                                     <div class="text-container">
-                                        <NuxtLink to="/" target="_blank"><span class="breadcrumb-home">{{ productDetail.home_text || 'Home' }}</span></NuxtLink>
+                                        <NuxtLink to="/" target="_blank"><span class="breadcrumb-home">{{ productDetail.home_text }}</span></NuxtLink>
                                     </div>
                                 </div>
                                 <div class="breadcrumb-text">
@@ -30,7 +30,7 @@
                                         <div class="dropdown-container">
                                             <div class="dropdown-text-container">
                                                 <NuxtLink to="/Products" target="_blank">
-                                                    <span class="breadcrumb-products">{{ productDetail.products_btn_text || 'Products' }}</span>
+                                                    <span class="breadcrumb-products">{{ productDetail.products_btn_text }}</span>
                                                 </NuxtLink>
                                             </div>
                                         </div>
@@ -66,12 +66,17 @@
                         <div class="badge-background">
                             <div class="badge-content">
                                 <div class="badge-icon">
-                                    <svg width="29" height="29" viewBox="0 0 29 29" fill="none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 19 19">
+                                        <path d="M 15.23 17.219 L 10.005 17.219 C 8.402 17.219 7.125 15.913 7.125 14.339 L 7.125 13.478 C 7.125 11.875 8.431 10.598 10.005 10.598 L 15.23 10.598 C 16.833 10.598 18.109 11.905 18.109 13.478 L 18.109 14.339 C 18.109 15.913 16.803 17.219 15.23 17.219 Z" fill="rgb(242, 203, 104)"></path>
+                                        <path d="M 14.339 16.002 L 4.067 16.002 C 2.642 16.002 1.514 14.844 1.514 13.448 L 1.514 5.255 C 1.514 3.83 2.672 2.702 4.067 2.702 L 14.309 2.702 C 15.734 2.702 16.863 3.859 16.863 5.255 L 16.863 13.419 C 16.892 14.844 15.734 16.002 14.339 16.002 Z M 4.067 3.533 C 3.117 3.533 2.345 4.305 2.345 5.255 L 2.345 13.419 C 2.345 14.369 3.117 15.141 4.067 15.141 L 14.309 15.141 C 15.259 15.141 16.031 14.369 16.031 13.419 L 16.031 5.255 C 16.031 4.305 15.259 3.533 14.309 3.533 Z" fill="rgb(158, 116, 11)"></path>
+                                        <path d="M 5.492 4.869 C 5.255 4.869 5.077 4.691 5.077 4.453 L 5.077 1.484 C 5.077 1.247 5.255 1.069 5.492 1.069 C 5.73 1.069 5.908 1.247 5.908 1.484 L 5.908 4.453 C 5.908 4.691 5.73 4.869 5.492 4.869 Z M 12.617 4.869 C 12.38 4.869 12.202 4.691 12.202 4.453 L 12.202 1.484 C 12.202 1.247 12.38 1.069 12.617 1.069 C 12.855 1.069 13.033 1.247 13.033 1.484 L 13.033 4.453 C 13.033 4.691 12.855 4.869 12.617 4.869 Z M 16.328 7.095 L 2.078 7.095 C 1.841 7.095 1.663 6.917 1.663 6.68 C 1.663 6.442 1.841 6.264 2.078 6.264 L 16.328 6.264 C 16.566 6.264 16.744 6.442 16.744 6.68 C 16.744 6.917 16.566 7.095 16.328 7.095 Z M 6.264 9.767 L 3.414 9.767 C 3.177 9.767 2.998 9.589 2.998 9.352 C 2.998 9.114 3.177 8.936 3.414 8.936 L 6.264 8.936 C 6.502 8.936 6.68 9.114 6.68 9.352 C 6.68 9.589 6.472 9.767 6.264 9.767 Z M 10.539 9.767 L 7.719 9.767 C 7.481 9.767 7.303 9.589 7.303 9.352 C 7.303 9.114 7.481 8.936 7.719 8.936 L 10.569 8.936 C 10.806 8.936 10.984 9.114 10.984 9.352 C 10.984 9.589 10.777 9.767 10.539 9.767 Z M 14.844 9.767 L 11.994 9.767 C 11.756 9.767 11.578 9.589 11.578 9.352 C 11.578 9.114 11.756 8.936 11.994 8.936 L 14.844 8.936 C 15.081 8.936 15.259 9.114 15.259 9.352 C 15.259 9.589 15.081 9.767 14.844 9.767 Z M 6.264 12.736 L 3.414 12.736 C 3.177 12.736 2.998 12.558 2.998 12.32 C 2.998 12.083 3.177 11.905 3.414 11.905 L 6.264 11.905 C 6.502 11.905 6.68 12.083 6.68 12.32 C 6.68 12.558 6.472 12.736 6.264 12.736 Z M 10.539 12.736 L 7.719 12.736 C 7.481 12.736 7.303 12.558 7.303 12.32 C 7.303 12.083 7.481 11.905 7.719 11.905 L 10.569 11.905 C 10.806 11.905 10.984 12.083 10.984 12.32 C 10.984 12.558 10.777 12.736 10.539 12.736 Z" fill="rgb(158, 116, 11)"></path>
+                                    </svg>
+                                    <!-- <svg width="29" height="29" viewBox="0 0 29 29" fill="none">
                                         <circle cx="14.5" cy="14.5" r="14.5" fill="#FFB800" />
                                         <path
                                             d="M14.5 8L16.5 13H22L17.5 16.5L19.5 22L14.5 18.5L9.5 22L11.5 16.5L7 13H12.5L14.5 8Z"
                                             fill="white" />
-                                    </svg>
+                                    </svg> -->
                                 </div>
                                 <div class="badge-text">
                                     <span class="badge-title">{{ productDetail.last_update_date_text }}</span>
@@ -120,10 +125,11 @@
                 <div class="dynamic-product-section" v-if="productDetail.cnc_mono_wire_saw_machine_products && productDetail.cnc_mono_wire_saw_machine_products.length">
                     <!-- 1张图片布局：左侧图片，右侧信息 - 按照Figma节点 10:15239 -->
                     <div v-if="productDetail.cnc_mono_wire_saw_machine_products.length === 1" class="layout-single">
+                        <NuxtLink :to="'/Products/'+productDetail.cnc_mono_wire_saw_machine_products[0].url" target="_blank">
                         <div class="single-container">
                             <div class="single-link">
                                 <div class="single-image">
-                                    <img :src="productDetail.cnc_mono_wire_saw_machine_products[0].first_image_url" />
+                                    <NuxtImg :src="productDetail.cnc_mono_wire_saw_machine_products[0].first_image_url" />
                                 </div>
                                 <div class="single-content">
                                     <div class="single-text-section">
@@ -142,20 +148,23 @@
                                 </div>
                             </div>
                         </div>
+                        </NuxtLink>
                     </div>
                     
                     <!-- 2张图片布局：左右布局 -->
                     <div v-else-if="productDetail.cnc_mono_wire_saw_machine_products.length === 2" class="layout-double">
+                        <template v-for="(product, index) in productDetail.cnc_mono_wire_saw_machine_products" 
+                            :key="index">
+                        <NuxtLink :to="'/Products/'+product.url" target="_blank">
                         <div 
-                            v-for="(product, index) in productDetail.cnc_mono_wire_saw_machine_products" 
-                            :key="index"
+                            
                             class="double-item"
                             :class="product.layout || 'vertical'"
                         >
                             <!-- 垂直布局：上面图片，下面标题 -->
                             <template v-if="!product.layout || product.layout === 'vertical'">
                                 <div class="double-image">
-                                    <img :src="product.first_image_url" :alt="product.h1_page_inner_title" />
+                                    <NuxtImg :src="product.first_image_url" :alt="product.h1_page_inner_title" />
                                 </div>
                                 <div class="double-content">
                                     <h3 class="double-title">{{ product.h1_page_inner_title }}</h3>
@@ -167,7 +176,7 @@
                                 <div class="horizontal-container">
                                     <div class="horizontal-link">
                                         <div class="horizontal-image">
-                                            <img :src="product.first_image_url" :alt="product.h1_page_inner_title" />
+                                            <NuxtImg :src="product.first_image_url" :alt="product.h1_page_inner_title" />
                                         </div>
                                         <div class="horizontal-content">
                                             <div class="horizontal-text-section">
@@ -188,30 +197,39 @@
                                 </div>
                             </template>
                         </div>
+                        </NuxtLink>
+                        </template>
                     </div>
                     
                     <!-- 4张图片布局：2x2网格 -->
                     <div v-else-if="productDetail.cnc_mono_wire_saw_machine_products.length === 4" class="layout-quad">
+                        <template v-for="(product, index) in productDetail.cnc_mono_wire_saw_machine_products" 
+                            :key="index">
+                            <NuxtLink :to="'/Products/'+product.url" target="_blank">
                         <div 
-                            v-for="(product, index) in productDetail.cnc_mono_wire_saw_machine_products" 
-                            :key="index"
+                           
                             class="quad-item"
                         >
                             <div class="quad-image">
-                                <img :src="product.first_image_url" />
+                                <NuxtImg :src="product.first_image_url" />
                             </div>
                             <div class="quad-content">
                                 <h3 class="quad-title">{{ product.h1_page_inner_title }}</h3>
                             </div>
                         </div>
+                        </NuxtLink>
+                        </template>
                     </div>
                     
                     <!-- 5张图片布局：左边1个大图，右边4个小图 -->
                     <div v-else-if="productDetail.cnc_mono_wire_saw_machine_products.length === 5" class="layout-five">
+                       
                         <div class="five-left">
+                             
                             <div class="five-main-image">
-                                <img :src="productDetail.cnc_mono_wire_saw_machine_products[0].first_image_url" />
+                                <NuxtLink :to="'/Products/'+productDetail.cnc_mono_wire_saw_machine_products[0].url" target="_blank"><NuxtImg :src="productDetail.cnc_mono_wire_saw_machine_products[0].first_image_url" /></NuxtLink>
                             </div>
+                            <NuxtLink :to="'/Products/'+productDetail.cnc_mono_wire_saw_machine_products[0].url" target="_blank">
                             <div class="five-main-content">
                                 <h3 class="five-main-title">{{ productDetail.cnc_mono_wire_saw_machine_products[0].h1_page_inner_title }}</h3>
                                 <p class="five-main-date" v-if="productDetail.cnc_mono_wire_saw_machine_products[0].date">{{ productDetail.cnc_mono_wire_saw_machine_products[0].date }}</p>
@@ -221,6 +239,7 @@
                                     <button class="buy-now-btn">{{productDetail.buy_now_text}}</button>
                                 </div>
                             </div>
+                            </NuxtLink>
                         </div>
                         <div class="five-right">
                             <div 
@@ -229,9 +248,13 @@
                                 class="five-grid-item"
                             >
                                 <div class="five-grid-image">
-                                    <img :src="product.first_image_url" />
+                                    <NuxtLink :to="'/Products/'+product.url" target="_blank">
+                                        <NuxtImg :src="product.first_image_url" />
+                                    </NuxtLink>
                                 </div>
-                                <h3 class="five-grid-title">{{ product.h1_page_inner_title }}</h3>
+                                <h3 class="five-grid-title">
+                                    <NuxtLink :to="'/Products/'+product.url" target="_blank">{{ product.h1_page_inner_title }}</NuxtLink>
+                                </h3>
                             </div>
                         </div>
                     </div>
@@ -466,7 +489,7 @@
                         <div class="processing-cases-more-button">
                             <div class="more-button-container">
                                 <div class="more-button-wrapper">
-                                    <span class="more-button-text">More</span>
+                                    <span class="more-button-text">{{productDetail.more_text  }}</span>
                                 </div>
                             </div>
                         </div>
@@ -538,7 +561,7 @@ import { formatDateLong, formatDatesInArray, formatArrayDatesLong, formatArrayDa
 const { data: productDetailRes, pending, error } = await useApi('/product-categories?filters[category_value][$eq]=wire-saw-machine&populate=all')
 watch(productDetailRes, (newPosts) => {
     if (newPosts) {
-        // console.log(newPosts)
+        console.log(newPosts)
         let data = newPosts.data[0]
 
         productDetail = data.wire_saw_machine
@@ -776,12 +799,13 @@ const productData = computed(() => {
     }
 
     .material-types {
+        justify-content:flex-start;
         flex-wrap: wrap;
         height: auto;
     }
 
     .material-item {
-        width: calc(50% - 8px);
+        flex: none;
         margin-bottom: 10px;
     }
 }
@@ -815,7 +839,7 @@ const productData = computed(() => {
     width: 100%;
     max-width: 1200px;
     height: 58px;
-    margin-bottom:30px;
+    margin:0 auto 30px;
 }
 
 .cnc-title {
@@ -839,7 +863,7 @@ const productData = computed(() => {
     width: 100%;
     max-width: 1212px;
     gap: 0;
-    margin-bottom:30px;
+    margin:0 auto 30px;
 }
 
 .cnc-description-text {
@@ -1430,6 +1454,9 @@ const productData = computed(() => {
     .layout-double {
         flex-direction: column;
         gap: 30px;
+        &>a{
+            flex:1;
+        }
     }
     
     .double-item.horizontal {

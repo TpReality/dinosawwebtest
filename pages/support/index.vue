@@ -194,11 +194,11 @@ watch(supportRes, (newPosts) => {
         let data = newPosts.data[0]
         support.value = data
         useHead({
-            title: data.metaTitle,
+            title: data.meta_title,
             meta: [
                 {
                     name: 'description',
-                    content: data.metaDescription
+                    content: data.meta_description
                 }
             ],
         })

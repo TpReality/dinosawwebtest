@@ -62,7 +62,7 @@
 
             <!-- Products Section -->
             <div class="products-section">
-                <div class="products-content">
+                <div class="products-content pc-view">
                     <Swiper :slides-per-view="1" :loop="true" :navigation="{
                         nextEl: '.products-button-next',
                         prevEl: '.products-button-prev',
@@ -112,6 +112,68 @@
                         </SwiperSlide>
                     </Swiper>
 
+                    <!-- Products Navigation Arrows -->
+                    <div class="products-button-prev">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M15 18L9 12L15 6" stroke="white" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <div class="products-button-next">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M9 18L15 12L9 6" stroke="white" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="products-content mobile-view">
+                    <div class="product-swiper"> 
+                 
+                     <div class="products-grid">
+                                
+                                            
+                    <template v-for="(product, index) in productsList" :key="index">
+                        <div class="product-card">
+                                    <NuxtLink :to="product.link" target="_blank">
+                                    <div class="tip" :class="product.tip?'':'visible-hidden'">
+                                        <svg width="20" height="20" viewBox="0 0 22 22" id="svg11753066115">
+                                            <g>
+                                                <path d="M 0 22 L 0 0 L 22 0 L 22 22 Z" fill="transparent"></path>
+                                                <path
+                                                    d="M 21.313 11 C 21.313 11.88 20.231 12.605 20.015 13.417 C 19.791 14.255 20.357 15.424 19.932 16.158 C 19.501 16.904 18.203 16.993 17.598 17.598 C 16.993 18.203 16.904 19.501 16.158 19.932 C 15.424 20.357 14.255 19.791 13.417 20.015 C 12.605 20.231 11.88 21.313 11 21.313 C 10.12 21.313 9.395 20.231 8.583 20.015 C 7.745 19.791 6.576 20.357 5.842 19.932 C 5.096 19.501 5.007 18.203 4.402 17.598 C 3.797 16.993 2.499 16.904 2.068 16.158 C 1.643 15.424 2.209 14.255 1.985 13.417 C 1.769 12.605 0.688 11.88 0.688 11 C 0.688 10.12 1.769 9.395 1.985 8.583 C 2.209 7.745 1.643 6.576 2.068 5.842 C 2.499 5.096 3.797 5.007 4.402 4.402 C 5.007 3.797 5.096 2.499 5.842 2.068 C 6.576 1.643 7.745 2.209 8.583 1.985 C 9.395 1.769 10.12 0.688 11 0.688 C 11.88 0.688 12.605 1.769 13.417 1.985 C 14.255 2.209 15.424 1.643 16.158 2.068 C 16.904 2.499 16.993 3.797 17.598 4.402 C 18.203 5.007 19.501 5.096 19.932 5.842 C 20.357 6.576 19.791 7.745 20.015 8.583 C 20.231 9.395 21.313 10.12 21.313 11 Z"
+                                                    fill="var(--token-79961501-ba44-4ee3-8c49-6bc6cf488241, rgb(67, 157, 241)) /* {&quot;name&quot;:&quot;1&quot;} */">
+                                                </path>
+                                                <path
+                                                    d="M 13.98 7.927 L 10.055 11.853 L 8.02 9.819 C 7.578 9.378 6.861 9.378 6.42 9.819 C 5.978 10.261 5.978 10.978 6.42 11.419 L 9.274 14.274 C 9.704 14.704 10.402 14.704 10.832 14.274 L 15.579 9.527 C 16.02 9.085 16.02 8.369 15.579 7.927 C 15.137 7.485 14.422 7.485 13.98 7.927 Z"
+                                                    fill="rgb(255, 255, 255)"></path>
+                                            </g>
+                                        </svg>
+                                        <span>{{ product.tip }}</span>
+                                    </div>
+                                    <h3 v-html="product.title"></h3>
+                                    <NuxtImg v-if="product.image&&product.image.url" :src="product.image.url" />
+                                    <p>{{ product.materials }}</p>
+                                    <!-- 新增的圆形图片展示区域 -->
+                                    <div class="features-section">
+                                        <div class="features-container" v-if="product.columnList" >
+                                            <template v-for="(item, j) in product.columnList.hero_circle_background_images" :key="j">
+                                                <div class="feature-item" v-if="j < 4">
+                                                    <div class="feature-image" v-if="item.banner_img">
+                                                        <NuxtImg :src="item.banner_img.url"
+                                                            />
+                                                    </div>
+                                                    <div class="feature-label">{{ item.banner_text }}</div>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </div>
+                                    <a class="product-button">{{indexDetail.discover_more_btn_text}}</a>
+                                    </NuxtLink>
+                                </div>
+                    </template>
+                    </div>
+                    </div>
                     <!-- Products Navigation Arrows -->
                     <div class="products-button-prev">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -1126,11 +1188,11 @@ watch(indexRes, (newPosts) => {
         })
         indexDetail.value = data
         useHead({
-            title: data.metaTitle,
+            title: data.meta_title,
             meta: [
                 {
                     name: 'description',
-                    content: data.metaDescription
+                    content: data.meta_description
                 }
             ],
             script: [
@@ -1470,6 +1532,7 @@ const scrollBlogCards = (direction) => {
 .banner-activety{
     width:100%;
     padding:15px 30px;
+    margin:30px 0;
     text-align:center;
 }
 
@@ -1496,6 +1559,10 @@ const scrollBlogCards = (direction) => {
         max-width: 1400px;
         margin: 0 auto;
         padding: 0 20px;
+        display:none;
+        &.pc-view{
+            display:block;
+        }
 
         // Products Navigation Arrows
         .products-button-prev,
@@ -4585,6 +4652,7 @@ const scrollBlogCards = (direction) => {
 // Large Screens (1440px and below)
 @media (max-width: 1440px) {
     .banner-activety{
+        margin:15px 0;
         padding:5px 10px;
     }
     .index-banner {
@@ -5307,11 +5375,25 @@ const scrollBlogCards = (direction) => {
 
     .products-section {
         .products-content {
+            display:none;
+            &.pc-view{
+                display:none;
+            }
+            &.mobile-view{
+
+                display:block;
+                .products-grid{
+                    overflow-x:auto;
+                    grid-template-columns:repeat(8, 1fr);
+                }
+            }
             .products-button-prev {
+                display:none;
                 left: 10px;
             }
 
             .products-button-next {
+                display:none;
                 right: 10px;
             }
         }
@@ -5410,7 +5492,7 @@ const scrollBlogCards = (direction) => {
         .testimonial-card {
             width: 100%;
             max-width: 320px;
-            height: auto;
+            min-height: 410px;
             padding: 20px;
 
             .testimonial-content {
@@ -5502,7 +5584,7 @@ const scrollBlogCards = (direction) => {
                 flex-direction: column;
                 margin-top: 30px;
                 width: 228px;
-                margin: 40px auto 0;
+                margin: 30px auto 0;
 
                 .button-primary {
                     width: 228px;
@@ -5649,44 +5731,45 @@ const scrollBlogCards = (direction) => {
 
                         h3 {
                             width: 100%;
-                            max-width: 148px;
+                            height:39px;
                             font-family: Inter;
-                            font-size: 14px;
+                            font-size: 16px;
                             font-weight: 700;
                             line-height: 1.2;
                             text-align: center;
                             color: #3d3d3d;
-                            margin: 179px 0 0 0;
+                            margin: 60px 0 0 0;
                             padding: 0 6px;
                             order: 2;
                         }
 
                         img {
                             width: 100%;
-                            max-width: 148px;
-                            height: auto;
+                            height:129px;
+                            max-width: 129px;
                             border-radius: 8px;
-                            margin: 58px 0 42px 0;
+                            margin: 0 auto 20px;
+                            object-fit: contain;
                             order: 1;
                         }
 
                         p {
                             width: 100%;
-                            max-width: 148px;
+                            max-width: 155px;
                             font-family: Inter;
                             font-size: 12px;
                             font-weight: 300;
                             line-height: 1.2;
                             text-align: center;
                             color: #3d3d3d;
-                            margin: 0 0 10px 0;
+                            margin: 0 auto 10px;
                             order: 3;
                         }
 
                         .features-section {
                             width: 100%;
                             max-width: 160px;
-                            margin: 10px 0;
+                            margin: 10px auto;
                             order: 4;
 
                             .features-container {
@@ -5695,6 +5778,7 @@ const scrollBlogCards = (direction) => {
                                 justify-content: center;
                                 align-items: center;
                                 gap: 10px;
+                                margin:0 auto;
 
                                 .feature-item {
                                     display: flex;
@@ -5705,6 +5789,7 @@ const scrollBlogCards = (direction) => {
                                     .feature-image {
                                         width: 24px;
                                         height: 24px;
+                                        margin-bottom:0;
                                         border-radius: 50%;
                                         overflow: hidden;
 
@@ -5731,14 +5816,16 @@ const scrollBlogCards = (direction) => {
 
                         .product-button {
                             width: 100%;
-                            max-width: 136px;
+                            max-width: 150px;
                             height: 24px;
+                            line-height:24px;
                             background: #000000;
                             border-radius: 21px;
                             display: flex;
                             align-items: center;
                             justify-content: center;
-                            margin: 20px 0 40px 0;
+                            margin: 20px auto 40px;
+                            padding:0;
                             font-size:12px;
                             order: 5;
 
@@ -6377,6 +6464,7 @@ const scrollBlogCards = (direction) => {
                         .cta-container {
                             left: 50%;
                             transform: translateX(-50%);
+                            height:100%;
 
                             .cta-content {
                                 .cta-text {

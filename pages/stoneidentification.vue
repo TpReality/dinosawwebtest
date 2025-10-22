@@ -301,20 +301,20 @@ const currentPage = ref(1)
 
 // 获取产品详情数据
 const stones = ref({})
-const { data: stoneRes, pending, error } = await useApi('/stoneidentifications??filters[home_text][$eq]=Home')
+const { data: stoneRes, pending, error } = await useApi('/product-categories?filters[category_value][$eq]=stoneidentification&populate=all')
 
 // 监听产品数据变化，设置页面元信息
 watch(stoneRes, (newPosts) => {
     if (newPosts) {
         console.log(newPosts)
-        let data = newPosts.data[0]
+        let data = newPosts.data[0].stoneidentification
         stones.value = data
         useHead({
-            title: data.metaTitle,
+            title: data.meta_title,
             meta: [
                 {
                     name: 'description',
-                    content: data.metaDescription
+                    content: data.meta_description
                 }
             ],
         })

@@ -7,7 +7,7 @@
                 <div class="breadcrumb-link">
                     <div class="breadcrumb-text">
                         <div class="text-container">
-                            <span class="breadcrumb-home"><NuxtLink to="/">Home</NuxtLink></span>
+                            <span class="breadcrumb-home"><NuxtLink to="/">{{ contentDetail.home_text }}</NuxtLink></span>
                         </div>
                     </div>
                     <div class="breadcrumb-text">
@@ -17,7 +17,7 @@
                     </div>
                     <div class="breadcrumb-text">
                         <div class="text-container">
-                            <span>Contact</span>
+                            <span>{{ contentDetail.contact_text }}</span>
                         </div>
                     </div>
                 </div>
@@ -104,19 +104,19 @@ await initializeMenuData()
 const { contentDetail, isLoaded } = useContentDetail()
 
 // 使用 useFetch 获取数据
-const { data: contactRes, pending, error } = await useApi('/contacts?filters[url][$eq]=contact')
+const { data: contactRes, pending, error } = await useApi('/product-categories?filters[category_value][$eq]=contact&populate=all')
 const contact = ref({})
 watch(contactRes, (newPosts) => {
     if (newPosts) {
         console.log(newPosts)
-        let data = newPosts.data[0]
+        let data = newPosts.data[0].contact
         contact.value = data
         useHead({
-            title: data.metaTitle,
+            title: data.meta_title,
             meta: [
                 {
                     name: 'description',
-                    content: data.metaDescription
+                    content: data.meta_description
                 }
             ],
         })

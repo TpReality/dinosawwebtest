@@ -178,7 +178,7 @@
                         <div class="processing-cases-more-button">
                             <div class="more-button-container">
                                 <div class="more-button-wrapper">
-                                    <span class="more-button-text">Load More</span>
+                                    <span class="more-button-text">{{ support.load_more_text }}</span>
                                 </div>
                             </div>
                         </div>
@@ -238,6 +238,12 @@ watch(supportRes, (newPosts) => {
 
 </script>
 <style scoped lang="scss">
+
+.processing-cases-section{
+    .background-image{
+        background:transparent;
+    }
+}
 @media (max-width: 1440px) {
     .projects-banner {
         height: auto;

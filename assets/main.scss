@@ -379,10 +379,10 @@ figure {
     color: #000;
     font-size: 48px;
     font-weight: 800;
-    line-height: 1.1em;
+    line-height: 1.2em;
     margin: 0;
     .title{
-        line-height: 1.1em;
+        line-height: 1.2em;
         font-size:48px;
     }
 }
@@ -745,6 +745,10 @@ figure {
     background-repeat: no-repeat;
     border-radius: 24px 24px 0px 0px;
     cursor:pointer;
+    img{
+        height:100%;
+        object-fit: cover;
+    }
 }
 
 .cement-case {
@@ -1165,6 +1169,9 @@ figure {
     display: flex;
     gap: 24px;
     align-items: stretch;
+    a{
+        flex:1;
+    }
 }
 
 .double-item {
@@ -1638,6 +1645,9 @@ figure {
     .five-main-title {
         font-size: 20px;
         line-height: 1.2em;
+    }
+    .five-subtitle{
+        font-size:18px;
     }
     
     .double-title,

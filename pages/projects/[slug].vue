@@ -75,8 +75,17 @@
                     <div class="title-section">
                         <h1 class="main-title">
                             {{ projects.hero_main_before_title }}
-                            <span class="title">{{ projects.hero_main_after_title }}</span>
-                            <div>{{ projects.hero_main_center_title }}</div>
+
+                            <template v-if="slug == 'marble-projects'">
+                                <span class="title">{{ projects.hero_main_center_title }}</span>
+                                <div>{{ projects.hero_main_after_title }}</div>
+                            </template>
+                            <template v-else>
+                                <span class="title">{{ projects.hero_main_center_subtitle }}</span>
+                                <div>{{ projects.hero_main_after_subtitle }}</div>
+                            </template>
+                                  
+                           
                         </h1>
                     </div>
                     <div class="description-section">
@@ -204,7 +213,7 @@ watch(projectsRes, (newPosts) => {
         if(slug == 'marble-projects'){
             data = newPosts.data[0].marble_project
             processingCase = [
-                { id: 1, beforeTitle: data.your_favorite_marble_projects_before_title, afterTitle:data.your_favorite_marble_projects_after_title, subTitle: data.your_favorite_marble_projects_center_title, text:"", blogs:formatArrayDatesShort(data.your_favorite_marble_projects_blogs),url:"" },
+                { id: 1, beforeTitle: data.your_favorite_marble_projects_before_title, afterTitle:data.your_favorite_marble_projects_center_title, subTitle: data.your_favorite_marble_projects_after_title, text:"", blogs:formatArrayDatesShort(data.your_favorite_marble_projects_blogs),url:"" },
                 { id: 2, beforeTitle: "", afterTitle:data.after_sales_video_title, subTitle: data.after_sales_video_subtitle, text:data.after_sales_video_description, blogs:formatArrayDatesShort(data.after_sales_video_blogs), url:"/video"},
                 { id: 3, beforeTitle: "", afterTitle:data.most_popular_marble_machines_title, subTitle: data.most_popular_marble_machines_subtitle, text:"", blogs:formatArrayDatesShort(data.most_popular_marble_machines_products),url:"" }
             ]

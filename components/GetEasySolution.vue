@@ -14,14 +14,7 @@
                                     {{ contentDetail.get_easy_solution }}
                                 </h2>
                                 <div class="contact-description">
-                                    <p>Are you looking for the perfect cutting machines or processing solutions for hard
-                                        and brittle materials?</p>
-                                    <p>Facing challenges in stone quarrying, countertop cutting, concrete and underwater
-                                        pipeline cutting, stainless steel rust removal and grinding, luxury thin slab
-                                        cutting, agate and gemstone cutting, graphite cutting, or even building
-                                        demolition?</p>
-                                    <p>Leave your inquiry, and you can expect a reply within 12 hours with tailored
-                                        solutions!</p>
+                                    <p v-html="contentDetail.get_easy_solution_description"></p>
                                 </div>
                             </div>
 
@@ -71,14 +64,26 @@
                             <div class="trusted-companies" v-if="getEasySolutionType == 3">
                                 <div class="companies-logos">
                                     <div class="logo-row">
-                                        <div class="company-logo logo-1"></div>
-                                        <div class="company-logo logo-2"></div>
+                                        <div class="company-logo logo-1">
+                                            <NuxtImg src="https://framerusercontent.com/images/9VBNkEzTsVqAIvrdaB9TM98Mm4.png" />
+                                        </div>
+                                        <div class="company-logo logo-2">
+                                            <NuxtImg src="https://framerusercontent.com/images/Dn8kbOm6roEzSQcWFSOWeQDoo.jpg" />
+                                        </div>
                                     </div>
                                     <div class="logo-row">
-                                        <div class="company-logo logo-3"></div>
-                                        <div class="company-logo logo-4"></div>
-                                        <div class="company-logo logo-5"></div>
-                                        <div class="company-logo logo-6"></div>
+                                        <div class="company-logo logo-3">
+                                            <NuxtImg src="https://framerusercontent.com/images/9gfhjO5p4BndZRR1S6iyCOd0.png" />
+                                        </div>
+                                        <div class="company-logo logo-4">
+                                            <NuxtImg src="https://framerusercontent.com/images/SRkkRttgodeVP1UDwBpzx3CXM.png" />
+                                        </div>
+                                        <div class="company-logo logo-5">
+                                            <NuxtImg src="https://framerusercontent.com/images/f6JbMVOW0aC3lmb8RmX75F0hsjM.jpg" />
+                                        </div>
+                                        <div class="company-logo logo-6">
+                                            <NuxtImg src="https://framerusercontent.com/images/JhGd8K0tLprFzPwik4sXB8ICkrQ.jpg" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -97,13 +102,15 @@
                                                 <div class="select-wrapper">
                                                     <select class="select-display" required v-model="form.types">
                                                         <option value="" disabled="" selected="">{{ contentDetail.what_type_of_CNC_machine_or_diamond_placeholder_text }}</option>
-                                                        <option value="Wire saw machine series">Wire saw machine series</option>
+                                                        <option :value="type.category_name" v-for="type in topProduct" :key="type.id">{{ type.category_name }}</option>
+                                                        
+                                                        <!-- <option value="Wire saw machine series">Wire saw machine series</option>
                                                         <option value="Circular Saw Machine">Circular Saw Machine</option>
                                                         <option value="Drilling and Engraving Machine">Drilling and Engraving Machine</option>
                                                         <option value="Grinding and Polishing Machine">Grinding and Polishing Machine</option>
                                                         <option value="Mining and Quarrying Machine">Mining and Quarrying Machine</option>
                                                         <option value="Other Industry Machine">Other Industry Machine</option>
-                                                        <option value=" Diamond Tools"> Diamond Tools</option>
+                                                        <option value=" Diamond Tools"> Diamond Tools</option> -->
                                                     </select>
                                                     <div class="select-icon">
                                                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -240,8 +247,7 @@
                             <div class="contact-header">
                                 <h2 class="contact-title">{{ contentDetail.get_easy_solution }}</h2>
                                 <div class="contact-description">
-                                    <p>Need some customized industry machines,diamond tools or technical support?</p>
-                                    <p>Get in touch with us and we will contact you within 15 minutes!</p>
+                                    <p v-html="contentDetail.get_easy_solution_description_1"></p>
                                 </div>
                             </div>
 
@@ -293,113 +299,136 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import emailjs from '@emailjs/browser';
 import { EMAIL_CONFIG, sendEmailViaEmailJS } from '../utils/emailConfig.js';
 
-export default {
-  name: 'GetEasySolution',
-  data(){
-    return {
-        form:{
-            types:"",
-            materials:"",
-            name:"",
-            contactInfo:"",
-            yourRequirements:""
-        },
-        isSubmitting: false
+// Props 定义
+const props = defineProps({
+  contentDetail: {
+    type: Object,
+    default: () => ({})
+  },
+  getEasySolutionType: {
+    type: Number,
+    default: 1
+  }
+})
+
+// 响应式数据
+const topProduct = ref([])
+const form = ref({
+  types: "",
+  materials: "",
+  name: "",
+  contactInfo: "",
+  yourRequirements: ""
+})
+const isSubmitting = ref(false)
+
+// 获取产品数据
+const { data: topProductDetailRes, pending: topPending, error: topError } = await useApi('/product-categories?filters[parent_category_value][$eq]=Products&populate=all')
+
+// 监听产品数据变化
+watch(topProductDetailRes, (newPosts) => {
+  if (newPosts) {
+    let data = newPosts.data
+    
+    // 根据 sort 字段从小到大排序
+    if (Array.isArray(data)) {
+      data = data.sort((a, b) => {
+        // 确保 sort 字段存在，如果不存在则视为最大值
+        const sortA = a.sort !== undefined ? a.sort : Number.MAX_SAFE_INTEGER
+        const sortB = b.sort !== undefined ? b.sort : Number.MAX_SAFE_INTEGER
+        return sortA - sortB
+      })
     }
-  },
-  props:{
-        contentDetail:{
-            type:Object,
-            default:()=>{}
-        },
-        getEasySolutionType:{
-            type:Number,
-            default:1
-        }
-  },
+    
+    topProduct.value = data
+  }
+}, { immediate: true })
 
-  methods:{
-    async submitForm() {
-      // 验证表单
-      if (!this.validateForm()) {
-        return;
-      }
+// 计算属性
+const topProducts = computed(() => topProduct.value)
 
-      this.isSubmitting = true;
+// 方法
+const submitForm = async () => {
+  // 验证表单
+  if (!validateForm()) {
+    return;
+  }
 
-      try {
-        // 构建邮件内容
-        const emailContent = this.buildEmailContent();
-        
-        // 发送邮件
-        await this.sendEmail(emailContent);
-        
-        // 显示成功消息
-        this.showMessage('success', 'Your inquiry has been submitted successfully! We will contact you within 12 hours.');
-        
-        // 重置表单
-        this.resetForm();
-        
-      } catch (error) {
-        console.error('Failed to submit form:', error);
-        this.showMessage('error', 'Failed to submit your inquiry. Please try again or contact us directly.');
-      } finally {
-        this.isSubmitting = false;
-      }
-    },
+  isSubmitting.value = true;
 
-    validateForm() {
-      const { types, materials, name, contactInfo } = this.form;
-      
-      // 对于产品询价表单（类型1和3），需要验证 types 和 materials
-      if (this.getEasySolutionType === 1 || this.getEasySolutionType === 3) {
-        if (!types || types.trim() === '') {
-          this.showMessage('warning', 'Please select a CNC machine type.');
-          return false;
-        }
-        
-        if (!materials || materials.trim() === '') {
-          this.showMessage('warning', 'Please select the materials you will be working with.');
-          return false;
-        }
-      }
-      
-      if (!name.trim()) {
-        this.showMessage('warning', 'Please enter your name.');
-        return false;
-      }
-      
-      if (!contactInfo.trim()) {
-        this.showMessage('warning', 'Please enter your contact information.');
-        return false;
-      }
-      
-      // 验证邮箱或电话格式
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
-      const cleanContact = contactInfo.replace(/[\s\-]/g, '');
-      
-      if (!emailRegex.test(contactInfo) && !phoneRegex.test(cleanContact)) {
-        this.showMessage('warning', 'Please enter a valid email address or phone number.');
-        return false;
-      }
-      
-      return true;
-    },
+  try {
+    // 构建邮件内容
+    const emailContent = buildEmailContent();
+    
+    // 发送邮件
+    await sendEmail(emailContent);
+    
+    // 显示成功消息
+    showMessage('success', 'Your inquiry has been submitted successfully! We will contact you within 12 hours.');
+    
+    // 重置表单
+    resetForm();
+    
+  } catch (error) {
+    console.error('Failed to submit form:', error);
+    showMessage('error', 'Failed to submit your inquiry. Please try again or contact us directly.');
+  } finally {
+    isSubmitting.value = false;
+  }
+}
 
-    buildEmailContent() {
-      const { types, materials, name, contactInfo, yourRequirements } = this.form;
-      
-      let subject = '';
-      let content = '';
-      
-      if (this.getEasySolutionType === 2) {
-        subject = `Support Request from ${name}`;
-        content = `
+const validateForm = () => {
+  const { types, materials, name, contactInfo } = form.value;
+  
+  // 对于产品询价表单（类型1和3），需要验证 types 和 materials
+  if (props.getEasySolutionType === 1 || props.getEasySolutionType === 3) {
+    if (!types || types.trim() === '') {
+      showMessage('warning', 'Please select a CNC machine type.');
+      return false;
+    }
+    
+    if (!materials || materials.trim() === '') {
+      showMessage('warning', 'Please select the materials you will be working with.');
+      return false;
+    }
+  }
+  
+  if (!name.trim()) {
+    showMessage('warning', 'Please enter your name.');
+    return false;
+  }
+  
+  if (!contactInfo.trim()) {
+    showMessage('warning', 'Please enter your contact information.');
+    return false;
+  }
+  
+  // 验证邮箱或电话格式
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+  const cleanContact = contactInfo.replace(/[\s\-]/g, '');
+  
+  if (!emailRegex.test(contactInfo) && !phoneRegex.test(cleanContact)) {
+    showMessage('warning', 'Please enter a valid email address or phone number.');
+    return false;
+  }
+  
+  return true;
+}
+
+const buildEmailContent = () => {
+  const { types, materials, name, contactInfo, yourRequirements } = form.value;
+  
+  let subject = '';
+  let content = '';
+  
+  if (props.getEasySolutionType === 2) {
+    subject = `Support Request from ${name}`;
+    content = `
 New Support Request:
 
 Name: ${name}
@@ -407,10 +436,10 @@ Contact: ${contactInfo}
 Support Needed: ${yourRequirements || 'Not specified'}
 
 Submitted at: ${new Date().toLocaleString()}
-        `.trim();
-      } else {
-        subject = `New Inquiry from ${name}`;
-        content = `
+    `.trim();
+  } else {
+    subject = `New Inquiry from ${name}`;
+    content = `
 New Customer Inquiry:
 
 Name: ${name}
@@ -420,76 +449,77 @@ Materials: ${materials || 'Not specified'}
 Requirements: ${yourRequirements || 'Not specified'}
 
 Submitted at: ${new Date().toLocaleString()}
-        `.trim();
-      }
-      
-      return { subject, content };
-    },
+    `.trim();
+  }
+  
+  return { subject, content };
+}
 
-    async sendEmail({ subject, content }) {
-      try {
-        // 初始化 EmailJS
-        emailjs.init(EMAIL_CONFIG.PUBLIC_KEY);
+const sendEmail = async ({ subject, content }) => {
+  try {
+    // 初始化 EmailJS
+    emailjs.init(EMAIL_CONFIG.PUBLIC_KEY);
 
-        // 构建邮件参数
-        const templateParams = {
-          to_email: EMAIL_CONFIG.RECIPIENT_EMAIL,  // jun524404@gmail.com
-          to_name: EMAIL_CONFIG.RECIPIENT_NAME,
-          from_name: this.form.name,
-          from_email: this.form.contactInfo,
-          subject: subject,
-          message: content,
-          cnc_type: this.form.types || '',
-          raw_materials: this.form.materials || '',
-          requirements: this.form.yourRequirements || '',
-          contact_info: this.form.contactInfo,
-          submit_time: new Date().toLocaleString(),
-          // 额外的表单类型标识
-          form_type: this.getEasySolutionType === 2 ? 'Support Request' : 'Product Inquiry',
-          // 确保收件人正确
-          recipient_email: 'jun524404@gmail.com'
-        };
+    // 构建邮件参数
+    const templateParams = {
+      to_email: EMAIL_CONFIG.RECIPIENT_EMAIL,  // jun524404@gmail.com
+      to_name: EMAIL_CONFIG.RECIPIENT_NAME,
+      from_name: form.value.name,
+      from_email: form.value.contactInfo,
+      subject: subject,
+      message: content,
+      cnc_type: form.value.types || '',
+      raw_materials: form.value.materials || '',
+      requirements: form.value.yourRequirements || '',
+      contact_info: form.value.contactInfo,
+      submit_time: new Date().toLocaleString(),
+      // 额外的表单类型标识
+      form_type: props.getEasySolutionType === 2 ? 'Support Request' : 'Product Inquiry',
+      // 确保收件人正确
+      recipient_email: 'jun524404@gmail.com'
+    };
 
-        console.log('📧 发送邮件参数:', templateParams);
+    console.log('📧 发送邮件参数:', templateParams);
 
-        // 使用配置文件发送邮件
-        const response = await sendEmailViaEmailJS(templateParams);
-        
-        console.log('✅ 邮件发送成功:', response);
-        return response;
+    // 使用配置文件发送邮件
+    const response = await sendEmailViaEmailJS(templateParams);
+    
+    console.log('✅ 邮件发送成功:', response);
+    return response;
 
-      } catch (error) {
-        console.error('❌ EmailJS 发送失败:', error);
-        
-        // 备用方案：使用 mailto
-        const mailtoLink = `mailto:${EMAIL_CONFIG.RECIPIENT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(content)}`;
-        window.open(mailtoLink, '_blank');
-        
-        // 抛出友好的错误信息
-        throw new Error('邮件发送失败，已为您打开邮件客户端作为备用方案');
-      }
-    },
+  } catch (error) {
+    console.error('❌ EmailJS 发送失败:', error);
+    
+    // 备用方案：使用 mailto
+    const mailtoLink = `mailto:${EMAIL_CONFIG.RECIPIENT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(content)}`;
+    window.open(mailtoLink, '_blank');
+    
+    // 抛出友好的错误信息
+    throw new Error('邮件发送失败，已为您打开邮件客户端作为备用方案');
+  }
+}
 
-    resetForm() {
-      this.form = {
-        types: "",
-        materials: "",
-        name: "",
-        contactInfo: "",
-        yourRequirements: ""
-      };
-    },
+const resetForm = () => {
+  form.value = {
+    types: "",
+    materials: "",
+    name: "",
+    contactInfo: "",
+    yourRequirements: ""
+  };
+}
 
-    showMessage(type, message) {
-      // 如果有UI框架的消息组件，使用它
-      if (this.$message && this.$message[type]) {
-        this.$message[type](message);
-      } else if (this.$toast && this.$toast[type]) {
-        this.$toast[type](message);
-      } else {
-        // 备用方案：使用原生alert
-        alert(message);
-      }
+const showMessage = (type, message) => {
+  // 使用 Nuxt 3 推荐的通知方式
+  if (process.client) {
+    // 可以使用 useNuxtApp() 来访问应用实例
+    const { $toast } = useNuxtApp()
+    
+    if ($toast && $toast[type]) {
+      $toast[type](message);
+    } else {
+      // 备用方案：使用原生alert
+      alert(message);
     }
   }
 }
@@ -869,7 +899,6 @@ Submitted at: ${new Date().toLocaleString()}
                 }
                 
                 .company-logo {
-                    background: #f0f0f0;
                     border-radius: 4px;
                     display: flex;
                     align-items: center;
@@ -878,37 +907,31 @@ Submitted at: ${new Date().toLocaleString()}
                     &.logo-1 {
                         width: 262px;
                         height: 31px;
-                        background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
                     }
                     
                     &.logo-2 {
                         width: 107px;
                         height: 45px;
-                        background: linear-gradient(135deg, #059669 0%, #10B981 100%);
                     }
                     
                     &.logo-3 {
                         width: 63px;
                         height: 52px;
-                        background: linear-gradient(135deg, #DC2626 0%, #EF4444 100%);
                     }
                     
                     &.logo-4 {
                         width: 119px;
                         height: 35px;
-                        background: linear-gradient(135deg, #7C2D12 0%, #EA580C 100%);
                     }
                     
                     &.logo-5 {
                         width: 122px;
                         height: 41px;
-                        background: linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%);
                     }
                     
                     &.logo-6 {
                         width: 82px;
                         height: 34px;
-                        background: linear-gradient(135deg, #BE185D 0%, #EC4899 100%);
                     }
                 }
             }

@@ -25,7 +25,7 @@
             <div class="breadcrumb-link">
             <div class="breadcrumb-text">
                 <div class="text-container">
-                <span class="breadcrumb-home"><a href="/" target="_blank">Home</a></span>
+                <span class="breadcrumb-home"><a href="/" target="_blank">{{contentDetail.home_text}}</a></span>
                 </div>
             </div>
             <div class="breadcrumb-text">
@@ -39,7 +39,7 @@
                     <div class="dropdown-link">
                       <div class="dropdown-container">
                           <div class="dropdown-text-container">
-                          <span class="breadcrumb-products"><a href="/blog" target="_blank">{{ breadcrumbText }}</a></span>
+                          <span class="breadcrumb-products"><a href="/blog" target="_blank">{{ contentDetail.blog_detail_menu_text }}</a></span>
                           </div>
                       </div>
                       <div class="dropdown-icon-container">
@@ -188,7 +188,7 @@
           <!-- 文章卡片 1 -->
            <template v-for="(item, index) in blogList" :key="index">
           <div class="idea-card" v-if="index >5">
-            <NuxtLink :to="'/blog/'+item.slug" class="idea-link">
+            <NuxtLink :to="'/blog/'+item.slug" target="_blank" class="idea-link">
               <div class="idea-image">
                 <NuxtImg :src="item.first_image_url"  />
               </div>
@@ -216,7 +216,7 @@
         
         <div class="other-blogs-navigation">
           <!-- Previous Blogs 按钮 -->
-          <NuxtLink to="/blog/previous" class="blog-nav-link previous-link">
+          <NuxtLink class="blog-nav-link previous-link">
             <div class="nav-icon-container">
               <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
                 <path d="M20 24L12 16L20 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -228,7 +228,7 @@
           </NuxtLink>
 
           <!-- Next Blogs 按钮 -->
-          <NuxtLink to="/blog/next" class="blog-nav-link next-link">
+          <NuxtLink class="blog-nav-link next-link">
             <div class="nav-text-container">
               <p>{{ contentDetail.next_blogs_text }}</p>
             </div>

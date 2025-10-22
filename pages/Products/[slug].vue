@@ -17,6 +17,7 @@
                 v-else
                 :slug="slug"
                 :topProduct="topProduct"
+                :contentDetail="contentDetail"
                 @headdata-loaded="handleHead"
             />
         </template>

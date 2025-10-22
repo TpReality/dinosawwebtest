@@ -5,10 +5,8 @@
             <!-- Background Images -->
             <div class="hero-background">
                 <div class="bg-left">
-                    <!-- <img src="/images/product/hero-bg-left.webp" alt="Hero Background Left" /> -->
                 </div>
                 <div class="bg-right">
-                    <!-- <img src="/images/product/hero-bg-right.webp" alt="Hero Background Right" /> -->
                 </div>
                 <!-- Gradient Overlay -->
                 <div class="gradient-overlay"></div>
@@ -22,7 +20,7 @@
                             <div class="breadcrumb-link">
                                 <div class="breadcrumb-text">
                                     <div class="text-container">
-                                        <NuxtLink to="/" target="_blank"><span class="breadcrumb-home">{{productDetail.home_text }}</span></NuxtLink>
+                                        <NuxtLink to="/" target="_blank"><span class="breadcrumb-home">{{contentDetail.home_text }}</span></NuxtLink>
                                     </div>
                                 </div>
                                 <div class="breadcrumb-text">
@@ -37,7 +35,7 @@
                                         <div class="dropdown-container">
                                             <div class="dropdown-text-container">
                                                 <NuxtLink to="/Products" target="_blank">
-                                                    <span class="breadcrumb-products">{{productDetail.products_btn_text}}</span>
+                                                    <span class="breadcrumb-products">{{contentDetail.product_detail_menu_text}}</span>
                                                 </NuxtLink>
                                             </div>
                                         </div>
@@ -70,7 +68,9 @@
                                 </div>
                                 <div class="breadcrumb-text">
                                     <div class="text-container">
-                                        <span> {{ props.slug }}</span>
+                                        <NuxtLink to="/" target="_blank">
+                                            <span> {{ productDetail.category }}</span>
+                                        </NuxtLink>
                                     </div>
                                 </div>
                             </div>
@@ -108,14 +108,14 @@
                             <!-- Action Buttons -->
                             <div class="action-buttons">
                                 <button class="btn-primary">
-                                    <span>Get A Quote</span>
+                                    <span>{{contentDetail.get_a_quote_text}}</span>
                                 </button>
                                 <button class="btn-whatsapp">
                                     <div class="btn-content">
                                         <div class="whatsapp-icon">
                                             <NuxtImg src="https://framerusercontent.com/images/Gvfk53Mm3Aro3nRYf1sD677a4.png?width=100&height=100" />
                                         </div>
-                                        <span>WhatsApp</span>
+                                        <span>{{ contentDetail.whats_app_title }}</span>
                                     </div>
                                 </button>
                             </div>
@@ -141,7 +141,7 @@
                         <div class="nav-item">
                             <a class="nav-link" @click="scrollToSection('compatible-materials-section')">
                                 <div class="nav-link-content">
-                                    <p class="nav-link-text">{{ productDetail.material_main_title }}</p>
+                                    <p class="nav-link-text">{{ contentDetail.product_detail_application_materail_tab_1 }}</p>
                                 </div>
                             </a>
                         </div>
@@ -149,7 +149,7 @@
                         <div class="nav-item">
                             <a class="nav-link" @click="scrollToSection('cases-section')">
                                 <div class="nav-link-content">
-                                    <p class="nav-link-text">Cases</p>
+                                    <p class="nav-link-text">{{ contentDetail.product_detail_application_materail_tab_2 }}</p>
                                 </div>
                             </a>
                         </div>
@@ -157,7 +157,7 @@
                         <div class="nav-item">
                             <a class="nav-link" @click="scrollToSection('specs-section')">
                                 <div class="nav-link-content">
-                                    <p class="nav-link-text">Specs</p>
+                                    <p class="nav-link-text">{{ contentDetail.product_detail_application_materail_tab_3 }}</p>
                                 </div>
                             </a>
                         </div>
@@ -165,7 +165,7 @@
                         <div class="nav-item">
                             <a class="nav-link" @click="scrollToSection('core-benefits')">
                                 <div class="nav-link-content">
-                                    <p class="nav-link-text">Core Benefits</p>
+                                    <p class="nav-link-text">{{ contentDetail.product_detail_application_materail_tab_4 }}</p>
                                 </div>
                             </a>
                         </div>
@@ -173,7 +173,7 @@
                         <div class="nav-item">
                             <a class="nav-link" @click="scrollToSection('faq-section')">
                                 <div class="nav-link-content">
-                                    <p class="nav-link-text">FAQs</p>
+                                    <p class="nav-link-text">{{ contentDetail.product_detail_application_materail_tab_5 }}</p>
                                 </div>
                             </a>
                         </div>
@@ -181,7 +181,7 @@
                         <div class="nav-item">
                             <a class="nav-link" @click="scrollToSection('certifications-section')">
                                 <div class="nav-link-content">
-                                    <p class="nav-link-text">Certification</p>
+                                    <p class="nav-link-text">{{ contentDetail.product_detail_application_materail_tab_6 }}</p>
                                 </div>
                             </a>
                         </div>
@@ -189,7 +189,7 @@
                         <div class="nav-item">
                             <a class="nav-link" @click="scrollToSection('solutions-section')">
                                 <div class="nav-link-content">
-                                    <p class="nav-link-text">Solutions</p>
+                                    <p class="nav-link-text">{{ contentDetail.product_detail_application_materail_tab_7 }}</p>
                                 </div>
                             </a>
                         </div>
@@ -252,7 +252,7 @@
                 <div class="expert-consultation">
                     <button class="expert-btn">
                         <NuxtLink to="https://api.whatsapp.com/send?phone=8619859013937&Hi Lizzy,I want to know more detail information">
-                            <span>Consult DINOSAW Material Expert → </span>
+                            <span>{{contentDetail.product_detail_consult_dinosaw_material_expert_btn_text}}</span>
                         </NuxtLink>
                     </button>
                 </div>
@@ -280,7 +280,7 @@
                                     <p class="case-description" v-html="productDetail.application_scenario_description_1"></p>
                                     <div class="case-action">
                                         <button class="case-btn">
-                                            <span>{{productDetail.button_text_1}} →</span>
+                                            <span>{{productDetail.button_text_1}}</span>
                                         </button>
                                     </div>
                                     <div class="case-image">
@@ -301,7 +301,7 @@
                                     <p class="case-description" v-html="productDetail.application_scenario_description_2"></p>
                                     <div class="case-action">
                                         <button class="case-btn">
-                                            <span>{{productDetail.button_text_2}} →</span>
+                                            <span>{{productDetail.button_text_2}}</span>
                                         </button>
                                     </div>
                                     <div class="case-image">
@@ -322,7 +322,7 @@
                                     <p class="case-description" v-html="productDetail.application_scenario_description_3"></p>
                                     <div class="case-action">
                                         <button class="case-btn">
-                                            <span>{{productDetail.button_text_3}} →</span>
+                                            <span>{{productDetail.button_text_3}}</span>
                                         </button>
                                     </div>
                                     <div class="case-image">
@@ -372,12 +372,12 @@
                 <div class="specs-header">
                     <div class="specs-title-container">
                         <h2 class="specs-title">
-                            <span class="title-gradient"> Specs and options</span>
+                            <span class="title-gradient">{{ contentDetail.product_detail_specs_and_options_title }}</span>
                         </h2>
                     </div>
                     <div class="specs-subtitle-container">
                         <p class="specs-subtitle">
-                            <span>Specifications customizable upon request.</span>
+                            <span>{{ contentDetail.product_detail_specs_and_options_subtitle }}</span>
                         </p>
                     </div>
                 </div>
@@ -392,7 +392,7 @@
                 <!-- Contact Button -->
                 <div class="expert-consultation">
                     <button class="expert-btn">
-                        <span>Contact DINOSAW technical team for details →</span>
+                        <span>{{ contentDetail.product_detail_contact_dinosaw_technical_btn_text }}</span>
                     </button>
                 </div>
             </div>
@@ -418,7 +418,7 @@
                         <!-- Image Display Area with horizontal scrolling -->
                         <div class="slideshow-track" ref="benefitsSlideshowTrack">
                             <div v-for="(slide, index) in benefitsSlides" :key="index" class="slide-item">
-                                <img :src="slide.image" :alt="slide.alt" />
+                                <NuxtImg :src="slide.image" :alt="slide.alt" />
                             </div>
                         </div>
 
@@ -487,7 +487,7 @@
 
                     <div class="expert-consultation">
                         <button class="expert-btn">
-                            <span>Inquiry for Details →</span>
+                            <span>{{ contentDetail.product_detail_inqury_for_details_btn_text }}</span>
                         </button>
                     </div>
                 </div>
@@ -581,7 +581,7 @@
             </div>
             <div class="expert-consultation">
                 <button class="expert-btn">
-                    <span>Need more assistance? Click to contact DINOSAW →</span>
+                    <span>{{contentDetail.product_detail_need_more_assistance_link_btn_text}}</span>
                 </button>
             </div>
         </div>
@@ -591,12 +591,12 @@
             <div class="certifications-container">
                 <!-- Section Header -->
                 <div class="certifications-header">
-                    <p class="section-subtitle">Certifications & Standards</p>
+                    <p class="section-subtitle">{{contentDetail.product_detail_certifications_standards_title}}</p>
                 </div>
 
                 <!-- Main Title -->
                 <div class="certifications-title">
-                    <h2>Global Leader in Industrial Machinery & Diamond Tools Manufacturing</h2>
+                    <h2>{{productDetail.big_title}}</h2>
                 </div>
 
                 <!-- Certification Cards -->
@@ -606,7 +606,7 @@
                             <NuxtImg src="https://framerusercontent.com/images/Yiho2Cb5dzAnUvfdxCniH50mk.webp" alt="CE Certification" />
                         </div>
                         <div class="cert-info">
-                            <p>CE Certification</p>
+                            <p>{{ contentDetail.product_detail_certifications_standards_panel_title_1 }}</p>
                         </div>
                     </div>
 
@@ -615,7 +615,7 @@
                             <NuxtImg src="https://framerusercontent.com/images/Ylr0CRgiSfaNfAW4kzkACAp8Sk8.webp" alt="Tech Patents" />
                         </div>
                         <div class="cert-info">
-                            <p>100+ Tech Patents</p>
+                            <p>{{ contentDetail.product_detail_certifications_standards_panel_title_2 }}</p>
                         </div>
                     </div>
 
@@ -624,21 +624,19 @@
                             <NuxtImg src="https://framerusercontent.com/images/XnigRDrO1VBjbKJKRd8TCFSlc.webp" alt="ISO Certification" />
                         </div>
                         <div class="cert-info">
-                            <p>ISO 9001:2015</p>
+                            <p>{{ contentDetail.product_detail_certifications_standards_panel_title_3 }}</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Description -->
                 <div class="certifications-description">
-                    <p>DINOSAW product lines fully comply with international engineering standards, passing rigorous
-                        third-party quality certifications to ensure exceptional performance and durability for all
-                        industrial equipment operating in high-load environments.</p>
+                    <p>{{ contentDetail.product_detail_certifications_standards_description }}</p>
                 </div>
 
                 <!-- Expertise Section -->
                 <div class="expertise-title">
-                    <h3>Expertise & Applications</h3>
+                    <h3>{{contentDetail.expertise_applications_title}}</h3>
                 </div>
 
                 <!-- Statistics Cards -->
@@ -652,7 +650,7 @@
                                 <p>75+</p>
                             </div>
                             <div class="stat-label">
-                                <p>Countries Served<br>Worldwide</p>
+                                <p>{{ contentDetail.expertise_applications_panel_label_1 }}</p>
                             </div>
                         </div>
                     </div>
@@ -666,26 +664,25 @@
                                 <p>20+</p>
                             </div>
                             <div class="stat-label">
-                                <p>Industry machinery<br>expertise</p>
+                                <p>{{ contentDetail.expertise_applications_panel_label_2 }}</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Application Description -->
-                <div class="application-description">
+                <div class="application-description" v-html="contentDetail.expertise_applications_description"></div>
+                <!-- <div class="application-description">
                     <p>DINOSAW delivers lifecycle quality traceability and technical support for machinery equipment and
                         diamond tools, covering cutting, drilling, engraving, polishing, and processing requirements for
                         precision machining across industries.</p>
                 </div>
 
-                <!-- Industries Description -->
                 <div class="industries-description">
                     <p>Our products serve traditional industries (mining, stone processing, building materials),
                         high-precision manufacturing (quartz glass, semiconductor), advanced materials (graphite, carbon
                         fiber composites), and specialized applications (nuclear decommissioning, railway construction
                         machinery).</p>
-                </div>
+                </div> -->
             </div>
         </div>
 
@@ -694,13 +691,12 @@
             <div class="solutions-container">
                 <!-- Section Header -->
                 <div class="solutions-header">
-                    <h2>Complete Production Solutions & Equipments</h2>
+                    <h2>{{contentDetail.complete_production_solutions_equipments_title}}</h2>
                 </div>
 
                 <!-- Section Description -->
                 <div class="solutions-description">
-                    <p>Choose equipment combinations for your product needs to establish efficient automated production
-                        lines and maximize profitability.</p>
+                    <p>{{ contentDetail.complete_production_solutions_equipments_description }}</p>
                 </div>
 
                 <!-- Solutions Carousel -->
@@ -714,7 +710,7 @@
                         <div class="solution-card">
                             <NuxtLink :to="'/Products/'+productDetail.link_1" target="_blank">
                                 <div class="solution-image">
-                                    <!-- <img src="/api/placeholder/410/230" alt="Stone CNC Engraving Machine" /> -->
+                                    <NuxtImg :src="productDetail.image_1_url" />
                                 </div>
                             
                                 <div class="solution-content">
@@ -735,7 +731,7 @@
                        <div class="solution-card">
                             <NuxtLink :to="'/Products/'+productDetail.link_2" target="_blank">
                                 <div class="solution-image">
-                                    <!-- <img src="/api/placeholder/410/230" alt="Stone CNC Engraving Machine" /> -->
+                                   <NuxtImg :src="productDetail.image_2_url" />
                                 </div>
                                 <div class="solution-content">
                                     <div class="solution-title">
@@ -755,7 +751,7 @@
                         <div class="solution-card">
                             <NuxtLink :to="'/Products/'+productDetail.link_3" target="_blank">
                                 <div class="solution-image">
-                                    <!-- <img src="/api/placeholder/410/230" alt="Stone CNC Engraving Machine" /> -->
+                                    <NuxtImg :src="productDetail.image_3_url" />
                                 </div>
                                 <div class="solution-content">
                                     <div class="solution-title">
@@ -784,7 +780,7 @@
                 <!-- Custom Solution Button -->
                 <div class="expert-consultation">
                     <button class="expert-btn">
-                        <span>Get a Custom Solution</span>
+                        <span>{{ contentDetail.get_a_custom_solution_text }}</span>
                     </button>
                 </div>
             </div>
@@ -807,14 +803,13 @@
                         <div class="card-content">
                             <div class="card-text">
                                 <div class="card-title">
-                                    <h3>Contact DINOSAW</h3>
+                                    <h3>{{ contentDetail.contact_dinosaw_title }}</h3>
                                 </div>
                                 <div class="card-description">
-                                    <p>Connect with DINOSAW experts to find the perfect processing solution for your
-                                        specific material and production needs.</p>
+                                    <p>{{contentDetail.contact_dinosaw_description}}</p>
                                 </div>
                                 <button class="contact-btn">
-                                    <span>Get A Quote</span>
+                                    <span>{{ contentDetail.get_a_quote_text }}</span>
                                 </button>
                             </div>
                             <div class="card-image">
@@ -831,15 +826,13 @@
                                     <h3>{{ productDetail.title }}</h3>
                                 </div>
                                 <div class="card-description">
-                                    <p>Discover how DINOSAW can accelerate your projects. Our tailored product line,
-                                        cutting-edge R&D, robust manufacturing, end-to-end service, global support, and
-                                        industry certifications are at your service.</p>
+                                    <p>{{ contentDetail.trustworthy_wire_saw_machine_manufacturer_description }}</p>
                                 </div>
                             </div>
                             <div class="card-image">
                                 <NuxtImg src="https://framerusercontent.com/images/rsDnae29rDFkuTTfSnFohbMKFg.webp" />
                                 <button class="about-btn">
-                                    <span>About Dinosaw</span>
+                                    <span>{{ contentDetail.about_dinosaw_btn_text }}</span>
                                 </button>
                             </div>
                         </div>
@@ -855,10 +848,10 @@
                 <!-- Section Header -->
                 <div class="other-machines-header">
                     <div class="section-title-container">
-                        <h2 class="other-machines-title">Other Machines or Tools</h2>
+                        <h2 class="other-machines-title">{{ contentDetail.product_detail_other_machines_or_tools_text }}</h2>
                     </div>
                     <div class="section-subtitle-container">
-                        <p class="other-machines-subtitle">Are you looking for more new information machines or tools?
+                        <p class="other-machines-subtitle">{{ contentDetail.product_detail_are_you_looking_for_more_new_text }}
                         </p>
                     </div>
                 </div>
@@ -866,7 +859,7 @@
                 <!-- Navigation Links -->
                 <div class="machines-navigation">
                     <div class="nav-link-container">
-                        <a href="#" class="nav-link prev-link">
+                        <NuxtLink :to="'/Products/'+productDetail.link_1" class="nav-link prev-link" target="_blank">
                             <div class="nav-icon-container">
                                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
                                     <path d="M20 24L12 16L20 8" stroke="currentColor" stroke-width="2"
@@ -874,16 +867,16 @@
                                 </svg>
                             </div>
                             <div class="nav-content">
-                                <p class="nav-text">Previous Machines or Tools</p>
+                                <p class="nav-text">{{ contentDetail.product_detail_previous_machines_or_tools_btn_text }}</p>
                             </div>
                             <div class="nav-after"></div>
-                        </a>
+                        </NuxtLink>
                     </div>
 
                     <div class="nav-link-container">
-                        <a href="#" class="nav-link next-link">
+                        <NuxtLink :to="'/Products/'+productDetail.link_3" class="nav-link next-link" target="_blank">
                             <div class="nav-content">
-                                <p class="nav-text">Next Machines or Tools</p>
+                                <p class="nav-text">{{contentDetail.product_detail_next_machines_or_tools_btn_text}}</p>
                             </div>
                             <div class="nav-icon-container">
                                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
@@ -891,7 +884,7 @@
                                         stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
                             </div>
-                        </a>
+                        </NuxtLink>
                     </div>
                 </div>
             </div>
@@ -913,6 +906,10 @@ const props = defineProps({
     topProduct:{
         type: Array,
         default: () => []
+    },
+    contentDetail:{
+        type: Object,
+        default: () => ({})
     }
 });
 
@@ -963,11 +960,24 @@ const faqs = ref({
     answers: ["answer_a", "answer_b", "answer_c", "answer_d", "answer_e", "answer_f", "answer_g", "answer_h", "answer_i", "answer_j"]
 })
 
+const benefitsSlides = ref([])
+
 const { data: productDetailRes, pending, error } = await useApi('/products?filters[url][$eq]='+props.slug)
 const productDetail = computed(() => {
     // 检查 productDetailRes.value 是否存在
     if (productDetailRes.value && productDetailRes.value.data && productDetailRes.value.data.length > 0) {
         // 返回你需要的具体数据对象
+        benefitsSlides.value = [
+            {
+                image: productDetailRes.value.data[0].core_advantage_illustration_a_url,
+            },
+            {
+                image: productDetailRes.value.data[0].core_advantage_illustration_b_url,
+            },
+            {
+                image: productDetailRes.value.data[0].core_advantage_illustration_c_url,
+            }
+        ]
         console.log('productDetailRes',productDetailRes.value)
         return productDetailRes.value.data[0];
     }
@@ -985,20 +995,7 @@ watch(productDetail, (newData) => {
     }
 }, { immediate: true });
 
-const benefitsSlides = ref([
-    {
-        image: "https://framerusercontent.com/images/KnYaIReg337YAFK7SgqU9lfzMKU.webp",
-        alt: "Precision cutting with DINOSAW wire saw machine"
-    },
-    {
-        image: "https://framerusercontent.com/images/KnYaIReg337YAFK7SgqU9lfzMKU.webp",
-        alt: "High-speed operation demonstration"
-    },
-    {
-        image: "https://framerusercontent.com/images/KnYaIReg337YAFK7SgqU9lfzMKU.webp",
-        alt: "User-friendly control interface"
-    }
-])
+
 
 const nextBenefitsSlide = () => {
     if (currentBenefitsSlide.value < benefitsSlides.value.length - 1) {
@@ -4438,7 +4435,6 @@ onUnmounted(() => {
     height: 600px;
     display: flex;
     flex-direction: column;
-    background: #FFFFFF;
     border-radius: 24px;
     overflow: hidden;
     flex-shrink: 0;
@@ -4458,11 +4454,13 @@ onUnmounted(() => {
 }
 
 .solution-content {
-    padding: 40px 0 0;
+    padding: 30px 0 0;
     height: 370px;
     display: flex;
+    border-radius: 24px;
     flex-direction: column;
     align-items: center;
+    background: #FFFFFF;
     gap: 24px;
 }
 
@@ -4484,7 +4482,6 @@ onUnmounted(() => {
 
 .solution-description {
     width: 352px;
-    flex: 1;
     display: flex;
     align-items: flex-start;
 
