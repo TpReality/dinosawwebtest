@@ -110,7 +110,7 @@
                                                     <div class="case-ipad">
                                                         <div class="case-image-container">
                                                             <div class="case-main-image cement-case">
-                                                                <NuxtImg src="blog.first_image_url"/>
+                                                                <NuxtImg :src="blog.first_image_url"/>
                                                             </div>
                                                         </div>
                                                         <div class="case-content-container">
