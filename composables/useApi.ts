@@ -1,8 +1,9 @@
 export const useApi = (url) => {
     // let authToken = useCookie('auth_token') // 假设您将 token 存储在 cookie 中
-    let authToken = "ae29b76ec76e6add8e79622c953ec8b2aaec9198d7990d0aa59e83327f79af8daaaca22b249f52b47d749979e2ba9e4ed428c5071e74d8ef7de6b462239081d605ff5cda3ba853944ca70320ed8578471cd1c8274f4ec8f2cb77b70a584c1c8f196bf68fd348ca98fa52d0d672175fde5afb1649eb17cb39de574769cb9eb1ec"
+    let authToken = "8f80d6094edcd486411ddc90d4fa4f18ed87f9fe9edae7fe7cb423e3ce261b23ce76afdedfc3cf2e3689bd1b03e9f504cbded28e7645eed305db44f61e914053e9fb4b4999d30c743b67fe2a052bff812b6165825f1502f22f991ff41a44536c67a88f99ae0f525ee710ee010834ffddaa1501dc60c7da7dac18060f46612708"
     return useFetch(url, {
       baseURL: '/api', // 统一设置基础 URL
+      server: true,
       headers: {
         Authorization: `Bearer ${authToken}`,
       },

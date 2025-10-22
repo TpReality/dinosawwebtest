@@ -1,6 +1,6 @@
 <template>
     <div class="main">
-        <DinosawHeader />
+        <DinosawHeader :menuItems="menuItems" :contentDetail="contentDetail" />
         <!-- 面包屑导航 - 对应Figma节点 19:13863 -->
         <div class="breadcrumb-container">
             <div class="breadcrumb-wrapper">
@@ -24,14 +24,14 @@
             </div>
         </div>
         
-        <GetEasySolution :getEasySolutionType="3" />
+        <GetEasySolution :contentDetail="contentDetail" :getEasySolutionType="3" />
        <div class="sales-support-section">
             <div class="sales-container">
                 <div class="sales-wrapper">
                     <div class="sales-inner">
                         <!-- 标题部分 -->
                         <div class="sales-title-section">
-                            <h2 class="sales-main-title">How Our Sales Team Supports Your Success</h2>
+                            <h2 class="sales-main-title">{{ contact.how_our_sales_team_title }}</h2>
                         </div>
                         
                         <!-- 第一行卡片 -->
@@ -39,20 +39,20 @@
                             <div class="sales-card consultation-card">
                                 <div class="card-content">
                                     <div class="card-title-wrapper">
-                                        <h3 class="card-title">Consultation and Recommendations</h3>
+                                        <h3 class="card-title">{{ contact.how_our_sales_team_left_top_title }}</h3>
                                     </div>
                                     <div class="card-description">
-                                        <p>Our sales team helps you identify the most suitable equipment and solutions <span class="c-blue">for your specific needs</span>. We analyze your requirements and provide recommendations based on similar successful cases, ensuring you make informed decisions.</p>
+                                        <p v-html="contact.how_our_sales_team_left_top_description"></p>
                                     </div>
                                 </div>
                             </div>
                             <div class="sales-card quick-response-card">
                                 <div class="card-content">
                                     <div class="card-title-wrapper">
-                                        <h3 class="card-title">Quick Response</h3>
+                                        <h3 class="card-title">{{ contact.how_our_sales_team_right_top_title }}</h3>
                                     </div>
                                     <div class="card-description">
-                                        <p>We prioritize timely communication, responding to all inquiries <span class="c-blue">within 24 hours</span>. Whether by phone, email, online chat, or WhatsApp, our team is always accessible to address your concerns.</p>
+                                        <p v-html="contact.how_our_sales_team_rigth_top_description"></p>
                                     </div>
                                 </div>
                             </div>
@@ -63,20 +63,20 @@
                             <div class="sales-card tailored-solutions-card">
                                 <div class="card-content">
                                     <div class="card-title-wrapper">
-                                        <h3 class="card-title">Tailored Solutions</h3>
+                                        <h3 class="card-title">{{ contact.how_our_sales_team_left_bottom_title }}</h3>
                                     </div>
                                     <div class="card-description">
-                                        <p>We take the time to understand your processing needs, offering <span class="c-blue">personalized product recommendations</span>. Detailed specifications, operation videos, and technical advice are all part of our comprehensive support.</p>
+                                        <p v-html="contact.how_our_sales_team_left_bottom_description"></p>
                                     </div>
                                 </div>
                             </div>
                             <div class="sales-card transparent-pricing-card">
                                 <div class="card-content">
                                     <div class="card-title-wrapper">
-                                        <h3 class="card-title">Transparent Pricing and Offers</h3>
+                                        <h3 class="card-title">{{ contact.how_our_sales_team_rigth_bottom_title }}</h3>
                                     </div>
                                     <div class="card-description">
-                                        <p>Enjoy a <span class="c-blue">clear and transparent</span> pricing process, with detailed quotes.</p>
+                                        <p v-html="contact.how_our_sales_team_rigth_bottom_description"></p>
                                     </div>
                                 </div>
                             </div>
@@ -85,27 +85,38 @@
                 </div>
             </div>
         </div>
-        <ContactType />
-        <WhatsApp />
-        <DinosawFooter />
+        <ContactType :contentDetail="contentDetail" />
+        <WhatsApp :contentDetail="contentDetail" />
+        <DinosawFooter :menuItems="menuItems" :contentDetail="contentDetail" />
     </div>
 </template>
 
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 
-const { data: productDetailRes, pending, error } = await useApi('/cnc-diamond-wire-saw-cutting-machine-pro-for-sales?populate=all')
+// 使用菜单数据composable
+const { menuItems, initializeMenuData } = useMenuData()
 
+// 初始化菜单数据
+await initializeMenuData()
 
-watch(productDetailRes, (newPosts) => {
+// 使用全局 contentDetail
+const { contentDetail, isLoaded } = useContentDetail()
+
+// 使用 useFetch 获取数据
+const { data: contactRes, pending, error } = await useApi('/contacts?filters[url][$eq]=contact')
+const contact = ref({})
+watch(contactRes, (newPosts) => {
     if (newPosts) {
         console.log(newPosts)
+        let data = newPosts.data[0]
+        contact.value = data
         useHead({
-            title: newPosts.metaTitle,
+            title: data.metaTitle,
             meta: [
                 {
                     name: 'description',
-                    content: newPosts.metaDescription
+                    content: data.metaDescription
                 }
             ],
         })
@@ -113,14 +124,6 @@ watch(productDetailRes, (newPosts) => {
 
 }, { immediate: true })
 
-
-
-// 组件挂载后开始打字机效果
-onMounted(() => {
-
-})
-
-// 使用 useFetch 获取数据
 </script>
 <style scoped lang="scss">
 .breadcrumb-container{

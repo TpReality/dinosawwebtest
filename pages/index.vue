@@ -1,27 +1,27 @@
 <template>
     <div class="main">
-        <DinosawHeader />
+        <DinosawHeader :menuItems="menuItems" :contentDetail="contentDetail" />
         <div>
             <div class="index-banner">
                 <div class="banner-text">
                     <h1>
-                        <span class="title">Best Industry Machine</span> with Innovative Technology
+                        <span class="title">{{ indexDetail.hero_main_before_title }}</span> {{
+                            indexDetail.hero_main_after_title }}
                     </h1>
-                    <p>Join Industry Leaders Worldwide Who Trust Dinosaw CNC Stone Cutting Machine for Intelligent
-                        Solutions That Boost Productivity and Cut Operational Costs</p>
+                    <p v-html="indexDetail.hero_description"></p>
                     <div class="banner-single">
-                        <NuxtImg :src="imageList[0].url" />
+                        <NuxtImg v-if="indexDetail.head_banner_images?.[0]?.banner_img?.url" :src="indexDetail.head_banner_images[0].banner_img.url" />
                     </div>
                     <!-- Figma设计的按钮容器 -->
                     <div class="banner-buttons">
                         <div class="button-primary">
-                            <a href="#" class="btn-learn-more">
-                                <span>Learn more products</span>
+                            <a href="/Products" class="btn-learn-more">
+                                <span>{{ indexDetail.learn_more_products_btn_text }}</span>
                             </a>
                         </div>
                         <div class="button-secondary">
-                            <a href="#" class="btn-meet-us">
-                                <span>Meet Us</span>
+                            <a href="/About-us" class="btn-meet-us">
+                                <span>{{ indexDetail.meet_us_btn_text }}</span>
                             </a>
                         </div>
                     </div>
@@ -30,7 +30,7 @@
 
                 <!-- Banner Machine Image for 1024px-1440px -->
                 <!-- <div class="banner-machine">
-                    <img src="https://framerusercontent.com/images/KnYaIReg337YAFK7SgqU9lfzMKU.webp" alt="Dinosaw CNC Wire Saw Machine">
+                    <NuxtImg src="https://framerusercontent.com/images/KnYaIReg337YAFK7SgqU9lfzMKU.webp" alt="Dinosaw CNC Wire Saw Machine" />
                 </div> -->
 
                 <div class="banner-swiper">
@@ -41,21 +41,21 @@
                             delay: 0,
                             disableOnInteraction: false
                         }" :speed="5000">
-                        <SwiperSlide v-for="image in imageList" :key="image.id">
-                            <NuxtImg :src="image.url" />
+                        <SwiperSlide v-for="image in indexDetail.head_banner_images" :key="image.id">
+                            <NuxtImg v-if="image.banner_img?.url" :src="image.banner_img.url" />
                         </SwiperSlide>
                     </Swiper>
                 </div>
 
             </div>
+            <div v-if="indexDetail.show_activity_text" class="banner-activety" :style="indexDetail.show_activity_image?.url?'background:url('+indexDetail.show_activity_image.url+') no-repeat center center':''">
+                <nuxtLink :to="indexDetail.show_activity_url">
+                    <div v-html="indexDetail.show_activity_text"></div>
+                </nuxtLink>
+            </div>
             <div class="index-part">
-                <h2 class="default-title">What We Do</h2>
-                <p class="dinosaw-text">Quanzhou Dinosaw Machinery Technology Co., Ltd. (Dinosaw) is the one of world's
-                    most trusted CNC wire saw machine brand from China.
-                    20 years' practical experience in the superhard materials machinery industry contributes to rich
-                    experience and technological advantage of machinery and diamond tools. For the persistent pursuit of
-                    technology and product quality, we have built a complete set of R&D and production systems, and
-                    passed ISO9001, OHSAS18001, CE certification.</p>
+                <h2 class="default-title">{{ indexDetail.what_we_do_title }}</h2>
+                <p class="dinosaw-text" v-html="indexDetail.what_we_do_description"></p>
             </div>
 
 
@@ -68,9 +68,11 @@
                         prevEl: '.products-button-prev',
                     }" :modules="modules" class="product-swiper">
                         <SwiperSlide v-for="(group, groupIndex) in groupedProducts" :key="groupIndex">
+                            
                             <div class="products-grid">
                                 <div v-for="product in group" :key="product.id" class="product-card">
-                                    <div class="tip">
+                                    <NuxtLink :to="product.link" target="_blank">
+                                    <div class="tip" :class="product.tip?'':'visible-hidden'">
                                         <svg width="20" height="20" viewBox="0 0 22 22" id="svg11753066115">
                                             <g>
                                                 <path d="M 0 22 L 0 0 L 22 0 L 22 22 Z" fill="transparent"></path>
@@ -86,44 +88,27 @@
                                         <span>{{ product.tip }}</span>
                                     </div>
                                     <h3 v-html="product.title"></h3>
-                                    <NuxtImg :src="product.image" :alt="product.alt" />
+                                    <NuxtImg v-if="product.image&&product.image.url" :src="product.image.url" />
                                     <p>{{ product.materials }}</p>
                                     <!-- 新增的圆形图片展示区域 -->
                                     <div class="features-section">
-                                        <div class="features-container">
-                                            <div class="feature-item">
-                                                <div class="feature-image">
-                                                    <img src="https://framerusercontent.com/images/KnYaIReg337YAFK7SgqU9lfzMKU.webp"
-                                                        alt="Feature 1">
+                                        <div class="features-container" v-if="product.columnList" >
+                                            <template v-for="(item, j) in product.columnList.hero_circle_background_images" :key="j">
+                                                <div class="feature-item" v-if="j < 4">
+                                                    <div class="feature-image" v-if="item.banner_img">
+                                                        <NuxtImg :src="item.banner_img.url"
+                                                            />
+                                                    </div>
+                                                    <div class="feature-label">{{ item.banner_text }}</div>
                                                 </div>
-                                                <div class="feature-label">Quality</div>
-                                            </div>
-                                            <div class="feature-item">
-                                                <div class="feature-image">
-                                                    <img src="https://framerusercontent.com/images/6DORYy0rJp9F56D1V9yzxZFozA.webp"
-                                                        alt="Feature 2">
-                                                </div>
-                                                <div class="feature-label">Technology</div>
-                                            </div>
-                                            <div class="feature-item">
-                                                <div class="feature-image">
-                                                    <img src="https://framerusercontent.com/images/f2DnRktwE5A4dq5VjaIGvPKsvI.webp"
-                                                        alt="Feature 3">
-                                                </div>
-                                                <div class="feature-label">Innovation</div>
-                                            </div>
-                                            <div class="feature-item">
-                                                <div class="feature-image">
-                                                    <img src="https://framerusercontent.com/images/KnYaIReg337YAFK7SgqU9lfzMKU.webp"
-                                                        alt="Feature 4">
-                                                </div>
-                                                <div class="feature-label">Support</div>
-                                            </div>
+                                            </template>
                                         </div>
                                     </div>
-                                    <a :href="product.link" class="product-button">Discover More</a>
+                                    <a class="product-button">{{indexDetail.discover_more_btn_text}}</a>
+                                    </NuxtLink>
                                 </div>
                             </div>
+                            
                         </SwiperSlide>
                     </Swiper>
 
@@ -147,7 +132,7 @@
             <section class="capabilities-section">
                 <div class="capabilities-container">
                     <div class="capabilities-header">
-                        <h2 class="capabilities-title">Our Capabilities & Presence</h2>
+                        <h2 class="capabilities-title">{{ indexDetail.our_capabilities_presence_title }}</h2>
                     </div>
 
                     <div class="capabilities-carousel">
@@ -158,58 +143,111 @@
                             el: '.capabilities-pagination',
                             clickable: true,
                         }" :modules="modules" class="capabilities-swiper">
-                            <SwiperSlide v-for="(capability, index) in capabilities" :key="capability.id">
+                            <SwiperSlide v-for="(num) in 4" :key="num">
                                 <div class="capability-slide">
                                     <div class="capability-image">
-                                        <NuxtImg :src="capability.image" :alt="capability.title" />
+                                        <NuxtImg
+                                            v-if="indexDetail[`our_capabilities_presence_banner_${num}_image`]?.url"
+                                            :src="indexDetail[`our_capabilities_presence_banner_${num}_image`].url" />
                                     </div>
-                                    <div class="capability-content" :class="'capability-content-' + index">
+                                    <div class="capability-content" :class="'capability-content-' + (num - 1)">
                                         <!-- Achievements Header -->
                                         <div class="achievements-header">
-                                            <h2 class="achievements-title">Achievements</h2>
+                                            <h2 class="achievements-title">{{
+                                                indexDetail[`our_capabilities_presence_banner_${num}_title`] }}</h2>
                                         </div>
 
                                         <!-- Achievement Items -->
                                         <div class="achievement-items">
                                             <div class="achievement-item">
                                                 <div class="achievement-icon">
-                                                    <!-- <img src="/images/achievement-icon-1.webp" alt="Achievement 1" /> -->
+                                                    <NuxtImg v-if="num == 1"
+                                                        src="https://framerusercontent.com/images/xoGVNejjgAGaSlUX1bMECmG31io.webp" />
+                                                    <NuxtImg v-if="num == 2"
+                                                        src="https://framerusercontent.com/images/QDBUwmDJVuYtV8yYKwuDhyFZm4.webp" />
+                                                    <NuxtImg v-if="num == 3"
+                                                        src="https://framerusercontent.com/images/a0VTve0ozqUp4ydiH2LhbXxpFk.webp" />
+                                                    <NuxtImg v-if="num == 4"
+                                                        src="https://framerusercontent.com/images/iLqxZDIinbYNiaH60YjXleFrM.webp" />
                                                 </div>
-                                                <div class="achievement-text">
-                                                    <p>Most Trusted Wire Saw Machine Brand in 120+ Countries</p>
+                                                <div class="achievement-text" v-if="num != 4">
+                                                    <p>{{
+                                                        indexDetail[`our_capabilities_presence_banner_${num}_content_one`]
+                                                        }}</p>
+                                                </div>
+                                                <div class="achievement-text" v-else>
+                                                    <p>
+                                                        <span class="bold">{{
+                                                            indexDetail.our_capabilities_presence_banner_4_content_before_one
+                                                            }}</span>{{
+                                                                indexDetail.our_capabilities_presence_banner_4_content_after_one
+                                                        }}
+                                                    </p>
                                                 </div>
                                             </div>
 
                                             <div class="achievement-item">
                                                 <div class="achievement-icon">
-                                                    <img src="https://framerusercontent.com/images/xoGVNejjgAGaSlUX1bMECmG31io.webp"
-                                                        alt="Achievement 2" />
+                                                    <NuxtImg v-if="num == 1"
+                                                        src="https://framerusercontent.com/images/qpNN6TQEZVtVKhOUiWz4VlquVKk.webp" />
+                                                    <NuxtImg v-if="num == 2"
+                                                        src="https://framerusercontent.com/images/iLqxZDIinbYNiaH60YjXleFrM.webp" />
+                                                    <NuxtImg v-if="num == 3"
+                                                        src="https://framerusercontent.com/images/Vy8HBxy08u8QLJK2Ba8RMv8zzI0.webp" />
+                                                    <NuxtImg v-if="num == 4"
+                                                        src="https://framerusercontent.com/images/MVf2W9AQ98rRTyUfKjyE6nkxNxs.webp" />
                                                 </div>
-                                                <div class="achievement-text">
-                                                    <p>Smart, automated factory operations delivering high-efficiency
-                                                        output and precision-engineered components.</p>
+                                                <div class="achievement-text" v-if="num != 4">
+                                                    <p>{{
+                                                        indexDetail[`our_capabilities_presence_banner_${num}_content_two`]
+                                                        }}</p>
+                                                </div>
+                                                <div class="achievement-text" v-else>
+                                                    <p>
+                                                        <span class="bold">{{
+                                                            indexDetail.our_capabilities_presence_banner_4_content_before_two
+                                                            }}</span>{{
+                                                                indexDetail.our_capabilities_presence_banner_4_content_after_two
+                                                        }}
+                                                    </p>
                                                 </div>
                                             </div>
 
                                             <div class="achievement-item">
                                                 <div class="achievement-icon">
-                                                    <!-- <img src="/images/achievement-icon-3.webp" alt="Achievement 3" /> -->
+                                                    <NuxtImg v-if="num == 1"
+                                                        src="https://framerusercontent.com/images/F5tURIf7d7cBnIxEUvSc86BA1k.webp" />
+                                                    <NuxtImg v-if="num == 2"
+                                                        src="https://framerusercontent.com/images/F5tURIf7d7cBnIxEUvSc86BA1k.webp" />
+                                                    <NuxtImg v-if="num == 3"
+                                                        src="https://framerusercontent.com/images/xoGVNejjgAGaSlUX1bMECmG31io.webp" />
+                                                    <NuxtImg v-if="num == 4"
+                                                        src="https://framerusercontent.com/images/qpNN6TQEZVtVKhOUiWz4VlquVKk.webp" />
                                                 </div>
-                                                <div class="achievement-text">
-                                                    <p>Cutting marble, granite, and super-hard materials with unrivaled
-                                                        precision — explore top-performing machines engineered by
-                                                        Dinosaw.</p>
+                                                <div class="achievement-text" v-if="num != 4">
+                                                    <p>{{
+                                                        indexDetail[`our_capabilities_presence_banner_${num}_content_three`]
+                                                        }}</p>
+                                                </div>
+                                                <div class="achievement-text" v-else>
+                                                    <p>
+                                                        <span class="bold">{{
+                                                            indexDetail.our_capabilities_presence_banner_4_content_before_three
+                                                            }}</span>{{
+                                                                indexDetail.our_capabilities_presence_banner_4_content_after_three
+                                                        }}
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <!-- Action Buttons -->
                                         <div class="achievement-actions">
-                                            <a href="/Products/wire-saw-machine" class="btn-primary" target="_blank">
-                                                Learn Wire Saw Machine
-                                            </a>
-                                            <a href="/aboutus" class="btn-secondary" target="_blank">
-                                                Meet Us
+                                            <a :href="indexDetail[`our_capabilities_presence_banner_${num}_left_btn_url`]" class="btn-primary" target="_blank">{{
+                                                indexDetail[`our_capabilities_presence_banner_${num}_left_btn_text`]
+                                                }}</a>
+                                            <a :href="indexDetail[`our_capabilities_presence_banner_${num}_right_btn_url`]" class="btn-secondary" target="_blank">
+                                                {{ indexDetail[`our_capabilities_presence_banner_${num}_right_btn_text`] }}
                                             </a>
                                         </div>
                                     </div>
@@ -233,7 +271,7 @@
 
                         <!-- Pagination Dots -->
                         <div class="capabilities-pagination">
-                            <div class="swiper-pagination-bullet" v-for="(dot, i) in capabilities" :key="i"></div>
+                            <div class="swiper-pagination-bullet" v-for="(i) in 4" :key="i"></div>
                         </div>
                     </div>
                 </div>
@@ -243,61 +281,21 @@
             <section class="what-you-need-section">
                 <div class="container">
                     <div class="section-header">
-                        <h2 class="section-title">What You Need</h2>
-                        <div class="section-description">
-                            <p>Dinosaw provides customers with advanced technology solutions to efficient superhard
-                                materials (e.g. marble, granite, silicon crystals, steel etc.) processing. Here Dinosaw
-                                provides everything you need to get started, including stone cutting machines and
-                                diamond tools, best practices in materials processing, prices and deals, software and
-                                supports.</p>
-                            <p>Our product range includes wire saw machines, circular saw machines, drilling and
-                                engraving machines, grinding and polishing machines, profiling machines, mining and
-                                quarry machines, as well as other industrial machinery (e.g. waterjet, splitting
-                                machine, kerbstone cutting machine line, arc-slab cutter etc.) and specialized nuclear
-                                decommissioning equipment with dry cutting capabilities. Additionally, we offer
-                                high-performance diamond tools, including diamond segments, saw blades, core drill bits,
-                                polishing pads, and wire saws.</p>
-                            <p>You can also submit your individual requirements in the form listed below.</p>
-                        </div>
+                        <h2 class="section-title">{{ indexDetail.what_you_need_title }}</h2>
+                        <div class="section-description" v-html="indexDetail.what_you_need_description"></div>
                     </div>
 
                     <div class="blog-cards-container" ref="blogCardsContainer">
                         <div class="blog-cards-grid" ref="blogCardsGrid">
                             <!-- Blog Card 1 -->
-                            <div class="blog-card">
+                            <div class="blog-card" v-for="(item, i) in indexDetail.what_you_need_blogs" :key="i">
                                 <div class="blog-image">
-                                    <NuxtImg src="https://framerusercontent.com/images/KnYaIReg337YAFK7SgqU9lfzMKU.webp"
-                                        alt="Rock Cutting Saw Guide"></NuxtImg>
+                                    <NuxtImg :src="item.first_image_url"
+                                      ></NuxtImg>
                                 </div>
                                 <div class="blog-content">
-                                    <h3 class="blog-title">Which Rock Cutting Saw to Choose? A Mining & Factory Guide
-                                    </h3>
-                                    <div class="blog-date">4/18/25</div>
-                                </div>
-                            </div>
-
-                            <!-- Blog Card 2 -->
-                            <div class="blog-card">
-                                <div class="blog-image">
-                                    <NuxtImg src="https://framerusercontent.com/images/6DORYy0rJp9F56D1V9yzxZFozA.webp"
-                                        alt="Best Stone CNC Machine"></NuxtImg>
-                                </div>
-                                <div class="blog-content">
-                                    <h3 class="blog-title">Best Stone CNC Machine for Design & Fabrication | 2025 Buying
-                                        Guide</h3>
-                                    <div class="blog-date">2/14/25</div>
-                                </div>
-                            </div>
-
-                            <!-- Blog Card 3 -->
-                            <div class="blog-card">
-                                <div class="blog-image">
-                                    <NuxtImg src="https://framerusercontent.com/images/f2DnRktwE5A4dq5VjaIGvPKsvI.webp"
-                                        alt="CNC Machine Cost"></NuxtImg>
-                                </div>
-                                <div class="blog-content">
-                                    <h3 class="blog-title">How Much Does a CNC Machine for Stone Cutting Cost?</h3>
-                                    <div class="blog-date">8/23/25</div>
+                                    <h3 class="blog-title">{{ item.title }}</h3>
+                                    <div class="blog-date">{{ item.date }}</div>
                                 </div>
                             </div>
                         </div>
@@ -319,18 +317,14 @@
                 </div>
             </section>
 
-            <GetEasySolution />
+            <GetEasySolution :contentDetail="contentDetail" />
 
             <!-- Your Guide to Choosing Machines Section -->
             <section class="guide-section">
                 <div class="container">
                     <div class="guide-header">
-                        <h2 class="guide-title">Your Guide to Choosing Machines</h2>
-                        <div class="guide-description">
-                            <p>Choosing the right industry machines doesn't have to be complicated. At DINOSAW,we've
-                                created a simple, four-step process to guide you, just <br>like a friend would, from
-                                understanding your needs to ongoing support.</p>
-                        </div>
+                        <h2 class="guide-title">{{ indexDetail.your_guide_to_choos_title }}</h2>
+                        <div class="guide-description" v-html="indexDetail.your_guide_to_choos_description"></div>
                     </div>
 
                     <div class="guide-steps">
@@ -338,16 +332,13 @@
                         <div class="step-card">
                             <div class="step-overlay">
                                 <div class="step-content">
-                                    <h3 class="step-title">See Best<br>Practice Cases</h3>
-                                    <p class="step-description">Check out best practice cases to see how customers with
-                                        needs like yours are using our machines. It'll help you figure out if it's the
-                                        right fit for you.</p>
+                                    <h3 class="step-title">{{ indexDetail.your_guide_to_choos_pannel_title_1 }}</h3>
+                                    <p class="step-description"
+                                        v-html="indexDetail.your_guide_to_choos_pannel_description_1"></p>
                                 </div>
                             </div>
                             <div class="step-background">
-                                <NuxtImg
-                                    src="https://framerusercontent.com/images/JptY3XhlzQKAFnDiATrVTaaWdrc.webp?scale-down-to=512"
-                                    alt="See Best Practice Cases" />
+                                <NuxtImg v-if="indexDetail.your_guide_to_choos_pannel_image_1?.url" :src="indexDetail.your_guide_to_choos_pannel_image_1.url" />
                             </div>
                         </div>
 
@@ -355,15 +346,13 @@
                         <div class="step-card">
                             <div class="step-overlay">
                                 <div class="step-content">
-                                    <h3 class="step-title">Dive Into the<br>Details</h3>
-                                    <p class="step-description">Take a closer look at the specs, features, and operation
-                                        videos. It's like getting a hands-on experience before you decide.</p>
+                                    <h3 class="step-title">{{ indexDetail.your_guide_to_choos_pannel_title_2 }}</h3>
+                                    <p class="step-description"
+                                        v-html="indexDetail.your_guide_to_choos_pannel_description_2"></p>
                                 </div>
                             </div>
                             <div class="step-background">
-                                <NuxtImg
-                                    src="https://framerusercontent.com/images/Bd3lNQRZIuU2niUqws1jDViiT4g.webp?scale-down-to=512"
-                                    alt="Dive Into the Details" />
+                                <NuxtImg v-if="indexDetail.your_guide_to_choos_pannel_image_2?.url" :src="indexDetail.your_guide_to_choos_pannel_image_2.url" />
                             </div>
                         </div>
 
@@ -371,16 +360,13 @@
                         <div class="step-card">
                             <div class="step-overlay">
                                 <div class="step-content">
-                                    <h3 class="step-title">Get A Free<br>Quote</h3>
-                                    <p class="step-description">Connect with us through WhatsApp（Usually responds within
-                                        10 minutes）, email, or phone call to get clear, upfront catalogue and learn
-                                        about pricing .</p>
+                                    <h3 class="step-title">{{ indexDetail.your_guide_to_choos_pannel_title_3 }}</h3>
+                                    <p class="step-description"
+                                        v-html="indexDetail.your_guide_to_choos_pannel_description_3"></p>
                                 </div>
                             </div>
                             <div class="step-background">
-                                <NuxtImg
-                                    src="https://framerusercontent.com/images/Wle3r8vmKRFH2Xa88mxhY6iWMUc.webp?scale-down-to=512"
-                                    alt="Get A Free Quote" />
+                                <NuxtImg v-if="indexDetail.your_guide_to_choos_pannel_image_3?.url" :src="indexDetail.your_guide_to_choos_pannel_image_3.url" />
                             </div>
                         </div>
 
@@ -388,16 +374,13 @@
                         <div class="step-card">
                             <div class="step-overlay">
                                 <div class="step-content">
-                                    <h3 class="step-title">Enjoy Full<br>Support</h3>
-                                    <p class="step-description">Buying your machines is just the start. We're here to
-                                        help with installation, routine maintenance, and remote updates, ensuring
-                                        everything runs smoothly.</p>
+                                    <h3 class="step-title">{{ indexDetail.your_guide_to_choos_pannel_title_4 }}</h3>
+                                    <p class="step-description"
+                                        v-html="indexDetail.your_guide_to_choos_pannel_description_4"></p>
                                 </div>
                             </div>
                             <div class="step-background">
-                                <NuxtImg
-                                    src="https://framerusercontent.com/images/XH8Q46S6N3OZU6cE043nYn09TtY.webp?scale-down-to=512"
-                                    alt="Enjoy Full Support" />
+                                <NuxtImg v-if="indexDetail.your_guide_to_choos_pannel_image_4?.url" :src="indexDetail.your_guide_to_choos_pannel_image_4.url" />
                             </div>
                         </div>
                     </div>
@@ -409,14 +392,8 @@
                 <div class="container">
                     <!-- Section Header -->
                     <div class="section-header">
-                        <h2 class="section-title">Customer Favorites</h2>
-                        <div class="section-description">
-                            <p>Here, you'll find Dinosaw's flagship machines, trusted and loved by customers in dozens
-                                of countries for its outstanding performance, reliability, and exceptional value. These
-                                machines have built a strong reputation in factories worldwide. At the same time,
-                                explore Dinosaw's latest</p>
-                            <p>innovations, designed to unlock new possibilities for your processing needs.</p>
-                        </div>
+                        <h2 class="section-title">{{ indexDetail.customer_favorites_title }}</h2>
+                        <div class="section-description" v-html="indexDetail.customer_favorites_description"></div>
                     </div>
 
                     <!-- Product Categories -->
@@ -426,154 +403,145 @@
                             <div class="category-header">
                                 <div class="category-background">
                                     <div class="category-container">
-                                        <h3 class="category-title">Flagship Tech</h3>
+                                        <h3 class="category-title">{{ indexDetail.flagship_tech_title }}</h3>
                                     </div>
                                     <div class="category-line"></div>
                                 </div>
                             </div>
-                            <div class="category-content">
-                                <div class="category-main">
-                                    <!-- Featured Product -->
-                                    <div class="featured-product">
-                                        <div class="featured-container">
-                                            <div class="featured-background">
-                                                <div class="featured-content">
-                                                    <div class="featured-link">
-                                                        <div class="featured-inner">
-                                                            <div class="featured-image-container">
-                                                                <div class="featured-image">
-                                                                    <div class="product-image">
-                                                                        <NuxtImg
-                                                                            src="https://framerusercontent.com/images/rllBx0HsRfT3uKPVJMcfBIolk.webp?width=1972&height=1516" />
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="featured-text">
-                                                                <h4 class="featured-title">Thin Multi Wire Saw Machines
-                                                                    for Natural Stone Block</h4>
-                                                            </div>
+                            <!-- 动态产品图片展示区域 -->
+                            <div class="dynamic-product-section" v-if="indexDetail.flagship_tech_products && indexDetail.flagship_tech_products.length">
+                                <!-- 1张图片布局：左侧图片，右侧信息 - 按照Figma节点 10:15239 -->
+                                <div v-if="indexDetail.flagship_tech_products.length === 1" class="layout-single">
+                                    <NuxtLink :to="'/Products/'+indexDetail.flagship_tech_products[0].url">
+                                        <div class="single-container">
+                                            <div class="single-link">
+                                                <div class="single-image">
+                                                    <NuxtImg :src="indexDetail.flagship_tech_products[0].first_image_url" />
+                                                </div>
+                                                <div class="single-content">
+                                                    <div class="single-text-section">
+                                                        <div class="single-title-wrapper">
+                                                            <h3 class="single-title">{{ indexDetail.flagship_tech_products[0].h1_page_inner_title }}</h3>
+                                                        </div>
+                                                        <div class="single-date-wrapper" v-if="indexDetail.flagship_tech_products[0].date">
+                                                            <p class="single-date">{{ indexDetail.flagship_tech_products[0].date }}</p>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="featured-footer">
-                                                <div class="featured-footer-link">
-                                                    <div class="featured-footer-container">
-                                                        <div class="featured-footer-content">
-                                                            <div class="featured-footer-inner">
-                                                                <h3 class="featured-footer-title">Flagship Products 2025
-                                                                </h3>
-                                                            </div>
-                                                        </div>
-                                                        <div class="featured-footer-description">
-                                                            <div class="featured-footer-text">
-                                                                <div class="featured-footer-link-text">
-                                                                    <div class="featured-footer-link-container">
-                                                                        <span class="featured-footer-link-label">Dinosaw
-                                                                            Featured Machines</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                    <div class="single-button" v-if="indexDetail.flagship_tech_products[0].buttonText">
+                                                        <div class="single-button-content">
+                                                            <span class="button-text">{{ indexDetail.flagship_tech_products[0].buttonText }}</span>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                    </NuxtLink>
+                                </div>
+                                
+                                <!-- 2张图片布局：左右布局 -->
+                                <div v-else-if="indexDetail.flagship_tech_products.length === 2" class="layout-double">
+                                    
+                                    <div 
+                                        v-for="(product, index) in indexDetail.flagship_tech_products" 
+                                        :key="index"
+                                        class="double-item"
+                                        :class="product.layout || 'vertical'"
+                                    >
+                                        
+                                            <!-- 垂直布局：上面图片，下面标题 -->
+                                            <template v-if="!product.layout || product.layout === 'vertical'">
+                                                <div class="double-image">
+                                                    <NuxtLink :to="'/Products/'+product.url" target="_blank"><NuxtImg :src="product.first_image_url" /></NuxtLink>
+                                                </div>
+                                                <div class="double-content">
+                                                    <NuxtLink :to="'/Products/'+product.url" target="_blank"><h3 class="double-title">{{ product.h1_page_inner_title }}</h3></NuxtLink>
+                                                </div>
+                                            </template>
+                                            
+                                            <!-- 水平布局：左侧图片，右侧信息 - 按照Figma节点 7:11368 -->
+                                            <template v-else-if="product.layout === 'horizontal'">
+                                                <div class="horizontal-container">
+                                                    <div class="horizontal-link">
+                                                        <div class="horizontal-image">
+                                                            <NuxtLink :to="'/Products/'+product.url" target="_blank"><NuxtImg :src="product.first_image_url" /></NuxtLink>
+                                                        </div>
+                                                        <div class="horizontal-content">
+                                                            <div class="horizontal-text-section">
+                                                                <div class="horizontal-title-wrapper">
+                                                                    <NuxtLink :to="'/Products/'+product.url" target="_blank"><h3 class="horizontal-title">{{ product.h1_page_inner_title }}</h3></NuxtLink>
+                                                                </div>
+                                                                <div class="horizontal-date-wrapper" v-if="product.date">
+                                                                    <p class="horizontal-date">{{ product.date }}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="horizontal-button" v-if="product.buttonText">
+                                                                <div class="horizontal-button-content">
+                                                                    <span class="button-text">{{ product.buttonText }}</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </template>
                                     </div>
-
-                                    <!-- Product Grid -->
-                                    <div class="product-grid">
-                                        <div class="product-row">
-                                            <div class="product-item">
-                                                <div class="product-background">
-                                                    <div class="product-container">
-                                                        <div class="product-link">
-                                                            <div class="product-content">
-                                                                <div class="product-image-wrapper">
-                                                                    <div class="product-image-container">
-                                                                        <div class="product-image">
-                                                                            <NuxtImg
-                                                                                src="https://framerusercontent.com/images/rllBx0HsRfT3uKPVJMcfBIolk.webp?width=1972&height=1516" />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="product-text">
-                                                                    <h4 class="product-title">DINOSAW Diamond Wire Saw
-                                                                        Cutting Machine</h4>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                </div>
+                                
+                                <!-- 4张图片布局：2x2网格 -->
+                                <div v-else-if="indexDetail.flagship_tech_products.length === 4" class="layout-quad">
+                                    <div 
+                                        v-for="(product, index) in indexDetail.flagship_tech_products" 
+                                        :key="index"
+                                        class="quad-item"
+                                    >
+                                        
+                                            <div class="quad-image">
+                                                <NuxtLink :to="'/Products/'+product.url" target="_blank"><NuxtImg :src="product.first_image_url" /></NuxtLink>
                                             </div>
-                                            <div class="product-item">
-                                                <div class="product-background">
-                                                    <div class="product-container">
-                                                        <div class="product-link">
-                                                            <div class="product-content">
-                                                                <div class="product-image-wrapper">
-                                                                    <div class="product-image-container">
-                                                                        <div class="product-image">
-                                                                            <NuxtImg
-                                                                                src="https://framerusercontent.com/images/rllBx0HsRfT3uKPVJMcfBIolk.webp?width=1972&height=1516" />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="product-text">
-                                                                    <h4 class="product-title">Stone Block Cutting Wire
-                                                                        Saw Machine</h4>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            <div class="quad-content">
+                                                <NuxtLink :to="'/Products/'+product.url" target="_blank"><h3 class="quad-title">{{ product.h1_page_inner_title }}</h3></NuxtLink>
                                             </div>
+                                        
+                                    </div>
+                                </div>
+                                
+                                <!-- 5张图片布局：左边1个大图，右边4个小图 -->
+                                <div v-else-if="indexDetail.flagship_tech_products.length === 5" class="layout-five">
+                                    
+                                    <div class="five-left">
+                                        
+                                        <div class="five-main-image">
+                                            <NuxtLink :to="'/Products/'+indexDetail.flagship_tech_products[0].url" target="_blank"><NuxtImg :src="indexDetail.flagship_tech_products[0].first_image_url" /></NuxtLink>
                                         </div>
-                                        <div class="product-row">
-                                            <div class="product-item">
-                                                <div class="product-background">
-                                                    <div class="product-container">
-                                                        <div class="product-link">
-                                                            <div class="product-content">
-                                                                <div class="product-image-wrapper">
-                                                                    <div class="product-image-container">
-                                                                        <div class="product-image">
-                                                                            <NuxtImg
-                                                                                src="https://framerusercontent.com/images/rllBx0HsRfT3uKPVJMcfBIolk.webp?width=1972&height=1516" />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="product-text">
-                                                                    <h4 class="product-title">CNC Diamond Wire Saw
-                                                                        Cutting Machine for Tombstone</h4>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                        <NuxtLink :to="'/Products/'+indexDetail.flagship_tech_products[0].url" target="_blank">
+                                        <div class="five-main-content">
+                                             
+                                                <h3 class="five-main-title">{{ indexDetail.flagship_tech_products[0].h1_page_inner_title }}</h3>
+                                                <p class="five-main-date" v-if="indexDetail.flagship_tech_products[0].date">{{ indexDetail.flagship_tech_products[0].date }}</p>
+                                                <div class="five-main-info" v-if="indexDetail.flagship_tech_products[0].subtitle">
+                                                   <h3 class="five-subtitle">{{ indexDetail.flagship_roducts_2025 }}</h3>
+                                                    <p class="five-description" v-if="indexDetail.flagship_products_2025_description">{{ indexDetail.flagship_products_2025_description }}</p>
+                                                    <button class="buy-now-btn">{{indexDetail.buy_now_text}}</button>
                                                 </div>
-                                            </div>
-                                            <div class="product-item">
-                                                <div class="product-background">
-                                                    <div class="product-container">
-                                                        <div class="product-link">
-                                                            <div class="product-content">
-                                                                <div class="product-image-wrapper">
-                                                                    <div class="product-image-container">
-                                                                        <div class="product-image">
-                                                                            <NuxtImg
-                                                                                src="https://framerusercontent.com/images/rllBx0HsRfT3uKPVJMcfBIolk.webp?width=1972&height=1516" />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="product-text">
-                                                                    <h4 class="product-title">Diamond Wire Saw Cutting
-                                                                        Machine for Kerbstone</h4>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                        </div>
+                                        </NuxtLink>
+                                    </div>
+                                   
+                                    <div class="five-right">
+                                        <div 
+                                            v-for="(product, index) in indexDetail.flagship_tech_products.slice(1)" 
+                                            :key="index + 1"
+                                            class="five-grid-item"
+                                        >
+                                            
+                                                <div class="five-grid-image">
+                                                    <NuxtLink :to="'/Products/'+product.url" target="_blank">
+                                                        <NuxtImg :src="product.first_image_url" />
+                                                    </NuxtLink>
                                                 </div>
-                                            </div>
+                                                <h3 class="five-grid-title">
+                                                    <NuxtLink :to="'/Products/'+product.url" target="_blank">{{ product.h1_page_inner_title }}</NuxtLink>
+                                                </h3>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -585,154 +553,145 @@
                             <div class="category-header">
                                 <div class="category-background">
                                     <div class="category-container">
-                                        <h3 class="category-title">Mature Products</h3>
+                                        <h3 class="category-title">{{ indexDetail.mature_products_title }}</h3>
                                     </div>
                                     <div class="category-line"></div>
                                 </div>
                             </div>
-                            <div class="category-content">
-                                <div class="category-main">
-                                    <!-- Featured Product -->
-                                    <div class="featured-product">
-                                        <div class="featured-container">
-                                            <div class="featured-background">
-                                                <div class="featured-content">
-                                                    <div class="featured-link">
-                                                        <div class="featured-inner">
-                                                            <div class="featured-image-container">
-                                                                <div class="featured-image">
-                                                                    <div class="product-image">
-                                                                        <NuxtImg
-                                                                            src="https://framerusercontent.com/images/rllBx0HsRfT3uKPVJMcfBIolk.webp?width=1972&height=1516" />
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="featured-text">
-                                                                <h4 class="featured-title">5 Axis CNC Waterjet Cutting
-                                                                    Machine for Sale</h4>
-                                                            </div>
+                            <!-- 动态产品图片展示区域 -->
+                            <div class="dynamic-product-section" v-if="indexDetail.mature_products_products && indexDetail.mature_products_products.length">
+                                <!-- 1张图片布局：左侧图片，右侧信息 - 按照Figma节点 10:15239 -->
+                                <div v-if="indexDetail.mature_products_products.length === 1" class="layout-single">
+                                    <NuxtLink :to="'/Products/'+indexDetail.mature_products_products[0].url">
+                                        <div class="single-container">
+                                            <div class="single-link">
+                                                <div class="single-image">
+                                                    <NuxtImg :src="indexDetail.mature_products_products[0].first_image_url" />
+                                                </div>
+                                                <div class="single-content">
+                                                    <div class="single-text-section">
+                                                        <div class="single-title-wrapper">
+                                                            <h3 class="single-title">{{ indexDetail.mature_products_products[0].h1_page_inner_title }}</h3>
+                                                        </div>
+                                                        <div class="single-date-wrapper" v-if="indexDetail.mature_products_products[0].date">
+                                                            <p class="single-date">{{ indexDetail.mature_products_products[0].date }}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="single-button" v-if="indexDetail.mature_products_products[0].buttonText">
+                                                        <div class="single-button-content">
+                                                            <span class="button-text">{{ indexDetail.mature_products_products[0].buttonText }}</span>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="featured-footer">
-                                                <div class="featured-footer-link">
-                                                    <div class="featured-footer-container">
-                                                        <div class="featured-footer-content">
-                                                            <div class="featured-footer-inner">
-                                                                <h3 class="featured-footer-title">Flagship Products 2025
-                                                                </h3>
-                                                            </div>
+                                        </div>
+                                    </NuxtLink>
+                                </div>
+                                
+                                <!-- 2张图片布局：左右布局 -->
+                                <div v-else-if="indexDetail.mature_products_products.length === 2" class="layout-double">
+                                    
+                                    <div 
+                                        v-for="(product, index) in indexDetail.mature_products_products" 
+                                        :key="index"
+                                        class="double-item"
+                                        :class="product.layout || 'vertical'"
+                                    >
+                                        
+                                            <!-- 垂直布局：上面图片，下面标题 -->
+                                            <template v-if="!product.layout || product.layout === 'vertical'">
+                                                <div class="double-image">
+                                                    <NuxtLink :to="'/Products/'+product.url" target="_blank"><NuxtImg :src="product.first_image_url" /></NuxtLink>
+                                                </div>
+                                                <div class="double-content">
+                                                    <NuxtLink :to="'/Products/'+product.url" target="_blank"><h3 class="double-title">{{ product.h1_page_inner_title }}</h3></NuxtLink>
+                                                </div>
+                                            </template>
+                                            
+                                            <!-- 水平布局：左侧图片，右侧信息 - 按照Figma节点 7:11368 -->
+                                            <template v-else-if="product.layout === 'horizontal'">
+                                                <div class="horizontal-container">
+                                                    <div class="horizontal-link">
+                                                        <div class="horizontal-image">
+                                                            <NuxtLink :to="'/Products/'+product.url" target="_blank"><NuxtImg :src="product.first_image_url" /></NuxtLink>
                                                         </div>
-                                                        <div class="featured-footer-description">
-                                                            <div class="featured-footer-text">
-                                                                <div class="featured-footer-link-text">
-                                                                    <div class="featured-footer-link-container">
-                                                                        <span class="featured-footer-link-label">Dinosaw
-                                                                            Featured Machines</span>
-                                                                    </div>
+                                                        <div class="horizontal-content">
+                                                            <div class="horizontal-text-section">
+                                                                <div class="horizontal-title-wrapper">
+                                                                    <NuxtLink :to="'/Products/'+product.url" target="_blank"><h3 class="horizontal-title">{{ product.h1_page_inner_title }}</h3></NuxtLink>
+                                                                </div>
+                                                                <div class="horizontal-date-wrapper" v-if="product.date">
+                                                                    <p class="horizontal-date">{{ product.date }}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="horizontal-button" v-if="product.buttonText">
+                                                                <div class="horizontal-button-content">
+                                                                    <span class="button-text">{{ product.buttonText }}</span>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </template>
+                                    </div>
+                                </div>
+                                
+                                <!-- 4张图片布局：2x2网格 -->
+                                <div v-else-if="indexDetail.mature_products_products.length === 4" class="layout-quad">
+                                    <div 
+                                        v-for="(product, index) in indexDetail.mature_products_products" 
+                                        :key="index"
+                                        class="quad-item"
+                                    >
+                                        
+                                            <div class="quad-image">
+                                                <NuxtLink :to="'/Products/'+product.url" target="_blank"><NuxtImg :src="product.first_image_url" /></NuxtLink>
                                             </div>
+                                            <div class="quad-content">
+                                                <NuxtLink :to="'/Products/'+product.url" target="_blank"><h3 class="quad-title">{{ product.h1_page_inner_title }}</h3></NuxtLink>
+                                            </div>
+                                        
+                                    </div>
+                                </div>
+                                
+                                <!-- 5张图片布局：左边1个大图，右边4个小图 -->
+                                <div v-else-if="indexDetail.mature_products_products.length === 5" class="layout-five">
+                                    
+                                    <div class="five-left">
+                                        
+                                        <div class="five-main-image">
+                                            <NuxtLink :to="'/Products/'+indexDetail.mature_products_products[0].url" target="_blank"><NuxtImg :src="indexDetail.mature_products_products[0].first_image_url" /></NuxtLink>
+                                        </div>
+                                        <div class="five-main-content">
+                                             <NuxtLink :to="'/Products/'+indexDetail.mature_products_products[0].url" target="_blank">
+                                                <h3 class="five-main-title">{{ indexDetail.mature_products_products[0].h1_page_inner_title }}</h3>
+                                                <p class="five-main-date" v-if="indexDetail.mature_products_products[0].date">{{ indexDetail.mature_products_products[0].date }}</p>
+                                                <div class="five-main-info" v-if="indexDetail.flagship_roducts_2025">
+                                                    <h3 class="five-subtitle">{{ indexDetail.flagship_roducts_2025 }}</h3>
+                                                    <p class="five-description" v-if="indexDetail.flagship_products_2025_description">{{ indexDetail.flagship_products_2025_description }}</p>
+                                                    <button class="buy-now-btn">{{indexDetail.buy_now_text}}</button>
+                                                    <!-- <p class="five-description" v-if="indexDetail.mature_products_products[0].description">{{ indexDetail.mature_products_products[0].description }}</p> -->
+                                                </div>
+                                            </NuxtLink>
                                         </div>
                                     </div>
-
-                                    <!-- Product Grid -->
-                                    <div class="product-grid">
-                                        <div class="product-row">
-                                            <div class="product-item">
-                                                <div class="product-background">
-                                                    <div class="product-container">
-                                                        <div class="product-link">
-                                                            <div class="product-content">
-                                                                <div class="product-image-wrapper">
-                                                                    <div class="product-image-container">
-                                                                        <div class="product-image">
-                                                                            <NuxtImg
-                                                                                src="https://framerusercontent.com/images/rllBx0HsRfT3uKPVJMcfBIolk.webp?width=1972&height=1516" />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="product-text">
-                                                                    <h4 class="product-title">4+1 Axis Bridge Saw
-                                                                        Cutting Machine</h4>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                   
+                                    <div class="five-right">
+                                        <div 
+                                            v-for="(product, index) in indexDetail.mature_products_products.slice(1)" 
+                                            :key="index + 1"
+                                            class="five-grid-item"
+                                        >
+                                            
+                                                <div class="five-grid-image">
+                                                    <NuxtLink :to="'/Products/'+product.url" target="_blank">
+                                                        <NuxtImg :src="product.first_image_url" />
+                                                    </NuxtLink>
                                                 </div>
-                                            </div>
-                                            <div class="product-item">
-                                                <div class="product-background">
-                                                    <div class="product-container">
-                                                        <div class="product-link">
-                                                            <div class="product-content">
-                                                                <div class="product-image-wrapper">
-                                                                    <div class="product-image-container">
-                                                                        <div class="product-image">
-                                                                            <NuxtImg
-                                                                                src="https://framerusercontent.com/images/rllBx0HsRfT3uKPVJMcfBIolk.webp?width=1972&height=1516" />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="product-text">
-                                                                    <h4 class="product-title">CNC ATC Grinding &
-                                                                        Polishing Machine</h4>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="product-row">
-                                            <div class="product-item">
-                                                <div class="product-background">
-                                                    <div class="product-container">
-                                                        <div class="product-link">
-                                                            <div class="product-content">
-                                                                <div class="product-image-wrapper">
-                                                                    <div class="product-image-container">
-                                                                        <div class="product-image">
-                                                                            <NuxtImg
-                                                                                src="https://framerusercontent.com/images/rllBx0HsRfT3uKPVJMcfBIolk.webp?width=1972&height=1516" />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="product-text">
-                                                                    <h4 class="product-title">Integrated CNC stone
-                                                                        profiling machine</h4>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product-item">
-                                                <div class="product-background">
-                                                    <div class="product-container">
-                                                        <div class="product-link">
-                                                            <div class="product-content">
-                                                                <div class="product-image-wrapper">
-                                                                    <div class="product-image-container">
-                                                                        <div class="product-image">
-                                                                            <NuxtImg
-                                                                                src="https://framerusercontent.com/images/rllBx0HsRfT3uKPVJMcfBIolk.webp?width=1972&height=1516" />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="product-text">
-                                                                    <h4 class="product-title">CNC Stone Engraving
-                                                                        Machine for Precision Carving</h4>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                <h3 class="five-grid-title">
+                                                    <NuxtLink :to="'/Products/'+product.url" target="_blank">{{ product.h1_page_inner_title }}</NuxtLink>
+                                                </h3>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -744,154 +703,151 @@
                             <div class="category-header">
                                 <div class="category-background">
                                     <div class="category-container">
-                                        <h3 class="category-title">Smart Value</h3>
+                                        <h3 class="category-title">{{ indexDetail.smart_value_title }}</h3>
                                     </div>
                                     <div class="category-line"></div>
                                 </div>
                             </div>
-                            <div class="category-content">
-                                <div class="category-main">
-                                    <!-- Featured Product -->
-                                    <div class="featured-product">
-                                        <div class="featured-container">
-                                            <div class="featured-background">
-                                                <div class="featured-content">
-                                                    <div class="featured-link">
-                                                        <div class="featured-inner">
-                                                            <div class="featured-image-container">
-                                                                <div class="featured-image">
-                                                                    <div class="product-image">
-                                                                        <NuxtImg
-                                                                            src="https://framerusercontent.com/images/rllBx0HsRfT3uKPVJMcfBIolk.webp?width=1972&height=1516" />
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="featured-text">
-                                                                <h4 class="featured-title">Manual Industrial Stone
-                                                                    Cutting Machine</h4>
-                                                            </div>
+                            <!-- 动态产品图片展示区域 -->
+                            <div class="dynamic-product-section" v-if="indexDetail.smart_value_products && indexDetail.smart_value_products.length">
+                                <!-- 1张图片布局：左侧图片，右侧信息 - 按照Figma节点 10:15239 -->
+                                <div v-if="indexDetail.smart_value_products.length === 1" class="layout-single">
+                                    <NuxtLink :to="'/Products/'+indexDetail.smart_value_products[0].url">
+                                        <div class="single-container">
+                                            <div class="single-link">
+                                                <div class="single-image">
+                                                    <NuxtImg :src="indexDetail.smart_value_products[0].first_image_url" />
+                                                </div>
+                                                <div class="single-content">
+                                                    <div class="single-text-section">
+                                                        <div class="single-title-wrapper">
+                                                            <h3 class="single-title">{{ indexDetail.smart_value_products[0].h1_page_inner_title }}</h3>
+                                                        </div>
+                                                        <div class="single-date-wrapper" v-if="indexDetail.smart_value_products[0].date">
+                                                            <p class="single-date">{{ indexDetail.smart_value_products[0].date }}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="single-button" v-if="indexDetail.smart_value_products[0].buttonText">
+                                                        <div class="single-button-content">
+                                                            <span class="button-text">{{ indexDetail.smart_value_products[0].buttonText }}</span>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="featured-footer">
-                                                <div class="featured-footer-link">
-                                                    <div class="featured-footer-container">
-                                                        <div class="featured-footer-content">
-                                                            <div class="featured-footer-inner">
-                                                                <h3 class="featured-footer-title">Flagship Products 2025
-                                                                </h3>
-                                                            </div>
+                                        </div>
+                                    </NuxtLink>
+                                </div>
+                                
+                                <!-- 2张图片布局：左右布局 -->
+                                <div v-else-if="indexDetail.smart_value_products.length === 2" class="layout-double">
+                                    <template v-for="(product, index) in indexDetail.smart_value_products" 
+                                        :key="index">
+                                        <NuxtLink :to="'/Products/'+product.url" target="_blank">
+                                    <div 
+                                        
+                                        class="double-item"
+                                        :class="product.layout || 'vertical'"
+                                    >
+                                        
+                                            <!-- 垂直布局：上面图片，下面标题 -->
+                                            <template v-if="!product.layout || product.layout === 'vertical'">
+                                                <div class="double-image">
+                                                    <NuxtImg :src="product.first_image_url" />
+                                                </div>
+                                                <div class="double-content">
+                                                    <h3 class="double-title">{{ product.h1_page_inner_title }}</h3>
+                                                </div>
+                                            </template>
+                                            
+                                            <!-- 水平布局：左侧图片，右侧信息 - 按照Figma节点 7:11368 -->
+                                            <template v-else-if="product.layout === 'horizontal'">
+                                                <div class="horizontal-container">
+                                                    <div class="horizontal-link">
+                                                        <div class="horizontal-image">
+                                                            <NuxtImg :src="product.first_image_url" />
                                                         </div>
-                                                        <div class="featured-footer-description">
-                                                            <div class="featured-footer-text">
-                                                                <div class="featured-footer-link-text">
-                                                                    <div class="featured-footer-link-container">
-                                                                        <span class="featured-footer-link-label">Dinosaw
-                                                                            Featured Machines</span>
-                                                                    </div>
+                                                        <div class="horizontal-content">
+                                                            <div class="horizontal-text-section">
+                                                                <div class="horizontal-title-wrapper">
+                                                                    <h3 class="horizontal-title">{{ product.h1_page_inner_title }}</h3>
+                                                                </div>
+                                                                <div class="horizontal-date-wrapper" v-if="product.date">
+                                                                    <p class="horizontal-date">{{ product.date }}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="horizontal-button" v-if="product.buttonText">
+                                                                <div class="horizontal-button-content">
+                                                                    <span class="button-text">{{ product.buttonText }}</span>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </template>
+                                    </div>
+                                    </NuxtLink>
+                                    </template>
+                                </div>
+                                
+                                <!-- 4张图片布局：2x2网格 -->
+                                <div v-else-if="indexDetail.smart_value_products.length === 4" class="layout-quad">
+                                    <template v-for="(product, index) in indexDetail.smart_value_products" 
+                                        :key="index">
+                                        <NuxtLink :to="'/Products/'+product.url" target="_blank">
+                                            <div 
+                                                
+                                                class="quad-item"
+                                            >
+                                                
+                                                    <div class="quad-image">
+                                                        <NuxtImg :src="product.first_image_url" />
+                                                    </div>
+                                                    <div class="quad-content">
+                                                        <h3 class="quad-title">{{ product.h1_page_inner_title }}</h3>
+                                                    </div>
+                                                
                                             </div>
+                                            </NuxtLink>
+                                    </template>
+                                </div>
+                                
+                                <!-- 5张图片布局：左边1个大图，右边4个小图 -->
+                                <div v-else-if="indexDetail.smart_value_products.length === 5" class="layout-five">
+                                    
+                                    <div class="five-left">
+                                        
+                                        <div class="five-main-image">
+                                            <NuxtLink :to="'/Products/'+indexDetail.smart_value_products[0].url" target="_blank"><NuxtImg :src="indexDetail.smart_value_products[0].first_image_url" /></NuxtLink>
+                                        </div>
+                                        <div class="five-main-content">
+                                             <NuxtLink :to="'/Products/'+indexDetail.smart_value_products[0].url" target="_blank">
+                                                <h3 class="five-main-title">{{ indexDetail.smart_value_products[0].h1_page_inner_title }}</h3>
+                                                <p class="five-main-date" v-if="indexDetail.smart_value_products[0].date">{{ indexDetail.smart_value_products[0].date }}</p>
+                                                <div class="five-main-info" v-if="indexDetail.flagship_roducts_2025">
+                                                    <h3 class="five-subtitle">{{ indexDetail.flagship_roducts_2025 }}</h3>
+                                                    <p class="five-description" v-if="indexDetail.flagship_products_2025_description">{{ indexDetail.flagship_products_2025_description }}</p>
+                                                    <button class="buy-now-btn">{{indexDetail.buy_now_text}}</button>
+                                                </div>
+                                            </NuxtLink>
                                         </div>
                                     </div>
-
-                                    <!-- Product Grid -->
-                                    <div class="product-grid">
-                                        <div class="product-row">
-                                            <div class="product-item">
-                                                <div class="product-background">
-                                                    <div class="product-container">
-                                                        <div class="product-link">
-                                                            <div class="product-content">
-                                                                <div class="product-image-wrapper">
-                                                                    <div class="product-image-container">
-                                                                        <div class="product-image">
-                                                                            <NuxtImg
-                                                                                src="https://framerusercontent.com/images/rllBx0HsRfT3uKPVJMcfBIolk.webp?width=1972&height=1516" />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="product-text">
-                                                                    <h4 class="product-title">Manual Stone Polishing
-                                                                        Machine for Granite & Marble</h4>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                   
+                                    <div class="five-right">
+                                        <div 
+                                            v-for="(product, index) in indexDetail.smart_value_products.slice(1)" 
+                                            :key="index + 1"
+                                            class="five-grid-item"
+                                        >
+                                            
+                                                <div class="five-grid-image">
+                                                    <NuxtLink :to="'/Products/'+product.url" target="_blank">
+                                                        <NuxtImg :src="product.first_image_url" />
+                                                    </NuxtLink>
                                                 </div>
-                                            </div>
-                                            <div class="product-item">
-                                                <div class="product-background">
-                                                    <div class="product-container">
-                                                        <div class="product-link">
-                                                            <div class="product-content">
-                                                                <div class="product-image-wrapper">
-                                                                    <div class="product-image-container">
-                                                                        <div class="product-image">
-                                                                            <NuxtImg
-                                                                                src="https://framerusercontent.com/images/rllBx0HsRfT3uKPVJMcfBIolk.webp?width=1972&height=1516" />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="product-text">
-                                                                    <h4 class="product-title">Diamond Polishing Pads for
-                                                                        Granite, Marble & Concrete</h4>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="product-row">
-                                            <div class="product-item">
-                                                <div class="product-background">
-                                                    <div class="product-container">
-                                                        <div class="product-link">
-                                                            <div class="product-content">
-                                                                <div class="product-image-wrapper">
-                                                                    <div class="product-image-container">
-                                                                        <div class="product-image">
-                                                                            <NuxtImg
-                                                                                src="https://framerusercontent.com/images/rllBx0HsRfT3uKPVJMcfBIolk.webp?width=1972&height=1516" />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="product-text">
-                                                                    <h4 class="product-title">Hydraulic Stone Cropper
-                                                                        for Marble, Granite & Concrete</h4>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product-item">
-                                                <div class="product-background">
-                                                    <div class="product-container">
-                                                        <div class="product-link">
-                                                            <div class="product-content">
-                                                                <div class="product-image-wrapper">
-                                                                    <div class="product-image-container">
-                                                                        <div class="product-image">
-                                                                            <NuxtImg
-                                                                                src="https://framerusercontent.com/images/rllBx0HsRfT3uKPVJMcfBIolk.webp?width=1972&height=1516" />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="product-text">
-                                                                    <h4 class="product-title">Diamond abrasive brush
-                                                                    </h4>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                <h3 class="five-grid-title">
+                                                    <NuxtLink :to="'/Products/'+product.url" target="_blank">{{ product.h1_page_inner_title }}</NuxtLink>
+                                                </h3>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -904,28 +860,23 @@
                         <div class="bottom-container">
                             <div class="bottom-title">
                                 <div class="title-part">
-                                    <span class="title-text">Continuously</span>
+                                    <span class="title-text">{{ indexDetail.continuously_text }}</span>
                                 </div>
                                 <span class="title-highlight" ref="typewriterText">{{ currentText }}</span>
                                 <div class="title-part">
-                                    <span class="title-text">For user</span>
+                                    <span class="title-text">{{ indexDetail.for_user_text }}</span>
                                 </div>
                             </div>
                             <div class="bottom-description">
-                                <div class="description-container">
-                                    <p class="description-text">When it comes to selecting the right processing
-                                        machines, trust matters.</p>
-                                </div>
-                                <div class="description-container">
-                                    <p class="description-text">At Dinosaw, we're not just a manufacturer—we're your
-                                        reliable partner in achieving smarter, more efficient production.</p>
-                                </div>
+                                <div class="description-container" v-html="indexDetail.continuously_for_user_description"></div>
                             </div>
                             <div class="bottom-cta">
                                 <div class="cta-button">
                                     <div class="cta-container">
                                         <div class="cta-content">
-                                            <span class="cta-text">Get A Quote</span>
+                                            <NuxtLink to="/contact" target="_blank">
+                                                <span class="cta-text">{{ indexDetail.get_a_auote_btn_text }}</span>
+                                            </NuxtLink>
                                         </div>
                                     </div>
                                 </div>
@@ -940,24 +891,8 @@
                 <div class="testimonials-background"></div>
                 <div class="testimonials-container">
                     <div class="testimonials-header">
-                        <h2>What Our Customers Say?</h2>
-                        <div class="testimonials-description">
-                            <p>Still wondering if Dinosaw Industry machines or diamond tools are the right choice for
-                                you? Let the voices of our customers guide your decision.</p>
-                            <p>At Dinosaw, we value transparency and customer feedback. That's why we regularly collect
-                                unbiased testimonials from customers worldwide, sharing their real experiences with our
-                                machines, services, and support. From the initial purchase process to long-term
-                                performance and maintenance, these reviews reflect the quality and reliability you can
-                                expect from Dinosaw.</p>
-                            <p>Our customers rate their satisfaction across key areas, including machine performance,
-                                technical support, and ownership experience. These insights come directly from
-                                businesses like yours, ensuring you get a genuine perspective on how Dinosaw machines
-                                can enhance your operations.</p>
-                            <p>We're proud that many of our customers have shared their trust and success stories, and
-                                in some regions, you can even arrange to visit local installations to see our machines
-                                in action. At Dinosaw, our commitment to delivering high-quality products and
-                                exceptional service drives us to innovate and improve every day.</p>
-                        </div>
+                        <h2>{{ indexDetail.what_our_customers_say_title }}</h2>
+                        <div class="testimonials-description" v-html="indexDetail.what_our_customers_say_description"></div>
                     </div>
 
                     <div class="testimonials-cards">
@@ -966,16 +901,17 @@
                             <div class="testimonial-header">
                                 <div class="customer-info">
                                     <div class="customer-avatar">
+                                        <NuxtImg v-if="indexDetail.what_our_customers_say_panel_1_head_pic" :src="indexDetail.what_our_customers_say_panel_1_head_pic" />
                                         <!-- Placeholder for customer image -->
                                     </div>
                                     <div class="customer-details">
                                         <div class="customer-name-section">
-                                            <h4>Pierre</h4>
+                                            <h4>{{ indexDetail.what_our_customers_say_panel_1_user_name }}</h4>
                                             <div class="company-flag">
-                                                <!-- Placeholder for flag -->
+                                                 <NuxtImg v-if="indexDetail.what_our_customers_say_panel_1_country_icon" :src="indexDetail.what_our_customers_say_panel_1_country_icon" />
                                             </div>
                                         </div>
-                                        <p class="customer-title">Project Manager</p>
+                                        <p class="customer-title">{{ indexDetail.what_our_customers_say_panel_1_position }}</p>
                                     </div>
                                 </div>
                                 <div class="divider"></div>
@@ -984,19 +920,15 @@
                             <div class="testimonial-content">
                                 <div class="testimonial-stats">
                                     <div class="stat-item">
-                                        <div class="stat-value">80%</div>
-                                        <div class="stat-label">Efficiency Increase</div>
+                                        <div class="stat-value">{{ indexDetail.what_our_customers_say_panel_1_advantage_data }}</div>
+                                        <div class="stat-label">{{ indexDetail.what_our_customers_say_panel_1_advantage_description }}</div>
                                     </div>
                                     <div class="material-icon">
-                                        <!-- Placeholder for material icon -->
+                                        <NuxtImg src="https://framerusercontent.com/images/4lSnkyg8nN5Oax5Ygirc0zHLqIU.webp?scale-down-to=512" />
                                     </div>
                                 </div>
 
-                                <div class="testimonial-text">
-                                    <p>"We're truly impressed by this CNC wire saw machine! It cuts refractory bricks
-                                        with exceptional precision and speed. The results are beyond our expectations,
-                                        and it's already greatly boosting our productivity for various projects."</p>
-                                </div>
+                                <div class="testimonial-text" v-html="indexDetail.what_our_customers_say_panel_1_product_description"></div>
                             </div>
                         </div>
 
@@ -1005,16 +937,17 @@
                             <div class="testimonial-header">
                                 <div class="customer-info">
                                     <div class="customer-avatar">
+                                        <NuxtImg v-if="indexDetail.what_our_customers_say_panel_2_head_pic" :src="indexDetail.what_our_customers_say_panel_2_head_pic" />
                                         <!-- Placeholder for customer image -->
                                     </div>
                                     <div class="customer-details">
                                         <div class="customer-name-section">
-                                            <h4>Andy</h4>
+                                            <h4>{{ indexDetail.what_our_customers_say_panel_2_user_name }}</h4>
                                             <div class="company-flag">
-                                                <!-- Placeholder for flag -->
+                                                 <NuxtImg v-if="indexDetail.what_our_customers_say_panel_2_country_icon" :src="indexDetail.what_our_customers_say_panel_2_country_icon" />
                                             </div>
                                         </div>
-                                        <p class="customer-title">Production Manager</p>
+                                        <p class="customer-title">{{ indexDetail.what_our_customers_say_panel_2_position }}</p>
                                     </div>
                                 </div>
                                 <div class="divider"></div>
@@ -1023,16 +956,15 @@
                             <div class="testimonial-content">
                                 <div class="testimonial-stats">
                                     <div class="stat-item">
-                                        <div class="stat-value">1.8x</div>
-                                        <div class="stat-label">Cutting Speed</div>
+                                        <div class="stat-value">{{ indexDetail.what_our_customers_say_panel_2_advantage_data }}</div>
+                                        <div class="stat-label">{{ indexDetail.what_our_customers_say_panel_2_advantage_description }}</div>
+                                    </div>
+                                    <div class="material-icon">
+                                        <NuxtImg src="https://framerusercontent.com/images/n2yDCQkYZTICvRg5HV7GhrbTM.webp" />
                                     </div>
                                 </div>
 
-                                <div class="testimonial-text">
-                                    <p>"We're very pleased with the new wire saw machine for cutting quartz glass. It's
-                                        1.8 times faster than our previous equipment, improving both speed and
-                                        efficiency. Highly recommended for anyone looking to boost productivity!"</p>
-                                </div>
+                                <div class="testimonial-text" v-html="indexDetail.what_our_customers_say_panel_2_product_description"></div>
                             </div>
                         </div>
 
@@ -1041,16 +973,16 @@
                             <div class="testimonial-header">
                                 <div class="customer-info">
                                     <div class="customer-avatar">
-                                        <!-- Placeholder for customer image -->
+                                         <NuxtImg v-if="indexDetail.what_our_customers_say_panel_3_head_pic" :src="indexDetail.what_our_customers_say_panel_3_head_pic" />
                                     </div>
                                     <div class="customer-details">
                                         <div class="customer-name-section">
-                                            <h4>Kai</h4>
+                                            <h4>{{ indexDetail.what_our_customers_say_panel_3_user_name }}</h4>
                                             <div class="company-flag">
-                                                <!-- Placeholder for flag -->
+                                                 <NuxtImg v-if="indexDetail.what_our_customers_say_panel_3_country_icon" :src="indexDetail.what_our_customers_say_panel_3_country_icon" />
                                             </div>
                                         </div>
-                                        <p class="customer-title">Project Manager</p>
+                                        <p class="customer-title">{{ indexDetail.what_our_customers_say_panel_3_position }}</p>
                                     </div>
                                 </div>
                                 <div class="divider"></div>
@@ -1059,19 +991,15 @@
                             <div class="testimonial-content">
                                 <div class="testimonial-stats">
                                     <div class="stat-item">
-                                        <div class="stat-value">100%</div>
-                                        <div class="stat-label">Precision</div>
+                                        <div class="stat-value">{{ indexDetail.what_our_customers_say_panel_3_advantage_data }}</div>
+                                        <div class="stat-label">{{ indexDetail.what_our_customers_say_panel_3_advantage_description }}</div>
                                     </div>
                                     <div class="material-icon-side">
-                                        <!-- Placeholder for construction material icon -->
+                                        <NuxtImg src="https://framerusercontent.com/images/RrPj6zcL1pUWUtZuRN7dx7fU0jg.webp" />
                                     </div>
                                 </div>
 
-                                <div class="testimonial-text">
-                                    <p>"Dinosaw's Devices Are Developed And Updated Very Quickly, After Five Minutes I
-                                        Learned And Was Able To Use The Device Myself, i'mGlad I Chose The Right One!"
-                                    </p>
-                                </div>
+                                <div class="testimonial-text" v-html="indexDetail.what_our_customers_say_panel_3_product_description"></div>
                             </div>
                         </div>
                     </div>
@@ -1080,54 +1008,52 @@
                 <section class="partners-section">
                     <div class="partners-container">
                         <div class="partners-header">
-                            <h2>Business Partners</h2>
-                            <div class="partners-description">
-                                <p>At Dinosaw, our success is driven by the trust of our customers and the strength of
-                                    our partnerships. Serving clients in over 60 countries, we've earned the confidence
-                                    of leading stone manufacturers, construction companies, and distributors, as well as
-                                    countless small-to-medium-sized workshops. Our solutions are tailored to meet
-                                    diverse needs, helping businesses worldwide achieve greater efficiency and lower
-                                    costs.Equally important are our collaborations with top-tier suppliers, who provide
-                                    us with the finest materials and technologies. These partnerships ensure that every
-                                    Dinosaw machine is built to the highest standards of quality, reliability, and
-                                    performance. By combining the trust of our customers and the support of our
-                                    suppliers, we deliver value and innovation that set us apart in the industry.Whether
-                                    you're considering your first Dinosaw machine or upgrading your equipment, you'll
-                                    benefit from the experience and reliability that our customers and partners trust.
-                                </p>
-                            </div>
+                            <h2>{{ indexDetail.business_partners_title }}</h2>
+                            <div class="partners-description" v-html="indexDetail.business_partners_description"></div>
                         </div>
 
                         <div class="partners-logos">
                             <div class="partner-logo">
                                 <!-- 中核集团 logo placeholder -->
                                 <div class="logo-placeholder"
-                                    style="width: 110px; height: 51px; background: #f0f0f0; border-radius: 4px;"></div>
+                                    style="width: 110px; height: 51px; background: #fff; border-radius: 4px;">
+                                    <NuxtImg src="https://framerusercontent.com/images/FpnleAPIN4IV2mdwRpgLUNOF6w.png"/>
+                                </div>
                             </div>
                             <div class="partner-logo">
                                 <!-- 中科院 logo placeholder -->
                                 <div class="logo-placeholder"
-                                    style="width: 110px; height: 51px; background: #f0f0f0; border-radius: 4px;"></div>
+                                    style="width: 110px; height: 51px; background: #fff; border-radius: 4px;">
+                                <NuxtImg src="https://framerusercontent.com/images/rInXR99BqGLsBVSIPaPJptiTDg.png"/>
+                            </div>
                             </div>
                             <div class="partner-logo">
                                 <!-- 中国铁建 logo placeholder -->
                                 <div class="logo-placeholder"
-                                    style="width: 110px; height: 51px; background: #f0f0f0; border-radius: 4px;"></div>
+                                    style="width: 110px; height: 51px; background: #fff; border-radius: 4px;">
+                                    <NuxtImg src="https://framerusercontent.com/images/c70mHQa1rmYYq4W7A8C4llFHLg.png"/>
+                                </div>
                             </div>
                             <div class="partner-logo">
                                 <!-- 紫金矿业 logo placeholder -->
                                 <div class="logo-placeholder"
-                                    style="width: 110px; height: 51px; background: #f0f0f0; border-radius: 4px;"></div>
+                                    style="width: 110px; height: 51px; background: #fff; border-radius: 4px;">
+                                    <NuxtImg src="https://framerusercontent.com/images/np5kOQAu61pepHdnoZ7YJErn3I.png"/>
+                                </div>
                             </div>
                             <div class="partner-logo">
                                 <!-- 太平洋石英 logo placeholder -->
                                 <div class="logo-placeholder"
-                                    style="width: 110px; height: 51px; background: #f0f0f0; border-radius: 4px;"></div>
+                                    style="width: 110px; height: 51px; background: #fff; border-radius: 4px;">
+                                    <NuxtImg src="https://framerusercontent.com/images/P5O06HfmGvkisFNWLPp8TYR4o4.png"/>
+                                </div>
                             </div>
                             <div class="partner-logo">
                                 <!-- 圣戈班 logo placeholder -->
                                 <div class="logo-placeholder"
-                                    style="width: 110px; height: 51px; background: #f0f0f0; border-radius: 4px;"></div>
+                                    style="width: 110px; height: 51px; background: #fff; border-radius: 4px;">
+                                    <NuxtImg src="https://framerusercontent.com/images/dXyve2roEON0UKlKgJTigYaqmY.png"/>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1135,208 +1061,235 @@
             </section>
         </div>
 
-        <ContactType />
-        <WhatsApp />
-        <DinosawFooter />
+        <ContactType :contentDetail="contentDetail" />
+        <WhatsApp :contentDetail="contentDetail" />
+        <DinosawFooter :menuItems="menuItems" :contentDetail="contentDetail" />
     </div>
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, watch } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Autoplay, FreeMode, Navigation, Pagination } from 'swiper'
+import qs from 'qs'
 import 'swiper/css'
 import 'swiper/css/free-mode' // ✅ 引入 free-mode 的样式
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
-const modules = [Autoplay, FreeMode, Navigation, Pagination];
-const imageList = [
-    { id: 1, url: "https://framerusercontent.com/images/KnYaIReg337YAFK7SgqU9lfzMKU.webp" },
-    { id: 2, url: "https://framerusercontent.com/images/6DORYy0rJp9F56D1V9yzxZFozA.webp" },
-    { id: 3, url: "https://framerusercontent.com/images/f2DnRktwE5A4dq5VjaIGvPKsvI.webp" },
-    { id: 4, url: "https://framerusercontent.com/images/KnYaIReg337YAFK7SgqU9lfzMKU.webp" },
-    { id: 5, url: "https://framerusercontent.com/images/6DORYy0rJp9F56D1V9yzxZFozA.webp" },
-    { id: 6, url: "https://framerusercontent.com/images/f2DnRktwE5A4dq5VjaIGvPKsvI.webp" },
-]
+// 使用全局 contentDetail
+const { contentDetail, isLoaded } = useContentDetail()
 
-const { data: productDetailRes, pending, error } = await useApi('/cnc-diamond-wire-saw-cutting-machine-pro-for-sales?populate=all')
+// 使用菜单数据composable
+const { menuItems, initializeMenuData } = useMenuData()
 
-// 定义产品列表数据
-const productsList = [
-    {
-        id: 1,
-        tip: "Most Trusted",
-        title: 'Wire Saw<br/>Machine Series',
-        image: '../assets/e1432693-2e38-48d0-a99f-bb1bfd38bc05.png',
-        alt: 'Wire Saw Machine',
-        materials: 'Machinable Materials: Granite, Marble, Luxurystone, Concrete',
-        link: '#'
-    },
-    {
-        id: 2,
-        tip: "Established",
-        title: 'Circle Saw<br/>Machine',
-        image: '../assets/a9617d96-3b26-42b5-b8cc-880abce7b2dc.png',
-        alt: 'Circle Saw Machine',
-        materials: 'Machinable Materials: Granite, Marble, Quartz, Slab',
-        link: '#'
-    },
-    {
-        id: 3,
-        tip: "Innovative",
-        title: 'Grinding and Polishing<br/>Machine',
-        image: '../assets/81b786e9-4296-4955-b523-ae9542918198.png',
-        alt: 'Grinding Machine',
-        materials: 'Machinable Materials: Granite, Marble, Limestone',
-        link: '#'
-    },
-    {
-        id: 4,
-        tip: "Innovative",
-        title: 'Drilling and Engraving<br/>Machine',
-        image: '../assets/70b5a9d8-62db-49c0-a84b-49b7f5934668.png',
-        alt: 'Drilling Machine',
-        materials: 'Machinable Materials: Granite, Marble, Steel, Quartz',
-        link: '#'
-    },
-    {
-        id: 5,
-        tip: "Established",
-        title: 'Wire Saw<br/>Machine Series',
-        image: '../assets/e1432693-2e38-48d0-a99f-bb1bfd38bc05.png',
-        alt: 'Wire Saw Machine',
-        materials: 'Machinable Materials: Granite, Marble, Luxurystone, Concrete',
-        link: '#'
-    },
-    {
-        id: 6,
-        tip: "Innovative",
-        title: 'Circle Saw<br/>Machine',
-        image: '../assets/a9617d96-3b26-42b5-b8cc-880abce7b2dc.png',
-        alt: 'Circle Saw Machine',
-        materials: 'Machinable Materials: Granite, Marble, Quartz, Slab',
-        link: '#'
-    },
-    {
-        id: 7,
-        tip: "Innovative",
-        title: 'Grinding and Polishing<br/>Machine',
-        image: '../assets/81b786e9-4296-4955-b523-ae9542918198.png',
-        alt: 'Grinding Machine',
-        materials: 'Machinable Materials: Granite, Marble, Limestone',
-        link: '#'
-    },
-    {
-        id: 8,
-        tip: "Innovative",
-        title: 'Drilling and Engraving<br/>Machine',
-        image: '../assets/70b5a9d8-62db-49c0-a84b-49b7f5934668.png',
-        alt: 'Drilling Machine',
-        materials: 'Machinable Materials: Granite, Marble, Steel, Quartz',
-        link: '#'
-    }
-]
-
+// 初始化菜单数据
+await initializeMenuData()
+const indexDetail = ref({})
 // 定义capabilities数据
-const capabilities = [
-    {
-        id: 1,
-        title: "Global Manufacturing Excellence",
-        description: "State-of-the-art facilities delivering precision engineering solutions worldwide with cutting-edge technology and expert craftsmanship.",
-        image: "https://framerusercontent.com/images/J176H42Vk1FofJIOb6XYsXiD8.webp",
-        stat1: { number: "15+", label: "Years Experience" },
-        stat2: { number: "50+", label: "Countries Served" },
-        features: [
-            "Advanced manufacturing facilities",
-            "Precision engineering solutions",
-            "Global supply chain network",
-            "Expert technical team"
-        ]
-    },
-    {
-        id: 2,
-        title: "Innovation & Technology",
-        description: "Cutting-edge R&D capabilities driving the future of diamond cutting technology with continuous innovation and breakthrough solutions.",
-        image: "https://framerusercontent.com/images/fQKVx88fw7cbWFaKXGjwWUMAC8.webp",
-        stat1: { number: "100+", label: "Patents Filed" },
-        stat2: { number: "24/7", label: "Technical Support" },
-        features: [
-            "Advanced R&D laboratory",
-            "Innovative cutting solutions",
-            "Patent-protected technology",
-            "Continuous improvement"
-        ]
-    },
-    {
-        id: 3,
-        title: "Quality Assurance",
-        description: "ISO certified processes ensuring the highest standards in every product with rigorous testing and quality control measures.",
-        image: "https://framerusercontent.com/images/XB040suWf4asGB3fxlDOvDm0.webp",
-        stat1: { number: "99.9%", label: "Quality Rate" },
-        stat2: { number: "ISO", label: "Certified" },
-        features: [
-            "ISO certified processes",
-            "Rigorous quality testing",
-            "Premium material selection",
-            "Comprehensive warranties"
-        ]
-    },
-    {
-        id: 4,
-        title: "Customer Success",
-        description: "Dedicated support team ensuring optimal performance and customer satisfaction with comprehensive service and technical assistance.",
-        image: "https://framerusercontent.com/images/rsDnae29rDFkuTTfSnFohbMKFg.webp",
-        stat1: { number: "1000+", label: "Happy Clients" },
-        stat2: { number: "12h", label: "Response Time" },
-        features: [
-            "Dedicated support team",
-            "Fast response time",
-            "Technical training programs",
-            "Lifetime maintenance support"
-        ]
-    }
-]
+// +'&populate=all'
 
-// 将产品列表分组为每组4个
-const groupedProducts = computed(() => {
-    const groups = []
-    for (let i = 0; i < productsList.length; i += 4) {
-        groups.push(productsList.slice(i, i + 4))
+// 构建复杂的populate查询
+const populateQuery = qs.stringify({
+  populate: {
+    head_banner_images: {
+      populate: {
+        banner_img: {
+          fields: ['url', 'alternativeText', 'width', 'height']
+        }
+      }
     }
-    return groups
-})
+    // flagship_tech_products:{
+    //     fields:['first_image','h1_page_inner_title','url']
+    // }
+  }
+}, { encodeValuesOnly: true })
 
-watch(productDetailRes, (newPosts) => {
+console.log(`/home-pages?${populateQuery}`)
+const { data: indexRes, pending, error } = await useApi(`/home-pages?populate=all`)
+
+watch(indexRes, (newPosts) => {
     if (newPosts) {
         console.log(newPosts)
+        let data = newPosts.data[0]
+        data.what_you_need_blogs.forEach(val=>{
+            val.date = formatDateShort(val.date)
+        })
+        data.flagship_tech_products.forEach(val=>{
+            val.date = formatDateLong(val.date)
+        })
+        data.mature_products_products.forEach(val=>{
+            val.date = formatDateLong(val.date)
+        })
+        data.smart_value_products.forEach(val=>{
+            val.date = formatDateLong(val.date)
+        })
+        indexDetail.value = data
         useHead({
-            title: newPosts.metaTitle,
+            title: data.metaTitle,
             meta: [
                 {
                     name: 'description',
-                    content: newPosts.metaDescription
+                    content: data.metaDescription
                 }
             ],
+            script: [
+                {
+                    type: 'application/ld+json',
+                    innerHTML: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@graph": [
+                            {
+                                "@type": "LocalBusiness",
+                                "name": "STYLECNC",
+                                "legalName": "Jinan Style Machinery Co., Ltd.",
+                                "description": "Jinan Style Machinery Co., Ltd. (STYLECNC) is a world-leading CNC machine manufacturer, offering CNC routers, milling machines, laser machines, plasma cutters, lathes, edge banders, digital cutters.",
+                                "address": {
+                                    "@type": "PostalAddress",
+                                    "streetAddress": "Rongsheng Times International, 16F, Building A, 9 Beiyuan Street",
+                                    "addressLocality": "Jinan",
+                                    "addressRegion": "Shandong",
+                                    "postalCode": "250131",
+                                    "addressCountry": "CN"
+                                },
+                                "image": [
+                                    "https://www.stylecnc.com/uploads/logo.jpg",
+                                    "https://www.stylecnc.com/assets/img/hero-img/stylecnc.svg"
+                                ],
+                                "email": "info@stylecnc.com",
+                                "telePhone": "+86-531-83161518",
+                                "url": "https://www.stylecnc.com",
+                                "paymentAccepted": ["cash", "check", "credit card", "invoice", "paypal"],
+                                "openingHours": "Mo,Tu,We,Th,Fr,Sa 08:00-18:00",
+                                "openingHoursSpecification": [
+                                    {
+                                        "@type": "OpeningHoursSpecification",
+                                        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                                        "opens": "08:00",
+                                        "closes": "18:00"
+                                    }
+                                ],
+                                "sameAs": [
+                                    "https://www.facebook.com/stylecnc/",
+                                    "https://twitter.com/stylecnc/",
+                                    "https://www.linkedin.com/company/jinan-style-machinery-co-ltd/",
+                                    "https://www.pinterest.com/stylecncmachine/",
+                                    "https://www.instagram.com/stylecnc/",
+                                    "https://www.youtube.com/@stylecnc"
+                                ],
+                                "geo": {
+                                    "@type": "GeoCoordinates",
+                                    "latitude": "36.68607",
+                                    "longitude": "117.03293"
+                                },
+                                "priceRange": "$$$"
+                            },
+                            {
+                                "@type": "Organization",
+                                "name": "STYLECNC",
+                                "url": "https://www.stylecnc.com",
+                                "logo": "https://www.stylecnc.com/stylecnc-logo.png",
+                                "description": "Jinan Style Machinery Co., Ltd. (STYLECNC) is a world-leading CNC machine manufacturer, offering CNC routers, milling machines, laser machines, plasma cutters, lathes, edge banders, digital cutters."
+                            },
+                            {
+                                "@type": "WebSite",
+                                "name": "STYLECNC",
+                                "url": "https://www.stylecnc.com",
+                                "potentialAction": {
+                                    "@type": "SearchAction",
+                                    "target": {
+                                        "@type": "EntryPoint",
+                                        "urlTemplate": "/search/?q={search_term_string}"
+                                    },
+                                    "query-input": "required name=search_term_string"
+                                }
+                            }
+                        ]
+                    })
+                }
+            ]
         })
     }
 
 }, { immediate: true })
 
-// 打字机效果
-const typewriterTexts = [
-    'Craft Top-Quality Device',
-    'Improve Productivity',
-    'Forge Best Cutting Solution'
-]
+const indexProduct = ref({})
+const { data: indexProductRes, indexProductPending, indexProductError } = await useApi(`/product-categories?filters[home_page_is_show][$eq]=1`)
 
-const currentText = ref('')
-const currentIndex = ref(0)
-const isDeleting = ref(false)
-const typeSpeed = ref(100)
+watch(indexProductRes, (newPosts) => {
+    if (newPosts) {
+        console.log(newPosts)
+        let data = newPosts.data[0]
+        indexProduct.value = data
+    }
+
+}, { immediate: true })
+
+const modules = [Autoplay, FreeMode, Navigation, Pagination];
+
+
+const productsList = ref([])
+const { data: productsRes, productPending, productError } = await useApi('/product-categories?filters[parent_category_value][$eq]=Products&populate=all')
+const productsTips = ref(["Most Trusted","Established","Innovative","New Trend", "","","","Outstanding"])
+watch(productsRes, (newPosts) => {
+    
+    if (newPosts) {
+        let data = newPosts.data
+        
+        if (Array.isArray(data)) {
+            data = data.sort((a, b) => {
+                // 确保 sort 字段存在，如果不存在则视为最大值
+                const sortA = a.sort !== undefined ? a.sort : Number.MAX_SAFE_INTEGER
+                const sortB = b.sort !== undefined ? b.sort : Number.MAX_SAFE_INTEGER
+                return sortA - sortB
+            })
+            
+            for (let i = 0; i < data.length; i++) {
+                if(data[i].menu_select_down_panel_is_show){
+                        let columnList = data[i][data[i].column_attr_name]
+                        productsList.value.push({
+                        id: i+1,
+                        tip: productsTips.value[i],
+                        title: data[i].category_name,
+                        image: data[i].head_image,
+                        materials: 'Machinable Materials',
+                        columnList:columnList,
+                        link: '/Products/'+data[i].category_value
+                    })
+                }
+                
+            }
+            
+        } 
+        console.log('productList',productsList)
+    }
+
+}, { immediate: true })
+
+// 将产品列表分组为每组4个
+const groupedProducts = computed(() => {
+    const groups = []
+    for (let i = 0; i < productsList.value.length; i += 4) {
+        groups.push(productsList.value.slice(i, i + 4))
+    }
+
+    // console.log('groupedProducts',groups)
+    return groups
+})
+
+
+
+// 打字机效果
+const typewriterTexts = computed(() => [
+    indexDetail.craft_top_quality_device_text || 'Craft Top-Quality Device',
+    indexDetail.improve_productivity_text || 'Improve Productivity',
+    'Forge Best Cutting Solution'
+])
 
 const typeWriter = () => {
-    const fullText = typewriterTexts[currentIndex.value]
+
+
+    const fullText = typewriterTexts.value[currentIndex.value]
 
     if (isDeleting.value) {
         // 删除字符
@@ -1359,7 +1312,7 @@ const typeWriter = () => {
     } else if (isDeleting.value && currentText.value === '') {
         // 删除完成，切换到下一个文本
         isDeleting.value = false
-        currentIndex.value = (currentIndex.value + 1) % typewriterTexts.length
+        currentIndex.value = (currentIndex.value + 1) % typewriterTexts.value.length
         // 删除完成后稍微暂停一下再开始下一个文本
         setTimeout(typeWriter, 300)
         return
@@ -1367,6 +1320,13 @@ const typeWriter = () => {
 
     setTimeout(typeWriter, typeSpeed.value)
 }
+
+const currentText = ref('')
+const currentIndex = ref(0)
+const isDeleting = ref(false)
+const typeSpeed = ref(100)
+
+
 
 // 组件挂载后开始打字机效果
 onMounted(() => {
@@ -1507,6 +1467,11 @@ const scrollBlogCards = (direction) => {
         padding: 30px 0;
     }
 }
+.banner-activety{
+    width:100%;
+    padding:15px 30px;
+    text-align:center;
+}
 
 .index-part {
     max-width: 1440px;
@@ -1602,9 +1567,9 @@ const scrollBlogCards = (direction) => {
         flex-direction: column;
     }
 
-    .product-card:hover {
-        transform: translateY(-5px);
-    }
+    // .product-card:hover {
+    //     transform: translateY(-5px);
+    // }
 
     .product-card .tip {
         position: relative;
@@ -1629,7 +1594,7 @@ const scrollBlogCards = (direction) => {
     .product-card img {
         width: 100%;
         height: 200px;
-        object-fit: cover;
+        object-fit: contain;
         border-radius: 15px;
         margin-bottom: 20px;
     }
@@ -1876,7 +1841,7 @@ const scrollBlogCards = (direction) => {
         transform: translate(-50%, 0);
         display: flex;
         padding: 10px 5px;
-        gap: 6px;
+        gap: 5px;
         z-index: 2;
         background: rgba(0, 0, 0, 0.2);
         border-radius: 50px;
@@ -2413,7 +2378,7 @@ const scrollBlogCards = (direction) => {
             font-size: 48px;
             font-weight: 800;
             color: #000;
-            margin-bottom: 0;
+            margin-bottom: 30px;
             line-height: 1.4;
         }
 
@@ -2823,6 +2788,7 @@ const scrollBlogCards = (direction) => {
                             width: 253px;
                             height: 64px;
                             position: relative;
+                            transition: 0.3s all;
 
                             .featured-footer-inner {
                                 position: absolute;
@@ -2847,11 +2813,13 @@ const scrollBlogCards = (direction) => {
                             align-items: center;
                             padding: 17px;
                             width: 100%;
+                            position: relative;
 
                             .featured-footer-text {
                                 width: 87px;
                                 height: 22px;
                                 position: relative;
+                                transition: opacity 0.3s ease;
 
                                 .featured-footer-link-text {
                                     position: absolute;
@@ -2873,9 +2841,49 @@ const scrollBlogCards = (direction) => {
                                     }
                                 }
                             }
+
+                            .featured-footer-button {
+                                position: absolute;
+                                top: 50%;
+                                left: 50%;
+                                transform: translate(-50%, -50%);
+                                opacity: 0;
+                                transition: opacity 0.3s ease;
+
+                                .buy-now-btn {
+                                    width: 175px;
+                                    height: 44px;
+                                    background: #000000;
+                                    color: #ffffff;
+                                    border: none;
+                                    border-radius: 44px;
+                                    font-family: Inter;
+                                    font-weight: 500;
+                                    font-size: 14px;
+                                    cursor: pointer;
+                                    transition: all 0.3s ease;
+                                }
+                            }
+
+
+                        }
+                    }
+
+                    &:hover {
+                        .featured-footer-text {
+                            opacity: 0;
+                        }
+
+                        .featured-footer-content {
+                            top: 4px;
+                        }
+
+                        .featured-footer-button {
+                            opacity: 1 !important;
                         }
                     }
                 }
+
             }
         }
     }
@@ -3228,7 +3236,7 @@ const scrollBlogCards = (direction) => {
         flex-direction: column;
         gap: 40px;
         flex-shrink: 0;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        // box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 
         .testimonial-header {
             display: flex;
@@ -3244,8 +3252,11 @@ const scrollBlogCards = (direction) => {
                     width: 80px;
                     height: 80px;
                     border-radius: 50%;
-                    background: #f0f0f0;
                     flex-shrink: 0;
+                    img{
+                        width:100%;
+                        height:100%;
+                    }
                 }
 
                 .customer-details {
@@ -3261,8 +3272,8 @@ const scrollBlogCards = (direction) => {
 
                         h4 {
                             font-family: Inter;
-                            font-weight: 300;
-                            font-size: 14px;
+                            font-weight: 600;
+                            font-size: 26px;
                             line-height: 1.2;
                             color: #000000;
                             margin: 0;
@@ -3279,7 +3290,7 @@ const scrollBlogCards = (direction) => {
                     .customer-title {
                         font-family: Inter;
                         font-weight: 300;
-                        font-size: 14px;
+                        font-size: 16px;
                         line-height: 1.2;
                         color: #333333;
                         margin: 0;
@@ -3301,6 +3312,8 @@ const scrollBlogCards = (direction) => {
             flex: 1;
 
             .testimonial-stats {
+                position: relative;
+                left:-15px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -3310,13 +3323,13 @@ const scrollBlogCards = (direction) => {
                 .stat-item {
                     display: flex;
                     flex-direction: column;
-                    align-items: center;
+                    align-items: flex-start;
                     width: 155px;
 
                     .stat-value {
                         font-family: Inter;
-                        font-weight: 300;
-                        font-size: 14px;
+                        font-weight: 600;
+                        font-size: 48px;
                         line-height: 1.2;
                         background: linear-gradient(88deg, rgba(71, 82, 230, 1) 0%, rgba(36, 196, 255, 1) 100%);
                         -webkit-background-clip: text;
@@ -3328,7 +3341,7 @@ const scrollBlogCards = (direction) => {
                     .stat-label {
                         font-family: Inter;
                         font-weight: 300;
-                        font-size: 14px;
+                        font-size: 18px;
                         line-height: 1.2;
                         color: #333333;
                         text-align: center;
@@ -3338,14 +3351,12 @@ const scrollBlogCards = (direction) => {
                 .material-icon {
                     width: 95px;
                     height: 47px;
-                    background: #f0f0f0;
                     border-radius: 4px;
                 }
 
                 .material-icon-side {
                     width: 71px;
                     height: 60px;
-                    background: #f0f0f0;
                     border-radius: 4px;
                 }
             }
@@ -3373,7 +3384,7 @@ const scrollBlogCards = (direction) => {
     position: relative;
     width: 1166px;
     margin: 0 auto;
-    padding: 10px 30px 30px;
+    padding: 40px 30px 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -3428,15 +3439,10 @@ const scrollBlogCards = (direction) => {
         .partner-logo {
             width: 128px;
             height: 60px;
-            background: rgba(255, 255, 255, 0.8);
             border-radius: 4px;
             display: flex;
             align-items: center;
             justify-content: center;
-
-            .logo-placeholder {
-                background: #f0f0f0 !important;
-            }
         }
     }
 }
@@ -4578,6 +4584,9 @@ const scrollBlogCards = (direction) => {
 
 // Large Screens (1440px and below)
 @media (max-width: 1440px) {
+    .banner-activety{
+        padding:5px 10px;
+    }
     .index-banner {
         width: 100%;
         height: auto;
@@ -4959,8 +4968,8 @@ const scrollBlogCards = (direction) => {
 
                 p {
                     font-size: 14px;
-                    font-weight:400;
-                    color:#666;
+                    font-weight: 400;
+                    color: #666;
                 }
             }
         }
@@ -5382,8 +5391,8 @@ const scrollBlogCards = (direction) => {
 
                 p {
                     font-size: 14px;
-                    font-weight:400;
-                    color:#666;
+                    font-weight: 400;
+                    color: #666;
                     line-height: 1.5;
                 }
             }
@@ -5405,17 +5414,18 @@ const scrollBlogCards = (direction) => {
             padding: 20px;
 
             .testimonial-content {
-                .testimonial-stats{
-                    .stat-item{
-                        align-items:flex-start;
-                        .stat-value{
+                .testimonial-stats {
+                    .stat-item {
+                        align-items: flex-start;
+
+                        .stat-value {
                             font-size: 48px;
-                            font-weight:500;
+                            font-weight: 500;
                         }
                     }
-                   
+
                 }
-                
+
                 .user-info {
                     margin-bottom: 16px;
 
@@ -5482,8 +5492,8 @@ const scrollBlogCards = (direction) => {
 
             p {
                 width: auto;
-                font-size:14px;
-                color:#666;
+                font-size: 14px;
+                color: #666;
                 line-height: 1.4;
             }
 
@@ -5572,7 +5582,8 @@ const scrollBlogCards = (direction) => {
 
             .product-swiper {
                 width: 100%;
-                padding:10px 0 15px;
+                padding: 10px 0 15px;
+
                 .products-grid {
                     width: 100%;
                     display: flex;
@@ -5728,6 +5739,7 @@ const scrollBlogCards = (direction) => {
                             align-items: center;
                             justify-content: center;
                             margin: 20px 0 40px 0;
+                            font-size:12px;
                             order: 5;
 
                             span {
@@ -5805,24 +5817,28 @@ const scrollBlogCards = (direction) => {
                 }
 
                 .capability-content {
-                    width:100%;
-                    padding:0 15px;
-                    text-align:left;
+                    width: 100%;
+                    padding: 0 15px;
+                    text-align: left;
+
                     .capability-title {
                         font-size: 24px;
                         margin-bottom: 15px;
-                        
+
                     }
-                    .achievements-header .achievements-title{
-                        font-size:24px;
-                        text-align:center;
+
+                    .achievements-header .achievements-title {
+                        font-size: 24px;
+                        text-align: center;
                     }
-                    .achievement-items{
-                        width:100%;
-                        gap:20px;
-                        .achievement-text{
-                            p{
-                                 font-size:16px !important;
+
+                    .achievement-items {
+                        width: 100%;
+                        gap: 20px;
+
+                        .achievement-text {
+                            p {
+                                font-size: 16px !important;
                             }
                         }
                     }
@@ -5907,8 +5923,8 @@ const scrollBlogCards = (direction) => {
                 p {
                     font-size: 14px;
                     margin-bottom: 16px;
-                    font-weight:400;
-                    color:#666;
+                    font-weight: 400;
+                    color: #666;
                 }
             }
         }
@@ -6173,13 +6189,13 @@ const scrollBlogCards = (direction) => {
 
             .section-title {
                 font-size: 24px;
-                color:#3d3d3d;
+                color: #3d3d3d;
             }
 
             .section-description {
                 p {
                     font-size: 14px;
-                    font-weight:400;
+                    font-weight: 400;
                 }
             }
         }
@@ -6374,4 +6390,9 @@ const scrollBlogCards = (direction) => {
         }
     }
 }
+.dynamic-product-section{
+    margin:30px 0;
+}
+
+
 </style>

@@ -8,10 +8,10 @@
                         <!-- Contact Information -->
                         <div class="contact-info">
                             <div class="contact-header" :class="getEasySolutionType == 3?'biger':''">
-                                <h2 v-if="getEasySolutionType == 1" class="contact-title">Get Easy Solution</h2>
+                                <h2 v-if="getEasySolutionType == 1" class="contact-title">{{ contentDetail.get_easy_solution }}</h2>
                                 <h2 v-else class="contact-title">
-                                    <p>Contact Dinosaw</p>
-                                    Get Easy Solution
+                                    <p>{{contentDetail.contact_text}} Dinosaw</p>
+                                    {{ contentDetail.get_easy_solution }}
                                 </h2>
                                 <div class="contact-description">
                                     <p>Are you looking for the perfect cutting machines or processing solutions for hard
@@ -37,8 +37,8 @@
                                         </svg>
                                     </div>
                                     <div class="contact-details">
-                                        <p class="contact-method-title">Prefer email?</p>
-                                        <p class="contact-method-desc">You can also reach us at</p>
+                                        <p class="contact-method-title">{{ contentDetail.prefer_email_title }}</p>
+                                        <p class="contact-method-desc">{{ contentDetail.prefer_email_remark }}</p>
                                         <a href="mailto:gma@dinosawmachine.com"
                                             class="contact-link">gma@dinosawmachine.com</a>
                                     </div>
@@ -47,17 +47,10 @@
                                 <!-- WhatsApp Contact -->
                                 <div class="contact-card">
                                     <div class="contact-icon whatsapp">
-                                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                                            <path
-                                                d="M16 2C8.268 2 2 8.268 2 16c0 2.76.8 5.32 2.16 7.48L2 30l6.52-2.16C10.68 29.2 13.24 30 16 30c7.732 0 14-6.268 14-14S23.732 2 16 2z"
-                                                fill="#40C351" />
-                                            <path
-                                                d="M12.5 9.5c-.3 0-.6.1-.8.3-.2.2-.7.7-.7 1.7s.7 2 .8 2.1c.1.1 1.6 2.5 3.9 3.5.5.2 1 .4 1.3.5.5.2 1 .2 1.4.1.4-.1 1.3-.5 1.5-1s.2-1-.1-1.1c-.1-.1-.3-.2-.6-.3s-1.3-.6-1.5-.7c-.2-.1-.3-.1-.4.1s-.5.6-.6.7c-.1.1-.2.2-.4.1s-.8-.3-1.5-.9c-.6-.5-1-1.1-1.1-1.3s0-.3.1-.4c.1-.1.2-.2.3-.3s.1-.2.2-.3c.1-.1.1-.2 0-.3s-.4-1-.6-1.4c-.2-.4-.4-.3-.6-.3z"
-                                                fill="white" />
-                                        </svg>
+                                        <svg class="icon" viewBox="0 0 1024 1024" width="200" height="200"><path d="M849.92 51.2H174.08c-67.866 0-122.88 55.014-122.88 122.88v675.84c0 67.866 55.014 122.88 122.88 122.88h675.84c67.866 0 122.88-55.014 122.88-122.88V174.08c0-67.866-55.014-122.88-122.88-122.88zM512.015 819.21h-.117c-55.127-.02-109.205-14.812-156.355-42.808l-11.233-6.651-116.27 30.48 31.047-113.311-7.316-11.623A306.422 306.422 0 0 1 204.8 511.852c.077-169.319 137.882-307.062 307.313-307.062 82.068.02 159.18 32.005 217.185 90.05 58.01 58.046 89.917 135.214 89.902 217.262-.061 169.35-137.861 307.108-307.185 307.108z" fill="#40C351"></path><path d="M680.5 589.21c-9.232-4.629-54.641-26.962-63.11-30.03s-14.618-4.607-20.792 4.63c-6.154 9.23-23.844 30.038-29.24 36.187-5.392 6.17-10.778 6.948-20.015 2.32-9.22-4.639-38.968-14.372-74.26-45.83-27.448-24.468-45.978-54.696-51.374-63.943-5.392-9.226-.584-14.228 4.05-18.842 4.147-4.147 9.226-10.782 13.86-16.179 4.613-5.391 6.154-9.247 9.226-15.396 3.077-6.174 1.536-11.56-.778-16.179-2.279-4.633-20.224-50.299-28.442-68.562-6.912-15.375-14.193-15.687-20.792-15.964-5.392-.23-11.54-.215-17.695-.215-6.15 0-16.154 2.32-24.627 11.566-8.469 9.247-32.333 31.575-32.333 77.01 0 45.44 33.09 89.344 37.704 95.503 4.613 6.15 63.892 102.37 157.752 139.392 78.003 30.761 93.89 24.648 110.827 23.112 16.943-1.53 54.641-22.318 62.331-43.899 7.696-21.56 7.696-40.038 5.397-43.888-2.314-3.86-8.464-6.155-17.69-10.793z" fill="#40C351"></path></svg>
                                     </div>
                                     <div class="contact-details">
-                                        <p class="contact-method-title">Whatsapp?</p>
+                                        <p class="contact-method-title">{{ contentDetail.whats_app_title }}?</p>
                                         <a href="https://wa.me/8619859013937" class="contact-link">+86 198-5901-3937</a>
                                     </div>
                                 </div>
@@ -65,15 +58,10 @@
                                 <!-- Phone Contact -->
                                 <div class="contact-card">
                                     <div class="contact-icon">
-                                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                                            <path
-                                                d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"
-                                                stroke="#2C2C2C" stroke-width="2" stroke-linecap="round"
-                                                stroke-linejoin="round" />
-                                        </svg>
+                                        <svg class="icon" style="transform: scale(1.35);" viewBox="0 0 1219 1024" width="238.086" height="200"><path d="M763.096 211.709c-170.42-74.347-369.507 3.777-443.966 174.14-74.346 170.405 3.778 369.55 174.17 443.894 49.87 21.839 102.265 30.506 153.246 27.672 43.923-2.499 86.707-13.67 126.132-32.285l.083.224c4-1.5 39.093-15.338 48.9-48.787 6.057-20.78.5-43.01-16.006-65.787 4.947-5.559 5.7-13.394 1.891-19.505v-.057l-62.843-99.57c-4.835-7.836-14.89-9.834-22.53-5.169l-32.037 27.115c-15.557 7.504-30.056-8.167-55.868-41.173l-53.65-84.835c-10.696-21.837-19.36-44.062-4.33-55.284l36.839-19.393v-.057c8.002-5.057 9.724-15.226 5.058-22.504v-.057l-62.848-99.682c-4.78-7.726-14.835-9.893-22.449-5.113l-32.81 25.78c-19.31 16.895-66.54 95.129 36.48 262.643 106.824 173.919 203.81 170.032 228.093 157.86l10.67-5.001-3.447 2.167c9.668 12.78 16.893 27.615 14.504 36.117-3.086 10.89-22.172 23.618-29.56 27.283-36.062 17.116-75.406 27.005-115.579 28.782-44.45 2-89.96-5.833-133.355-24.838-151.998-66.344-221.677-243.818-155.249-395.833 66.316-151.968 243.875-221.648 395.902-155.359 151.25 66.068 220.87 242.318 156.079 393.776-1.637 1.72-3.39 7.888-3.973 10.279-2.139 8.443 4.918 13.113 15.34 15.669 10.388 2.669 11.917 2.669 18.752-4.221.222-.78 3.835-7.778 3.835-8.56 71.735-169.618-6.224-366.485-175.474-440.331" fill="#2c2c2c"></path></svg>
                                     </div>
                                     <div class="contact-details">
-                                        <p class="contact-method-title">Telephone?</p>
+                                        <p class="contact-method-title">{{contentDetail.telephone_title}}?</p>
                                         <a href="tel:+8619859013937" class="contact-link">+86 198-5901-3937</a>
                                     </div>
                                 </div>
@@ -104,11 +92,19 @@
                                     <div class="form-content">
                                         <!-- CNC Type Selection -->
                                         <div class="form-group">
-                                            <h4 class="form-title">What type of CNC machine or diamond tools are you
-                                                looking for?</h4>
+                                            <h4 class="form-title">{{ contentDetail.what_type_of_CNC_machine_or_diamond_title }}</h4>
                                             <div class="select-container">
                                                 <div class="select-wrapper">
-                                                    <select class="select-display" required v-model="form.types"><option value="" disabled="" selected="">CNC Types</option><option value="Wire saw machine series">Wire saw machine series</option><option value="Circular Saw Machine">Circular Saw Machine</option><option value="Drilling and Engraving Machine">Drilling and Engraving Machine</option><option value="Grinding and Polishing Machine">Grinding and Polishing Machine</option><option value="Mining and Quarrying Machine">Mining and Quarrying Machine</option><option value="Other Industry Machine">Other Industry Machine</option><option value=" Diamond Tools"> Diamond Tools</option></select>
+                                                    <select class="select-display" required v-model="form.types">
+                                                        <option value="" disabled="" selected="">{{ contentDetail.what_type_of_CNC_machine_or_diamond_placeholder_text }}</option>
+                                                        <option value="Wire saw machine series">Wire saw machine series</option>
+                                                        <option value="Circular Saw Machine">Circular Saw Machine</option>
+                                                        <option value="Drilling and Engraving Machine">Drilling and Engraving Machine</option>
+                                                        <option value="Grinding and Polishing Machine">Grinding and Polishing Machine</option>
+                                                        <option value="Mining and Quarrying Machine">Mining and Quarrying Machine</option>
+                                                        <option value="Other Industry Machine">Other Industry Machine</option>
+                                                        <option value=" Diamond Tools"> Diamond Tools</option>
+                                                    </select>
                                                     <div class="select-icon">
                                                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                                                             <path d="M4 6L8 10L12 6" stroke="#999999" stroke-width="1.5"
@@ -121,10 +117,18 @@
 
                                         <!-- Materials Selection -->
                                         <div class="form-group">
-                                            <h4 class="form-title">What materials will you be working with?</h4>
+                                            <h4 class="form-title">{{ contentDetail.what_materials_will_you_title }}</h4>
                                             <div class="select-container">
                                                 <div class="select-wrapper">
-                                                    <select class="select-display" required v-model="form.materials"><option value="" disabled="" selected="">Raw Materials</option><option value="Marble">Marble</option><option value="Granite">Granite</option><option value="Quartz">Quartz</option><option value="Ceramic">Ceramic</option><option value="Steel">Steel</option><option value="Concrete">Concrete</option><option value="Other">Other</option></select>
+                                                    <select class="select-display" required v-model="form.materials">
+                                                        <option value="" disabled="" selected="">{{ contentDetail.what_materials_will_you_placeholder_text }}</option>
+                                                        <option value="Marble">Marble</option>
+                                                        <option value="Granite">Granite</option>
+                                                        <option value="Quartz">Quartz</option>
+                                                        <option value="Ceramic">Ceramic</option>
+                                                        <option value="Steel">Steel</option>
+                                                        <option value="Concrete">Concrete</option>
+                                                        <option value="Other">Other</option></select>
                                                     <div class="select-icon">
                                                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                                                             <path d="M4 6L8 10L12 6" stroke="#999999" stroke-width="1.5"
@@ -137,28 +141,28 @@
 
                                         <!-- Name Input -->
                                         <div class="form-group">
-                                            <h4 class="form-label">What's your name?</h4>
+                                            <h4 class="form-label">{{ contentDetail.what_is_your_name_title }}</h4>
                                             <div class="input-container">
-                                                <input type="text" placeholder="Name" class="form-input" v-model="form.name" />
+                                                <input type="text" :placeholder="contentDetail.what_is_your_name_placeholder_text" class="form-input" v-model="form.name" />
                                             </div>
                                         </div>
 
                                         <!-- Contact Input -->
                                         <div class="form-group">
-                                            <h4 class="form-title">What's your Whatsapp phone number or email address.
+                                            <h4 class="form-title">{{ contentDetail.what_is_your_Whatsapp_or_email_title }}
                                             </h4>
                                             <div class="input-container">
-                                                <input type="text" placeholder="Whatsapp phone number& Email"
+                                                <input type="text" :placeholder="contentDetail.what_is_your_Whatsapp_or_email_placeholder_text"
                                                     class="form-input" v-model="form.contactInfo" />
                                             </div>
                                         </div>
 
                                         <!-- Requirements Textarea -->
                                         <div class="form-group">
-                                            <h4 class="form-title">What specific requirements do you have?</h4>
+                                            <h4 class="form-title">{{ contentDetail.what_specific_requirements_title }}</h4>
                                             <div class="textarea-container">
                                                 <textarea
-                                                    placeholder="You can propose other customization requirements here, such as processing materials, dimensions, voltage, dust prevention requirements, etc"
+                                                    :placeholder="contentDetail.what_specific_requirements_placeholder_text"
                                                     class="form-textarea" v-model="form.yourRequirements"></textarea>
                                             </div>
                                         </div>
@@ -166,7 +170,7 @@
                                         <!-- Submit Button -->
                                         <div class="form-group">
                                             <button class="submit-btn" @click="submitForm" :disabled="isSubmitting">
-                                                {{ isSubmitting ? 'Submitting...' : 'Get A Free Solution' }}
+                                                {{ isSubmitting ? 'Submitting...' : contentDetail.get_a_free_solution_btn_text }}
                                             </button>
                                         </div>
                                     </div>
@@ -192,28 +196,28 @@
 
                                         <!-- Name Input -->
                                         <div class="form-group">
-                                            <h4 class="form-label">What's your name?</h4>
+                                            <h4 class="form-label">{{ contentDetail.what_is_your_name_title }}</h4>
                                             <div class="input-container">
-                                                <input type="text" placeholder="Name" class="form-input" v-model="form.name" />
+                                                <input type="text" :placeholder="contentDetail.what_is_your_name_placeholder_text" class="form-input" v-model="form.name" />
                                             </div>
                                         </div>
 
                                         <!-- Contact Input -->
                                         <div class="form-group">
-                                            <h4 class="form-title">What's your Whatsapp phone number or email address.
+                                            <h4 class="form-title">{{ contentDetail.what_is_your_Whatsapp_or_email_title }}
                                             </h4>
                                             <div class="input-container">
-                                                <input type="text" placeholder="Whatsapp phone number& Email"
+                                                <input type="text" :placeholder="contentDetail.what_is_your_Whatsapp_or_email_placeholder_text"
                                                     class="form-input" v-model="form.contactInfo" />
                                             </div>
                                         </div>
 
                                         <!-- Requirements Textarea -->
                                         <div class="form-group">
-                                            <h4 class="form-title">What support do you need?</h4>
+                                            <h4 class="form-title">{{ contentDetail.what_specific_requirements_title }}</h4>
                                             <div class="textarea-container">
                                                 <textarea
-                                                    placeholder="You can write down what type of support you need so that we can arrange for assistance as soon as possible, for installation, training, after-sales, or other usage issues and enquiries"
+                                                    :placeholder="contentDetail.what_specific_requirements_placeholder_text"
                                                     class="form-textarea" v-model="form.yourRequirements"></textarea>
                                             </div>
                                         </div>
@@ -221,7 +225,7 @@
                                         <!-- Submit Button -->
                                         <div class="form-group">
                                             <button class="submit-btn" @click="submitForm" :disabled="isSubmitting">
-                                                {{ isSubmitting ? 'Submitting...' : 'Get A Free Solution' }}
+                                                {{ isSubmitting ? 'Submitting...' : contentDetail.get_a_free_solution_btn_text }}
                                             </button>
                                         </div>
                                     </div>
@@ -234,7 +238,7 @@
                         <!-- Contact Information -->
                         <div class="contact-info small">
                             <div class="contact-header">
-                                <h2 class="contact-title">Get Easy Solution</h2>
+                                <h2 class="contact-title">{{ contentDetail.get_easy_solution }}</h2>
                                 <div class="contact-description">
                                     <p>Need some customized industry machines,diamond tools or technical support?</p>
                                     <p>Get in touch with us and we will contact you within 15 minutes!</p>
@@ -253,8 +257,8 @@
                                         </svg>
                                     </div>
                                     <div class="contact-details">
-                                        <p class="contact-method-title">Prefer email?</p>
-                                        <p class="contact-method-desc">You can also reach us at</p>
+                                        <p class="contact-method-title">{{ contentDetail.prefer_email_title }}</p>
+                                        <p class="contact-method-desc">{{ contentDetail.prefer_email_remark }}</p>
                                         <a href="mailto:gma@dinosawmachine.com"
                                             class="contact-link">gma@dinosawmachine.com</a>
                                     </div>
@@ -263,17 +267,10 @@
                                 <!-- WhatsApp Contact -->
                                 <div class="contact-card">
                                     <div class="contact-icon whatsapp">
-                                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                                            <path
-                                                d="M16 2C8.268 2 2 8.268 2 16c0 2.76.8 5.32 2.16 7.48L2 30l6.52-2.16C10.68 29.2 13.24 30 16 30c7.732 0 14-6.268 14-14S23.732 2 16 2z"
-                                                fill="#40C351" />
-                                            <path
-                                                d="M12.5 9.5c-.3 0-.6.1-.8.3-.2.2-.7.7-.7 1.7s.7 2 .8 2.1c.1.1 1.6 2.5 3.9 3.5.5.2 1 .4 1.3.5.5.2 1 .2 1.4.1.4-.1 1.3-.5 1.5-1s.2-1-.1-1.1c-.1-.1-.3-.2-.6-.3s-1.3-.6-1.5-.7c-.2-.1-.3-.1-.4.1s-.5.6-.6.7c-.1.1-.2.2-.4.1s-.8-.3-1.5-.9c-.6-.5-1-1.1-1.1-1.3s0-.3.1-.4c.1-.1.2-.2.3-.3s.1-.2.2-.3c.1-.1.1-.2 0-.3s-.4-1-.6-1.4c-.2-.4-.4-.3-.6-.3z"
-                                                fill="white" />
-                                        </svg>
+                                        <svg class="icon" viewBox="0 0 1024 1024" width="200" height="200"><path d="M849.92 51.2H174.08c-67.866 0-122.88 55.014-122.88 122.88v675.84c0 67.866 55.014 122.88 122.88 122.88h675.84c67.866 0 122.88-55.014 122.88-122.88V174.08c0-67.866-55.014-122.88-122.88-122.88zM512.015 819.21h-.117c-55.127-.02-109.205-14.812-156.355-42.808l-11.233-6.651-116.27 30.48 31.047-113.311-7.316-11.623A306.422 306.422 0 0 1 204.8 511.852c.077-169.319 137.882-307.062 307.313-307.062 82.068.02 159.18 32.005 217.185 90.05 58.01 58.046 89.917 135.214 89.902 217.262-.061 169.35-137.861 307.108-307.185 307.108z" fill="#40C351"></path><path d="M680.5 589.21c-9.232-4.629-54.641-26.962-63.11-30.03s-14.618-4.607-20.792 4.63c-6.154 9.23-23.844 30.038-29.24 36.187-5.392 6.17-10.778 6.948-20.015 2.32-9.22-4.639-38.968-14.372-74.26-45.83-27.448-24.468-45.978-54.696-51.374-63.943-5.392-9.226-.584-14.228 4.05-18.842 4.147-4.147 9.226-10.782 13.86-16.179 4.613-5.391 6.154-9.247 9.226-15.396 3.077-6.174 1.536-11.56-.778-16.179-2.279-4.633-20.224-50.299-28.442-68.562-6.912-15.375-14.193-15.687-20.792-15.964-5.392-.23-11.54-.215-17.695-.215-6.15 0-16.154 2.32-24.627 11.566-8.469 9.247-32.333 31.575-32.333 77.01 0 45.44 33.09 89.344 37.704 95.503 4.613 6.15 63.892 102.37 157.752 139.392 78.003 30.761 93.89 24.648 110.827 23.112 16.943-1.53 54.641-22.318 62.331-43.899 7.696-21.56 7.696-40.038 5.397-43.888-2.314-3.86-8.464-6.155-17.69-10.793z" fill="#40C351"></path></svg>
                                     </div>
                                     <div class="contact-details">
-                                        <p class="contact-method-title">Whatsapp?</p>
+                                        <p class="contact-method-title">{{ contentDetail.whats_app_title }}?</p>
                                         <a href="https://wa.me/8619859013937" class="contact-link">+86 198-5901-3937</a>
                                     </div>
                                 </div>
@@ -281,15 +278,10 @@
                                 <!-- Phone Contact -->
                                 <div class="contact-card">
                                     <div class="contact-icon">
-                                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                                            <path
-                                                d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"
-                                                stroke="#2C2C2C" stroke-width="2" stroke-linecap="round"
-                                                stroke-linejoin="round" />
-                                        </svg>
+                                        <svg class="icon" style="transform: scale(1.35);" viewBox="0 0 1219 1024" width="238.086" height="200" ><path d="M763.096 211.709c-170.42-74.347-369.507 3.777-443.966 174.14-74.346 170.405 3.778 369.55 174.17 443.894 49.87 21.839 102.265 30.506 153.246 27.672 43.923-2.499 86.707-13.67 126.132-32.285l.083.224c4-1.5 39.093-15.338 48.9-48.787 6.057-20.78.5-43.01-16.006-65.787 4.947-5.559 5.7-13.394 1.891-19.505v-.057l-62.843-99.57c-4.835-7.836-14.89-9.834-22.53-5.169l-32.037 27.115c-15.557 7.504-30.056-8.167-55.868-41.173l-53.65-84.835c-10.696-21.837-19.36-44.062-4.33-55.284l36.839-19.393v-.057c8.002-5.057 9.724-15.226 5.058-22.504v-.057l-62.848-99.682c-4.78-7.726-14.835-9.893-22.449-5.113l-32.81 25.78c-19.31 16.895-66.54 95.129 36.48 262.643 106.824 173.919 203.81 170.032 228.093 157.86l10.67-5.001-3.447 2.167c9.668 12.78 16.893 27.615 14.504 36.117-3.086 10.89-22.172 23.618-29.56 27.283-36.062 17.116-75.406 27.005-115.579 28.782-44.45 2-89.96-5.833-133.355-24.838-151.998-66.344-221.677-243.818-155.249-395.833 66.316-151.968 243.875-221.648 395.902-155.359 151.25 66.068 220.87 242.318 156.079 393.776-1.637 1.72-3.39 7.888-3.973 10.279-2.139 8.443 4.918 13.113 15.34 15.669 10.388 2.669 11.917 2.669 18.752-4.221.222-.78 3.835-7.778 3.835-8.56 71.735-169.618-6.224-366.485-175.474-440.331" fill="#2c2c2c"></path></svg>
                                     </div>
                                     <div class="contact-details">
-                                        <p class="contact-method-title">Telephone?</p>
+                                        <p class="contact-method-title">{{ contentDetail.telephone_title }}?</p>
                                         <a href="tel:+8619859013937" class="contact-link">+86 198-5901-3937</a>
                                     </div>
                                 </div>
@@ -319,8 +311,11 @@ export default {
         isSubmitting: false
     }
   },
-
   props:{
+        contentDetail:{
+            type:Object,
+            default:()=>{}
+        },
         getEasySolutionType:{
             type:Number,
             default:1
@@ -721,6 +716,12 @@ Submitted at: ${new Date().toLocaleString()}
         &.small{
             width:427px;
             margin-left:50px;
+            .contact-header {
+                padding-bottom:30px;
+                &:before {
+                    transform: scaleX(-1);
+                }
+            }
         }
         
         .contact-header {

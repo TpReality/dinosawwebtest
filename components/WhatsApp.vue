@@ -1,5 +1,5 @@
 <template>
-  <div class="whats-app">
+  <div class="whats-app" v-if="contentDetail">
       <div 
         class="panel" 
         :class="{ 'panel-hidden': !isPanelVisible }"
@@ -13,8 +13,8 @@
                 <svg display="block" role="presentation" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M 12.5 0 L 0 0" fill="transparent" height="1px" id="M5t9QOTlE" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="var(--1335ju, 1.5)" stroke="var(--18mrqx2, rgb(0, 0, 0))" transform="translate(5.75 12.25)" width="12.5px"></path></svg>
               </div>
               <div class="text-mes">
-                <p>Get A Easy Solution！</p>
-                <span>Chat Online</span>
+                <p>{{contentDetail.chat_online_dialog_head_title}}</p>
+                <span>{{ contentDetail.chat_online_dialog_head_subtitle }}</span>
               </div>
           </div>
           <div class="whats-content">
@@ -22,15 +22,15 @@
                 <NuxtImg src="https://framerusercontent.com/images/PZaASQwcgVKtL1LRgszQtSdlJU.png" />
               </div>
               <div class="text">
-                  <div class="name">Ms.Lizzy</div>
-                  <p>Hi, this is Lizzy from Dinosaw ( Not a Robot ).  Which Machine ( model ) do you want? Please WhatsApp us now</p>
+                  <div class="name">{{ contentDetail.chat_online_dialog_body_title }}</div>
+                  <p v-html="contentDetail.chat_online_dialog_body_description"></p>
               </div>
           </div>
           <div class="whats-button">
-              <a href="https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information">WhatsApp Chat Now</a>
+              <a href="https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information">{{ contentDetail.chat_online_dialog_btn_whatapp_text}}</a>
           </div>
           <div class="contact-button">
-            <a href="./contact" target="_blank">Contact Us</a>
+            <a href="./contact" target="_blank">{{ contentDetail.chat_online_dialog_btn_contact_us_text }}</a>
           </div>
       </div>
       <div 
@@ -38,7 +38,7 @@
        
       >
         <img width="35" height="35" src="https://framerusercontent.com/images/PZaASQwcgVKtL1LRgszQtSdlJU.png" alt="">
-        <p class="framer-text">Hello 👋 How can we help?</p>
+        <p class="framer-text">{{ contentDetail.chat_online_dialog_btn_help_text }}</p>
         <svg :class="{ 'tip-visible': !isPanelVisible }" @click="showPanel" class="cursor-pointer" width="24px" height="24px"viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" ><path d="M 0 0 L 0 12.5" fill="transparent" height="12.5px" id="InYKHyHwf" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="var(--1335ju, 1.5)" stroke="var(--18mrqx2, rgb(0, 0, 0))" transform="translate(12 5.75)" width="1px"></path><path d="M 12.5 0 L 0 0" fill="transparent" height="1px" id="pfQxqOaIQ" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="var(--1335ju, 1.5)" stroke="var(--18mrqx2, rgb(0, 0, 0))" transform="translate(5.75 12)" width="12.5px"></path></svg>
       </div>
   </div>
@@ -46,6 +46,14 @@
 
 <script setup>
 import { ref } from 'vue'
+const props = defineProps({
+  contentDetail: {
+      type: Object,
+      default: () => {
+        chat_online_dialog_head_title:""
+      }
+  }
+})
 
 // 控制面板显示/隐藏的响应式变量
 const isPanelVisible = ref(true)
@@ -170,6 +178,9 @@ const hidePanel = () => {
           .name{
               font-size:22px;
               font-weight:500;
+          }
+          .text{
+            width:195px;
           }
           p{
               font-size:14px;

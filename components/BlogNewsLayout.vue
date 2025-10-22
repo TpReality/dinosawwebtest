@@ -16,7 +16,7 @@
               <div class="breadcrumb-link">
                 <div class="breadcrumb-text">
                   <div class="text-container">
-                    <span class="breadcrumb-home"><NuxtLink to="/">Home</NuxtLink></span>
+                    <span class="breadcrumb-home"><NuxtLink to="/">{{ news.home_text }}</NuxtLink></span>
                   </div>
                 </div>
                 <div class="breadcrumb-text">
@@ -29,7 +29,7 @@
                   <div class="dropdown-link">
                     <div class="dropdown-container">
                       <div class="dropdown-text-container">
-                        <span class="breadcrumb-products"><NuxtLink to="/blog">Blogs</NuxtLink></span>
+                        <span class="breadcrumb-products"><NuxtLink to="/blog">{{ news.products_btn_text }}</NuxtLink></span>
                       </div>
                     </div>
                     <div class="dropdown-icon-container">
@@ -39,11 +39,8 @@
                 </div>
                 <div class="breadcrumb-outer">
                         <div class="bg">
-                            <p>
-                                <a href="/blog/news-events" target="_blank">News Events</a>
-                            </p>
-                            <p>
-                                <a href="/blog/industry-news" target="_blank">Industry News</a>
+                            <p v-for="(menu, i) in menuItems" :key="i">
+                                <a :href="'/blog/'+menu.category_value" target="_blank">{{ menu.category_name }}</a>
                             </p>
                         </div>
                       </div>
@@ -59,7 +56,7 @@
                   <div class="dropdown-link">
                     <div class="dropdown-container">
                       <div class="dropdown-text-container">
-                        <span class="breadcrumb-products">{{ breadcrumbText }}</span>
+                        <span class="breadcrumb-products">{{ news.category_btn_text }}</span>
                       </div>
                     </div>
                     <div class="dropdown-icon-container">
@@ -82,44 +79,41 @@
                   </svg>
                 </div>
                 <div class="badge-text">
-                  <span class="badge-title">Last Updated:</span>
-                  <div class="badge-title">{{ lastUpdated }}</div>
+                  <span class="badge-title">{{ news.last_update_date_text }}</span>
+                  <div class="badge-title">{{ news.last_update_date_value }}</div>
                 </div>
               </div>
             </div>
           </div>
           <div class="title-section">
-            <h1 class="main-title">
-              {{ mainTitle }}<br/>
-              {{ subTitle }}
+            <h1 class="main-title" v-if="slug == 'news-events'">
+              {{ news.hero_main_head_title }} <span class="title">{{ news.hero_main_center_title }}</span>{{ news.hero_main_after_title }}
+            </h1>
+            <h1 class="main-title" v-if="slug == 'industry-news'">
+              {{ news.hero_main_head_title }} <span class="title">{{ news.hero_main_center_1_title }}</span>
+              {{ news.hero_main_center_2_title }} <span class="title">{{ news.hero_main_after_title }}</span>
             </h1>
           </div>
           <div class="description-section">
-            <p class="description-text">
-              {{ description }}
-            </p>
+            <p class="description-text" v-html="news.hero_description"></p>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Processing Cases Section -->
-    <div class="processing-cases-section" v-for="(item, index) in processingCase" :key="index">
+    <div class="processing-cases-section">
       <!-- 背景图片 -->
-      <div class="processing-cases-background" v-if="index != 1">
+      <!-- <div class="processing-cases-background" v-if="index != 1">
         <div class="background-image"></div>
-      </div>
+      </div> -->
 
       <!-- 标题部分 -->
       <div class="processing-cases-title-section">
         <div class="processing-cases-title-frame">
-          <h2 class="processing-cases-title" v-if="index == 0">
-            {{ item.title }}<br>
-            <div class="c-black">{{ item.subTitle }}</div>
-          </h2>
-          <h2 class="processing-cases-title" v-else>
-            <div class="c-black">{{ item.title }}</div>
-            {{ item.subTitle }}
+          <h2 class="processing-cases-title">
+            {{ processingCase.title }}<br>
+            <div class="c-black">{{ processingCase.subTitle }}</div>
           </h2>
         </div>
       </div>
@@ -132,35 +126,47 @@
               <div class="processing-cases-section-inner">
                 <div class="processing-cases-list">
                   <!-- 动态渲染案例项 -->
-                  <div class="processing-case-item" v-for="(caseItem, caseIndex) in item.cases" :key="caseIndex">
-                    <div class="case-background">
-                      <div class="case-ipad">
-                        <div class="case-image-container">
-                          <div class="case-main-image" :class="caseItem.imageClass"></div>
-                        </div>
-                        <div class="case-content-container">
-                          <div class="case-link">
-                            <div class="case-info-container">
-                              <div class="case-youtube-link">
-                                <div class="case-title-frame">
-                                  <h3 class="case-title">
-                                    <span class="case-title-line" v-for="(line, lineIndex) in caseItem.titleLines" :key="lineIndex">
-                                      {{ line }}
-                                    </span>
-                                  </h3>
-                                </div>
+                  <template v-for="(caseItem, caseIndex) in blogList" :key="caseIndex">
+                    <NuxtLink :to="'/blog/'+caseItem.slug" target="_blank">
+                      <div class="processing-case-item">
+                        <div class="case-background">
+                          <div class="case-ipad">
+                            <div class="case-image-container">
+                              <div class="case-main-image" :class="caseItem.imageClass">
+                                <NuxtImg src="caseItem.first_image_url" />
                               </div>
-                              <div class="case-date-section">
-                                <div class="case-date-container">
-                                  <span class="case-date">{{ caseItem.date }}</span>
+                            </div>
+                            <div class="case-content-container">
+                              <div class="case-link">
+                                <div class="case-info-container">
+                                  <div class="case-youtube-link">
+                                    <div class="case-title-frame">
+                                      <h3 class="case-title">
+                                        {{caseItem.title}}
+                                          <!-- <span class="case-title-line" v-for="(line, lineIndex) in caseItem.titleLines" :key="lineIndex">
+                                            {{ line }}
+                                          </span> -->
+                                      </h3>
+                                    </div>
+                                  </div>
+                                  <div class="case-date-section">
+                                    <div class="case-date-container">
+                                      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 16 16">
+                                                                                <path d="M 12.825 14.5 L 8.425 14.5 C 7.075 14.5 6 13.4 6 12.075 L 6 11.35 C 6 10 7.1 8.925 8.425 8.925 L 12.825 8.925 C 14.175 8.925 15.25 10.025 15.25 11.35 L 15.25 12.075 C 15.25 13.4 14.15 14.5 12.825 14.5 Z" fill="rgb(135, 135, 135)"></path>
+                                                                                <path d="M 12.075 13.475 L 3.425 13.475 C 2.225 13.475 1.275 12.5 1.275 11.325 L 1.275 4.425 C 1.275 3.225 2.25 2.275 3.425 2.275 L 12.05 2.275 C 13.25 2.275 14.2 3.25 14.2 4.425 L 14.2 11.3 C 14.225 12.5 13.25 13.475 12.075 13.475 Z M 3.425 2.975 C 2.625 2.975 1.975 3.625 1.975 4.425 L 1.975 11.3 C 1.975 12.1 2.625 12.75 3.425 12.75 L 12.05 12.75 C 12.85 12.75 13.5 12.1 13.5 11.3 L 13.5 4.425 C 13.5 3.625 12.85 2.975 12.05 2.975 Z" fill="rgb(0, 0, 0)"></path>
+                                                                                <path d="M 4.625 4.1 C 4.425 4.1 4.275 3.95 4.275 3.75 L 4.275 1.25 C 4.275 1.05 4.425 0.9 4.625 0.9 C 4.825 0.9 4.975 1.05 4.975 1.25 L 4.975 3.75 C 4.975 3.95 4.825 4.1 4.625 4.1 Z M 10.625 4.1 C 10.425 4.1 10.275 3.95 10.275 3.75 L 10.275 1.25 C 10.275 1.05 10.425 0.9 10.625 0.9 C 10.825 0.9 10.975 1.05 10.975 1.25 L 10.975 3.75 C 10.975 3.95 10.825 4.1 10.625 4.1 Z M 13.75 5.975 L 1.75 5.975 C 1.55 5.975 1.4 5.825 1.4 5.625 C 1.4 5.425 1.55 5.275 1.75 5.275 L 13.75 5.275 C 13.95 5.275 14.1 5.425 14.1 5.625 C 14.1 5.825 13.95 5.975 13.75 5.975 Z M 5.275 8.225 L 2.875 8.225 C 2.675 8.225 2.525 8.075 2.525 7.875 C 2.525 7.675 2.675 7.525 2.875 7.525 L 5.275 7.525 C 5.475 7.525 5.625 7.675 5.625 7.875 C 5.625 8.075 5.45 8.225 5.275 8.225 Z M 8.875 8.225 L 6.5 8.225 C 6.3 8.225 6.15 8.075 6.15 7.875 C 6.15 7.675 6.3 7.525 6.5 7.525 L 8.9 7.525 C 9.1 7.525 9.25 7.675 9.25 7.875 C 9.25 8.075 9.075 8.225 8.875 8.225 Z M 12.5 8.225 L 10.1 8.225 C 9.9 8.225 9.75 8.075 9.75 7.875 C 9.75 7.675 9.9 7.525 10.1 7.525 L 12.5 7.525 C 12.7 7.525 12.85 7.675 12.85 7.875 C 12.85 8.075 12.7 8.225 12.5 8.225 Z M 5.275 10.725 L 2.875 10.725 C 2.675 10.725 2.525 10.575 2.525 10.375 C 2.525 10.175 2.675 10.025 2.875 10.025 L 5.275 10.025 C 5.475 10.025 5.625 10.175 5.625 10.375 C 5.625 10.575 5.45 10.725 5.275 10.725 Z M 8.875 10.725 L 6.5 10.725 C 6.3 10.725 6.15 10.575 6.15 10.375 C 6.15 10.175 6.3 10.025 6.5 10.025 L 8.9 10.025 C 9.1 10.025 9.25 10.175 9.25 10.375 C 9.25 10.575 9.075 10.725 8.875 10.725 Z" fill="rgb(0, 0, 0)"></path>
+                                                                            </svg>
+                                      <span class="case-date">{{ caseItem.date }}</span>
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
+                    </NuxtLink>
+                  </template>
                 </div>
               </div>
             </div>
@@ -169,7 +175,7 @@
             <div class="processing-cases-more-button">
               <div class="more-button-container">
                 <div class="more-button-wrapper">
-                  <span class="more-button-text">Load More</span>
+                  <span class="more-button-text" @click="loadMore">{{ news.load_more_text }}</span>
                 </div>
               </div>
             </div>
@@ -181,68 +187,147 @@
 </template>
 
 <script setup>
+
 // Props
 const props = defineProps({
-  breadcrumbText: {
-    type: String,
-    default: 'News & Events'
-  },
-  lastUpdated: {
-    type: String,
-    default: '2025-09-05'
-  },
-  mainTitle: {
-    type: String,
-    default: 'Latest News &'
-  },
-  subTitle: {
-    type: String,
-    default: 'Industry Updates'
-  },
-  description: {
-    type: String,
-    default: 'Stay updated with the latest news, events, and industry insights from the stone machinery world.'
-  },
-  processingCase: {
-    type: Array,
-    default: () => [
-      {
-        title: 'Recent',
-        subTitle: 'News & Events',
-        cases: [
-          {
-            imageClass: 'cement-case',
-            titleLines: [
-              'Industry News: New Technology',
-              'Breakthrough in Stone Processing'
-            ],
-            date: '5/14/24'
-          },
-          {
-            imageClass: 'marble-case',
-            titleLines: [
-              'Company Event: Trade Show',
-              'Participation and Success'
-            ],
-            date: '12/11/24'
-          },
-          {
-            imageClass: 'granite-case',
-            titleLines: [
-              'Product Launch: Next Generation',
-              'CNC Wire Saw Technology'
-            ],
-            date: '8/10/24'
-          }
-        ]
-      }
-    ]
-  }
+   slug: {
+      type: String,
+      required: true
+    }
 })
+const news = ref({})
+
+const { data: newsRes, pending, error } = await useApi('/product-categories?filters[category_value][$eq]='+props.slug+'&populate=all')
+let processingCase = {}
+
+watch(newsRes, (newPosts) => {
+    if (newPosts) {
+        // console.log(newPosts)
+        let data = {}
+        
+
+        if(props.slug == 'industry-news'){
+          data = newPosts.data[0].industry_new
+          processingCase = { 
+              title: data.industry_machinery_news_title, 
+              subTitle: data.industry_machinery_news_subtitle, 
+              text:"", 
+            }
+        }else{
+          data = newPosts.data[0].news_event
+          processingCase = { 
+              title: data.company_news_title, 
+              subTitle: data.company_news_subtitle, 
+              text:""
+            }
+        }
+        
+        news.value = data
+
+        useHead({
+            title: data.meta_title,
+            meta: [
+                {
+                    name: 'description',
+                    content: data.meta_description
+                }
+            ],
+        })
+        
+    }
+
+}, { immediate: true })
+
+const page = ref(1)
+const blogList = ref([])
+const isLoading = ref(false)
+const hasMore = ref(true)
+
+// 初始加载
+let blogUrl ='/blogs?pagination[page]=1&pagination[pageSize]=6&sort[0]=date:desc'
+if(props.slug == 'industry-news'){
+  blogUrl +='&filters[category][$eq]=Industry News'
+}else{
+  blogUrl +='&filters[category][$eq]=Company News'
+}
+const { data: blogRes, blogPending, blogError } = await useApi(blogUrl)
+
+watch(blogRes, (newPosts) => {
+    if (newPosts) {
+        // console.log(newPosts)
+        let data = newPosts.data
+
+        data.forEach(item => {
+          item.date = formatDateShort(item.date)
+          blogList.value.push(item)
+        })
+        
+        // 如果返回的数据少于页面大小，说明没有更多数据了
+        if(data.length < 6){
+          hasMore.value = false
+        }
+    }
+}, { immediate: true })
+
+// loadMore 函数
+const loadMore = async () => {
+    if (isLoading.value || !hasMore.value) return
+    
+    isLoading.value = true
+    page.value++
+    
+    try {
+        let moreUrl = `/api/blogs?pagination[page]=${page.value}&pagination[pageSize]=6&sort[0]=date:desc`
+        const authToken = "8f80d6094edcd486411ddc90d4fa4f18ed87f9fe9edae7fe7cb423e3ce261b23ce76afdedfc3cf2e3689bd1b03e9f504cbded28e7645eed305db44f61e914053e9fb4b4999d30c743b67fe2a052bff812b6165825f1502f22f991ff41a44536c67a88f99ae0f525ee710ee010834ffddaa1501dc60c7da7dac18060f46612708"
+        if(props.slug == 'industry-news'){
+          moreUrl +='&filters[category][$eq]=Industry News'
+        }else{
+          moreUrl +='&filters[category][$eq]=Company News'
+        }
+        const moreData = await $fetch(moreUrl, {
+            headers: {
+                Authorization: `Bearer ${authToken}`,
+            }
+        })
+        
+        if (moreData && moreData.data) {
+            const newItems = moreData.data
+            
+            newItems.forEach(item => {
+                item.date = formatDateShort(item.date)
+                blogList.value.push(item)
+            })
+            
+            // 检查是否还有更多数据
+            if (newItems.length < 6) {
+                hasMore.value = false
+            }
+        }
+    } catch (error) {
+        console.error('加载更多数据失败:', error)
+        page.value-- // 回退页码
+    } finally {
+        isLoading.value = false
+    }
+}
+
+const menuItems = ref([])
+const { data: menuItemsRes, menuItemsPending, menuItemsError } = await useApi('/product-categories?filters[parent_category_value][$eq]=blog&populate=all')
+
+watch(menuItemsRes, (newPosts) => {
+    if (newPosts) {
+        // console.log(newPosts)
+        menuItems.value = newPosts.data
+    }
+}, { immediate: true })
+
 </script>
 
 <style scoped lang="scss">
 /* 这里可以添加组件特定的样式，或者从父组件继承样式 */
+.projects-banner .title-section{
+  max-width:930px;
+}
  @media (max-width: 1024px) {
     .projects-banner {
         height: 453px;

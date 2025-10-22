@@ -1,75 +1,64 @@
 <template>
   <footer class="dinosaw-footer">
       <div class="footer-top">
-          <h2>CONTINUOUSLY IMPROVE PRODUCTIVITY FOR USER</h2>
-          <p>Customer first | Teamwork | Embrace change | Integrity | Passion | Commitment</p>
+          <h2>{{contentDetail.continuously_improve_productivity_text}}</h2>
+          <p v-html="contentDetail.continuously_improve_productivity_description"></p>
       </div>
-      <div class="footer-content">
+      <div class="footer-content" v-if="menuItems.length > 0">
           <div class="footer-link">
               <div class="item">
                   <div class="border"></div>
                   <h3>
-                      <a href="/Products" target="_blank">Products</a>
+                      <a :href="menuItems[0].link" target="_blank">{{ menuItems[0].title }}</a>
                   </h3>
                   <ul class="ul">
-                    <li><a href="/Products/wire-saw-machine" target="_blank">Wire Saw Machine</a></li>
-                    <li><a href="/Products/circle-saw-machine" target="_blank">Circle Saw Machine</a></li>
-                    <li><a href="/Products/drilling-and-engraving-machine" target="_blank">Drilling and Engraving Machine</a></li>
-                    <li><a href="/Products/grinding-and-polishing-machine" target="_blank">Grinding and Polishing Machine</a></li>
-                    <li><a href="/Products/mining-and-quarry-machine" target="_blank">Mining and Quarry Machine</a></li>
-                    <li><a href="/Products/profiling-machine" target="_blank">Profiling Machine</a></li>
-                    <li><a href="/Products/other-machine" target="_blank">Other Machine</a></li>
-                    <li><a href="/Products/diamond-tools" target="_blank">Diamond Tools</a></li>
+                    <li v-for="(item,i) in menuItems[0].children" :key="i"><a :href="menuItems[0].link+item.link" target="_blank">{{ item.text }}</a></li>
                   </ul>
               </div>
               <div class="item">
                   <div class="border"></div>
                   <h3>
-                      <a href="/projects" target="_blank">Projects</a>
+                      <a :href="menuItems[1].link" target="_blank">{{ menuItems[1].title }}</a>
                   </h3>
                   <ul class="ul">
-                    <li><a href="/projects/marble-projects" target="_blank">Marble Projects</a></li>
-                    <li><a href="/projects/granite-projects" target="_blank">Granite Projects</a></li>
-                    <li><a href="/projects/other-hard-materials-projects" target="_blank">Other Hard Materials Projects</a></li>
+                    <li v-for="(item,i) in menuItems[1].children" :key="i"><a :href="menuItems[1].link+item.link" target="_blank">{{ item.text }}</a></li>
                   </ul>
                   <div class="border"></div>
                   <h3>
-                      <a href="/blog" target="_blank">Blogs</a>
+                      <a :href="menuItems[3].link" target="_blank">{{ menuItems[3].title }}</a>
                   </h3>
                   <ul class="ul">
-                    <li><a href="/blog/news-events" target="_blank">News Events</a></li>
-                    <li><a href="/blog/industry-news" target="_blank">Industry News</a></li>
+                    <li v-for="(item,i) in menuItems[3].children" :key="i"><a :href="menuItems[3].link+item.link" target="_blank">{{ item.text }}</a></li>
                   </ul>
                   <div class="border"></div>
                   <h3>
-                      <a href="/video" target="_blank">Videos</a>
+                      <a :href="menuItems[4].link" target="_blank">{{ menuItems[4].linkText }}</a>
                   </h3>
                   <ul class="ul">
-                    <li><a href="/video" target="_blank">Videos</a></li>
+                    <li><a :href="menuItems[4].link" target="_blank">{{ menuItems[4].linkText }}</a></li>
                   </ul>
               </div>
               <div class="item">
                   <div class="border"></div>
                   <h3>
-                      <a href="/aboutus" target="_blank">About Us</a>
+                      <a :href="menuItems[5].link" target="_blank">{{ menuItems[5].linkText }}</a>
                   </h3>
-                   <ul class="ul">
-                    <li><a href="/aboutus" target="_blank">Company</a></li>
+                  <ul class="ul">
+                    <li><a :href="menuItems[5].link" target="_blank">{{ menuItems[5].linkText }}</a></li>
                   </ul>
                   <div class="border"></div>
                   <h3>
-                      <a href="/support" target="_blank">Support</a>
+                      <a :href="menuItems[2].link" target="_blank">{{ menuItems[2].title }}</a>
                   </h3>
                   <ul class="ul">
-                    <li><a href="/support/user-manual" target="_blank">User-Manual</a></li>
-                    <li><a href="/support/faqs" target="_blank">FAQs</a></li>
+                    <li v-for="(item,i) in menuItems[2].children" :key="i"><a :href="menuItems[2].link+item.link" target="_blank">{{ item.text }}</a></li>
                   </ul>
                   <div class="border"></div>
                   <h3>
-                      <a href="/contact" target="_blank">Contact</a>
+                      <a :href="menuItems[6].link" target="_blank">{{ menuItems[6].linkText }}</a>
                   </h3>
                   <ul class="ul">
-                    <li><a href="/contact" target="_blank">Contact Us</a></li>
+                    <li><a :href="menuItems[6].link" target="_blank">{{ menuItems[6].linkText }}</a></li>
                   </ul>
               </div>
               <div class="item follow-us">
@@ -115,19 +104,22 @@
   </footer>
 </template>
 
-<script>
-export default {
-  name: 'DinosawFooter',
-  data(){
-    return {
-      
-    }
-  },
+<script setup>
 
-  methods:{
-    
+const props = defineProps({
+  contentDetail: {
+      type: Object,
+      default: () => {
+        open_hours_text:""
+      }
+  },
+  menuItems:{
+    type: Array,
+    default: () => []
   }
-}
+})
+
+// console.log(props.menuItems)
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

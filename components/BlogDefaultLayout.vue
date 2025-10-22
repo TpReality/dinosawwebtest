@@ -37,23 +37,22 @@
             <div class="breadcrumb-dropdown">
                 <div class="dropdown-collapsed">
                     <div class="dropdown-link">
-                    <div class="dropdown-container">
-                        <div class="dropdown-text-container">
-                        <span class="breadcrumb-products"><a href="/blog" target="_blank">{{ breadcrumbText }}</a></span>
-                        </div>
-                    </div>
-                    <div class="dropdown-icon-container"></div>
+                      <div class="dropdown-container">
+                          <div class="dropdown-text-container">
+                          <span class="breadcrumb-products"><a href="/blog" target="_blank">{{ breadcrumbText }}</a></span>
+                          </div>
+                      </div>
+                      <div class="dropdown-icon-container">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" focusable="false" color="rgb(0, 0, 0)" style="user-select: none; width:16px; height:16px; display: inline-block; fill: rgb(0, 0, 0); flex-shrink: 0; cursor: auto;"><g color="rgb(0, 0, 0)" weight="bold"><polyline points="208 96 128 176 48 96" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></g></svg>
+                      </div>
                     </div>
                 </div>
                 <div class="breadcrumb-outer">
                     <div class="bg">
-                        <p>
-                            <a href="/blog/news-events" target="_blank" >News Events</a>
-                        </p>
-                        <p>
-                            <a href="/blog/industry-news" target="_blank" >Industry News</a>
-                        </p>
-                    </div>
+                            <p v-for="(menu, i) in menuItems" :key="i">
+                                <a :href="'/blog/'+menu.category_value" target="_blank">{{ menu.category_name }}</a>
+                            </p>
+                        </div>
                 </div>
             </div>
         </div>
@@ -64,15 +63,16 @@
           <!-- 左侧内容 -->
           <div class="hero-left">
             <h1 class="hero-main-title">
-              Best Stone CNC Machine 2025: A Buyer's Guide
+              {{ blogDetail.title }}
             </h1>
             
             <div class="hero-meta">
-              <span class="author-name">Lizzy</span>
+              <NuxtImg src="https://framerusercontent.com/images/kb04PIvrLwFZGpVkwv4cn7XR54.png" />
+              <span class="author-name">{{ blogDetail.author }}</span>
               <span class="meta-separator">·</span>
-              <span class="publish-date">Feb 14, 2025</span>
+              <span class="publish-date">{{ formatDateEN(blogDetail.date) }}</span>
               <span class="meta-separator">·</span>
-              <span class="read-time">8 MIN READ</span>
+              <span class="read-time">{{ blogDetail.reading_time }}</span>
             </div>
           </div>
           
@@ -80,8 +80,7 @@
           <div class="hero-right">
             <div class="hero-image-container">
               <NuxtImg 
-                src="/assets/4df4ee36-5a05-4e29-87eb-d4af6bc271ff.png"
-                alt="Best Stone CNC Machine 2025" 
+                :src="blogDetail.first_image_url"
                 class="hero-image" 
               />
             </div>
@@ -98,351 +97,54 @@
         <div class="main-content">
           <!-- 文章介绍段落 -->
           <div class="article-intro">
-            <p class="intro-text">
-              DINOSAW showcases advanced CNC stone machines at STONE INDUSTRY 2025 Russia. 
-              Discover innovative solutions for monument fabrication and countertop processing. Visit booth 
-              A13.1 at Crocus Expo, Moscow, June 24-26.
-            </p>
+            <p class="intro-text">{{ blogDetail.article_guide }}</p>
           </div>
 
           <!-- 展会详情 -->
-          <section class="exhibition-details">
-            <h2 class="section-title">STONE INDUSTRY 2025 Exhibition Details</h2>
-            
-            <h3 class="subsection-title">STONE INDUSTRY 2025</h3>
-            
-            <div class="details-list">
-              <p class="detail-item">
-                <strong>Date:</strong> June 24-26, 2025
-              </p>
-              <p class="detail-item">
-                <strong>Location:</strong> Crocus Expo, Moscow (65-66 km MKAD)
-              </p>
-              <p class="detail-item">
-                <strong>DINOSAW Booth:</strong> A13.1
-              </p>
-            </div>
-
-            <h3 class="subsection-title">Visiting Benefits</h3>
-            <ul class="benefits-list">
-              <li>Learn how CNC stone equipment solves monument and countertop fabrication challenges</li>
-              <li>Watch live demonstrations: CNC wire saw reduces processing time by 50% and saves 20% material</li>
-              <li>Receive customized solutions: 30-minute quick consultation to address hard stone processing issues</li>
-            </ul>
-          </section>
-
-          <!-- 行业挑战表格 -->
-          <section class="industry-challenges">
-            <h2 class="section-title">Stone Processing Industry Challenges</h2>
-            
-            <div class="challenges-table">
-              <table class="comparison-table">
-                <thead>
-                  <tr class="table-header">
-                    <th colspan="2">Monument Fabrication Challenges</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="challenge-type"><strong>Low Batch Production Efficiency</strong></td>
-                    <td class="challenge-type"><strong>Artistic Shape Cutting Challenges</strong></td>
-                  </tr>
-                  <tr>
-                    <td class="challenge-description">
-                      Traditional methods cannot efficiently batch-produce monuments, causing material waste and low 
-                      equipment utilization. When processing Absoluted Black Granite and Black Galaxy Granite, conventional 
-                      technologies struggle to maintain ±0.1mm precision.
-                    </td>
-                    <td class="challenge-description">
-                      Complex curves and artistic designs are difficult to cut precisely on materials like Shanxi 
-                      Black and Imperial Red Granite. Traditional grinding machines require professional training and are 
-                      inefficient when processing monuments of different shapes.
-                    </td>
-                  </tr>
-                  <tr class="table-header">
-                    <th colspan="2">Countertop Processing Pain Points</th>
-                  </tr>
-                  <tr>
-                    <td class="challenge-type"><strong>Multi-Angle Processing Efficiency</strong></td>
-                    <td class="challenge-type"><strong>Surface Finishing Flexibility</strong></td>
-                  </tr>
-                  <tr>
-                    <td class="challenge-description">
-                      Traditional countertop processing requires multiple clamping operations, increasing time and cost. 
-                      Premium materials like Black Forest Granite need precise beveling and rounding that conventional bridge 
-                      saws struggle to achieve.
-                    </td>
-                    <td class="challenge-description">
-                      Traditional grinding machines cannot batch process stones of different dimensions efficiently. When 
-                      working with White Marble and Koyelga Marble, replacing grinding discs is cumbersome, affecting 
-                      production efficiency.
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </section>
-
-          <!-- DINOSAW解决方案 -->
-          <section class="dinosaw-solutions">
-            <h2 class="section-title">How DINOSAW Machinery Change it ?</h2>
-            
-            <p class="solutions-intro">
-              With years of stone processing technology experience, DINOSAW offers three core equipment solutions for 
-              monument and countertop processing:
-            </p>
-
-            <div class="equipment-list">
-              <div class="equipment-item">
-                <h3 class="equipment-title">🔷CNC Wire Saw Machine</h3>
-                <p class="equipment-description">
-                  High-precision diamond wire cutting system with ±0.1mm cutting accuracy. Multi-head cutting capability processes 
-                  multiple monuments simultaneously, increasing efficiency by 60% while reducing material waste by 20%. Ideal for 
-                  artistic monument designs and shaped countertop edges.
-                </p>
-              </div>
-
-              <div class="equipment-item">
-                <h3 class="equipment-title">🔷Visual Automatic Polishing Machine</h3>
-                <p class="equipment-description">
-                  Automatic grinding disc replacement system with one-click process setting. Processes stone materials of different 
-                  sizes, shapes, and heights. Visual recognition adjusts parameters automatically, improving finishing efficiency by 
-                  45% with polishing glossiness of 114. Significantly reduces labor costs.
-                </p>
-              </div>
-
-              <div class="equipment-item">
-                <h3 class="equipment-title">🔷5-Axis Bridge Saw</h3>
-                <p class="equipment-description">
-                  Five-axis linkage system completes multi-directional processing with single clamping, maintaining ±0.1mm 
-                  precision. Designed for countertops and sinks with preset templates for complex cutouts and edge processing, 
-                  improving production efficiency by 50%.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          <!-- DDX EasySTONE Technology Integration -->
-          <section class="technology-integration">
-            <h2 class="section-title">DDX EasySTONE Technology Integration</h2>
-            
-            <h3 class="subsection-title">Software Advantages</h3>
-            <ul class="software-advantages-list">
-              <li>Intuitive user interface for easy operation</li>
-              <li>Powerful CAD/CAM functionality supporting multiple file format imports</li>
-              <li>Intelligent nesting features to maximize material utilization</li>
-              <li>Preset processing template library to accelerate production workflows</li>
-              <li>Remote technical support and diagnostics</li>
-            </ul>
-
-            <h3 class="subsection-title">Exclusive Agency Benefits</h3>
-            <p class="agency-intro">
-              As the exclusive agent for DDX EasySTONE in China, DINOSAW provides not only high-quality equipment but 
-              also multiple value-added services for customers:
-            </p>
-            <ul class="agency-benefits-list">
-              <li>Comprehensive localized technical support</li>
-              <li>Customized equipment solution design for factories</li>
-              <li>Professional operator training</li>
-              <li>Software upgrades and maintenance services</li>
-              <li>Rapid spare parts supply guarantee</li>
-            </ul>
-          </section>
-
-          <!-- Customer Application Cases -->
-          <section class="customer-cases">
-            <h2 class="section-title">Customer Application Cases</h2>
-            
-            <div class="case-testimonial">
-              <blockquote class="testimonial-quote">
-                "Since implementing DINOSAW's Visual Grinding Machine and CNC wire saw, our gravestone finishing 
-                production efficiency has increased by nearly 40%, while product quality has become more consistent. The 
-                high level of automation has greatly reduced labor dependency, especially excelling in complex surface 
-                processing of materials like Emerald Pearl and Ruby Red."
-              </blockquote>
-              <cite class="testimonial-author">— A renowned monument manufacturer in Moscow</cite>
-            </div>
-
-            <div class="case-testimonial">
-              <blockquote class="testimonial-quote">
-                "DINOSAW's 5-axis bridge saw has solved the most challenging problem in our countertop processing — 
-                shaped cutting. Now we can accept more creative design orders, especially for high-end projects using 
-                materials like Cosmic Fusion Black Granite and Mansurovsky Granite. The equipment offers high precision 
-                cutting accuracy, simple operation, and much lower maintenance costs compared to our previous 
-                equipment."
-              </blockquote>
-              <cite class="testimonial-author">— A high-end kitchen and bathroom countertop supplier in St. Petersburg</cite>
-            </div>
-          </section>
-
-          <!-- Join DINOSAW -->
-          <section class="join-dinosaw">
-            <h2 class="section-title">Join DINOSAW to Discuss Stone Processing Solutions</h2>
-            
-            <p class="join-info">
-              June 24-26, Crocus Expo Exhibition Center, Moscow, we are at Booth A13.1.
-            </p>
-            
-            <p class="join-info">
-              Bring your specific stone processing requirements, and we'll provide targeted fabrication solutions.
-            </p>
-
-            <h3 class="subsection-title">About DINOSAW</h3>
-            
-            <p class="about-paragraph">
-              Quanzhou DINOSAW Machinery Technology Co., Ltd. specializes in the development and production of stone 
-              processing equipment. As DDX EasySTONE's technology partner in China, we provide localized equipment 
-              support tailored to local market needs.
-            </p>
-            
-            <p class="about-paragraph">
-              Our technical team averages over 20 years of stone fabrication technology R&D experience, with in-depth 
-              understanding of tombstone manufacturing and countertop processing workflows and technical challenges, 
-              capable of providing comprehensive technical support from equipment selection to process optimization.
-            </p>
-            
-            <p class="about-paragraph">
-              We focus on equipment practicality, stability, and after-sales service, currently serving over 750 stone processing 
-              enterprises worldwide, helping customers achieve production efficiency improvements and processing quality 
-              enhancements through CNC stone machining and advanced fabrication techniques.
-            </p>
-          </section>
-
-          <!-- 更多内容区域 -->
-          <div class="article-content">
-            <slot name="content">
-              <div class="default-content">
-                <p>{{ defaultContent }}</p>
-              </div>
-            </slot>
-          </div>
+          <div class="blog-article-details" v-html="blogDetail.content"></div>
         </div>
 
         <!-- 右侧边栏 - 基于Figma设计 52:8225 -->
         <aside class="sidebar">
           <!-- Hot Reads 热门文章区域 -->
           <div class="hot-reads-widget">
-            <h3 class="widget-title">Hot Reads</h3>
+            <h3 class="widget-title">{{ contentDetail.hot_reads_text }}</h3>
             <div class="hot-reads-list">
-              <article class="hot-read-item">
-                <div class="article-thumbnail-container">
-                  <img src="../assets/4df4ee36-5a05-4e29-87eb-d4af6bc271ff.png"  alt="Marble Block Cutting" class="article-thumbnail">
-                </div>
-                <div class="article-info">
-                  <h4 class="article-title">Marble Block Cutting Yield Skyrockets 20%+ with DINOSAW Multi-Wire Saw</h4>
-                  <div class="article-meta">
-                    <span class="article-date">Mar 22, 2025</span>
+              <template v-for="(item, index) in blogList" :key="index">
+                <NuxtLink :to="'/blog/'+item.slug" target="_blank" v-if="index<=5"> 
+                <article class="hot-read-item">
+                  <div class="article-thumbnail-container">
+                    <NuxtImg :src="item.first_image_url"  class="article-thumbnail" />
                   </div>
-                </div>
-              </article>
-
-              <article class="hot-read-item">
-                <div class="article-thumbnail-container">
-                  <img src="/assets/4df4ee36-5a05-4e29-87eb-d4af6bc271ff.png"  alt="CNC Router Guide" class="article-thumbnail">
-                </div>
-                <div class="article-info">
-                  <h4 class="article-title">CNC Router for Granite & Marble: A Buyer's Guide to Engraving & Cutting</h4>
-                  <div class="article-meta">
-                    <span class="article-date">Mar 15, 2025</span>
+                  <div class="article-info">
+                    <h4 class="article-title">{{ item.title }}</h4>
+                    <div class="article-meta">
+                      <span class="article-date">{{ item.date }}</span>
+                    </div>
                   </div>
-                </div>
-              </article>
-
-              <article class="hot-read-item">
-                <div class="article-thumbnail-container">
-                  <img src="/assets/4df4ee36-5a05-4e29-87eb-d4af6bc271ff.png"  alt="Granite Bridge Saw" class="article-thumbnail">
-                </div>
-                <div class="article-info">
-                  <h4 class="article-title">Granite Bridge Saw Buyer's Guide (2025): Key Features to Compare</h4>
-                  <div class="article-meta">
-                    <span class="article-date">Mar 5, 2025</span>
-                  </div>
-                </div>
-              </article>
-
-              <article class="hot-read-item">
-                <div class="article-thumbnail-container">
-                  <img src="/assets/4df4ee36-5a05-4e29-87eb-d4af6bc271ff.png"  alt="Diamond Wire Saw" class="article-thumbnail">
-                </div>
-                <div class="article-info">
-                  <h4 class="article-title">Diamond Wire Saw for Stone Cutting | Efficient & Durable Solutions</h4>
-                  <div class="article-meta">
-                    <span class="article-date">Dec 10, 2024</span>
-                  </div>
-                </div>
-              </article>
-
-              <article class="hot-read-item">
-                <div class="article-thumbnail-container">
-                  <img src="/assets/4df4ee36-5a05-4e29-87eb-d4af6bc271ff.png"  alt="Rock Cutting Saw" class="article-thumbnail">
-                </div>
-                <div class="article-info">
-                  <h4 class="article-title">Which Rock Cutting Saw to Choose? A Mining & Factory Guide</h4>
-                  <div class="article-meta">
-                    <span class="article-date">Apr 18, 2025</span>
-                  </div>
-                </div>
-              </article>
-
-              <article class="hot-read-item">
-                <div class="article-thumbnail-container">
-                  <img src="/assets/4df4ee36-5a05-4e29-87eb-d4af6bc271ff.png"  alt="Stone CNC Machine" class="article-thumbnail">
-                </div>
-                <div class="article-info">
-                  <h4 class="article-title">Best Stone CNC Machine for Design & Fabrication | 2025 Buying Guide</h4>
-                  <div class="article-meta">
-                    <span class="article-date">Feb 14, 2025</span>
-                  </div>
-                </div>
-              </article>
+                </article>
+              </NuxtLink>
+              </template>
             </div>
           </div>
 
           <!-- 产品目录推广区域 -->
           <div class="catalog-widget">
-            <h3 class="widget-title">
-                Interested
-                <div> in Best stone machine catalog？</div>
-            </h3>
+            <h3 class="widget-title">{{ contentDetail.interested_in_best_stone_machine_catalog_text }}</h3>
             <div class="product-categories">
-              <a href="/products/cnc-wire-saw-machine" class="product-category-link">
-                <div class="category-icon">
-                  <svg style="width:100%;height:100%;" viewBox="0 0 22 22" preserveAspectRatio="none" width="100%" height="100%">
-                    <use href="#svg-1021927419_1735"></use>
-                    </svg>
-                </div>
-                <h4 class="category-name">CNC Wire Saw Machine</h4>
-              </a>
-
-              <a href="/products/circle-saw-machine" class="product-category-link">
-                <div class="category-icon">
-                  <svg style="width:100%;height:100%;" viewBox="0 0 22 22" preserveAspectRatio="none" width="100%" height="100%"><use href="#svg-1021927419_1735"></use></svg>
-                </div>
-                <h4 class="category-name">Circle Saw Machine</h4>
-              </a>
-
-              <a href="/products/drilling-and-engraving-machine" class="product-category-link">
-                <div class="category-icon">
-                  <svg style="width:100%;height:100%;" viewBox="0 0 22 22" preserveAspectRatio="none" width="100%" height="100%"><use href="#svg-1021927419_1735"></use></svg>
-                </div>
-                <h4 class="category-name">Drilling And Engraving Machine</h4>
-              </a>
-
-              <a href="/products/grinding-and-polishing-machine" class="product-category-link">
-                <div class="category-icon">
-                  <svg style="width:100%;height:100%;" viewBox="0 0 22 22" preserveAspectRatio="none" width="100%" height="100%"><use href="#svg-1021927419_1735"></use></svg>
-                </div>
-                <h4 class="category-name">Grinding And Polishing Machine</h4>
-              </a>
-
-              <a href="/products/mining-and-quarry-machine" class="product-category-link">
-                <div class="category-icon">
-                  <svg style="width:100%;height:100%;" viewBox="0 0 22 22" preserveAspectRatio="none" width="100%" height="100%"><use href="#svg-1021927419_1735"></use></svg>
-                </div>
-                <h4 class="category-name">Mining And Quarry Machine</h4>
-              </a>
-            </div>
-            <a href="/products" class="learn-more-link">Learn More</a>
+              <template v-for="(item, index) in productList" :key="index">
+                <a :href="'/Products/'+item.category_value" class="product-category-link" v-if="index<=4">
+                  <div class="category-icon">
+                    <svg style="width:100%;height:100%;" viewBox="0 0 22 22" preserveAspectRatio="none" width="100%" height="100%">
+                      <use href="#svg-1021927419_1735"></use>
+                      </svg>
+                  </div>
+                  <h4 class="category-name">{{ item.category_name }}</h4>
+                </a>
+                 </template>
+              </div>
+           
+            <a href="/Products" class="learn-more-link">{{ contentDetail.learn_more_text }}</a>
           </div>
 
           <!-- 在线聊天功能区域 -->
@@ -450,24 +152,24 @@
             <div class="chat-background">
               <div class="chat-content">
                 <div class="chat-header">
-                  <p class="chat-greeting">Get A Easy Solution！</p>
-                  <p class="chat-action">Chat Online</p>
+                  <p class="chat-greeting">{{contentDetail.chat_online_dialog_head_title}}</p>
+                  <p class="chat-action">{{ contentDetail.chat_online_dialog_head_subtitle }}</p>
                 </div>
               </div>
             </div>
             <div class="chat-profile-section">
               <div class="profile-container">
                 <div class="profile-avatar">
-                  <img src="/assets/4df4ee36-5a05-4e29-87eb-d4af6bc271ff.png" alt="Ms.Lizzy" class="avatar-image">
+                  <NuxtImg src="https://framerusercontent.com/images/PZaASQwcgVKtL1LRgszQtSdlJU.png" />
                 </div>
                 <div class="profile-info">
-                  <p class="profile-name">Ms.Lizzy</p>
-                  <p class="profile-message">Hello 👋How can we help?</p>
+                  <p class="profile-name">{{ contentDetail.chat_online_dialog_body_title }}</p>
+                  <p class="profile-message" v-html="contentDetail.chat_online_dialog_body_description"></p>
                 </div>
               </div>
               <div class="chat-actions">
-                <a href="#" class="whatsapp-chat-btn">WhatsApp Chat Now</a>
-                <a href="/contact" class="contact-us-btn">Contact Us</a>
+                <a class="whatsapp-chat-btn" href="https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information">{{ contentDetail.chat_online_dialog_btn_whatapp_text}}</a>
+                <a href="./contact" class="contact-us-btn" target="_blank">{{ contentDetail.chat_online_dialog_btn_contact_us_text }}</a>
               </div>
             </div>
           </div>
@@ -479,57 +181,23 @@
     <div class="similar-ideas-section">
       <div class="similar-ideas-container">
         <div class="similar-ideas-header">
-          <h2>SIMILAR IDEAS TO STIMULATE YOUR CREATIVITY</h2>
+          <h2>{{ contentDetail.similar_ideas_to_stimulate_your_creativity_text }}</h2>
         </div>
         
         <div class="similar-ideas-grid">
           <!-- 文章卡片 1 -->
-          <div class="idea-card">
-            <NuxtLink to="/blog/marble-block-cutting-yield" class="idea-link">
+           <template v-for="(item, index) in blogList" :key="index">
+          <div class="idea-card" v-if="index >5">
+            <NuxtLink :to="'/blog/'+item.slug" class="idea-link">
               <div class="idea-image">
-                <img src="/assets/4df4ee36-5a05-4e29-87eb-d4af6bc271ff.png" alt="Marble Block Cutting" />
+                <NuxtImg :src="item.first_image_url"  />
               </div>
               <div class="idea-content">
-                <p>Marble Block Cutting Yield Skyrockets 20%+ with DINOSAW Multi-Wire Saw</p>
+                <p>{{ item.title }}</p>
               </div>
             </NuxtLink>
           </div>
-
-          <!-- 文章卡片 2 -->
-          <div class="idea-card">
-            <NuxtLink to="/blog/cnc-router-granite-marble" class="idea-link">
-              <div class="idea-image">
-                <img src="/assets/4df4ee36-5a05-4e29-87eb-d4af6bc271ff.png" alt="CNC Router Guide" />
-              </div>
-              <div class="idea-content">
-                <p>CNC Router for Granite & Marble: A Buyer's Guide to Engraving & Cutting</p>
-              </div>
-            </NuxtLink>
-          </div>
-
-          <!-- 文章卡片 3 -->
-          <div class="idea-card">
-            <NuxtLink to="/blog/granite-bridge-saw-guide" class="idea-link">
-              <div class="idea-image">
-                <img src="/assets/4df4ee36-5a05-4e29-87eb-d4af6bc271ff.png" alt="Granite Bridge Saw" />
-              </div>
-              <div class="idea-content">
-                <p>Granite Bridge Saw Buyer's Guide (2025): Key Features to Compare</p>
-              </div>
-            </NuxtLink>
-          </div>
-
-          <!-- 文章卡片 4 -->
-          <div class="idea-card">
-            <NuxtLink to="/blog/best-stone-cnc-machine" class="idea-link">
-              <div class="idea-image">
-                <img src="/assets/4df4ee36-5a05-4e29-87eb-d4af6bc271ff.png" alt="Stone CNC Machine" />
-              </div>
-              <div class="idea-content">
-                <p>Best Stone CNC Machine for Design & Fabrication | 2025 Buying Guide</p>
-              </div>
-            </NuxtLink>
-          </div>
+          </template>
         </div>
       </div>
     </div>
@@ -539,10 +207,10 @@
       <div class="other-blogs-container">
         <div class="other-blogs-header">
           <div class="other-blogs-title">
-            <h2>Other Blogs</h2>
+            <h2>{{contentDetail.other_blogs_text}}</h2>
           </div>
           <div class="other-blogs-subtitle">
-            <p>Are you looking for more new information blogs?</p>
+            <p>{{contentDetail.are_you_looking_for_more_new_information_blogs_text}}</p>
           </div>
         </div>
         
@@ -555,14 +223,14 @@
               </svg>
             </div>
             <div class="nav-text-container">
-              <p>Previous Blogs</p>
+              <p>{{ contentDetail.previous_blogs_text }}</p>
             </div>
           </NuxtLink>
 
           <!-- Next Blogs 按钮 -->
           <NuxtLink to="/blog/next" class="blog-nav-link next-link">
             <div class="nav-text-container">
-              <p>Next Blogs</p>
+              <p>{{ contentDetail.next_blogs_text }}</p>
             </div>
             <div class="nav-icon-container">
               <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
@@ -578,57 +246,74 @@
 </template>
 
 <script setup>
+import { formatDateEN } from '~/utils/dateUtils';
+
 // Props
+const emit = defineEmits(['headdata-loaded']);
 const props = defineProps({
-  breadcrumbText: {
-    type: String,
-    default: 'Blog'
+  slug: {
+      type: String,
+      required: true
   },
-  publishedDate: {
-    type: String,
-    default: '2025-09-05'
-  },
-  mainTitle: {
-    type: String,
-    default: 'Explore Our'
-  },
-  subTitle: {
-    type: String,
-    default: 'Latest Blog Posts'
-  },
-  description: {
-    type: String,
-    default: 'Discover insights, tutorials, and industry knowledge from our expert team.'
-  },
-  articleTitle: {
-    type: String,
-    default: 'Welcome to Our Blog'
-  },
-  author: {
-    type: String,
-    default: 'Dinosaw Team'
-  },
-  category: {
-    type: String,
-    default: 'General'
-  },
-  featuredImage: {
-    type: String,
-    default: ''
-  },
-  defaultContent: {
-    type: String,
-    default: 'This is the default blog content. You can customize this by passing content through the slot or props.'
-  },
-  tags: {
-    type: Array,
-    default: () => ['Technology', 'Stone Processing', 'CNC Machines']
-  },
-  relatedArticles: {
-    type: Array,
-    default: () => []
+  contentDetail:{
+    type: Object,
+    default: () => ({})
   }
 })
+let blogDetail = {}
+
+const { data: blogDetailRes, pending, error } = await useApi('/blogs?filters[slug][$eq]='+props.slug)
+// console.log('/blogs?filters[slug][$eq]='+props.slug)
+watch(blogDetailRes, (newPosts) => {
+    if (newPosts) {
+      console.log('blog',newPosts)
+        let data = newPosts.data[0]
+
+        blogDetail = data
+        // 通知父组件数据已加载
+        emit('headdata-loaded', data);
+    }
+
+}, { immediate: true })
+
+const blogList = ref({})
+const { data: blogListRes, blogListPending, blogListError } = await useApi('/blogs?pagination[page]=1&pagination[pageSize]=10&sort[0]=date:desc')
+
+watch(blogListRes, (newPosts) => {
+    if (newPosts) {
+        // console.log('nlist',newPosts)
+        let data = newPosts.data
+        data.forEach(item => {
+            item.date = formatDateLong(item.date)
+        })
+        blogList.value = data
+    }
+
+}, { immediate: true })
+
+const productList = ref({})
+const { data: productListRes, productListPending, productListError } = await useApi('/product-categories?filters[parent_category_value][$eq]=Products&populate=all')
+
+watch(productListRes, (newPosts) => {
+    if (newPosts) {
+        // console.log('plist',newPosts)
+        let data = newPosts.data
+        
+        productList.value = data
+    }
+
+}, { immediate: true })
+
+const menuItems = ref([])
+const { data: menuItemsRes, menuItemsPending, menuItemsError } = await useApi('/product-categories?filters[parent_category_value][$eq]=blog&populate=all')
+
+watch(menuItemsRes, (newPosts) => {
+    if (newPosts) {
+        // console.log('menuItems',newPosts)
+        menuItems.value = newPosts.data
+    }
+}, { immediate: true })
+
 </script>
 
 <style scoped>
@@ -686,25 +371,29 @@ const props = defineProps({
 .hero-meta {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap:2px;
   font-size: 1rem;
-  color: #64748b;
+  color: rgba(41, 41, 41, 0.8);
   flex-wrap: wrap;
+  img{
+    width:36px;
+    margin-right:20px;
+  }
 }
 
 .author-name {
-  font-weight: 600;
-  color: #374151;
+  font-weight: 300;
+  color: rgba(41, 41, 41, 0.8);
 }
 
 .meta-separator {
-  color: #cbd5e1;
-  font-weight: 500;
+  color: rgba(41, 41, 41, 0.8);
+  font-weight: 200;
 }
 
 .publish-date,
 .read-time {
-  font-weight: 500;
+  font-weight: 300;
 }
 
 /* 右侧图片 */
@@ -807,9 +496,22 @@ const props = defineProps({
 
 /* 文章介绍 */
 .article-intro {
+  position:relative;
   margin-bottom: 42px;
-  padding: 52px 0;
-  text-align: center;
+  padding: 52px 0 52px 40px;
+  &:before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:-8px;
+    width:100%;
+    height:100%;
+    opacity:0.2;
+    width:78px;
+    height:66px;
+    background:url(https://framerusercontent.com/images/UkLUnElDYcVwnnrmvgIyRJDNjI.webp) no-repeat;
+    background-size:100% auto;
+  }
 }
 
 .intro-text {
@@ -839,6 +541,9 @@ const props = defineProps({
 }
 
 /* 展会详情 */
+.blog-article-details{
+  max-width: 788px;
+}
 .exhibition-details {
   margin-bottom: 42px;
 }
@@ -1398,10 +1103,6 @@ const props = defineProps({
   font-weight: 500;
 }
 
-.meta-separator {
-  color: #cbd5e1;
-}
-
 /* 文章主体 */
 .article-body {
   margin-bottom: 40px;
@@ -1661,17 +1362,11 @@ const props = defineProps({
   transition: all 0.3s ease;
 }
 
-.idea-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-}
-
 .idea-link {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  padding: 22px;
   height: 100%;
   text-decoration: none;
   color: inherit;
@@ -1691,17 +1386,13 @@ const props = defineProps({
   object-fit: cover;
   transition: transform 0.3s ease;
 }
-
-.idea-card:hover .idea-image img {
-  transform: scale(1.05);
-}
-
 .idea-content {
   display: flex;
   flex-direction: column;
   justify-content: stretch;
   align-items: stretch;
   flex: 1;
+  padding:0 22px 22px;
   width: 100%;
 }
 
@@ -1807,6 +1498,8 @@ const props = defineProps({
   background: #ffffff;
   border: 1px solid #e5e7eb;
   border-radius: 12px;
+  font-size:20px;
+  font-weight:500;
   transition: all 0.3s ease;
   padding: 20px;
 }
@@ -2039,7 +1732,6 @@ const props = defineProps({
   .idea-link {
     width: 100%;
     height: 100%;
-    padding: 1px;
     box-sizing: border-box;
     gap: 17px;
   }

@@ -1,6 +1,6 @@
 <template>
     <div class="main">
-        <DinosawHeader />
+        <DinosawHeader :menuItems="menuItems" :contentDetail="contentDetail" />
         <div class="projects-banner">
             <div class="banner-background">
                 <div class="banner-image">
@@ -16,7 +16,7 @@
                             <div class="breadcrumb-link">
                                 <div class="breadcrumb-text">
                                     <div class="text-container">
-                                        <span class="breadcrumb-home"><a href="/" target="_blank">Home</a></span>
+                                        <span class="breadcrumb-home"><a href="/" target="_blank">{{ blogs.home_text }}</a></span>
                                     </div>
                                 </div>
                                 <div class="breadcrumb-text">
@@ -30,7 +30,7 @@
                                     <div class="dropdown-link">
                                         <div class="dropdown-container">
                                             <div class="dropdown-text-container">
-                                                <span class="breadcrumb-products"><a href="/blog" target="_blank">Blogs</a></span>
+                                                <span class="breadcrumb-products"><a href="/blog" target="_blank">{{ blogs.products_btn_text }}</a></span>
                                             </div>
                                         </div>
                                         <div class="dropdown-icon-container">
@@ -40,11 +40,8 @@
                                 </div>
                                 <div class="breadcrumb-outer">
                                     <div class="bg">
-                                        <p>
-                                            <a href="/blog/news-events" target="_blank" >News Events</a>
-                                        </p>
-                                        <p>
-                                            <a href="/blog/industry-news" target="_blank" >Industry News</a>
+                                        <p v-for="(menu, i) in curMenuItems[0].children" :key="i">
+                                            <a :href="'/blog'+menu.link" target="_blank" >{{ menu.text }}</a>
                                         </p>
                                     </div>
                                 </div>
@@ -59,22 +56,20 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="none"><path d="M 23.245 26.281 L 15.27 26.281 C 12.823 26.281 10.875 24.288 10.875 21.886 L 10.875 20.572 C 10.875 18.125 12.869 16.177 15.27 16.177 L 23.245 16.177 C 25.692 16.177 27.641 18.17 27.641 20.572 L 27.641 21.886 C 27.641 24.288 25.647 26.281 23.245 26.281 Z" fill="rgb(242, 203, 104)"></path><path d="M 21.886 24.423 L 6.208 24.423 C 4.033 24.423 2.311 22.656 2.311 20.527 L 2.311 8.02 C 2.311 5.845 4.078 4.123 6.208 4.123 L 21.841 4.123 C 24.016 4.123 25.738 5.891 25.738 8.02 L 25.738 20.481 C 25.783 22.656 24.016 24.423 21.886 24.423 Z M 6.208 5.392 C 4.758 5.392 3.58 6.57 3.58 8.02 L 3.58 20.481 C 3.58 21.931 4.758 23.109 6.208 23.109 L 21.841 23.109 C 23.291 23.109 24.469 21.931 24.469 20.481 L 24.469 8.02 C 24.469 6.57 23.291 5.392 21.841 5.392 Z" fill="rgb(158, 116, 11)"></path><path d="M 8.383 7.431 C 8.02 7.431 7.748 7.159 7.748 6.797 L 7.748 2.266 C 7.748 1.903 8.02 1.631 8.383 1.631 C 8.745 1.631 9.017 1.903 9.017 2.266 L 9.017 6.797 C 9.017 7.159 8.745 7.431 8.383 7.431 Z M 19.258 7.431 C 18.895 7.431 18.623 7.159 18.623 6.797 L 18.623 2.266 C 18.623 1.903 18.895 1.631 19.258 1.631 C 19.62 1.631 19.892 1.903 19.892 2.266 L 19.892 6.797 C 19.892 7.159 19.62 7.431 19.258 7.431 Z M 24.922 10.83 L 3.172 10.83 C 2.809 10.83 2.538 10.558 2.538 10.195 C 2.538 9.833 2.809 9.561 3.172 9.561 L 24.922 9.561 C 25.284 9.561 25.556 9.833 25.556 10.195 C 25.556 10.558 25.284 10.83 24.922 10.83 Z M 9.561 14.908 L 5.211 14.908 C 4.848 14.908 4.577 14.636 4.577 14.273 C 4.577 13.911 4.848 13.639 5.211 13.639 L 9.561 13.639 C 9.923 13.639 10.195 13.911 10.195 14.273 C 10.195 14.636 9.878 14.908 9.561 14.908 Z M 16.086 14.908 L 11.781 14.908 C 11.419 14.908 11.147 14.636 11.147 14.273 C 11.147 13.911 11.419 13.639 11.781 13.639 L 16.131 13.639 C 16.494 13.639 16.766 13.911 16.766 14.273 C 16.766 14.636 16.448 14.908 16.086 14.908 Z M 22.656 14.908 L 18.306 14.908 C 17.944 14.908 17.672 14.636 17.672 14.273 C 17.672 13.911 17.944 13.639 18.306 13.639 L 22.656 13.639 C 23.019 13.639 23.291 13.911 23.291 14.273 C 23.291 14.636 23.019 14.908 22.656 14.908 Z M 9.561 19.439 L 5.211 19.439 C 4.848 19.439 4.577 19.167 4.577 18.805 C 4.577 18.442 4.848 18.17 5.211 18.17 L 9.561 18.17 C 9.923 18.17 10.195 18.442 10.195 18.805 C 10.195 19.167 9.878 19.439 9.561 19.439 Z M 16.086 19.439 L 11.781 19.439 C 11.419 19.439 11.147 19.167 11.147 18.805 C 11.147 18.442 11.419 18.17 11.781 18.17 L 16.131 18.17 C 16.494 18.17 16.766 18.442 16.766 18.805 C 16.766 19.167 16.448 19.439 16.086 19.439 Z" fill="rgb(158, 116, 11)"></path></svg>
                                 </div>
                                 <div class="badge-text">
-                                    <span class="badge-title">Last Updated:</span>
-                                    <div class="badge-title">2025-09-05</div>
+                                    <span class="badge-title">{{ blogs.last_update_date_text }}</span>
+                                    <div class="badge-title">{{blogs.last_update_date_value}}</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="title-section">
                         <h1 class="main-title">
-                            Find & Explore Most PopularIdeal<br/>
-                            <span class="title">Industry Machining Articles</span> of 2025
+                            {{blogs.hero_main_head_title}}<br/>
+                            <span class="title">{{ blogs.hero_main_center_title }}</span> {{ blogs.hero_main_after_title }}
                         </h1>
                     </div>
                     <div class="description-section">
-                        <p class="description-text">
-                            Discover and dive into expert articles and trending blog posts for 2025 covering CNC wire saw machines, bridge saws, engraving equipment, drilling tools, waterjets, polishing machines, diamond tools, and more. Keep up with the latest industry developments, practical tips, and innovations to enhance your equipment usage and project outcomes.
-                        </p>
+                        <p class="description-text" v-html="blogs.hero_description"></p>
                     </div>
                 </div>
             </div>
@@ -99,9 +94,7 @@
                     </h2>
                 </div>
             </div>
-            <div class="processing-cases-description-section">
-                {{item.text}}
-            </div>
+            <div class="processing-cases-description-section" v-html="item.text"></div>
             <!-- 案例展示部分 -->
             <div class="processing-cases-content">
                 <div class="processing-cases-container">
@@ -110,141 +103,55 @@
                             <div class="processing-cases-section-inner">
                                 <div class="processing-cases-list">
                                     <!-- 案例1 -->
-                                    <div class="processing-case-item">
-                                        <div class="case-background">
-                                            <div class="case-ipad">
-                                                <div class="case-image-container">
-                                                    <div class="case-main-image cement-case"></div>
-                                                </div>
-                                                <div class="case-content-container">
-                                                    <div class="case-link">
-                                                        <div class="case-info-container">
-                                                            <div class="case-youtube-link">
-                                                                <div class="case-title-frame">
-                                                                    <h3 class="case-title">
-                                                                        <span class="case-title-line">Cement Product
-                                                                            Cutting Case - CNC Wire</span>
-                                                                        <span class="case-title-line">Saw Machine
-                                                                            Supports Spanish Factory</span>
-                                                                    </h3>
-                                                                </div>
+                                     <template v-for="(blog, j) in item.blogs" :key="j">
+                                        <NuxtLink :to="'/blog/'+blog.slug" target="_blank">
+                                            <div class="processing-case-item">
+                                                <div class="case-background">
+                                                    <div class="case-ipad">
+                                                        <div class="case-image-container">
+                                                            <div class="case-main-image cement-case">
+                                                                <NuxtImg src="blog.first_image_url"/>
                                                             </div>
-                                                            <div class="case-date-section">
-                                                                <div class="case-date-container">
-                                                                    <span class="case-date">5/14/24</span>
+                                                        </div>
+                                                        <div class="case-content-container">
+                                                            <div class="case-link">
+                                                                <div class="case-info-container">
+                                                                    <div class="case-youtube-link">
+                                                                        <div class="case-title-frame">
+                                                                            <h3 class="case-title">
+                                                                                <span class="case-title-line">{{ blog.title }}</span>
+                                                                            </h3>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="case-date-section">
+                                                                        <div class="case-date-container">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 16 16">
+                                                                                <path d="M 12.825 14.5 L 8.425 14.5 C 7.075 14.5 6 13.4 6 12.075 L 6 11.35 C 6 10 7.1 8.925 8.425 8.925 L 12.825 8.925 C 14.175 8.925 15.25 10.025 15.25 11.35 L 15.25 12.075 C 15.25 13.4 14.15 14.5 12.825 14.5 Z" fill="rgb(135, 135, 135)"></path>
+                                                                                <path d="M 12.075 13.475 L 3.425 13.475 C 2.225 13.475 1.275 12.5 1.275 11.325 L 1.275 4.425 C 1.275 3.225 2.25 2.275 3.425 2.275 L 12.05 2.275 C 13.25 2.275 14.2 3.25 14.2 4.425 L 14.2 11.3 C 14.225 12.5 13.25 13.475 12.075 13.475 Z M 3.425 2.975 C 2.625 2.975 1.975 3.625 1.975 4.425 L 1.975 11.3 C 1.975 12.1 2.625 12.75 3.425 12.75 L 12.05 12.75 C 12.85 12.75 13.5 12.1 13.5 11.3 L 13.5 4.425 C 13.5 3.625 12.85 2.975 12.05 2.975 Z" fill="rgb(0, 0, 0)"></path>
+                                                                                <path d="M 4.625 4.1 C 4.425 4.1 4.275 3.95 4.275 3.75 L 4.275 1.25 C 4.275 1.05 4.425 0.9 4.625 0.9 C 4.825 0.9 4.975 1.05 4.975 1.25 L 4.975 3.75 C 4.975 3.95 4.825 4.1 4.625 4.1 Z M 10.625 4.1 C 10.425 4.1 10.275 3.95 10.275 3.75 L 10.275 1.25 C 10.275 1.05 10.425 0.9 10.625 0.9 C 10.825 0.9 10.975 1.05 10.975 1.25 L 10.975 3.75 C 10.975 3.95 10.825 4.1 10.625 4.1 Z M 13.75 5.975 L 1.75 5.975 C 1.55 5.975 1.4 5.825 1.4 5.625 C 1.4 5.425 1.55 5.275 1.75 5.275 L 13.75 5.275 C 13.95 5.275 14.1 5.425 14.1 5.625 C 14.1 5.825 13.95 5.975 13.75 5.975 Z M 5.275 8.225 L 2.875 8.225 C 2.675 8.225 2.525 8.075 2.525 7.875 C 2.525 7.675 2.675 7.525 2.875 7.525 L 5.275 7.525 C 5.475 7.525 5.625 7.675 5.625 7.875 C 5.625 8.075 5.45 8.225 5.275 8.225 Z M 8.875 8.225 L 6.5 8.225 C 6.3 8.225 6.15 8.075 6.15 7.875 C 6.15 7.675 6.3 7.525 6.5 7.525 L 8.9 7.525 C 9.1 7.525 9.25 7.675 9.25 7.875 C 9.25 8.075 9.075 8.225 8.875 8.225 Z M 12.5 8.225 L 10.1 8.225 C 9.9 8.225 9.75 8.075 9.75 7.875 C 9.75 7.675 9.9 7.525 10.1 7.525 L 12.5 7.525 C 12.7 7.525 12.85 7.675 12.85 7.875 C 12.85 8.075 12.7 8.225 12.5 8.225 Z M 5.275 10.725 L 2.875 10.725 C 2.675 10.725 2.525 10.575 2.525 10.375 C 2.525 10.175 2.675 10.025 2.875 10.025 L 5.275 10.025 C 5.475 10.025 5.625 10.175 5.625 10.375 C 5.625 10.575 5.45 10.725 5.275 10.725 Z M 8.875 10.725 L 6.5 10.725 C 6.3 10.725 6.15 10.575 6.15 10.375 C 6.15 10.175 6.3 10.025 6.5 10.025 L 8.9 10.025 C 9.1 10.025 9.25 10.175 9.25 10.375 C 9.25 10.575 9.075 10.725 8.875 10.725 Z" fill="rgb(0, 0, 0)"></path>
+                                                                            </svg>
+                                                                            <span class="case-date">{{blog.date}}</span>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- 案例2 -->
-                                    <div class="processing-case-item">
-                                        <div class="case-background">
-                                            <div class="case-ipad">
-                                                <div class="case-image-container">
-                                                    <div class="case-main-image marble-case"></div>
-                                                </div>
-                                                <div class="case-content-container">
-                                                    <div class="case-link">
-                                                        <div class="case-info-container">
-                                                            <div class="case-youtube-link">
-                                                                <div class="case-title-frame">
-                                                                    <h3 class="case-title">
-                                                                        <span class="case-title-line">Marble Block Slab
-                                                                            Cutting Case - CNC Wire</span>
-                                                                        <span class="case-title-line">Saw Machine
-                                                                            Supports Spanish Factory</span>
-                                                                    </h3>
-                                                                </div>
-                                                            </div>
-                                                            <div class="case-date-section">
-                                                                <div class="case-date-container">
-                                                                    <span class="case-date">12/11/24</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- 案例3 -->
-                                    <div class="processing-case-item">
-                                        <div class="case-background">
-                                            <div class="case-ipad">
-                                                <div class="case-image-container">
-                                                    <div class="case-main-image granite-case"></div>
-                                                </div>
-                                                <div class="case-content-container">
-                                                    <div class="case-link">
-                                                        <div class="case-info-container">
-                                                            <div class="case-youtube-link">
-                                                                <div class="case-title-frame">
-                                                                    <h3 class="case-title">
-                                                                        <span class="case-title-line">Granite Tombstone
-                                                                            Case - CNC Wire Saw</span>
-                                                                        <span class="case-title-line">Machine Supports
-                                                                            Chongqing Factory</span>
-                                                                    </h3>
-                                                                </div>
-                                                            </div>
-                                                            <div class="case-date-section">
-                                                                <div class="case-date-container">
-                                                                    <span class="case-date">8/10/24</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- 案例3 -->
-                                    <div class="processing-case-item">
-                                        <div class="case-background">
-                                            <div class="case-ipad">
-                                                <div class="case-image-container">
-                                                    <div class="case-main-image granite-case"></div>
-                                                </div>
-                                                <div class="case-content-container">
-                                                    <div class="case-link">
-                                                        <div class="case-info-container">
-                                                            <div class="case-youtube-link">
-                                                                <div class="case-title-frame">
-                                                                    <h3 class="case-title">
-                                                                        <span class="case-title-line">Granite Tombstone
-                                                                            Case - CNC Wire Saw</span>
-                                                                        <span class="case-title-line">Machine Supports
-                                                                            Chongqing Factory</span>
-                                                                    </h3>
-                                                                </div>
-                                                            </div>
-                                                            <div class="case-date-section">
-                                                                <div class="case-date-container">
-                                                                    <span class="case-date">8/10/24</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                        </NuxtLink>
+                                    </template>
                                 </div>
                             </div>
                         </div>
 
                         <!-- More 按钮 -->
-                        <div class="processing-cases-more-button">
+                        <div class="processing-cases-more-button" v-if="blogs.url">
                             <div class="more-button-container">
                                 <div class="more-button-wrapper">
-                                    <span class="more-button-text">More</span>
+                                    <NuxtLink :to="blog.url" target="_blank">
+                                        <span class="more-button-text">{{ blogs.more_text }}</span>
+                                    </NuxtLink>
                                 </div>
                             </div>
                         </div>
@@ -252,47 +159,53 @@
                 </div>
             </div>
         </div>
-        <ContactType />
-        <WhatsApp />
-        <DinosawFooter />
+        <ContactType :contentDetail="contentDetail" />
+        <WhatsApp :contentDetail="contentDetail" />
+        <DinosawFooter :menuItems="menuItems" :contentDetail="contentDetail" />
     </div>
 </template>
 
 <script setup>
 import { ref, onMounted, computed } from 'vue'
+import {formatArrayDatesShort } from '~/utils/dateFormatter'
+// 使用菜单数据composable
+const { menuItems, initializeMenuData } = useMenuData()
+const curMenuItems = computed(() => menuItems.value.filter(item => item.title === 'Blogs'))
 
-const { data: productDetailRes, pending, error } = await useApi('/cnc-diamond-wire-saw-cutting-machine-pro-for-sales?populate=all')
-const processingCase = [
-    { id: 1, title: "Industry Machinery News ", subTitle: "Latest Innovations & Trends", text: "Welcome to the Industrial Machinery News Center! Here, you'll discover the latest updates on processing techniques and machinery for industries such as natural stone, engineered stone, construction materials, metals, semiconductors, carbon fiber, rubber, and other composites. From cutting and grinding to drilling and engraving,stay informed and keep your business a step ahead in the competitive market!" },
-    { id: 2, title: "The practical videos on", subTitle: "How to install, use, and maintain industrial", text: "Diamond Tools" },
-    { id: 3, title: "Worth-reading articles on", subTitle: "industrial processing Machinery Cases", text: "Diamond Tools" },
-     { id: 4, title: "Worth-reading articles on", subTitle: "industrial processing Machinery Cases", text: "Diamond Tools" }
-]
+// 初始化菜单数据
+await initializeMenuData()
 
-watch(productDetailRes, (newPosts) => {
+const { contentDetail, isLoaded } = useContentDetail()
+// 使用 useFetch 获取数据
+const blogs = ref({})
+const { data: blogRes, pending, error } = await useApi('/product-categories?filters[category_value][$eq]=blog&populate=all')
+let processingCase = []
+
+watch(blogRes, (newPosts) => {
     if (newPosts) {
         console.log(newPosts)
+        let data = newPosts.data[0].blog_main_page
+
+        blogs.value = data
         useHead({
-            title: newPosts.metaTitle,
+            title: data.meta_title,
             meta: [
                 {
                     name: 'description',
-                    content: newPosts.metaDescription
+                    content: data.meta_description
                 }
             ],
         })
+        processingCase = [
+            { id: 1, title: data.industry_machinery_title, subTitle:data.industry_machinery_subtitle, text: data.industry_machinery_description, text:"", blogs: formatArrayDatesShort(data.industry_machinery_news_blogs), url:"/blog/industry-news" },
+            { id: 2, title: data.dinosaw_company_title, subTitle: data.dinosaw_company_subtitle, text: data.dinosaw_company_description, text:"", blogs: formatArrayDatesShort(data.dinosaw_company_news_blogs), url:"/blog/news-events" },
+            { id: 3, title: data.most_popular_cnc_industry_title, subTitle: data.most_popular_cnc_industry_subtitle, text:"", blogs: formatArrayDatesShort(data.most_popular_cnc_industry_machines_products), url:"" },
+        ]
     }
 
 }, { immediate: true })
 
 
-
-// 组件挂载后开始打字机效果
-onMounted(() => {
-
-})
-
-// 使用 useFetch 获取数据
 </script>
 <style scoped lang="scss">
 .main {

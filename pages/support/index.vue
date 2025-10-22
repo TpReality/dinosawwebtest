@@ -1,13 +1,13 @@
 <template>
     <div class="main">
-        <DinosawHeader />
+        <DinosawHeader :menuItems="menuItems" :contentDetail="contentDetail" />
         <!-- 面包屑导航 - 对应Figma节点 19:13863 -->
         <div class="breadcrumb-container">
             <div class="breadcrumb-wrapper">
                 <div class="breadcrumb-link">
                     <div class="breadcrumb-text">
                         <div class="text-container">
-                            <span class="breadcrumb-home"><a href="/" target="_blank">Home</a></span>
+                            <span class="breadcrumb-home"><NuxtLink to="/" target="_blank">{{ support.home_text }}</NuxtLink></span>
                         </div>
                     </div>
                     <div class="breadcrumb-text">
@@ -22,7 +22,7 @@
                         <div class="dropdown-link">
                             <div class="dropdown-container">
                                 <div class="dropdown-text-container">
-                                    <span class="breadcrumb-products"><a href="/support" target="_blank">Support</a></span>
+                                    <span class="breadcrumb-products"><NuxtLink to="/support" target="_blank">{{ support.products_btn_text }}</NuxtLink></span>
                                 </div>
                             </div>
                             <div class="dropdown-icon-container">
@@ -32,28 +32,24 @@
                     </div>
                     <div class="breadcrumb-outer">
                         <div class="bg">
-                            <p>
-                                <a href="/support/user-manual" target="_blank">User-Manual</a>
-                            </p>
-                            <p>
-                                <a href="/support/faqs" target="_blank">FAQs</a>
+                            <p v-for="(menu, i) in curMenuItems[0].children" :key="i">
+                                <a :href="'/support'+menu.link" target="_blank" >{{ menu.text }}</a>
                             </p>
                         </div>
                       </div>
                 </div>
             </div>
         </div>
-        <h1 class="title">
-            Comprehensive Service & Expert Support for Your Machines and Systems
+        <h1 class="title">{{ support.hero_main_title }}
         </h1>
-        <GetEasySolution />
+        <GetEasySolution :contentDetail="contentDetail" />
         <div class="sales-support-section">
             <div class="sales-container">
                 <div class="sales-wrapper">
                     <div class="sales-inner">
                         <!-- 标题部分 -->
                         <div class="sales-title-section">
-                            <h2 class="sales-main-title">How Our Sales Team Supports Your Success</h2>
+                            <h2 class="sales-main-title">{{ support.how_our_sales_team_title }}</h2>
                         </div>
                         
                         <!-- 第一行卡片 -->
@@ -61,20 +57,20 @@
                             <div class="sales-card consultation-card">
                                 <div class="card-content">
                                     <div class="card-title-wrapper">
-                                        <h3 class="card-title">Consultation and Recommendations</h3>
+                                        <h3 class="card-title">{{ support.how_our_sales_team_left_top_title }}</h3>
                                     </div>
                                     <div class="card-description">
-                                        <p>Our sales team helps you identify the most suitable equipment and solutions <span class="c-blue">for your specific needs</span>. We analyze your requirements and provide recommendations based on similar successful cases, ensuring you make informed decisions.</p>
+                                        <p v-html="support.how_our_sales_team_left_top_description"></p>
                                     </div>
                                 </div>
                             </div>
                             <div class="sales-card quick-response-card">
                                 <div class="card-content">
                                     <div class="card-title-wrapper">
-                                        <h3 class="card-title">Quick Response</h3>
+                                        <h3 class="card-title">{{ support.how_our_sales_team_right_top_title }}</h3>
                                     </div>
                                     <div class="card-description">
-                                        <p>We prioritize timely communication, responding to all inquiries <span class="c-blue">within 24 hours</span>. Whether by phone, email, online chat, or WhatsApp, our team is always accessible to address your concerns.</p>
+                                        <p v-html="support.how_our_sales_team_rigth_top_description"></p>
                                     </div>
                                 </div>
                             </div>
@@ -85,20 +81,20 @@
                             <div class="sales-card tailored-solutions-card">
                                 <div class="card-content">
                                     <div class="card-title-wrapper">
-                                        <h3 class="card-title">Tailored Solutions</h3>
+                                        <h3 class="card-title">{{support.how_our_sales_team_left_bottom_title }}</h3>
                                     </div>
                                     <div class="card-description">
-                                        <p>We take the time to understand your processing needs, offering <span>personalized product recommendations</span>. Detailed specifications, operation videos, and technical advice are all part of our comprehensive support.</p>
+                                        <p v-html="support.how_our_sales_team_left_bottom_description"></p>
                                     </div>
                                 </div>
                             </div>
                             <div class="sales-card transparent-pricing-card">
                                 <div class="card-content">
                                     <div class="card-title-wrapper">
-                                        <h3 class="card-title">Transparent Pricing and Offers</h3>
+                                        <h3 class="card-title">{{ support.how_our_sales_team_rigth_bottom_title }}</h3>
                                     </div>
                                     <div class="card-description">
-                                        <p>Enjoy a clear and transparent pricing process, with detailed quotes.</p>
+                                        <p v-html="support.how_our_sales_team_rigth_bottom_description"></p>
                                     </div>
                                 </div>
                             </div>
@@ -108,14 +104,14 @@
             </div>
         </div>
         <!-- Sales Team Support Section - 对应Figma节点 20:63517 -->
-         <GetEasySolution :getEasySolutionType="2" />
+         <GetEasySolution :contentDetail="contentDetail" :getEasySolutionType="2" />
         <div class="sales-support-section">
             <div class="sales-container">
                 <div class="sales-wrapper">
                     <div class="sales-inner">
                         <!-- 标题部分 -->
                         <div class="sales-title-section">
-                            <h2 class="sales-main-title">How Our Technical Experts Keep You Running</h2>
+                            <h2 class="sales-main-title">{{ support.how_our_technical_experts_keep_title }}</h2>
                         </div>
                         
                         <!-- 第一行卡片 -->
@@ -123,20 +119,20 @@
                             <div class="sales-card consultation-card">
                                 <div class="card-content">
                                     <div class="card-title-wrapper">
-                                        <h3 class="card-title">Equipment Installation and Commissioning</h3>
+                                        <h3 class="card-title">{{ support.how_our_technical_experts_keep_left_top_title }}</h3>
                                     </div>
                                     <div class="card-description">
-                                        <p>Our technical team ensures your <span class="c-blue">equipment is installed correctly and ready to operate.</span> On-site installation services or remote guidance are provided to get your machines up and running smoothly.</p>
+                                        <p v-html="support.how_our_technical_experts_keep_left_top_description"></p>
                                     </div>
                                 </div>
                             </div>
                             <div class="sales-card quick-response-card">
                                 <div class="card-content">
                                     <div class="card-title-wrapper">
-                                        <h3 class="card-title">Operation Training</h3>
+                                        <h3 class="card-title">{{ support.how_our_technical_experts_keep_right_top_title }}</h3>
                                     </div>
                                     <div class="card-description">
-                                        <p><span class="c-blue">We offer comprehensive training for your team</span>, covering everything from equipment operation to maintenance best practices. User manuals, video tutorials, and live Q&A support ensure your operators feel confident and prepared.</p>
+                                        <p v-html="support.how_our_technical_experts_keep_rigth_top_description"></p>
                                     </div>
                                 </div>
                             </div>
@@ -147,20 +143,20 @@
                             <div class="sales-card tailored-solutions-card">
                                 <div class="card-content">
                                     <div class="card-title-wrapper">
-                                        <h3 class="card-title">Fault Diagnosis and Repairs</h3>
+                                        <h3 class="card-title">{{ support.how_our_technical_experts_keep_left_bottom_title }}</h3>
                                     </div>
                                     <div class="card-description">
-                                        <p>Our experts provide <span class="c-blue">24/7 online</span> support to diagnose and resolve any equipment issues quickly. For urgent cases, we arrange on-site service <span class="c-blue">within 4 hours to minimize downtime.</span></p>
+                                        <p v-html="support.how_our_technical_experts_keep_bottom_description"></p>
                                     </div>
                                 </div>
                             </div>
                             <div class="sales-card transparent-pricing-card">
                                 <div class="card-content">
                                     <div class="card-title-wrapper">
-                                        <h3 class="card-title">System Upgrades and Optimization</h3>
+                                        <h3 class="card-title">{{ support.how_our_technical_experts_keep_rigth_bottom_title }}</h3>
                                     </div>
                                     <div class="card-description">
-                                        <p>We deliver <span class="c-blue">regular system updates to ensure your equipment</span> performs at its best. Additionally, we provide tailored optimization suggestions to meet evolving production needs.</p>
+                                        <p v-html="support.how_our_technical_experts_keep_rigth_bottom_description"></p>
                                     </div>
                                 </div>
                             </div>
@@ -169,13 +165,48 @@
                 </div>
             </div>
         </div>
-        <ContactType />
-        <WhatsApp />
-        <DinosawFooter />
+        <ContactType :contentDetail="contentDetail" />
+        <WhatsApp :contentDetail="contentDetail" />
+        <DinosawFooter :menuItems="menuItems" :contentDetail="contentDetail" />
     </div>
 </template>
 
 <script setup>
+
+// 使用菜单数据composable
+const { menuItems, initializeMenuData } = useMenuData()
+const curMenuItems = computed(() => menuItems.value.filter(item => item.title === 'Support'))
+// 初始化菜单数据
+await initializeMenuData()
+// 使用全局 contentDetail
+const { contentDetail, isLoaded } = useContentDetail()
+const support = ref({})
+const { data: supportRes, pending, error } = await useApi('/support-main-pages?filters[products_btn_text][$eq]=Support')
+// 首字母大写函数
+const capitalizeFirstLetter = (string) => {
+    if (!string) return '';
+    return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
+watch(supportRes, (newPosts) => {
+    if (newPosts) {
+        console.log(newPosts)
+        let data = newPosts.data[0]
+        support.value = data
+        useHead({
+            title: data.metaTitle,
+            meta: [
+                {
+                    name: 'description',
+                    content: data.metaDescription
+                }
+            ],
+        })
+
+    }
+
+}, { immediate: true })
+
 </script>
 
 <style scoped lang="scss">

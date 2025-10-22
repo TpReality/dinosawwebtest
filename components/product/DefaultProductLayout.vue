@@ -14,15 +14,15 @@
                 <div class="gradient-overlay"></div>
             </div>
 
-            <!-- Hero Content -->
+            <!-- Hero Content:style="'background:url('+productDetail.application_scenario_background_1_url+') no-repeat top center'" -->
             <div class="hero-content">
-                <div class="container">
+                <div class="container" >
                     <div class="breadcrumb-container">
                         <div class="breadcrumb-wrapper">
                             <div class="breadcrumb-link">
                                 <div class="breadcrumb-text">
                                     <div class="text-container">
-                                        <NuxtLink to="/"><span class="breadcrumb-home">Home</span></NuxtLink>
+                                        <NuxtLink to="/" target="_blank"><span class="breadcrumb-home">{{productDetail.home_text }}</span></NuxtLink>
                                     </div>
                                 </div>
                                 <div class="breadcrumb-text">
@@ -36,8 +36,8 @@
                                     <div class="dropdown-link">
                                         <div class="dropdown-container">
                                             <div class="dropdown-text-container">
-                                                <NuxtLink to="/Products">
-                                                    <span class="breadcrumb-products">Products</span>
+                                                <NuxtLink to="/Products" target="_blank">
+                                                    <span class="breadcrumb-products">{{productDetail.products_btn_text}}</span>
                                                 </NuxtLink>
                                             </div>
                                         </div>
@@ -56,33 +56,8 @@
                                 </div>
                                 <div class="breadcrumb-outer">
                                     <div class="bg">
-                                        <p>
-                                            <a href="/Products/wire-saw-machine" target="_blank">Wire Saw Machine</a>
-                                        </p>
-                                        <p>
-                                            <a href="/Products/circle-saw-machine" target="_blank">Circle Saw
-                                                Machine</a>
-                                        </p>
-                                        <p>
-                                            <a href="/Products/drilling-and-engraving-machine" target="_blank">Drilling
-                                                and Engraving Machine</a>
-                                        </p>
-                                        <p>
-                                            <a href="/Products/grinding-and-polishing-machine" target="_blank">Grinding
-                                                and Polishing Machine</a>
-                                        </p>
-                                        <p>
-                                            <a href="/Products/mining-and-quarry-machine" target="_blank">Mining and
-                                                Quarry Machine</a>
-                                        </p>
-                                        <p>
-                                            <a href="/Products/profiling-machine" target="_blank">Profiling Machine</a>
-                                        </p>
-                                        <p>
-                                            <a href="/Products/other-machine" target="_blank">Other Machine</a>
-                                        </p>
-                                        <p>
-                                            <a href="/Products/diamond-tools" target="_blank">Diamond Tools</a>
+                                        <p v-for="(item) in topProduct" :key="item.id">
+                                            <a :href="'/Products/'+item.category_value" target="_blank">{{ item.category_name }}</a>
                                         </p>
                                     </div>
                                 </div>
@@ -103,10 +78,10 @@
                     </div>
                     <div class="product-title-section">
                         <h1 class="product-title">
-                            DINOSAW Diamond Wire Saw Cutting Machine
+                            {{productDetail.h1_page_inner_title}}
                         </h1>
                         <h2 class="product-model">
-                            YXSJ-2500/3000/3500-16pro
+                            {{productDetail.mode}}
                         </h2>
                     </div>
                     <!-- Main Content -->
@@ -119,23 +94,15 @@
                             <!-- Product Description -->
                             <div class="product-description">
                                 <div class="description-content">
-                                    <p class="description-text">
-                                        DINOSAW Diamond wire saw cutting machine performs straight,
-                                        curved, and custom-shaped cutting all, with precision ±1mm and
-                                        speeds of 1.8-2.0㎡/h (for marble), increasing production efficiency by
-                                        up to 100% compared to traditional cutting methods.
-                                        <br><br>
-                                        It can effectively cut marble, granite, concrete, metal, quartz glass,
-                                        refractory bricks, graphite and other hard materials, suited for creating
-                                        tombstones, curved slabs, fireplaces and bathtubs, columns and
-                                        curbstones.
+                                    <p v-html="productDetail.product_overview" class="description-text">
+                                        
                                     </p>
                                 </div>
 
                             </div>
 
-                            <div class="product-image">
-                                <NuxtImg src="https://framerusercontent.com/images/OLBWm7sLNft6mCi7TuWDReNvmY.webp?width=1973&height=1516" alt="DINOSAW Diamond Wire Saw Cutting Machine" />
+                            <div class="product-image" >
+                                <NuxtImg :src="productDetail.first_image_url" />
                             </div>
 
                             <!-- Action Buttons -->
@@ -155,9 +122,10 @@
                         </div>
 
                         <!-- Right Content - Product Image -->
+                           <!-- <NuxtImg :src="productDetail.b_applicable_materials_rich"  /> -->
                         <div class="hero-right">
-                            <div class="product-image">
-                                <NuxtImg src="https://framerusercontent.com/images/OLBWm7sLNft6mCi7TuWDReNvmY.webp?width=1973&height=1516" alt="DINOSAW Diamond Wire Saw Cutting Machine" />
+                            <div class="product-image" >
+                                <NuxtImg :src="productDetail.first_image_url" />
                             </div>
                         </div>
                     </div>
@@ -173,7 +141,7 @@
                         <div class="nav-item">
                             <a class="nav-link" @click="scrollToSection('compatible-materials-section')">
                                 <div class="nav-link-content">
-                                    <p class="nav-link-text">Compatible Materials & Products</p>
+                                    <p class="nav-link-text">{{ productDetail.material_main_title }}</p>
                                 </div>
                             </a>
                         </div>
@@ -240,8 +208,8 @@
             <div class="container">
                 <!-- Section Header -->
                 <div class="section-header">
-                    <h2 class="section-title">Compatible Materials & Products</h2>
-                    <p class="section-subtitle">Wire Saw Machine Specifications customizable upon request</p>
+                    <h2 class="section-title">{{productDetail.material_main_title}}</h2>
+                    <p class="section-subtitle">{{productDetail.applicable_material_title_description}}</p>
                 </div>
 
                 <!-- Materials Carousel -->
@@ -249,156 +217,16 @@
                     <div class="carousel-container">
                         <div class="carousel-track" ref="carouselTrack">
                             <!-- Item 1: Product Demo -->
-                            <div class="carousel-item">
-                                <div class="material-card">
-                                    <div class="card-header">
-                                        <h3 class="card-title">▶ Product Demo</h3>
-                                    </div>
-                                    <div class="card-content">
-                                        <div class="demo-video">
-                                            <div class="video-placeholder">
-                                                <div class="play-button">
-                                                    <svg width="68" height="48" viewBox="0 0 68 48" fill="none">
-                                                        <rect width="68" height="48" rx="8" fill="white" />
-                                                        <path d="M27 14L41 24L27 34V14Z" fill="rgba(33, 33, 33, 0.8)" />
-                                                    </svg>
-                                                </div>
-                                            </div>
-                                            <p class="video-description">DINOSAW CNC wire saw cutting machine Video</p>
+                             <template v-for="(material, index) in applicableMaterials" :key="index">
+                                <div class="carousel-item" v-if="productDetail[material]">
+                                    <div class="material-card">
+                                        <div class="card-header">
+                                            <h3 class="card-title">{{ productDetail[material] }}</h3>
                                         </div>
+                                        <div class="card-content" v-html="productDetail[material+'_rich']"></div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <!-- Item 2: Granite Tombstones -->
-                            <div class="carousel-item">
-                                <div class="material-card">
-                                    <div class="card-header">
-                                        <h3 class="card-title">Granite ❯ Tombstones</h3>
-                                    </div>
-                                    <div class="card-content">
-                                        <div class="image-gallery">
-                                            <!-- <img src="/images/materials/granite-tombstone-1.webp" alt="granite tombstone cutting with DINOSAW wire saw machine" />
-                                            <img src="/images/materials/granite-tombstone-2.webp" alt="DINOSAW CNC wire saw for granite tombstone cutting" />
-                                            <img src="/images/materials/granite-tombstone-3.webp" alt="Granite hradstone cutting with CNC wire saw machine" />
-                                            <img src="/images/materials/granite-tombstone-4.webp" alt="DINOSAW cnc diamond wire saw cutting machine" />
-                                            <img src="/images/materials/granite-tombstone-5.webp" alt="DINOSAW diamond wire saw cutting machine for granite" /> -->
-                                        </div>
-                                        <div class="card-description">
-                                            <p>Granite's exceptional durability and timeless elegance make it the
-                                                premier choice for memorial stonework, demanding precision cutting
-                                                technology that preserves both aesthetic appeal and structural
-                                                integrity.</p>
-                                            <p>The DINOSAW CNC diamond wire saw cutting machine excels in granite
-                                                tombstone fabrication through its advanced multi-axis control system.
-                                                The diamond-embedded wire creates clean, precise cuts with minimal
-                                                material waste while maintaining consistent pressure through
-                                                servo-controlled tension systems.</p>
-                                            <p>Stone fabricators benefit from reduced processing time, higher material
-                                                yield, and enhanced precision that meets the exacting standards of
-                                                memorial artistry.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Item 3: Curved Slabs -->
-                            <div class="carousel-item">
-                                <div class="material-card">
-                                    <div class="card-header">
-                                        <h3 class="card-title">Granite & Marble ❯ Curved Slabs</h3>
-                                    </div>
-                                    <div class="card-content">
-                                        <div class="image-gallery">
-                                            <!-- <img src="/images/materials/curved-slab-1.webp" alt="Granite curved slab cutting wire saw machine" />
-                                            <img src="/images/materials/curved-slab-2.webp" alt="DINOSAW CNC wire saw cutting stone curved slabs" />
-                                            <img src="/images/materials/curved-slab-3.webp" alt="DINOSAW cnc wire saw machine cutting marble slabs" /> -->
-                                        </div>
-                                        <div class="card-description">
-                                            <p>Granite and marble's enduring popularity in luxury interior and exterior
-                                                applications demands innovative cutting solutions for creating curved
-                                                slabs that maintain the material's natural beauty while achieving the
-                                                architectural precision required for modern curved surfaces and radius
-                                                elements.</p>
-                                            <p>The DINOSAW CNC diamond wire saw cutting machine excels in curved slab
-                                                fabrication through its advanced 4-axis control system and proprietary
-                                                curve-tracking technology.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Item 4: Stone Columns -->
-                            <div class="carousel-item">
-                                <div class="material-card">
-                                    <div class="card-header">
-                                        <h3 class="card-title">Natural Stone ❯ Columns & Cylinders</h3>
-                                    </div>
-                                    <div class="card-content">
-                                        <!-- <img src="/images/materials/stone-columns.webp" alt="Natural stone columns cutting" class="featured-image" /> -->
-                                        <div class="card-description">
-                                            <p>Natural stone columns and cylindrical elements represent some of the most
-                                                challenging and prestigious applications in architectural stone
-                                                fabrication, requiring exceptional precision to achieve the perfect
-                                                symmetry and surface consistency demanded in classical and contemporary
-                                                architectural designs.</p>
-                                            <p>The DINOSAW CNC diamond wire saw cutting machine transforms column and
-                                                cylinder production through its specialized rotational cutting
-                                                capabilities.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Item 5: FRP Pipe Cutting -->
-                            <div class="carousel-item">
-                                <div class="material-card">
-                                    <div class="card-header">
-                                        <h3 class="card-title">FRP ❯ Pipe Cutting</h3>
-                                    </div>
-                                    <div class="card-content">
-                                        <div class="image-gallery">
-                                            <!-- <img src="/images/materials/frp-pipe-1.webp" alt="Fiberglass reinforced plastic pipes cutting DINOSAW wire saw machine" />
-                                            <img src="/images/materials/frp-pipe-2.webp" alt="DINOSAW CNC diamond wire saw machine for FRP pipes cutting" /> -->
-                                        </div>
-                                        <div class="card-description">
-                                            <p>Fiber Reinforced Polymer (FRP) pipes have revolutionized industrial fluid
-                                                transport systems with their exceptional corrosion resistance,
-                                                lightweight properties, and extended service life, creating demand for
-                                                precision cutting solutions that preserve the material's structural
-                                                integrity and specialized layered composition.</p>
-                                            <p>The DINOSAW CNC diamond wire saw cutting machine excels in FRP pipe
-                                                processing through its vibration-minimizing cutting action and
-                                                specialized material handling system.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Item 6: Refractory Materials -->
-                            <div class="carousel-item">
-                                <div class="material-card">
-                                    <div class="card-header">
-                                        <h3 class="card-title">Refractory Materials ❯ Block Cutting</h3>
-                                    </div>
-                                    <div class="card-content">
-                                        <div class="image-gallery">
-                                            <!-- <img src="/images/materials/refractory-block-1.webp" alt="Refractory materials block cutting" />
-                                            <img src="/images/materials/refractory-block-2.webp" alt="Refractory block cutting machine" />
-                                            <img src="/images/materials/refractory-block-3.webp" alt="Industrial refractory cutting" /> -->
-                                        </div>
-                                        <div class="card-description">
-                                            <p>Refractory materials are the backbone of high-temperature industrial
-                                                applications, from steel furnaces to ceramic kilns. As industries demand
-                                                more precise, custom-shaped refractory components for enhanced thermal
-                                                efficiency, traditional cutting methods struggle with the extreme
-                                                hardness and specialized requirements of these materials.</p>
-                                            <p>DINOSAW Diamond Wire Saw Machine revolutionizes refractory component
-                                                manufacturing through advanced multi-axis cutting technology.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            </template>
                         </div>
 
                         <!-- Carousel Navigation -->
@@ -423,7 +251,9 @@
                 <!-- Consult Expert Button -->
                 <div class="expert-consultation">
                     <button class="expert-btn">
-                        <span>Consult DINOSAW Material Expert → </span>
+                        <NuxtLink to="https://api.whatsapp.com/send?phone=8619859013937&Hi Lizzy,I want to know more detail information">
+                            <span>Consult DINOSAW Material Expert → </span>
+                        </NuxtLink>
                     </button>
                 </div>
             </div>
@@ -442,23 +272,19 @@
                             <div class="case-item">
                                 <div class="case-content">
                                     <h2 class="case-header">
-                                        <span class="case-category">Architectural Projects</span>
+                                        <span class="case-category">{{ productDetail.cutting_materials_1 }}</span>
                                     </h2>
                                     <h3 class="title">
-                                        <span class="title-main">Precision Facade Carving for</span>
+                                        <span class="title-main">{{productDetail.application_scenario_title_1}}</span>
                                     </h3>
-                                    <p class="case-description">
-                                        Dubai firm needed arabesque patterns on limestone facades. 2000×3000mm worktable
-                                        with automatic tool changer maintained 0.05mm variance throughout 4-month
-                                        production, ensuring geometric consistency across the entire building exterior.
-                                    </p>
+                                    <p class="case-description" v-html="productDetail.application_scenario_description_1"></p>
                                     <div class="case-action">
                                         <button class="case-btn">
-                                            <span>Scale Your Architectural Carving →</span>
+                                            <span>{{productDetail.button_text_1}} →</span>
                                         </button>
                                     </div>
                                     <div class="case-image">
-                                        <!-- <img src="/images/cases/limestone-carving-samples.jpg" alt="Limestone facade carving samples" /> -->
+                                        <NuxtImg :src="productDetail.application_scenario_background_1_url" />
                                     </div>
                                 </div>
                             </div>
@@ -467,24 +293,19 @@
                             <div class="case-item">
                                 <div class="case-content">
                                     <h2 class="case-header">
-                                        <span class="case-category">Industrial Projects</span>
+                                        <span class="case-category">{{ productDetail.cutting_materials_2 }}</span>
                                     </h2>
                                     <h3 class="title">
-                                        <span class="title-main">High-Volume Stone Processing for</span>
+                                        <span class="title-main">{{productDetail.application_scenario_title_2}}</span>
                                     </h3>
-                                    <p class="case-description">
-                                        Large-scale manufacturing facility required consistent stone processing
-                                        capabilities. Our CNC wire saw machines delivered precision cutting with minimal
-                                        waste, increasing production efficiency by 150% while maintaining quality
-                                        standards.
-                                    </p>
+                                    <p class="case-description" v-html="productDetail.application_scenario_description_2"></p>
                                     <div class="case-action">
                                         <button class="case-btn">
-                                            <span>Optimize Your Production →</span>
+                                            <span>{{productDetail.button_text_2}} →</span>
                                         </button>
                                     </div>
                                     <div class="case-image">
-                                        <!-- <img src="/images/cases/industrial-stone-processing.jpg" alt="Industrial stone processing" /> -->
+                                        <NuxtImg :src="productDetail.application_scenario_background_2_url" />
                                     </div>
                                 </div>
                             </div>
@@ -493,23 +314,19 @@
                             <div class="case-item">
                                 <div class="case-content">
                                     <h2 class="case-header">
-                                        <span class="case-category">Custom Solutions</span>
+                                        <span class="case-category">{{ productDetail.cutting_materials_3 }}</span>
                                     </h2>
                                     <h3 class="title">
-                                        <span class="title-main">Specialized Cutting Solutions for</span>
+                                        <span class="title-main">{{productDetail.application_scenario_title_3}}</span>
                                     </h3>
-                                    <p class="case-description">
-                                        Unique architectural requirements demanded custom cutting solutions. Our
-                                        engineering team developed specialized tooling and programming to achieve
-                                        complex curved cuts with precision tolerances of ±0.1mm.
-                                    </p>
+                                    <p class="case-description" v-html="productDetail.application_scenario_description_3"></p>
                                     <div class="case-action">
                                         <button class="case-btn">
-                                            <span>Explore Custom Solutions →</span>
+                                            <span>{{productDetail.button_text_3}} →</span>
                                         </button>
                                     </div>
                                     <div class="case-image">
-                                        <!-- <img src="/images/cases/custom-stone-cutting.jpg" alt="Custom stone cutting solutions" /> -->
+                                        <NuxtImg :src="productDetail.application_scenario_background_3_url" />
                                     </div>
                                 </div>
                             </div>
@@ -568,85 +385,7 @@
                 <!-- Specifications Table -->
                 <div class="specs-table-container">
                     <div class="specs-table-wrapper">
-                        <figure class="specs-table-figure">
-                            <table class="specs-table">
-                                <tbody>
-                                    <!-- Header Row -->
-                                    <tr class="table-header-row">
-                                        <th class="table-header-cell">Model</th>
-                                        <th class="table-header-cell">Unit</th>
-                                        <th class="table-header-cell">YXSJ - 2500 - 16pro</th>
-                                        <th class="table-header-cell">YXSJ - 3000 - 16pro</th>
-                                        <th class="table-header-cell">YXSJ - 3500 - 16pro</th>
-                                    </tr>
-
-                                    <!-- Data Rows -->
-                                    <tr class="table-row">
-                                        <td class="table-cell-label">Max Working dimensions</td>
-                                        <td class="table-cell-unit">m</td>
-                                        <td class="table-cell-data">2.5x1.5</td>
-                                        <td class="table-cell-data">3.0x1.5</td>
-                                        <td class="table-cell-data">3.5x1.5</td>
-                                    </tr>
-
-                                    <tr class="table-row">
-                                        <td class="table-cell-label">Worktable size</td>
-                                        <td class="table-cell-unit">m</td>
-                                        <td class="table-cell-data">2.5x1.4</td>
-                                        <td class="table-cell-data">2.5x1.4</td>
-                                        <td class="table-cell-data">2.5x1.4</td>
-                                    </tr>
-
-                                    <tr class="table-row">
-                                        <td class="table-cell-label">Wire length</td>
-                                        <td class="table-cell-unit">m</td>
-                                        <td class="table-cell-data">14.75</td>
-                                        <td class="table-cell-data">15.75</td>
-                                        <td class="table-cell-data">16.75</td>
-                                    </tr>
-
-                                    <tr class="table-row">
-                                        <td class="table-cell-label">Wire diameter</td>
-                                        <td class="table-cell-unit">mm</td>
-                                        <td class="table-cell-data">7.6 - 11</td>
-                                        <td class="table-cell-data">7.6 - 11</td>
-                                        <td class="table-cell-data">7.6 - 11</td>
-                                    </tr>
-
-                                    <tr class="table-row">
-                                        <td class="table-cell-label">Main motor power</td>
-                                        <td class="table-cell-unit">kw</td>
-                                        <td class="table-cell-data">15</td>
-                                        <td class="table-cell-data">15</td>
-                                        <td class="table-cell-data">15</td>
-                                    </tr>
-
-                                    <tr class="table-row">
-                                        <td class="table-cell-label">Water consumption</td>
-                                        <td class="table-cell-unit">m³/h</td>
-                                        <td class="table-cell-data">3</td>
-                                        <td class="table-cell-data">3</td>
-                                        <td class="table-cell-data">3</td>
-                                    </tr>
-
-                                    <tr class="table-row">
-                                        <td class="table-cell-label">Overall dimensions</td>
-                                        <td class="table-cell-unit">m</td>
-                                        <td class="table-cell-data">6.3x7.9x4.0</td>
-                                        <td class="table-cell-data">6.3x8.4x4.0</td>
-                                        <td class="table-cell-data">6.3x9.0x4.0</td>
-                                    </tr>
-
-                                    <tr class="table-row">
-                                        <td class="table-cell-label">Approximate weight</td>
-                                        <td class="table-cell-unit">t</td>
-                                        <td class="table-cell-data">6.8</td>
-                                        <td class="table-cell-data">7.6</td>
-                                        <td class="table-cell-data">8.5</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </figure>
+                        <figure class="specs-table-figure" v-html="productDetail.table" > </figure>
                     </div>
                 </div>
 
@@ -663,11 +402,11 @@
         <div id="core-benefits" class="core-benefits">
             <div class="benefits-header">
                 <div class="benefits-tagline">
-                    <p>Advanced engineering meets practical design excellence.</p>
+                    <p>{{ productDetail.small_title }}</p>
                 </div>
                 <div class="benefits-title title">
                     <h2>
-                        <span>Precision. Power. Performance.</span>
+                        <span>{{ productDetail.big_title }}</span>
                     </h2>
                 </div>
             </div>
@@ -716,10 +455,10 @@
                     <div class="feature-card">
                         <div class="feature-content">
                             <div class="feature-header">
-                                <h3>User-Friendly Operation</h3>
+                                <h3>{{ productDetail.core_strengths_a }}</h3>
                             </div>
                             <div class="feature-description">
-                                <p>Built-in pattern library and CAD import capability simplify workflow.</p>
+                                <p>{{ productDetail.core_strengths_description_a }}</p>
                             </div>
                         </div>
                     </div>
@@ -727,11 +466,10 @@
                     <div class="feature-card">
                         <div class="feature-content">
                             <div class="feature-header">
-                                <h3>35m/min High-Speed Engraving</h3>
+                                <h3>{{ productDetail.core_strengths_b }}</h3>
                             </div>
                             <div class="feature-description">
-                                <p>7.5kW stone-specific spindle with 40m/min rapid travel speed delivers
-                                    industrial-grade power</p>
+                                <p>{{ productDetail.core_strengths_description_b }}</p>
                             </div>
                         </div>
                     </div>
@@ -739,10 +477,10 @@
                     <div class="feature-card">
                         <div class="feature-content">
                             <div class="feature-header">
-                                <h3>±0.05mm Ultra-High Precision</h3>
+                                <h3>{{ productDetail.core_strengths_c }}</h3>
                             </div>
                             <div class="feature-description">
-                                <p> Full servo system control ensures exceptional accuracy</p>
+                                <p>{{ productDetail.core_strengths_description_c }}</p>
                             </div>
                         </div>
                     </div>
@@ -762,286 +500,84 @@
             <div class="features-row">
                 <div class="feature-grid-card">
                     <div class="feature-icon">
-                        <!-- <img src="/api/placeholder/80/80" alt="Energy Savings" /> -->
+                        <NuxtImg :src="productDetail.image_a_url" />
                     </div>
                     <div class="feature-info">
-                        <h3>20% Energy Savings</h3>
-                        <p>High-efficiency permanent magnet synchronous motor</p>
+                        <h3>{{ productDetail.detailed_advantages_a }}</h3>
+                        <p>{{ productDetail.advantage_introduction_a }}</p>
                     </div>
                 </div>
 
                 <div class="feature-grid-card">
                     <div class="feature-icon">
-                        <!-- <img src="/api/placeholder/80/80" alt="Remote Operation" /> -->
+                        <NuxtImg :src="productDetail.image_b_url" />
                     </div>
                     <div class="feature-info">
-                        <h3>Remote Operation</h3>
-                        <p>OTA technology for remote updates and maintenance support</p>
+                        <h3>{{ productDetail.detailed_advantages_b }}</h3>
+                        <p>{{ productDetail.advantage_introduction_b }}</p>
                     </div>
                 </div>
 
                 <div class="feature-grid-card">
                     <div class="feature-icon">
-                        <!-- <img src="/api/placeholder/80/80" alt="Versatile Cutting" /> -->
+                        <NuxtImg :src="productDetail.image_c_url" />
                     </div>
                     <div class="feature-info">
-                        <h3>Versatile Cutting</h3>
-                        <p>Multi-axis control enables straight, curved, and custom-shaped cuts</p>
+                        <h3>{{ productDetail.detailed_advantages_c }}</h3>
+                        <p>{{ productDetail.advantage_introduction_c }}</p>
+                    </div>
+                </div>
+            </div>
+             <div class="features-row" v-if="productDetail.image_d_url || productDetail.image_e_url || productDetail.image_f_url">
+                <div class="feature-grid-card" v-if="productDetail.image_d_url">
+                    <div class="feature-icon">
+                        <NuxtImg :src="productDetail.image_d_url" />
+                    </div>
+                    <div class="feature-info">
+                        <h3>{{ productDetail.detailed_advantages_d }}</h3>
+                        <p>{{ productDetail.advantage_introduction_d }}</p>
+                    </div>
+                </div>
+
+                <div class="feature-grid-card" v-if="productDetail.image_e_url">
+                    <div class="feature-icon">
+                        <NuxtImg :src="productDetail.image_e_url" />
+                    </div>
+                    <div class="feature-info">
+                        <h3>{{ productDetail.detailed_advantages_e}}</h3>
+                        <p>{{ productDetail.advantage_introduction_e }}</p>
+                    </div>
+                </div>
+
+                <div class="feature-grid-card" v-if="productDetail.image_f_url">
+                    <div class="feature-icon">
+                        <NuxtImg :src="productDetail.image_f_url" />
+                    </div>
+                    <div class="feature-info">
+                        <h3>{{ productDetail.detailed_advantages_f }}</h3>
+                        <p>{{ productDetail.advantage_introduction_f }}</p>
                     </div>
                 </div>
             </div>
 
-            <div class="features-row">
-                <div class="feature-grid-card">
-                    <div class="feature-icon">
-                        <!-- <img src="/api/placeholder/80/80" alt="Robust Construction" /> -->
-                    </div>
-                    <div class="feature-info">
-                        <h3>Robust Construction</h3>
-                        <p>Cast iron columns with Siemens and NSK components ensure durability</p>
-                    </div>
-                </div>
-
-                <div class="feature-grid-card">
-                    <div class="feature-icon">
-                        <!-- <img src="/api/placeholder/80/80" alt="Safety Protection" /> -->
-                    </div>
-                    <div class="feature-info">
-                        <h3>Comprehensive Safety Protection</h3>
-                        <p>Software alerts + hardware safeguards with protective covers and limit switches</p>
-                    </div>
-                </div>
-
-                <div class="feature-grid-card">
-                    <div class="feature-icon">
-                        <!-- <img src="/api/placeholder/80/80" alt="Reduced Maintenance" /> -->
-                    </div>
-                    <div class="feature-info">
-                        <h3>Reduced Maintenance</h3>
-                        <p>Dust/water-resistant design with automatic lubrication system</p>
-                    </div>
-                </div>
-            </div>
+            
         </div>
         <!-- FAQ Section -->
         <div id="faq-section" class="faq-section">
             <div class="faq-header">
                 <h2>FAQs</h2>
-                <p>Common Questions About DINOSAW Diamond Wire Saw Cutting Machines</p>
+                <p>{{ productDetail.faq_subtitle }}</p>
             </div>
 
-            <div class="faq-container">
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h2>What is a CNC diamond wire saw cutting machine and how does it work?</h2>
+            <div class="faq-container" v-if="!pending && productDetail" >
+                <template v-for="(problem, index) in faqs.problems" :key="index">
+                    <div class="faq-item"  v-if="productDetail[problem]">
+                        <div class="faq-question">
+                            <h2>{{ productDetail[problem] }}</h2>
+                        </div>
+                        <div class="faq-answer" v-html="productDetail[faqs.answers[index]]"> </div>
                     </div>
-                    <div class="faq-answer">
-                        <p>A CNC diamond wire saw cutting machine is a precision stone cutting tool that uses a thin,
-                            flexible wire embedded with industrial diamond particles to cut through hard materials. The
-                            wire is guided by computer numerical control (CNC) systems along predetermined paths with
-                            multiple axis movements. As the diamond wire moves at high speed (typically 20-40 m/s), it
-                            gradually abrades through materials while water cooling systems maintain optimal cutting
-                            conditions and remove cutting debris.</p>
-                        <p>The machine operates using a continuous loop of diamond wire that runs around a series of
-                            pulleys and guide wheels, with one end connected to a motor drive system. The CNC control
-                            system precisely positions the workpiece relative to the wire or moves the wire itself
-                            through computer-programmed cutting paths. This technology allows for cutting complex shapes
-                            with exceptional precision (±1mm) without the heat damage, vibration issues, or large kerf
-                            width associated with traditional blade cutting methods.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h2>What materials can be cut with a CNC diamond wire saw machine?</h2>
-                    </div>
-                    <div class="faq-answer">
-                        <p>CNC diamond wire saw machines are exceptionally versatile and can cut through a wide range of
-                            hard materials including:</p>
-                        <ul>
-                            <li>Natural stones: granite, marble, limestone, sandstone, travertine, onyx, quartzite</li>
-                            <li>Engineered stones: quartz surfaces, sintered stones, terrazzo, concrete products</li>
-                            <li>Industrial materials: graphite, ceramics, glass, reinforced concrete, tungsten carbide
-                            </li>
-                            <li>Advanced materials: semiconductor materials, technical ceramics, carbon fiber composites
-                            </li>
-                        </ul>
-                        <p>The diamond wire cutting technology is particularly effective for materials that are brittle,
-                            have varying densities, or are prone to thermal damage when cut using conventional methods.
-                            The water-cooled cutting process prevents overheating and maintains material integrity even
-                            in thermally sensitive materials. Additionally, the low-stress cutting action makes this
-                            technology ideal for materials with internal tensions that might crack under the
-                            higher-force impacts of blade cutting.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h2>Does the CNC wire saw cutting machine require programming or CAD experience?</h2>
-                    </div>
-                    <div class="faq-answer">
-                        <p>No, the diamond wire saw stone cutting machine is designed with user-friendliness as a
-                            priority:</p>
-                        <ul>
-                            <li>The intuitive touchscreen interface uses simple, graphical controls that operators can
-                                master quickly, unlike traditional CNC machines requiring complex programming knowledge
-                            </li>
-                            <li>No CAD programming is required for standard cutting operations</li>
-                            <li>Most operators can complete basic setup within 5 minutes after initial training, and a
-                                single operator can efficiently manage multiple machines simultaneously</li>
-                            <li>For complex shapes, our optional pattern library allows quick selection from
-                                pre-configured cutting paths</li>
-                        </ul>
-                        <p>We provide comprehensive training for operators of all experience levels as part of our
-                            implementation package.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h2>How does the CNC wire saw control system work, and what level of expertise is required to
-                            operate it?</h2>
-                    </div>
-                    <div class="faq-answer">
-                        <p>The DINOSAW CNC diamond wire saw cutting machine features an intuitive control system
-                            designed to balance sophisticated functionality with user-friendly operation. Key aspects of
-                            the control system include:</p>
-                        <ul>
-                            <li><strong>User Interface:</strong> Touch-screen interface with visual programming options
-                                and multi-language support</li>
-                            <li><strong>Programming Methods:</strong> Multiple options including direct drawing
-                                on-screen, importing CAD files, or using preset shape libraries</li>
-                            <li><strong>Multi-Axis Control:</strong> Complex 3d cutting capabilities</li>
-                            <li><strong>Adaptive Cutting:</strong> Intelligent systems that automatically adjust wire
-                                speed, tension, and feed rate based on material properties</li>
-                            <li><strong>Remote Operation:</strong> Wireless control options allowing operators to
-                                monitor cutting from a safe distance</li>
-                        </ul>
-                        <p>Operator expertise requirements are intentionally minimized through our user-centric design
-                            approach. New operators typically require only 1-2 days of training to become proficient
-                            with basic operations, compared to weeks or months with traditional G-code based CNC
-                            systems. The interface eliminates the need for complex programming knowledge, using
-                            intuitive visual tools instead of manual coding.</p>
-                        <p>Our remote assistance capability enables direct support from DINOSAW technicians who can
-                            access the system (with permission) to troubleshoot issues or optimize settings without
-                            requiring on-site expertise.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h2>What safety features are incorporated into modern CNC diamond wire saw machines?</h2>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Safety is a paramount concern in the design of DINOSAW CNC diamond wire saw cutting machines.
-                            Our systems incorporate multiple layers of protection to ensure operator safety and prevent
-                            equipment damage:</p>
-                        <p><strong>Physical Barriers:</strong> Enclosed cutting area with transparent impact-resistant
-                            shields and safety interlocks that prevent operation when guards are open</p>
-                        <p><strong>Emergency Systems:</strong> Multiple emergency stop buttons positioned at strategic
-                            locations and foot pedal emergency stops for hands-free activation</p>
-                        <p><strong>Wire Break Detection:</strong> Instant shutdown system that detects wire breakage or
-                            excessive tension within milliseconds</p>
-                        <p><strong>Overload Protection:</strong> Automatic systems that prevent motor overload,
-                            hydraulic pressure excess, or mechanical strain</p>
-                        <p><strong>Intelligent Monitoring:</strong> Continuous monitoring of critical parameters with
-                            automatic shutdown if unsafe conditions develop</p>
-                        <p><strong>Remote Operation:</strong> Wireless control options allowing operation from a safe
-                            distance during high-risk cutting operations</p>
-                        <p><strong>Safety Certification:</strong> Compliance with international safety standards
-                            including CE, ISO, and regional safety requirements</p>
-                        <p>Beyond physical safety features, our machines include operational safeguards such as
-                            two-stage confirmation for critical operations, password-protected access to advanced
-                            settings, and visual/audible warnings before motion begins. The control system maintains
-                            detailed safety logs and requires acknowledgment of safety protocols during startup.</p>
-                        <p>We also provide comprehensive safety training with each machine, including detailed manuals,
-                            safety demonstration videos, and in-person instruction on proper operating procedures.
-                            Regular safety updates are made available through our service network to address emerging
-                            safety considerations as technology evolves.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h2>What types of projects and industries benefit most from CNC diamond wire saw machine?</h2>
-                    </div>
-                    <div class="faq-answer">
-                        <p>CNC diamond wire saw technology offers exceptional benefits across various industries and
-                            project types where precision cutting of hard materials is required:</p>
-                        <p><strong>Stone Fabrication:</strong></p>
-                        <ul>
-                            <li>Kitchen and bathroom countertop manufacturers requiring complex shapes and cutouts</li>
-                            <li>Custom furniture producers creating stone tables, desks, and decorative elements</li>
-                            <li>Architectural element fabricators producing columns, balusters, and ornamental features
-                            </li>
-                        </ul>
-                        <p><strong>Monument Industry:</strong></p>
-                        <ul>
-                            <li>Memorial and tombstone manufacturers requiring shaped monuments and custom designs</li>
-                            <li>Public art and sculpture studios working with stone and composite materials</li>
-                            <li>Historical restoration specialists recreating period architectural elements</li>
-                        </ul>
-                        <p><strong>Construction and Renovation:</strong></p>
-                        <ul>
-                            <li>Specialty contractors handling precision modification of existing concrete structures
-                            </li>
-                            <li>Historic building restoration requiring minimal vibration cutting techniques</li>
-                            <li>Custom home builders creating bespoke architectural features</li>
-                        </ul>
-                        <p><strong>Industrial Applications:</strong></p>
-                        <ul>
-                            <li>Graphite electrode manufacturers</li>
-                            <li>Advanced ceramics producers requiring precision cutting</li>
-                            <li>Semiconductor and electronics industry cutting specialized materials</li>
-                        </ul>
-                        <p>Projects that particularly benefit from CNC diamond wire saw technology include those
-                            requiring complex curved shapes, thick material cutting, preservation of material integrity,
-                            and applications where minimal material waste is economically important. The technology is
-                            especially valuable for high-value materials where precision cutting directly impacts the
-                            final product value and quality.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h2>What future developments are expected in CNC diamond wire saw technology?</h2>
-                    </div>
-                    <div class="faq-answer">
-                        <p>CNC diamond wire saw technology continues to evolve rapidly, with several key innovations on
-                            the horizon that will further enhance capabilities and performance. DINOSAW remains at the
-                            forefront of these developments:</p>
-                        <ul>
-                            <li><strong>Advanced Material Science:</strong> Next-generation diamond wires with
-                                nano-structured diamond particles and enhanced matrix compositions will increase cutting
-                                speed by up to 30% while extending wire life</li>
-                            <li><strong>Artificial Intelligence Integration:</strong> Machine learning algorithms are
-                                being developed to dynamically optimize cutting parameters in real-time based on
-                                material variations, cutting patterns, and environmental conditions</li>
-                            <li><strong>Automation and Robotics:</strong> Enhanced integration with robotic material
-                                handling systems for fully automated production lines capable of 24/7 operation with
-                                minimal human intervention</li>
-                            <li><strong>Digital Twin Technology:</strong> Creating virtual replicas of physical cutting
-                                operations to simulate and optimize processes before actual cutting begins, reducing
-                                waste and improving outcomes</li>
-                            <li><strong>Ultra-thin Wire Technology:</strong> Development of sub-1mm diamond wires that
-                                reduce kerf width by 30%, maximizing material yield for precious stone applications</li>
-                            <li><strong>Augmented Reality Interfaces:</strong> AR systems that overlay cutting paths,
-                                material information, and operational guidance directly onto the work surface for
-                                enhanced operator precision</li>
-                            <li><strong>Sustainable Innovations:</strong> Zero-waste water systems and energy-neutral
-                                operation through renewable power integration and advanced energy recovery</li>
-                        </ul>
-                        <p>DINOSAW's research and development program actively pursues these technological frontiers
-                            while maintaining our focus on practical, reliable solutions that deliver measurable
-                            benefits to our customers. Our user-centric innovation approach ensures that advanced
-                            technologies are implemented in ways that enhance productivity and quality without
-                            compromising ease of use or maintenance.</p>
-                        <p>As the industry evolves, we anticipate CNC diamond wire saw technology will continue
-                            expanding into new materials and applications, including advanced composites, engineered
-                            building materials, and specialized industrial components where precision cutting of hard
-                            materials is essential.</p>
-                    </div>
-                </div>
+                </template>
             </div>
             <div class="expert-consultation">
                 <button class="expert-btn">
@@ -1067,7 +603,7 @@
                 <div class="certification-cards">
                     <div class="certification-card">
                         <div class="cert-icon">
-                            <!-- <img src="/api/placeholder/127/179" alt="CE Certification" /> -->
+                            <NuxtImg src="https://framerusercontent.com/images/Yiho2Cb5dzAnUvfdxCniH50mk.webp" alt="CE Certification" />
                         </div>
                         <div class="cert-info">
                             <p>CE Certification</p>
@@ -1076,7 +612,7 @@
 
                     <div class="certification-card">
                         <div class="cert-icon">
-                            <!-- <img src="/api/placeholder/274/416" alt="Tech Patents" /> -->
+                            <NuxtImg src="https://framerusercontent.com/images/Ylr0CRgiSfaNfAW4kzkACAp8Sk8.webp" alt="Tech Patents" />
                         </div>
                         <div class="cert-info">
                             <p>100+ Tech Patents</p>
@@ -1085,7 +621,7 @@
 
                     <div class="certification-card">
                         <div class="cert-icon">
-                            <!-- <img src="/api/placeholder/127/179" alt="ISO Certification" /> -->
+                            <NuxtImg src="https://framerusercontent.com/images/XnigRDrO1VBjbKJKRd8TCFSlc.webp" alt="ISO Certification" />
                         </div>
                         <div class="cert-info">
                             <p>ISO 9001:2015</p>
@@ -1109,7 +645,7 @@
                 <div class="statistics-cards">
                     <div class="stat-card">
                         <div class="stat-icon">
-                            <!-- <img src="/api/placeholder/120/120" alt="Countries Served" /> -->
+                            <NuxtImg src="https://framerusercontent.com/images/3WAqTA4czHSx7tLQYQumGPcHF0.webp" alt="Countries Served" />
                         </div>
                         <div class="stat-content">
                             <div class="stat-number">
@@ -1123,7 +659,7 @@
 
                     <div class="stat-card">
                         <div class="stat-icon">
-                            <!-- <img src="/api/placeholder/120/120" alt="Industry Expertise" /> -->
+                            <NuxtImg src="https://framerusercontent.com/images/6APWWoW36QHSZvUE58xYEN6x0o.webp" alt="Industry Expertise" />
                         </div>
                         <div class="stat-content">
                             <div class="stat-number">
@@ -1176,65 +712,63 @@
                     <div class="solutions-track" ref="solutionsCarouselTrack">
                         <!-- Solution Card 1 -->
                         <div class="solution-card">
-                            <div class="solution-image">
-                                <!-- <img src="/api/placeholder/410/230" alt="Stone CNC Engraving Machine" /> -->
-                            </div>
-                            <div class="solution-content">
-                                <div class="solution-title">
-                                    <h3>Stone CNC Engraving Machine</h3>
+                            <NuxtLink :to="'/Products/'+productDetail.link_1" target="_blank">
+                                <div class="solution-image">
+                                    <!-- <img src="/api/placeholder/410/230" alt="Stone CNC Engraving Machine" /> -->
                                 </div>
-                                <div class="solution-description">
-                                    <p>Create the perfect memorial processing workflow. The DINOSAW wire saw efficiently
-                                        cuts tombstone outlines while our compatible engraving machine precisely carves
-                                        text, patterns, and images on the stone surface for complete monument
-                                        production.</p>
+                            
+                                <div class="solution-content">
+                                    <div class="solution-title">
+                                        <h3>{{productDetail.recommended_product_name_a}}</h3>
+                                    </div>
+                                    <div class="solution-description">
+                                        <p>{{ productDetail.recommended_description_a }}</p>
+                                    </div>
+                                    <div class="solution-cta">
+                                        <p><em>{{productDetail.button_text_a  }}</em></p>
+                                    </div>
                                 </div>
-                                <div class="solution-cta">
-                                    <p><em>Enhance your memorial production line →</em></p>
-                                </div>
-                            </div>
+                            </NuxtLink>
                         </div>
 
                         <!-- Solution Card 2 -->
-                        <div class="solution-card">
-                            <div class="solution-image">
-                                <!-- <img src="/api/placeholder/410/230" alt="Automatic Polishing Machine" /> -->
-                            </div>
-                            <div class="solution-content">
-                                <div class="solution-title">
-                                    <h3>Automatic Polishing Machine</h3>
+                       <div class="solution-card">
+                            <NuxtLink :to="'/Products/'+productDetail.link_2" target="_blank">
+                                <div class="solution-image">
+                                    <!-- <img src="/api/placeholder/410/230" alt="Stone CNC Engraving Machine" /> -->
                                 </div>
-                                <div class="solution-description">
-                                    <p>Optimize your stone finishing process. After the DINOSAW wire saw creates precise
-                                        cuts for curb stones and tombstones, our polishing machine delivers perfect
-                                        surface finishing in a single setup, handling materials of varying heights and
-                                        sizes simultaneously.</p>
+                                <div class="solution-content">
+                                    <div class="solution-title">
+                                        <h3>{{productDetail.recommended_product_name_b}}</h3>
+                                    </div>
+                                    <div class="solution-description">
+                                        <p>{{ productDetail.recommended_description_b }}</p>
+                                    </div>
+                                    <div class="solution-cta">
+                                        <p><em>{{productDetail.button_text_b  }}</em></p>
+                                    </div>
                                 </div>
-                                <div class="solution-cta">
-                                    <p><em>Streamline your stone finishing workflow →</em></p>
-                                </div>
-                            </div>
+                            </NuxtLink>
                         </div>
 
                         <!-- Solution Card 3 -->
                         <div class="solution-card">
-                            <div class="solution-image">
-                                <!-- <img src="/api/placeholder/410/230" alt="Quarry Wire Saw Machine" /> -->
-                            </div>
-                            <div class="solution-content">
-                                <div class="solution-title">
-                                    <h3>Quarry Wire Saw Machine</h3>
+                            <NuxtLink :to="'/Products/'+productDetail.link_3" target="_blank">
+                                <div class="solution-image">
+                                    <!-- <img src="/api/placeholder/410/230" alt="Stone CNC Engraving Machine" /> -->
                                 </div>
-                                <div class="solution-description">
-                                    <p>Optimize your quarry mining workflow. The High-Efficiency DINOSAW Quarry Wire Saw
-                                        features a PLC automatic control system, precisely cutting stone materials of
-                                        various hardness at speeds up to 130% of comparable products, ensuring maximum
-                                        production efficiency.</p>
+                                <div class="solution-content">
+                                    <div class="solution-title">
+                                        <h3>{{productDetail.recommended_product_name_c}}</h3>
+                                    </div>
+                                    <div class="solution-description">
+                                        <p>{{ productDetail.recommended_description_c }}</p>
+                                    </div>
+                                    <div class="solution-cta">
+                                        <p><em>{{productDetail.button_text_c  }}</em></p>
+                                    </div>
                                 </div>
-                                <div class="solution-cta">
-                                    <p><em>Improve Your Quarry Mining Efficiency →</em></p>
-                                </div>
-                            </div>
+                            </NuxtLink>
                         </div>
                     </div>
 
@@ -1261,11 +795,10 @@
             <div class="contact-about-container">
                 <div class="section-header">
                     <div class="header-content">
-                        <h2>Ready to upgrade your cutting solution?</h2>
+                        <h2>{{ productDetail.cta_main_title }}</h2>
                     </div>
                     <div class="header-description">
-                        <p>Use DINOSAW Diamond Wire Saw Cutting Machine to transform production efficiency and
-                            precision.</p>
+                        <p>{{ productDetail.cta_subtitle }}</p>
                     </div>
                 </div>
 
@@ -1285,8 +818,8 @@
                                 </button>
                             </div>
                             <div class="card-image">
-                                <!-- <img src="/images/contact-image.jpg" alt="Contact DINOSAW" /> -->
-                                <div class="placeholder-image">Contact Image</div>
+                                <NuxtImg src="https://framerusercontent.com/images/4T3YsD9vEGtvInzGOTD62VoYaI.webp" />
+                                <!-- <div class="placeholder-image">Contact Image</div> -->
                             </div>
                         </div>
                     </div>
@@ -1295,7 +828,7 @@
                         <div class="card-content">
                             <div class="card-text">
                                 <div class="card-title">
-                                    <h3>DINOSAW: Trustworthy Wire Saw Machine Manufacturer</h3>
+                                    <h3>{{ productDetail.title }}</h3>
                                 </div>
                                 <div class="card-description">
                                     <p>Discover how DINOSAW can accelerate your projects. Our tailored product line,
@@ -1304,7 +837,7 @@
                                 </div>
                             </div>
                             <div class="card-image">
-                                <!-- <img src="/images/about-image.jpg" alt="About DINOSAW" /> -->
+                                <NuxtImg src="https://framerusercontent.com/images/rsDnae29rDFkuTTfSnFohbMKFg.webp" />
                                 <button class="about-btn">
                                     <span>About Dinosaw</span>
                                 </button>
@@ -1315,49 +848,6 @@
             </div>
         </div>
 
-        <!-- Related Reading Section -->
-        <div class="related-reading-section">
-            <div class="related-reading-container">
-                <div class="reading-header">
-                    <div class="reading-title">
-                        <h2>Related Reading</h2>
-                    </div>
-                    <div class="reading-subtitle">
-                        <h3>Learn more about Dinosaw Wire Saw</h3>
-                    </div>
-                    <div class="reading-description">
-                        <p>Get specifications, case studies, applications, technical information, and latest
-                            developments for DINOSAW industry machines.</p>
-                    </div>
-                </div>
-
-                <div class="reading-carousel">
-                    <div class="reading-carousel-container"
-                        :style="{ transform: `translateX(-${currentReadingSlide * (100 / visibleReadingSlides)}%)` }">
-                        <div class="reading-item" v-for="(article, index) in readingArticles" :key="index">
-                            <a href="#" class="reading-link">
-                                <div class="reading-card">
-                                    <div class="reading-content">
-                                        <p>{{ article.title }}</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="reading-navigation">
-                        <button class="reading-prev-btn" @click="prevReading"
-                            :class="{ 'hidden': currentReadingSlide === 0 }">
-                            ‹
-                        </button>
-                        <button class="reading-next-btn" @click="nextReading"
-                            :class="{ 'hidden': currentReadingSlide >= readingArticles.length - visibleReadingSlides }">
-                            ›
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <!-- Other Machines or Tools Navigation Section -->
         <div class="other-machines-section">
@@ -1419,8 +909,17 @@ const props = defineProps({
     slug: {
         type: String,
         required: true
+    },
+    topProduct:{
+        type: Array,
+        default: () => []
     }
 });
+
+// 添加 emit 定义
+const emit = defineEmits(['headdata-loaded']);
+
+
 
 // 轮播相关状态
 const carouselTrack = ref(null)
@@ -1457,6 +956,34 @@ const activeNavIndex = ref(0)
 const currentBenefitsSlide = ref(0)
 const benefitsSlideshowTrack = ref(null)
 const benefitsSlideWidth = ref(400) // 响应式slide宽度
+
+const applicableMaterials  = ref(["a_applicable_materials","b_applicable_materials","c_applicable_materials","d_applicable_materials","e_applicable_materials","f_applicable_materials"])
+const faqs = ref({
+    problems: ["problem_a", "problem_b", "problem_c", "problem_d", "problem_e", "problem_f", "problem_g", "problem_h", "problem_i", "problem_j"],
+    answers: ["answer_a", "answer_b", "answer_c", "answer_d", "answer_e", "answer_f", "answer_g", "answer_h", "answer_i", "answer_j"]
+})
+
+const { data: productDetailRes, pending, error } = await useApi('/products?filters[url][$eq]='+props.slug)
+const productDetail = computed(() => {
+    // 检查 productDetailRes.value 是否存在
+    if (productDetailRes.value && productDetailRes.value.data && productDetailRes.value.data.length > 0) {
+        // 返回你需要的具体数据对象
+        console.log('productDetailRes',productDetailRes.value)
+        return productDetailRes.value.data[0];
+    }
+    // console.log('productDetailRes.value:', productDetailRes.value);
+    // 否则返回 null 或一个空对象，方便判断
+    return null; 
+});
+
+// 监听 productDetail 变化并通知父组件
+watch(productDetail, (newData) => {
+    if (newData) {
+        // console.log('Product data loaded in DefaultProductLayout:', newData);
+        // 通知父组件数据已加载
+        emit('headdata-loaded', newData);
+    }
+}, { immediate: true });
 
 const benefitsSlides = ref([
     {
@@ -1767,12 +1294,12 @@ const updateCaseCarouselPosition = () => {
         // 获取实际容器宽度
         const container = casesCarouselTrack.value.parentElement
         const containerWidth = container ? container.offsetWidth : window.innerWidth
-
+        
         // 根据屏幕尺寸确定实际的slide宽度
         let actualSlideWidth = containerWidth
 
         // 对于大屏幕，使用固定宽度以保持设计一致性
-        if (containerWidth > 1200) {
+        if (containerWidth >= 1200) {
             actualSlideWidth = 1200 // 保持与容器宽度一致
         } else if (containerWidth > 768) {
             actualSlideWidth = Math.min(1000, containerWidth - 40) // 减去padding
@@ -1889,12 +1416,12 @@ onMounted(() => {
 onUnmounted(() => {
     window.removeEventListener('resize', updateVisibleSlides)
     window.removeEventListener('scroll', handleScroll)
-    stopAutoPlay()
-    stopBenefitsAutoPlay()
+    // stopAutoPlay()
+    // stopBenefitsAutoPlay()
 })
 
 // 在模板中可以直接使用 props.slug
-console.log('Current slug in DefaultProductLayout:', props.slug);
+// console.log('Current slug in DefaultProductLayout:', props.slug);
 </script>
 
 <style scoped lang="scss">
@@ -2136,6 +1663,9 @@ console.log('Current slug in DefaultProductLayout:', props.slug);
     width: 100%;
     padding: 80px 0;
     background: linear-gradient(-1deg, rgba(255, 255, 255, 1) 0%, rgba(241, 245, 255, 1) 100%);
+    .card-content{
+        flex-direction: column;
+    }
 }
 
 .section-header {
@@ -2226,9 +1756,9 @@ console.log('Current slug in DefaultProductLayout:', props.slug);
 
 .card-content {
     flex: 1;
-    padding: 0 20px 32px;
+    padding: 20px 20px 20px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 8px;
 }
 
@@ -3093,7 +2623,6 @@ console.log('Current slug in DefaultProductLayout:', props.slug);
     width: 100%;
     height: auto;
     border-radius: 12px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
 /* Carousel Controls */
@@ -4298,7 +3827,7 @@ console.log('Current slug in DefaultProductLayout:', props.slug);
     background: #FFFFFF;
     border-radius: 32px;
     padding: 24px;
-    width: 300px;
+    width: 360px;
     min-height: 200px;
     // box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     transition: all 0.3s ease;
@@ -4337,6 +3866,7 @@ console.log('Current slug in DefaultProductLayout:', props.slug);
         font-weight: 700;
         font-size: 24px;
         line-height: 1.17em;
+        min-height:58px;
         color: #333333;
         margin: 0;
         text-align: center;
@@ -5330,22 +4860,28 @@ console.log('Current slug in DefaultProductLayout:', props.slug);
     border-radius: 24px;
     padding: 20px;
 }
+.contact-card{
+    padding-top: 35px;
+}
 
 .about-card {
     background: #EFEBFF;
 }
 
 .card-content {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    gap: 24px;
-    height: 167px;
+    // display: flex;
+    // align-items: center;
+    // flex-direction: row;
+    // gap: 24px;
+    // height: 167px;
+    img{
+        width:100%;
+    }
 }
 
 .about-card .card-content {
-    gap: 8px;
-    height: 156px;
+    // gap: 8px;
+    // height: 156px;
 }
 
 .card-text {
@@ -5359,7 +4895,7 @@ console.log('Current slug in DefaultProductLayout:', props.slug);
     font-family: Inter, sans-serif;
     font-weight: 700;
     font-size: 20px;
-    line-height: 1;
+    line-height: 1.4;
     color: #333333;
     margin: 0;
 }
@@ -5406,6 +4942,12 @@ console.log('Current slug in DefaultProductLayout:', props.slug);
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
+.about-btn{
+    position:absolute;
+    bottom:10px;
+    left:50%;
+    transform: translate(-50%, 0);
+}
 
 .card-image {
     width: 207px;
@@ -5428,8 +4970,8 @@ console.log('Current slug in DefaultProductLayout:', props.slug);
     object-fit: cover;
 }
 
-.about-card .card-image img {
-    height: 92px;
+.about-card .card-image {
+    margin-top:20px;
 }
 
 .about-btn {
@@ -5637,9 +5179,9 @@ console.log('Current slug in DefaultProductLayout:', props.slug);
     }
 
     .card-content {
-        flex-direction: column;
+        // flex-direction: column;
         height: auto;
-        gap: 16px;
+        // gap: 16px;
     }
 
     .card-image {
@@ -5750,13 +5292,12 @@ console.log('Current slug in DefaultProductLayout:', props.slug);
 
 .other-machines-subtitle {
     font-family: Inter, sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 14px;
     line-height: 1em;
     text-align: left;
     color: #000000;
     margin: 0;
-    width: 395px;
     height: 14px;
     display: flex;
     align-items: center;
@@ -5894,13 +5435,13 @@ console.log('Current slug in DefaultProductLayout:', props.slug);
 
     .other-machines-header {
         width: 100%;
-        max-width: 1200px;
+        max-width: 1137px;
         padding-left: 0;
     }
 
     .machines-navigation {
         width: 100%;
-        max-width: 1000px;
+        max-width: 1137px;
     }
 }
 

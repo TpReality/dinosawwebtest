@@ -1,6 +1,6 @@
 <template>
     <div class="main">
-        <DinosawHeader />
+        <DinosawHeader :menuItems="menuItems" :contentDetail="contentDetail" />
         <div class="projects-banner">
             <div class="banner-background">
                 <div class="banner-image">
@@ -16,7 +16,7 @@
                             <div class="breadcrumb-link">
                                 <div class="breadcrumb-text">
                                     <div class="text-container">
-                                        <span class="breadcrumb-home">Home</span>
+                                        <span class="breadcrumb-home"><NuxtLink to="/">{{faqs.home_text}}</NuxtLink></span>
                                     </div>
                                 </div>
                                 <div class="breadcrumb-text">
@@ -30,12 +30,19 @@
                                     <div class="dropdown-link">
                                         <div class="dropdown-container">
                                             <div class="dropdown-text-container">
-                                                <span class="breadcrumb-products">Support</span>
+                                                <span class="breadcrumb-products"><NuxtLink to="/support">{{faqs.products_btn_text}}</NuxtLink></span>
                                             </div>
                                         </div>
                                         <div class="dropdown-icon-container">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" focusable="false" color="rgb(0, 0, 0)" style="user-select: none; width:16px; height:16px; display: inline-block; fill: rgb(0, 0, 0); flex-shrink: 0; cursor: auto;"><g color="rgb(0, 0, 0)" weight="bold"><polyline points="208 96 128 176 48 96" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></g></svg>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="breadcrumb-outer">
+                                    <div class="bg">
+                                        <p v-for="(menu, i) in curMenuItems[0].children" :key="i">
+                                            <a :href="'/support'+menu.link" target="_blank" >{{ menu.text }}</a>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -47,7 +54,7 @@
                                 </div>
                                 <div class="breadcrumb-text">
                                     <div class="text-container">
-                                        <span class="breadcrumb-home">Faqs</span>
+                                        <span class="breadcrumb-home">{{ faqs.category_btn_text }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -61,22 +68,19 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="none"><path d="M 23.245 26.281 L 15.27 26.281 C 12.823 26.281 10.875 24.288 10.875 21.886 L 10.875 20.572 C 10.875 18.125 12.869 16.177 15.27 16.177 L 23.245 16.177 C 25.692 16.177 27.641 18.17 27.641 20.572 L 27.641 21.886 C 27.641 24.288 25.647 26.281 23.245 26.281 Z" fill="rgb(242, 203, 104)"></path><path d="M 21.886 24.423 L 6.208 24.423 C 4.033 24.423 2.311 22.656 2.311 20.527 L 2.311 8.02 C 2.311 5.845 4.078 4.123 6.208 4.123 L 21.841 4.123 C 24.016 4.123 25.738 5.891 25.738 8.02 L 25.738 20.481 C 25.783 22.656 24.016 24.423 21.886 24.423 Z M 6.208 5.392 C 4.758 5.392 3.58 6.57 3.58 8.02 L 3.58 20.481 C 3.58 21.931 4.758 23.109 6.208 23.109 L 21.841 23.109 C 23.291 23.109 24.469 21.931 24.469 20.481 L 24.469 8.02 C 24.469 6.57 23.291 5.392 21.841 5.392 Z" fill="rgb(158, 116, 11)"></path><path d="M 8.383 7.431 C 8.02 7.431 7.748 7.159 7.748 6.797 L 7.748 2.266 C 7.748 1.903 8.02 1.631 8.383 1.631 C 8.745 1.631 9.017 1.903 9.017 2.266 L 9.017 6.797 C 9.017 7.159 8.745 7.431 8.383 7.431 Z M 19.258 7.431 C 18.895 7.431 18.623 7.159 18.623 6.797 L 18.623 2.266 C 18.623 1.903 18.895 1.631 19.258 1.631 C 19.62 1.631 19.892 1.903 19.892 2.266 L 19.892 6.797 C 19.892 7.159 19.62 7.431 19.258 7.431 Z M 24.922 10.83 L 3.172 10.83 C 2.809 10.83 2.538 10.558 2.538 10.195 C 2.538 9.833 2.809 9.561 3.172 9.561 L 24.922 9.561 C 25.284 9.561 25.556 9.833 25.556 10.195 C 25.556 10.558 25.284 10.83 24.922 10.83 Z M 9.561 14.908 L 5.211 14.908 C 4.848 14.908 4.577 14.636 4.577 14.273 C 4.577 13.911 4.848 13.639 5.211 13.639 L 9.561 13.639 C 9.923 13.639 10.195 13.911 10.195 14.273 C 10.195 14.636 9.878 14.908 9.561 14.908 Z M 16.086 14.908 L 11.781 14.908 C 11.419 14.908 11.147 14.636 11.147 14.273 C 11.147 13.911 11.419 13.639 11.781 13.639 L 16.131 13.639 C 16.494 13.639 16.766 13.911 16.766 14.273 C 16.766 14.636 16.448 14.908 16.086 14.908 Z M 22.656 14.908 L 18.306 14.908 C 17.944 14.908 17.672 14.636 17.672 14.273 C 17.672 13.911 17.944 13.639 18.306 13.639 L 22.656 13.639 C 23.019 13.639 23.291 13.911 23.291 14.273 C 23.291 14.636 23.019 14.908 22.656 14.908 Z M 9.561 19.439 L 5.211 19.439 C 4.848 19.439 4.577 19.167 4.577 18.805 C 4.577 18.442 4.848 18.17 5.211 18.17 L 9.561 18.17 C 9.923 18.17 10.195 18.442 10.195 18.805 C 10.195 19.167 9.878 19.439 9.561 19.439 Z M 16.086 19.439 L 11.781 19.439 C 11.419 19.439 11.147 19.167 11.147 18.805 C 11.147 18.442 11.419 18.17 11.781 18.17 L 16.131 18.17 C 16.494 18.17 16.766 18.442 16.766 18.805 C 16.766 19.167 16.448 19.439 16.086 19.439 Z" fill="rgb(158, 116, 11)"></path></svg>
                                 </div>
                                 <div class="badge-text">
-                                    <span class="badge-title">Last Updated:</span>
-                                    <div class="badge-title">2025-09-05</div>
+                                    <span class="badge-title">{{ faqs.last_update_date_text }}</span>
+                                    <div class="badge-title">{{ faqs.last_update_date_value }}</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="title-section">
                         <h1 class="main-title">
-                            DINOSAW FAQs : All about Industry 
-Machines & Diamond Tools
+                            {{ faqs.hero_main_title }}
                         </h1>
                     </div>
                     <div class="description-section">
-                        <p class="description-text">
-                           Welcome to our FAQs page, where you'll find answers to common questions about the DINOSAW, our industry machines, and diamond tools. From selecting the right equipment to after-sales support, this page provides a comprehensive guide to help you navigate the entire process and quickly find the information you need.
-                        </p>
+                        <p class="description-text" v-html="faqs.hero_description"></p>
                     </div>
                 </div>
             </div>
@@ -88,178 +92,299 @@ Machines & Diamond Tools
                 <div class="content-wrapper-main">
                     <div class="header-section">
                         <div class="title-container">
-                            <h2 class="section-main-title">Is DINOSAW the trusted choice for Industrial Machinery?</h2>
+                            <h2 class="section-main-title">{{ faqs.trusted_choice_for_industrial_machinery_title }}</h2>
                         </div>
                     </div>
                     
                     <div class="content-body">
                         <div class="text-content">
-                            <div class="paragraph-group">
-                                <p class="content-paragraph">
-                                    Dinosaw is the flagship brand of Quanzhou Dinosaw Machinery Technology Co., Ltd., a professional manufacturer specializing in industrial machinery for cutting, grinding, polishing, and drilling.
-                                </p>
-                                
-                                <p class="content-paragraph">
-                                    Founded in 2018, Dinosaw has rapidly established itself as a leader in providing innovative, efficient, and versatile solutions for diverse industries worldwide.
-                                </p>
-                                
-                                <p class="content-paragraph">
-                                    From processing stone, metal, glass, plastics, composites, and more, Dinosaw's machines are designed to handle a wide range of materials with precision and reliability.
-                                </p>
-                                
-                                <p class="content-paragraph">
-                                    With operations in Europe, North America, Russia, India, the Middle East, Africa, Oceania, and beyond, Dinosaw is trusted by businesses around the globe for its exceptional quality and service.
-                                </p>
-                                
-                                <h3 class="section-subtitle">A Global Leader with Certified Excellence</h3>
-                                
-                                <p class="content-paragraph">
-                                    Dinosaw is committed to upholding international standards, ensuring that all products deliver outstanding performance and reliability:
-                                </p>
-                                
-                                <p class="content-paragraph">
-                                    <strong>Certified Quality:</strong> Products meet ISO, CE, and CCC standards, reflecting a strong commitment to safety and dependability.
-                                </p>
-                                
-                                <p class="content-paragraph">
-                                    <strong>Global Presence:</strong> Trusted by clients in over 100 countries, including key markets in Russia, India, Africa, Europe, and Southeast Asia.
-                                </p>
-                                
-                                <p class="content-paragraph">
-                                    <strong>Renowned Exhibitions:</strong> Regularly showcasing innovations at prestigious events such as the Marmomac Stone Fair, Coverings, the Nan'an Shuitou International Stone Fair, and the Xiamen Stone Fair.
-                                </p>
-                                
-                                <h3 class="section-subtitle">Simplified Operation with Intelligent CNC Systems</h3>
-                                
-                                <p class="content-paragraph">
-                                    Dinosaw's proprietary CNC system redefines ease of operation, making advanced machining accessible to users without programming expertise. Key advantages include:
-                                </p>
-                                
-                                <p class="content-paragraph">
-                                    <strong>Touchscreen Interface:</strong> User-friendly design with clear functions and a clean layout.
-                                </p>
-                                
-                                <p class="content-paragraph">
-                                    <strong>No G-Code Required:</strong> Simplifies operations for those without coding knowledge, reducing the learning curve.
-                                </p>
-                                
-                                <p class="content-paragraph">
-                                    <strong>Innovative Features:</strong> Tailored for specific machines with functionalities like continuous sweeping and automatic tool compensation to enhance productivity and precision.
-                                </p>
-                                
-                                <p class="content-paragraph">
-                                    These intelligent systems save time, reduce errors, and optimize performance, enabling operators to focus on results rather than technical complexities.
-                                </p>
-                                
-                                <h3 class="section-subtitle">Modular Design and Customization</h3>
-                                
-                                <p class="content-paragraph">
-                                    Dinosaw's machinery is built with flexibility in mind, offering:
-                                </p>
-                                
-                                <p class="content-paragraph">
-                                    <strong>Modular Design:</strong> Machines can be configured for diverse applications, including cutting, polishing, and profiling.
-                                </p>
-                                
-                                <p class="content-paragraph">
-                                    <strong>Customizable Features:</strong> Tailored options for interfaces, electrical systems, dimensions, and branding ensure seamless integration into unique production processes.
-                                </p>
-                                
-                                <p class="content-paragraph">
-                                    <strong>Versatile Material Handling:</strong> Whether processing stone, metals, ceramics, or composite materials, Dinosaw's solutions adapt to varied industrial demands.
-                                </p>
-                                
-                                <p class="content-paragraph">
-                                    This adaptability makes Dinosaw an ideal partner for businesses seeking personalized solutions to meet specific operational goals.
-                                </p>
-                                
-                                <h3 class="section-subtitle">Customer-Driven Innovation</h3>
-                                
-                                <p class="content-paragraph">
-                                    At Dinosaw, innovation is powered by feedback from our global clientele. By closely collaborating with customers, we:
-                                </p>
-                                
-                                <p class="content-paragraph">
-                                    <strong>Enhance Efficiency:</strong> Continuously improve machine designs to optimize speed, accuracy, and reliability.
-                                </p>
-                                
-                                <p class="content-paragraph">
-                                    <strong>Respond Quickly:</strong> Regularly update products to meet evolving market demands and technological advancements.
-                                </p>
-                                
-                                <p class="content-paragraph">
-                                    <strong>Focus on Value:</strong> Deliver machines that lower production costs and reduce material waste while maintaining high output quality.
-                                </p>
-                                
-                                <h3 class="section-subtitle">Industry Expertise and Reliable Support</h3>
-                                
-                                <p class="content-paragraph">
-                                    With a team of experienced engineers and a commitment to excellence, Dinosaw offers:
-                                </p>
-                                
-                                <p class="content-paragraph">
-                                    <strong>Comprehensive Services:</strong> Installation support, training, and ongoing maintenance to ensure long-term performance.
-                                </p>
-                                
-                                <p class="content-paragraph">
-                                    <strong>Global Network:</strong> Distributors and service points across multiple regions to provide fast, localized support.
-                                </p>
-                                
-                                <p class="content-paragraph">
-                                    <strong>Proven Solutions:</strong> Decades of industry knowledge applied to help clients achieve their production goals efficiently.
-                                </p>
-                                
-                                <h3 class="section-subtitle">Why Dinosaw Stands Out in Industrial Machinery</h3>
-                                
-                                <p class="content-paragraph">
-                                    Dinosaw excels by combining technical expertise, innovative designs, and a customer-centric approach.
-                                </p>
-                                
-                                <p class="content-paragraph">
-                                    Here's why businesses choose Dinosaw:
-                                </p>
-                                
-                                <p class="content-paragraph">
-                                    <strong>Versatility:</strong> Machines capable of processing a wide variety of materials, from stone and metal to composites and ceramics.
-                                </p>
-                                
-                                <p class="content-paragraph">
-                                    <strong>Ease of Use:</strong> Intelligent CNC systems with simple interfaces make advanced machining accessible to all operators.
-                                </p>
-                                
-                                <p class="content-paragraph">
-                                    <strong>Custom Solutions:</strong> Modular and customizable designs tailored to specific client requirements.
-                                </p>
-                                
-                                <p class="content-paragraph">
-                                    <strong>Global Reach:</strong> Trusted by clients in over 100 countries, with a strong presence in key regions like Russia, India, and Africa.
-                                </p>
-                                
-                                <p class="content-paragraph">
-                                    <strong>Sustainability:</strong> Machines designed for efficiency, reducing energy consumption and material waste.
-                                </p>
-                                
-                                <p class="content-paragraph">
-                                    Whether you need a robust solution for high-volume production or specialized equipment for unique applications, Dinosaw delivers innovative and reliable machinery to drive your business forward.
-                                </p>
-                                
-                                <p class="content-paragraph">
-                                    <a href="/contact" class="contact-link">Contact us</a> today to discover how Dinosaw can revolutionize your production process!
-                                </p>
-                            </div>
+                            <div class="paragraph-group" v-html="faqs.trusted_choice_for_industrial_machinery_description"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-container">
+                 <div class="content-wrapper-main" v-if="faqs.which_industries_are_dinosaw_machines_title">
+                    <div class="header-section">
+                        <div class="title-container">
+                            <h2 class="section-main-title">{{ faqs.which_industries_are_dinosaw_machines_title }}</h2>
+                        </div>
+                    </div>
+                    
+                    <div class="content-body">
+                        <div class="text-content">
+                            <div class="paragraph-group" v-html="faqs.which_industries_are_dinosaw_machines_description"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <div class="content-container">
+                 <div class="content-wrapper-main" v-if="faqs.how_to_buy_the_Best_industria_title">
+                    <div class="header-section">
+                        <div class="title-container">
+                            <h2 class="section-main-title">{{ faqs.how_to_buy_the_Best_industria_title }}</h2>
+                        </div>
+                    </div>
+                    
+                    <div class="content-body">
+                        <div class="text-content">
+                            <div class="paragraph-group" v-html="faqs.how_to_buy_the_Best_industria_description"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <div class="content-container">
+                 <div class="content-wrapper-main" v-if="faqs.does_dinosaw_provide_title">
+                    <div class="header-section">
+                        <div class="title-container">
+                            <h2 class="section-main-title">{{ faqs.does_dinosaw_provide_title }}</h2>
+                        </div>
+                    </div>
+                    
+                    <div class="content-body">
+                        <div class="text-content">
+                            <div class="paragraph-group" v-html="faqs.does_dinosaw_provide_description"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-container">
+                 <div class="content-wrapper-main" v-if="faqs.is_there_service_center_my_area_title">
+                    <div class="header-section">
+                        <div class="title-container">
+                            <h2 class="section-main-title">{{ faqs.is_there_service_center_my_area_title }}</h2>
+                        </div>
+                    </div>
+                    
+                    <div class="content-body">
+                        <div class="text-content">
+                            <div class="paragraph-group" v-html="faqs.is_there_service_center_my_area_description"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-container">
+                 <div class="content-wrapper-main" v-if="faqs.what_payment_methods_does_title">
+                    <div class="header-section">
+                        <div class="title-container">
+                            <h2 class="section-main-title">{{ faqs.what_payment_methods_does_title }}</h2>
+                        </div>
+                    </div>
+                    
+                    <div class="content-body">
+                        <div class="text-content">
+                            <div class="paragraph-group" v-html="faqs.what_payment_methods_does_description"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-container">
+                 <div class="content-wrapper-main" v-if="faqs.what_makesServices_right_for_me_title">
+                    <div class="header-section">
+                        <div class="title-container">
+                            <h2 class="section-main-title">{{ faqs.what_makesServices_right_for_me_title }}</h2>
+                        </div>
+                    </div>
+                    
+                    <div class="content-body">
+                        <div class="text-content">
+                            <div class="paragraph-group" v-html="faqs.what_makesServices_right_for_me_description"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <div class="content-container">
+                 <div class="content-wrapper-main" v-if="faqs.how_long_will_it_take_Industry_machine_title">
+                    <div class="header-section">
+                        <div class="title-container">
+                            <h2 class="section-main-title">{{ faqs.how_long_will_it_take_Industry_machine_title }}</h2>
+                        </div>
+                    </div>
+                    
+                    <div class="content-body">
+                        <div class="text-content">
+                            <div class="paragraph-group" v-html="faqs.how_long_will_it_take_Industry_machine_description"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <div class="content-container">
+                 <div class="content-wrapper-main" v-if="faqs.how_to_ship_industry_machines_title">
+                    <div class="header-section">
+                        <div class="title-container">
+                            <h2 class="section-main-title">{{ faqs.how_to_ship_industry_machines_title }}</h2>
+                        </div>
+                    </div>
+                    
+                    <div class="content-body">
+                        <div class="text-content">
+                            <div class="paragraph-group" v-html="faqs.how_to_ship_industry_machines_description"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-container">
+                 <div class="content-wrapper-main" v-if="faqs.are_dinosaw_industry_to_operate_title">
+                    <div class="header-section">
+                        <div class="title-container">
+                            <h2 class="section-main-title">{{ faqs.are_dinosaw_industry_to_operate_title }}</h2>
+                        </div>
+                    </div>
+                    
+                    <div class="content-body">
+                        <div class="text-content">
+                            <div class="paragraph-group" v-html="faqs.are_dinosaw_industry_to_operate_description"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-container">
+                 <div class="content-wrapper-main" v-if="faqs.how_much_does_an_industry_machines_title">
+                    <div class="header-section">
+                        <div class="title-container">
+                            <h2 class="section-main-title">{{ faqs.how_much_does_an_industry_machines_title }}</h2>
+                        </div>
+                    </div>
+                    
+                    <div class="content-body">
+                        <div class="text-content">
+                            <div class="paragraph-group" v-html="faqs.how_much_does_an_industry_machines_description"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-container">
+                 <div class="content-wrapper-main" v-if="faqs.does_dinosaw_offer_warranty_industry_machines_title">
+                    <div class="header-section">
+                        <div class="title-container">
+                            <h2 class="section-main-title">{{ faqs.does_dinosaw_offer_warranty_industry_machines_title }}</h2>
+                        </div>
+                    </div>
+                    
+                    <div class="content-body">
+                        <div class="text-content">
+                            <div class="paragraph-group" v-html="faqs.does_dinosaw_offer_warranty_industry_machines_description"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-container">
+                 <div class="content-wrapper-main" v-if="faqs.are_dinosaw_machines_suitable_for_the_materials_title">
+                    <div class="header-section">
+                        <div class="title-container">
+                            <h2 class="section-main-title">{{ faqs.are_dinosaw_machines_suitable_for_the_materials_title }}</h2>
+                        </div>
+                    </div>
+                    
+                    <div class="content-body">
+                        <div class="text-content">
+                            <div class="paragraph-group" v-html="faqs.are_dinosaw_machines_suitable_for_the_materials_description"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-container">
+                 <div class="content-wrapper-main" v-if="faqs.does_dinosaw_provide_oem_or_odm_services_title">
+                    <div class="header-section">
+                        <div class="title-container">
+                            <h2 class="section-main-title">{{ faqs.does_dinosaw_provide_oem_or_odm_services_title }}</h2>
+                        </div>
+                    </div>
+                    
+                    <div class="content-body">
+                        <div class="text-content">
+                            <div class="paragraph-group" v-html="faqs.does_dinosaw_provide_oem_or_odm_services_description"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-container">
+                 <div class="content-wrapper-main" v-if="faqs.does_dinosaw_also_sell_machine_and_diamond_tools_title">
+                    <div class="header-section">
+                        <div class="title-container">
+                            <h2 class="section-main-title">{{ faqs.does_dinosaw_also_sell_machine_and_diamond_tools_title }}</h2>
+                        </div>
+                    </div>
+                    
+                    <div class="content-body">
+                        <div class="text-content">
+                            <div class="paragraph-group" v-html="faqs.does_dinosaw_also_sell_machine_and_diamond_tools_description"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-container">
+                 <div class="content-wrapper-main" v-if="faqs.does_dinosaw_offer_training_for_machine_peration_title">
+                    <div class="header-section">
+                        <div class="title-container">
+                            <h2 class="section-main-title">{{ faqs.does_dinosaw_offer_training_for_machine_peration_title }}</h2>
+                        </div>
+                    </div>
+                    
+                    <div class="content-body">
+                        <div class="text-content">
+                            <div class="paragraph-group" v-html="faqs.does_dinosaw_offer_training_for_machine_peration_description"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-container">
+                 <div class="content-wrapper-main" v-if="faqs.does_dinosaw_provide_for_industry_machines_title">
+                    <div class="header-section">
+                        <div class="title-container">
+                            <h2 class="section-main-title">{{ faqs.does_dinosaw_provide_for_industry_machines_title }}</h2>
+                        </div>
+                    </div>
+                    
+                    <div class="content-body">
+                        <div class="text-content">
+                            <div class="paragraph-group" v-html="faqs.does_dinosaw_provide_for_industry_machines_description"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <ContactType />
-        <WhatsApp />
-        <DinosawFooter />
+       
+
+        <ContactType :contentDetail="contentDetail" />
+        <WhatsApp :contentDetail="contentDetail" />
+        <DinosawFooter :menuItems="menuItems" :contentDetail="contentDetail" />
     </div>
 </template>
 
 <script setup>
+
+// 使用菜单数据composable
+const { menuItems, initializeMenuData } = useMenuData()
+const curMenuItems = computed(() => menuItems.value.filter(item => item.title === 'Support'))
+// 初始化菜单数据
+await initializeMenuData()
+
+// 使用全局 contentDetail
+const { contentDetail, isLoaded } = useContentDetail()
+
+// 使用 useFetch 获取数据
+const { data: faqsRes, pending, error } = await useApi('/product-categories?filters[category_value][$eq]=faqs&populate=all')
+const faqs = ref({})
+watch(faqsRes, (newPosts) => {
+    if (newPosts) {
+        console.log(newPosts)
+        let data = newPosts.data[0].faq
+        faqs.value = data
+        useHead({
+            title: data.meta_title,
+            meta: [
+                {
+                    name: 'description',
+                    content: data.meta_description
+                }
+            ],
+        })
+    }
+
+}, { immediate: true })
+
 </script>
 
 <style scoped lang="scss">
@@ -487,7 +612,9 @@ Machines & Diamond Tools
     box-sizing: border-box;
     border:1px solid rgba(136, 136, 136, 0.1);
 }
-
+.content-container+.content-container{
+    margin-top:30px;
+}
 .content-wrapper-main {
     width: 100%;
     padding: 10px 0;

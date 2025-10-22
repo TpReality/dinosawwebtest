@@ -20,12 +20,12 @@
                 <div class="right flex">
                     <div class="work-time flex">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" data-slot="icon" color="rgb(179, 179, 179)" style="width: 24px; height: 24px;"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z" clip-rule="evenodd"></path></svg>
-                      <p>Open Hours:8:30am-20:30pm</p>
+                      <p>{{ props.contentDetail.open_hours_text }}:8:30am-20:30pm</p>
                     </div>
                     <div class="whatsapp flex">
                       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" style="width: 24px; height: 24px;"><path d="M 19.92 1.2 L 4.08 1.2 C 2.489 1.2 1.2 2.489 1.2 4.08 L 1.2 19.92 C 1.2 21.511 2.489 22.8 4.08 22.8 L 19.92 22.8 C 21.511 22.8 22.8 21.511 22.8 19.92 L 22.8 4.08 C 22.8 2.489 21.511 1.2 19.92 1.2 Z M 12 19.2 L 11.998 19.2 C 10.706 19.2 9.438 18.853 8.333 18.197 L 8.07 18.041 L 5.345 18.755 L 6.072 16.1 L 5.901 15.827 C 5.18 14.68 4.798 13.352 4.8 11.997 C 4.802 8.028 8.032 4.8 12.003 4.8 C 13.926 4.8 15.733 5.55 17.093 6.91 C 18.453 8.271 19.2 10.079 19.2 12.002 C 19.199 15.972 15.969 19.2 12 19.2 Z" fill="rgb(179, 179, 179)"></path><path d="M 15.949 13.81 C 15.733 13.701 14.669 13.178 14.47 13.106 C 14.272 13.034 14.127 12.998 13.983 13.214 C 13.839 13.431 13.424 13.918 13.297 14.062 C 13.171 14.207 13.045 14.225 12.828 14.117 C 12.612 14.008 11.915 13.78 11.088 13.043 C 10.445 12.469 10.01 11.761 9.884 11.544 C 9.757 11.328 9.87 11.211 9.979 11.102 C 10.076 11.005 10.195 10.85 10.304 10.723 C 10.412 10.597 10.448 10.506 10.52 10.362 C 10.592 10.218 10.556 10.091 10.502 9.983 C 10.448 9.875 10.028 8.804 9.835 8.376 C 9.673 8.016 9.502 8.009 9.348 8.002 C 9.221 7.997 9.077 7.997 8.933 7.997 C 8.789 7.997 8.554 8.051 8.356 8.268 C 8.157 8.485 7.598 9.008 7.598 10.073 C 7.598 11.138 8.373 12.167 8.482 12.311 C 8.59 12.456 9.979 14.711 12.179 15.578 C 14.007 16.299 14.379 16.156 14.776 16.12 C 15.174 16.084 16.057 15.597 16.237 15.091 C 16.418 14.586 16.418 14.153 16.364 14.063 C 16.31 13.972 16.165 13.918 15.949 13.81 Z" fill="rgb(185, 185, 185)"></path></svg>
                       <p>
-                        <span class="dinosaw-text">Whatsapp: </span>
+                        <span class="dinosaw-text">{{ props.contentDetail.whats_app_title }}: </span>
                         <a class="c-blue" href="https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information" target="_blank">+86 198-5901-3937</a>
                       </p>
                     </div>
@@ -38,13 +38,13 @@
                   <div class="mobile-left flex">
                     <div class="mobile-info-section flex">
                       <div class="mobile-hours">
-                        <p class="mobile-label">Open Hours:</p>
+                        <p class="mobile-label">{{ props.contentDetail.open_hours_text }}:</p>
                         <p class="mobile-value">8:30am-20:30pm</p>
                       </div>
                     </div>
                   </div>
                   <div class="mobile-right">
-                      <span class="dinosaw-text f12">Whatsapp: </span>
+                      <span class="dinosaw-text f12">{{ props.contentDetail.whats_app_title }}: </span>
                       <div><a class="c-blue" href="https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information" target="_blank">+86 198-5901-3937</a></div>
                   </div>
                 </div>
@@ -100,187 +100,190 @@
                       </svg>
                     </div>
                     <div v-if="item.children" class="submenu" :class="{ 'submenu-open': activeSubMenus[index] }">
-                      <p v-for="(child, childIndex) in item.children" :key="childIndex">
-                        <a :href="child.link" target="_blank">{{ child.text }}</a>
-                      </p>
+                      <template v-for="(child, childIndex) in item.children" :key="childIndex">
+                        <p v-if="child.isShow">
+                          <a :href="item.link+child.link" target="_blank">{{ child.text }}</a>
+                        </p>
+                      </template>
                     </div>
                   </div>
                 </div>
                 <div class="dinosaw-menu flex">
-                    <div class="menu-item">
-                      <div class="flex">
-                          <span><a href="/Products" target="_blank">Products</a></span>
+                    <div class="menu-item" v-for="(item, index) in menuItems" :key="index">
+                      <!-- 有子菜单的项目 -->
+                      <div v-if="item.children" class="flex">
+                          <span><a :href="item.link" target="_blank">{{ item.title }}</a></span>
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" focusable="false" color="var(--token-e0ce79e8-f023-49ad-9edf-bfcca13d71cf, rgb(49, 47, 47))" style="user-select: none; width: 16px; height: 16px; display: inline-block; fill: var(--token-e0ce79e8-f023-49ad-9edf-bfcca13d71cf, rgb(49, 47, 47)); flex-shrink: 0; cursor: auto;"><g color="var(--token-e0ce79e8-f023-49ad-9edf-bfcca13d71cf, rgb(49, 47, 47))" weight="bold"><polyline points="208 96 128 176 48 96" fill="none" stroke="var(--token-e0ce79e8-f023-49ad-9edf-bfcca13d71cf, rgb(49, 47, 47))" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></g></svg>
                       </div>
-                      <div class="menu-outer">
-                          <p>
-                              <a href="/Products/wire-saw-machine" target="_blank">Wire Saw Machine</a>
-                          </p>
-                          <p>
-                              <a href="/Products/circle-saw-machine" target="_blank">Circle Saw Machine</a>
-                          </p>
-                          <p>
-                              <a href="/Products/drilling-and-engraving-machine" target="_blank">Drilling and Engraving Machine</a>
-                          </p>
-                          <p>
-                              <a href="/Products/grinding-and-polishing-machine" target="_blank">Grinding and Polishing Machine</a>
-                          </p>
-                          <p>
-                              <a href="/Products/mining-and-quarry-machine" target="_blank">Mining and Quarry Machine</a>
-                          </p>
-                          <p>
-                              <a href="/Products/profiling-machine" target="_blank">Profiling Machine</a>
-                          </p>
-                          <p>
-                              <a href="/Products/other-machine" target="_blank">Other Machine</a>
-                          </p>
-                          <p>
-                              <a href="/Products/diamond-tools" target="_blank">Diamond Tools</a>
-                          </p>
+                      <!-- 子菜单下拉内容 -->
+                      <div v-if="item.children" class="menu-outer">
+                        
+                          <template v-for="(child, childIndex) in item.children" :key="childIndex">
+                            <p v-if="child.isShow">
+                                <a :href="item.link+child.link" target="_blank">{{ child.text }}</a>
+                            </p>
+                          </template>
                       </div>
-                    </div>
-                    <div class="menu-item">
-                      <div class="flex">
-                          <span><a href="/projects" target="_blank">Projects</a></span>
-                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" focusable="false" color="var(--token-e0ce79e8-f023-49ad-9edf-bfcca13d71cf, rgb(49, 47, 47))" style="user-select: none; width: 16px; height: 16px; display: inline-block; fill: var(--token-e0ce79e8-f023-49ad-9edf-bfcca13d71cf, rgb(49, 47, 47)); flex-shrink: 0; cursor: auto;"><g color="var(--token-e0ce79e8-f023-49ad-9edf-bfcca13d71cf, rgb(49, 47, 47))" weight="bold"><polyline points="208 96 128 176 48 96" fill="none" stroke="var(--token-e0ce79e8-f023-49ad-9edf-bfcca13d71cf, rgb(49, 47, 47))" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></g></svg>
-                      </div>
-                      <div class="menu-outer">
-                          <p>
-                              <a href="/projects/marble-projects" target="_blank">Marble Projects</a>
-                          </p>
-                          <p>
-                              <a href="/projects/granite-projects" target="_blank">Granite Projects</a>
-                          </p>
-                          <p>
-                              <a href="/projects/other-hard-materials-projects" target="_blank">Other Hard Materials Projects</a>
-                          </p>
-                      </div>
-                    </div>
-                    <div class="menu-item">
-                      <div class="flex">
-                          <span><a href="/support" target="_blank">Support</a></span>
-                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" focusable="false" color="var(--token-e0ce79e8-f023-49ad-9edf-bfcca13d71cf, rgb(49, 47, 47))" style="user-select: none; width: 16px; height: 16px; display: inline-block; fill: var(--token-e0ce79e8-f023-49ad-9edf-bfcca13d71cf, rgb(49, 47, 47)); flex-shrink: 0; cursor: auto;"><g color="var(--token-e0ce79e8-f023-49ad-9edf-bfcca13d71cf, rgb(49, 47, 47))" weight="bold"><polyline points="208 96 128 176 48 96" fill="none" stroke="var(--token-e0ce79e8-f023-49ad-9edf-bfcca13d71cf, rgb(49, 47, 47))" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></g></svg>
-                      </div>
-                      <div class="menu-outer">
-                          <p>
-                              <a href="/support/user-manual" target="_blank">User-Manual</a>
-                          </p>
-                          <p>
-                              <a href="/support/faqs" target="_blank">FAQs</a>
-                          </p>
-                      </div>
-                    </div>
-                    <div class="menu-item">
-                      <div class="flex">
-                          <span><a href="/blog" target="_blank">Blogs</a></span>
-                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" focusable="false" color="var(--token-e0ce79e8-f023-49ad-9edf-bfcca13d71cf, rgb(49, 47, 47))" style="user-select: none; width: 16px; height: 16px; display: inline-block; fill: var(--token-e0ce79e8-f023-49ad-9edf-bfcca13d71cf, rgb(49, 47, 47)); flex-shrink: 0; cursor: auto;"><g color="var(--token-e0ce79e8-f023-49ad-9edf-bfcca13d71cf, rgb(49, 47, 47))" weight="bold"><polyline points="208 96 128 176 48 96" fill="none" stroke="var(--token-e0ce79e8-f023-49ad-9edf-bfcca13d71cf, rgb(49, 47, 47))" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></g></svg>
-                      </div>
-                      <div class="menu-outer">
-                          <p>
-                              <a href="/blog/news-events" target="_blank">News Events</a>
-                          </p>
-                          <p>
-                              <a href="/blog/industry-news" target="_blank">Industry News</a>
-                          </p>
-                      </div>
-                    </div>
-                    <div class="menu-item">
-                      <div>
-                          <a href="/video" target="_blank">Videos</a>
-                      </div>
-                    </div>
-                    <div class="menu-item">
-                      <div>
-                        <a href="/aboutus" target="_blank">About Us</a>
-                      </div>
-                    </div>
-                    <div class="menu-item">
-                      <div>
-                        <a href="/contact" target="_blank">Contact</a>
-                      </div>
-                    </div>
-                    <div class="menu-item">
-                      <div>
-                        <a href="/stoneidentification" target="_blank">Stone Identification</a>
+                      <!-- 没有子菜单的项目 -->
+                      <div v-else>
+                          <a :href="item.link" target="_blank">{{ item.linkText }}</a>
                       </div>
                     </div>
                 </div>
               </div>
-              <a class="freequote" href="/contact" target="_blank">Get A Free Quote</a>
+              <a class="freequote" href="/contact" target="_blank">{{ props.contentDetail.get_a_free_quote_btn_text }}</a>
           </div>
       </div>
   </header>
 </template>
 
-<script>
-export default {
-  name: 'DinosawHeader',
-  data(){
-    return {
-        menuList:[],
-        isMobileMenuOpen: false,
-        activeSubMenus: {},
-        // 定义菜单数据结构
-        menuItems: [
-          {
-            title: 'Products',
-            link: '/Products',
-            children: [
-              { text: 'Wire Saw Machine', link: '/Products/wire-saw-machine' },
-              { text: 'Circle Saw Machine', link: '/Products/circle-saw-machine' },
-              { text: 'Drilling and Engraving Machine', link: '/Products/drilling-and-engraving-machine' },
-              { text: 'Grinding and Polishing Machine', link: '/Products/grinding-and-polishing-machine' },
-              { text: 'Mining and Quarry Machine', link: '/Products/mining-and-quarry-machine' },
-              { text: 'Profiling Machine', link: '/Products/profiling-machine' },
-              { text: 'Other Machine', link: '/Products/other-machine' },
-              { text: 'Diamond Tools', link: '/Products/diamond-tools' }
-            ]
-          },
-          {
-            title: 'Projects',
-            link: '/projects',
-            children: [
-              { text: 'Marble Projects', link: '/projects/marble-projects' },
-              { text: 'Granite Projects', link: '/projects/granite-projects' },
-              { text: 'Other Hard Materials Projects', link: '/projects/other-hard-materials-projects' }
-            ]
-          },
-          {
-            title: 'Support',
-            link: '/support',
-            children: [
-              { text: 'User-Manual', link: '/support/user-manual' },
-              { text: 'FAQs', link: '/support/faqs' }
-            ]
-          },
-          {
-            title: 'Blogs',
-            link: '/blog',
-            children: [
-              { text: 'News Events', link: '/blog/news-events' },
-              { text: 'Industry News', link: '/blog/industry-news' }
-            ]
-          },
-          { linkText: 'Videos', link: '/video' },
-          { linkText: 'About Us', link: '/aboutus' },
-          { linkText: 'Contact', link: '/contact' },
-          { linkText: 'Stone Identification', link: '/stoneidentification' }
-        ]
-    }
-  },
+<script setup>
 
-  methods:{
-      getMenu(){
-      },
-      toggleMobileMenu() {
-        this.isMobileMenuOpen = !this.isMobileMenuOpen;
-      },
-      toggleSubMenu(index) {
-        // 使用 Vue 3 的响应式系统直接设置值
-        this.activeSubMenus[index] = !this.activeSubMenus[index];
-      },
-      stopPoint(){}
+const props = defineProps({
+  contentDetail: {
+      type: Object,
+      default: () => {
+        open_hours_text:""
+      }
+  },
+  menuItems:{
+    type: Array,
+    default: () => []
   }
+})
+// 响应式数据
+const isMobileMenuOpen = ref(false)
+const activeSubMenus = ref({})
+
+// 定义菜单数据结构
+// const menuItems = ref([
+//   {
+//     title: 'Products',
+//     link: '/Products',
+//     children: [
+//       { text: 'Wire Saw Machine', link: '/Products/wire-saw-machine' },
+//       { text: 'Circle Saw Machine', link: '/Products/circle-saw-machine' },
+//       { text: 'Drilling and Engraving Machine', link: '/Products/drilling-and-engraving-machine' },
+//       { text: 'Grinding and Polishing Machine', link: '/Products/grinding-and-polishing-machine' },
+//       { text: 'Mining and Quarry Machine', link: '/Products/mining-and-quarry-machine' },
+//       { text: 'Profiling Machine', link: '/Products/profiling-machine' },
+//       { text: 'Other Machine', link: '/Products/other-machine' },
+//       { text: 'Diamond Tools', link: '/Products/diamond-tools' }
+//     ]
+//   },
+//   {
+//     title: 'Projects',
+//     link: '/projects',
+//     children: [
+//       { text: 'Marble Projects', link: '/projects/marble-projects' },
+//       { text: 'Granite Projects', link: '/projects/granite-projects' },
+//       { text: 'Other Hard Materials Projects', link: '/projects/other-hard-materials-projects' }
+//     ]
+//   },
+//   {
+//     title: 'Support',
+//     link: '/support',
+//     children: [
+//       { text: 'User-Manual', link: '/support/user-manual' },
+//       { text: 'FAQs', link: '/support/faqs' }
+//     ]
+//   },
+//   {
+//     title: 'Blogs',
+//     link: '/blog',
+//     children: [
+//       { text: 'News Events', link: '/blog/news-events' },
+//       { text: 'Industry News', link: '/blog/industry-news' }
+//     ]
+//   },
+//   { linkText: 'Videos', link: '/video' },
+//   { linkText: 'About Us', link: '/aboutus' },
+//   { linkText: 'Contact', link: '/contact' },
+//   { linkText: 'Stone Identification', link: '/stoneidentification' }
+// ])
+
+// const categoryDetail = ref({})
+// const { data: categoryRes, pending, error } = await useApi('/product-categories')
+
+// // 处理分类数据转换为树状结构的函数
+// const transformCategoryData = (categories) => {
+//   if (!categories || !Array.isArray(categories)) return []
+  
+//   // 按sort字段排序
+//   const sortedCategories = [...categories].sort((a, b) => a.sort - b.sort)
+  
+//   // 分离顶级分类和子分类
+//   const topLevelCategories = []
+//   const childCategories = []
+  
+//   sortedCategories.forEach(category => {
+//     if (!category.parent_category_value) {
+//       topLevelCategories.push(category)
+//     } else {
+//       childCategories.push(category)
+//     }
+//   })
+  
+//   // 构建树状结构
+//   const treeStructure = topLevelCategories.map(topCategory => {
+//     // 查找该顶级分类的子分类
+//     const children = childCategories
+//       .filter(child => child.parent_category_value === topCategory.category_value)
+//       .sort((a, b) => a.sort - b.sort)
+//       .map(child => ({
+//         text: child.category_name,
+//         link: `/${child.category_value}`
+//       }))
+    
+//     // 构建菜单项
+//     const menuItem = {
+//       title: topCategory.category_name,
+//       link: `/${topCategory.category_value}`
+//     }
+    
+//     // 如果有子分类，添加children属性
+//     if (children.length > 0) {
+//       menuItem.children = children
+//     } else {
+//       // 如果没有子分类，使用linkText格式
+//       delete menuItem.title
+//       menuItem.linkText = topCategory.category_name
+//     }
+    
+//     return menuItem
+//   })
+  
+//   return treeStructure
+// }
+
+// watch(categoryRes, (newData) => {
+//     if (newData && newData.data) {
+//         // console.log('原始数据:', newData.data)
+        
+//         // 转换数据为树状结构
+//         const transformedData = transformCategoryData(newData.data)
+//         // console.log('转换后的数据:', transformedData)
+        
+//         // 更新menuItems
+//         menuItems.value = transformedData
+//         // 保留原有逻辑
+//         let data = newData.data[0]
+//         categoryDetail.value = data?.wire_saw_machine
+//     }
+// }, { immediate: true })
+// 方法
+
+const toggleMobileMenu = () => {
+  isMobileMenuOpen.value = !isMobileMenuOpen.value
+}
+
+const toggleSubMenu = (index) => {
+  // 使用 Vue 3 的响应式系统直接设置值
+  activeSubMenus.value[index] = !activeSubMenus.value[index]
+}
+
+const stopPoint = () => {
+  // 停止事件传播逻辑
 }
 </script>
 

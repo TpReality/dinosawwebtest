@@ -15,7 +15,7 @@
                             <div class="breadcrumb-link">
                                 <div class="breadcrumb-text">
                                     <div class="text-container">
-                                        <NuxtLink to="/"><span class="breadcrumb-home">Home</span></NuxtLink>
+                                        <NuxtLink to="/" target="_blank"><span class="breadcrumb-home">{{ productDetail.home_text || 'Home' }}</span></NuxtLink>
                                     </div>
                                 </div>
                                 <div class="breadcrumb-text">
@@ -29,8 +29,8 @@
                                     <div class="dropdown-link">
                                         <div class="dropdown-container">
                                             <div class="dropdown-text-container">
-                                                <NuxtLink to="/Products">
-                                                    <span class="breadcrumb-products">Products</span>
+                                                <NuxtLink to="/Products" target="_blank">
+                                                    <span class="breadcrumb-products">{{ productDetail.products_btn_text || 'Products' }}</span>
                                                 </NuxtLink>
                                             </div>
                                         </div>
@@ -41,29 +41,8 @@
                                 </div>
                                 <div class="breadcrumb-outer">
                                     <div class="bg">
-                                        <p>
-                                            <a href="/Products/wire-saw-machine" target="_blank">Wire Saw Machine</a>
-                                        </p>
-                                        <p>
-                                            <a href="/Products/circle-saw-machine" target="_blank">Circle Saw Machine</a>
-                                        </p>
-                                        <p>
-                                            <a href="/Products/drilling-and-engraving-machine" target="_blank">Drilling and Engraving Machine</a>
-                                        </p>
-                                        <p>
-                                            <a href="/Products/grinding-and-polishing-machine" target="_blank">Grinding and Polishing Machine</a>
-                                        </p>
-                                        <p>
-                                            <a href="/Products/mining-and-quarry-machine" target="_blank">Mining and Quarry Machine</a>
-                                        </p>
-                                        <p>
-                                            <a href="/Products/profiling-machine" target="_blank">Profiling Machine</a>
-                                        </p>
-                                        <p>
-                                            <a href="/Products/other-machine" target="_blank">Other Machine</a>
-                                        </p>
-                                        <p>
-                                            <a href="/Products/diamond-tools" target="_blank">Diamond Tools</a>
+                                        <p v-for="(item) in topProduct" :key="item.id">
+                                            <a :href="'/Products/'+item.category_value" target="_blank">{{ item.category_name }}</a>
                                         </p>
                                     </div>
                                 </div>
@@ -95,47 +74,31 @@
                                     </svg>
                                 </div>
                                 <div class="badge-text">
-                                    <span class="badge-title">Last Updated:</span>
-                                    <div class="badge-title">2025-09-05</div>
+                                    <span class="badge-title">{{ productDetail.last_update_date_text }}</span>
+                                    <div class="badge-title">{{ productDetail.last_update_date_value }}</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="title-section">
                         <h1 class="main-title">
-                            {{ props.slug }}
+                            {{ productDetail.hero_main_title }}
                         </h1>
                     </div>
                     <div class="description-section">
-                        <p class="description-text">
-                            Professional {{ props.slug.toLowerCase() }} solutions for precision stone processing and cutting applications.
-                        </p>
+                        <p class="description-text" v-if="productDetail.hero_main_description"></p>
                     </div>
                     <div class="material-types">
-                        <div class="material-item">
-                            <div class="material-icon">
-                                <img src="/images/granite-icon.svg" alt="Granite" />
+                        <template v-for="(item, index) in productDetail.hero_circle_background_images"  :key="index">
+                            <div class="material-item">
+                                <div class="material-icon">
+                                    <NuxtImg :src="item.banner_img.url" />
+                                </div>
+                                <span class="material-name">{{ item.banner_text}}</span>
                             </div>
-                            <span class="material-name">Granite</span>
-                        </div>
-                        <div class="material-item">
-                            <div class="material-icon">
-                                <img src="/images/marble-icon.svg" alt="Marble" />
-                            </div>
-                            <span class="material-name">Marble</span>
-                        </div>
-                        <div class="material-item">
-                            <div class="material-icon">
-                                <img src="/images/cement-icon.svg" alt="Cement" />
-                            </div>
-                            <span class="material-name">Cement</span>
-                        </div>
-                        <div class="material-item">
-                            <div class="material-icon">
-                                <img src="/images/ceramic-icon.svg" alt="Ceramic" />
-                            </div>
-                            <span class="material-name">Ceramic</span>
-                        </div>
+                            
+                        </template>
+                        
                     </div>
                 </div>
             </div>
@@ -145,42 +108,35 @@
         <div class="dynamic-content-section">
             <div class="content-wrapper">
                 <!-- 标题部分 -->
-                <div class="cnc-title-section" v-if="contentData.title">
-                    <h2 class="cnc-title">{{ contentData.title }}</h2>
+                <div class="cnc-title-section">
+                    <h2 class="cnc-title">{{ productDetail.cnc_mono_wire_saw_machine_title }}</h2>
                 </div>
                 
                 <!-- 描述内容部分 -->
-                <div class="cnc-description-section" v-if="contentData.descriptions && contentData.descriptions.length">
-                    <p 
-                        v-for="(desc, index) in contentData.descriptions" 
-                        :key="index"
-                        class="cnc-description-text"
-                    >
-                        {{ desc }}
-                    </p>
+                <div class="cnc-description-section" v-html="productDetail.cnc_mono_wire_saw_machine_description">
                 </div>
                 
                 <!-- 动态产品图片展示区域 -->
-                <div class="dynamic-product-section" v-if="contentData.products && contentData.products.length">
+                <div class="dynamic-product-section" v-if="productDetail.cnc_mono_wire_saw_machine_products && productDetail.cnc_mono_wire_saw_machine_products.length">
                     <!-- 1张图片布局：左侧图片，右侧信息 - 按照Figma节点 10:15239 -->
-                    <div v-if="contentData.products.length === 1" class="layout-single">
+                    <div v-if="productDetail.cnc_mono_wire_saw_machine_products.length === 1" class="layout-single">
                         <div class="single-container">
                             <div class="single-link">
                                 <div class="single-image">
-                                    <img :src="contentData.products[0].image" :alt="contentData.products[0].title" />
+                                    <img :src="productDetail.cnc_mono_wire_saw_machine_products[0].first_image_url" />
                                 </div>
                                 <div class="single-content">
                                     <div class="single-text-section">
                                         <div class="single-title-wrapper">
-                                            <h3 class="single-title">{{ contentData.products[0].title }}</h3>
+                                            <h3 class="single-title">{{ productDetail.cnc_mono_wire_saw_machine_products[0].h1_page_inner_title }}</h3>
                                         </div>
-                                        <div class="single-date-wrapper" v-if="contentData.products[0].date">
-                                            <p class="single-date">{{ contentData.products[0].date }}</p>
+                                        <div class="single-date-wrapper" v-if="productDetail.cnc_mono_wire_saw_machine_products[0].date">
+                                            <p class="single-date">{{ productDetail.cnc_mono_wire_saw_machine_products[0].date }}</p>
                                         </div>
                                     </div>
-                                    <div class="single-button" v-if="contentData.products[0].buttonText">
+                                    <div class="single-button" v-if="productDetail.buy_now_text">
                                         <div class="single-button-content">
-                                            <span class="button-text">{{ contentData.products[0].buttonText }}</span>
+                                            <span class="button-text">{{ productDetail.buy_now_text }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -189,9 +145,9 @@
                     </div>
                     
                     <!-- 2张图片布局：左右布局 -->
-                    <div v-else-if="contentData.products.length === 2" class="layout-double">
+                    <div v-else-if="productDetail.cnc_mono_wire_saw_machine_products.length === 2" class="layout-double">
                         <div 
-                            v-for="(product, index) in contentData.products" 
+                            v-for="(product, index) in productDetail.cnc_mono_wire_saw_machine_products" 
                             :key="index"
                             class="double-item"
                             :class="product.layout || 'vertical'"
@@ -199,10 +155,10 @@
                             <!-- 垂直布局：上面图片，下面标题 -->
                             <template v-if="!product.layout || product.layout === 'vertical'">
                                 <div class="double-image">
-                                    <img :src="product.image" :alt="product.title" />
+                                    <img :src="product.first_image_url" :alt="product.h1_page_inner_title" />
                                 </div>
                                 <div class="double-content">
-                                    <h3 class="double-title">{{ product.title }}</h3>
+                                    <h3 class="double-title">{{ product.h1_page_inner_title }}</h3>
                                 </div>
                             </template>
                             
@@ -211,12 +167,12 @@
                                 <div class="horizontal-container">
                                     <div class="horizontal-link">
                                         <div class="horizontal-image">
-                                            <img :src="product.image" :alt="product.title" />
+                                            <img :src="product.first_image_url" :alt="product.h1_page_inner_title" />
                                         </div>
                                         <div class="horizontal-content">
                                             <div class="horizontal-text-section">
                                                 <div class="horizontal-title-wrapper">
-                                                    <h3 class="horizontal-title">{{ product.title }}</h3>
+                                                    <h3 class="horizontal-title">{{ product.h1_page_inner_title }}</h3>
                                                 </div>
                                                 <div class="horizontal-date-wrapper" v-if="product.date">
                                                     <p class="horizontal-date">{{ product.date }}</p>
@@ -235,49 +191,208 @@
                     </div>
                     
                     <!-- 4张图片布局：2x2网格 -->
-                    <div v-else-if="contentData.products.length === 4" class="layout-quad">
+                    <div v-else-if="productDetail.cnc_mono_wire_saw_machine_products.length === 4" class="layout-quad">
                         <div 
-                            v-for="(product, index) in contentData.products" 
+                            v-for="(product, index) in productDetail.cnc_mono_wire_saw_machine_products" 
                             :key="index"
                             class="quad-item"
                         >
                             <div class="quad-image">
-                                <img :src="product.image" :alt="product.title" />
+                                <img :src="product.first_image_url" />
                             </div>
                             <div class="quad-content">
-                                <h3 class="quad-title">{{ product.title }}</h3>
+                                <h3 class="quad-title">{{ product.h1_page_inner_title }}</h3>
                             </div>
                         </div>
                     </div>
                     
                     <!-- 5张图片布局：左边1个大图，右边4个小图 -->
-                    <div v-else-if="contentData.products.length === 5" class="layout-five">
+                    <div v-else-if="productDetail.cnc_mono_wire_saw_machine_products.length === 5" class="layout-five">
                         <div class="five-left">
                             <div class="five-main-image">
-                                <img :src="contentData.products[0].image" :alt="contentData.products[0].title" />
+                                <img :src="productDetail.cnc_mono_wire_saw_machine_products[0].first_image_url" />
                             </div>
                             <div class="five-main-content">
-                                <h3 class="five-main-title">{{ contentData.products[0].title }}</h3>
-                                <p class="five-main-date" v-if="contentData.products[0].date">{{ contentData.products[0].date }}</p>
-                                <div class="five-main-info" v-if="contentData.products[0].subtitle">
-                                    <h3 class="five-subtitle">{{ contentData.products[0].subtitle }}</h3>
-                                    <p class="five-description" v-if="contentData.products[0].description">{{ contentData.products[0].description }}</p>
+                                <h3 class="five-main-title">{{ productDetail.cnc_mono_wire_saw_machine_products[0].h1_page_inner_title }}</h3>
+                                <p class="five-main-date" v-if="productDetail.cnc_mono_wire_saw_machine_products[0].date">{{ productDetail.cnc_mono_wire_saw_machine_products[0].date }}</p>
+                                <div class="five-main-info" v-if="productDetail.flagship_products_2025_text">
+                                    <h3 class="five-subtitle">{{ productDetail.flagship_products_2025_text }}</h3>
+                                    <p class="five-description" v-if="productDetail.flagship_products_2025_description">{{ productDetail.cnc_mono_wire_saw_machine_products[0].description }}</p>
+                                    <button class="buy-now-btn">{{productDetail.buy_now_text}}</button>
                                 </div>
                             </div>
                         </div>
                         <div class="five-right">
                             <div 
-                                v-for="(product, index) in contentData.products.slice(1)" 
+                                v-for="(product, index) in productDetail.cnc_mono_wire_saw_machine_products.slice(1)" 
                                 :key="index + 1"
                                 class="five-grid-item"
                             >
                                 <div class="five-grid-image">
-                                    <img :src="product.image" :alt="product.title" />
+                                    <img :src="product.first_image_url" />
                                 </div>
-                                <h3 class="five-grid-title">{{ product.title }}</h3>
+                                <h3 class="five-grid-title">{{ product.h1_page_inner_title }}</h3>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="dynamic-content-section" v-if="productDetail.cnc_multi_wire_saw_machine_title">
+            <div class="content-wrapper">
+                <!-- 标题部分 -->
+                <div class="cnc-title-section">
+                    <h2 class="cnc-title">{{ productDetail.cnc_multi_wire_saw_machine_title }}</h2>
+                </div>
+                
+                <!-- 描述内容部分 -->
+                <div class="cnc-description-section" v-html="productDetail.cnc_multi_wire_saw_machine_description">
+                </div>
+                
+                <!-- 动态产品图片展示区域 -->
+                <div class="dynamic-product-section" v-if="productDetail.cnc_multi_wire_saw_machine_products && productDetail.cnc_multi_wire_saw_machine_products.length">
+                    <!-- 1张图片布局：左侧图片，右侧信息 - 按照Figma节点 10:15239 -->
+                    <div v-if="productDetail.cnc_multi_wire_saw_machine_products.length === 1" class="layout-single">
+                        <NuxtLink :to="'/Products/'+productDetail.cnc_multi_wire_saw_machine_products[0].url">
+                            <div class="single-container">
+                                <div class="single-link">
+                                    <div class="single-image">
+                                        <NuxtImg :src="productDetail.cnc_multi_wire_saw_machine_products[0].first_image_url" />
+                                    </div>
+                                    <div class="single-content">
+                                        <div class="single-text-section">
+                                            <div class="single-title-wrapper">
+                                                <h3 class="single-title">{{ productDetail.cnc_multi_wire_saw_machine_products[0].h1_page_inner_title }}</h3>
+                                            </div>
+                                            <div class="single-date-wrapper" v-if="productDetail.cnc_multi_wire_saw_machine_products[0].date">
+                                                <p class="single-date">{{ productDetail.cnc_multi_wire_saw_machine_products[0].date }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="single-button" v-if="productDetail.cnc_multi_wire_saw_machine_products[0].buttonText">
+                                            <div class="single-button-content">
+                                                <span class="button-text">{{ productDetail.cnc_multi_wire_saw_machine_products[0].buttonText }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </NuxtLink>
+                    </div>
+                    
+                    <!-- 2张图片布局：左右布局 -->
+                    <div v-else-if="productDetail.cnc_multi_wire_saw_machine_products.length === 2" class="layout-double">
+                        <template v-for="(product, index) in productDetail.cnc_multi_wire_saw_machine_products" 
+                            :key="index">
+                            <NuxtLink :to="'/Products/'+product.url">
+                                    <div 
+                                    class="double-item"
+                                    :class="product.layout || 'vertical'"
+                                >
+                                
+                                    <!-- 垂直布局：上面图片，下面标题 -->
+                                    <template v-if="!product.layout || product.layout === 'vertical'">
+                                        <div class="double-image">
+                                            <NuxtImg :src="product.first_image_url" />
+                                        </div>
+                                        <div class="double-content">
+                                            <h3 class="double-title">{{ product.h1_page_inner_title }}</h3>
+                                        </div>
+                                    </template>
+                                    
+                                    <!-- 水平布局：左侧图片，右侧信息 - 按照Figma节点 7:11368 -->
+                                    <template v-else-if="product.layout === 'horizontal'">
+                                        <div class="horizontal-container">
+                                            <div class="horizontal-link">
+                                                <div class="horizontal-image">
+                                                    <NuxtImg :src="product.first_image_url" />
+                                                </div>
+                                                <div class="horizontal-content">
+                                                    <div class="horizontal-text-section">
+                                                        <div class="horizontal-title-wrapper">
+                                                            <h3 class="horizontal-title">{{ product.h1_page_inner_title }}</h3>
+                                                        </div>
+                                                        <div class="horizontal-date-wrapper" v-if="product.date">
+                                                            <p class="horizontal-date">{{ product.date }}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="horizontal-button" v-if="product.buttonText">
+                                                        <div class="horizontal-button-content">
+                                                            <span class="button-text">{{ product.buttonText }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                                </NuxtLink>
+                        </template>
+                        
+                    </div>
+                    
+                    <!-- 4张图片布局：2x2网格 -->
+                    <div v-else-if="productDetail.cnc_multi_wire_saw_machine_products.length === 4" class="layout-quad">
+                        <template v-for="(product, index) in productDetail.cnc_multi_wire_saw_machine_products" 
+                            :key="index">
+                            <NuxtLink :to="'/Products/'+product.url">
+                            <div 
+                                
+                                class="quad-item"
+                            >
+                                <div class="quad-image">
+                                    <NuxtImg :src="product.first_image_url" />
+                                </div>
+                                <div class="quad-content">
+                                    <h3 class="quad-title">{{ product.h1_page_inner_title }}</h3>
+                                </div>
+                            </div>
+                            </NuxtLink>
+                        </template>
+                    </div>
+                    
+                    <!-- 5张图片布局：左边1个大图，右边4个小图 -->
+                    <div v-else-if="productDetail.cnc_multi_wire_saw_machine_products.length === 5" class="layout-five">
+                        <div class="five-left">
+                            <div class="five-main-image">
+                                <NuxtLink :to="'/Products/'+productDetail.cnc_multi_wire_saw_machine_products[0].url">
+                                    <NuxtImg :src="productDetail.cnc_multi_wire_saw_machine_products[0].first_image_url" />
+                                </NuxtLink>
+                            </div>
+                            <div class="five-main-content">
+                                <h3 class="five-main-title">{{ productDetail.cnc_multi_wire_saw_machine_products[0].h1_page_inner_title }}</h3>
+                                <p class="five-main-date" v-if="productDetail.cnc_multi_wire_saw_machine_products[0].date">{{ productDetail.cnc_multi_wire_saw_machine_products[0].date }}</p>
+                                <div class="five-main-info" v-if="productDetail.flagship_products_2025_text">
+                                    <h3 class="five-subtitle">{{ productDetail.flagship_products_2025_text }}</h3>
+                                    <p class="five-description" v-if="productDetail.flagship_products_2025_description">{{ productDetail.cnc_mono_wire_saw_machine_products[0].description }}</p>
+                                    <button class="buy-now-btn">{{productDetail.buy_now_text}}</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="five-right">
+                            <div 
+                                v-for="(product, index) in productDetail.cnc_multi_wire_saw_machine_products.slice(1)" 
+                                :key="index + 1"
+                                class="five-grid-item"
+                            >
+                                <div class="five-grid-image">
+                                    <NuxtImg :src="product.first_image_url" />
+                                </div>
+                                <h3 class="five-grid-title">{{ product.h1_page_inner_title }}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dynamic-content-section" v-if="productDetail.what_is_a_wire_saw_machine_title">
+            <div class="content-wrapper">
+                <!-- 标题部分 -->
+                <div class="cnc-title-section">
+                    <h2 class="cnc-title">{{ productDetail.what_is_a_wire_saw_machine_title }}</h2>
+                </div>
+                
+                <!-- 描述内容部分 -->
+                <div class="cnc-description-section" v-html="productDetail.what_is_a_wire_saw_machine_description">
                 </div>
             </div>
         </div>
@@ -291,23 +406,11 @@
             <!-- 标题部分 -->
             <div class="processing-cases-title-section">
                 <div class="processing-cases-title-frame">
-                    <h2 class="processing-cases-title" v-if="index == 0">
+                    <h2 class="processing-cases-title">
                         {{ item.title }}<br>
-                        <div class="c-black">{{ item.subTitle }}</div>
-                    </h2>
-                    <h2 class="processing-cases-title" v-else>
-                        <div class="c-black">{{ item.title }}</div>
-                        {{ item.subTitle }}
+                        <div class="c-black" v-html="item.subTitle"></div>
                     </h2>
                 </div>
-            </div>
-            <div class="processing-cases-description-section">
-                Discover how Dinosaw’s wire saw machines, carving machines, and block machines bring precision and
-                efficiency to marble processing.
-                From pure cutting to intricate carving for decorative columns, countertops, and wall panels, our
-                advanced solutions empower businesses to achieve flawless results.
-                Explore case studies showcasing how our equipment transforms raw marble into stunning, high-value
-                products.
             </div>
             <!-- 案例展示部分 -->
             <div class="processing-cases-content">
@@ -317,100 +420,44 @@
                             <div class="processing-cases-section-inner">
                                 <div class="processing-cases-list">
                                     <!-- 案例1 -->
-                                    <div class="processing-case-item">
-                                        <div class="case-background">
-                                            <div class="case-ipad">
-                                                <div class="case-image-container">
-                                                    <div class="case-main-image cement-case"></div>
-                                                </div>
-                                                <div class="case-content-container">
-                                                    <div class="case-link">
-                                                        <div class="case-info-container">
-                                                            <div class="case-youtube-link">
-                                                                <div class="case-title-frame">
-                                                                    <h3 class="case-title">
-                                                                        <span class="case-title-line">Cement Product
-                                                                            Cutting Case - CNC Wire</span>
-                                                                        <span class="case-title-line">Saw Machine
-                                                                            Supports Spanish Factory</span>
-                                                                    </h3>
-                                                                </div>
+                                    <template v-for="(blogs, j) in item.blogs" :key="j">
+                                        <NuxtLink :to="blogs.category_link" target="_blank">
+                                            <div class="processing-case-item">
+                                                <div class="case-background" :class="index != 2 ? 'yellow' : ''">
+                                                    <div class="case-ipad">
+                                                        <div class="case-image-container">
+                                                            <div class="case-main-image cement-case">
+                                                                <NuxtImg :src="blogs.first_image_url" />
                                                             </div>
-                                                            <div class="case-date-section">
-                                                                <div class="case-date-container">
-                                                                    <span class="case-date">5/14/24</span>
+                                                        </div>
+                                                        <div class="case-content-container">
+                                                            <div class="case-link">
+                                                                <div class="case-info-container">
+                                                                    <div class="case-youtube-link">
+                                                                        <div class="case-title-frame">
+                                                                            <h3 class="case-title">
+                                                                                <span class="case-title-line">{{ blogs.title }}</span>
+                                                                            </h3>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="case-date-section">
+                                                                        <div class="case-date-container">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 16 16">
+                                                                                <path d="M 12.825 14.5 L 8.425 14.5 C 7.075 14.5 6 13.4 6 12.075 L 6 11.35 C 6 10 7.1 8.925 8.425 8.925 L 12.825 8.925 C 14.175 8.925 15.25 10.025 15.25 11.35 L 15.25 12.075 C 15.25 13.4 14.15 14.5 12.825 14.5 Z" fill="rgb(135, 135, 135)"></path>
+                                                                                <path d="M 12.075 13.475 L 3.425 13.475 C 2.225 13.475 1.275 12.5 1.275 11.325 L 1.275 4.425 C 1.275 3.225 2.25 2.275 3.425 2.275 L 12.05 2.275 C 13.25 2.275 14.2 3.25 14.2 4.425 L 14.2 11.3 C 14.225 12.5 13.25 13.475 12.075 13.475 Z M 3.425 2.975 C 2.625 2.975 1.975 3.625 1.975 4.425 L 1.975 11.3 C 1.975 12.1 2.625 12.75 3.425 12.75 L 12.05 12.75 C 12.85 12.75 13.5 12.1 13.5 11.3 L 13.5 4.425 C 13.5 3.625 12.85 2.975 12.05 2.975 Z" fill="rgb(0, 0, 0)"></path>
+                                                                                <path d="M 4.625 4.1 C 4.425 4.1 4.275 3.95 4.275 3.75 L 4.275 1.25 C 4.275 1.05 4.425 0.9 4.625 0.9 C 4.825 0.9 4.975 1.05 4.975 1.25 L 4.975 3.75 C 4.975 3.95 4.825 4.1 4.625 4.1 Z M 10.625 4.1 C 10.425 4.1 10.275 3.95 10.275 3.75 L 10.275 1.25 C 10.275 1.05 10.425 0.9 10.625 0.9 C 10.825 0.9 10.975 1.05 10.975 1.25 L 10.975 3.75 C 10.975 3.95 10.825 4.1 10.625 4.1 Z M 13.75 5.975 L 1.75 5.975 C 1.55 5.975 1.4 5.825 1.4 5.625 C 1.4 5.425 1.55 5.275 1.75 5.275 L 13.75 5.275 C 13.95 5.275 14.1 5.425 14.1 5.625 C 14.1 5.825 13.95 5.975 13.75 5.975 Z M 5.275 8.225 L 2.875 8.225 C 2.675 8.225 2.525 8.075 2.525 7.875 C 2.525 7.675 2.675 7.525 2.875 7.525 L 5.275 7.525 C 5.475 7.525 5.625 7.675 5.625 7.875 C 5.625 8.075 5.45 8.225 5.275 8.225 Z M 8.875 8.225 L 6.5 8.225 C 6.3 8.225 6.15 8.075 6.15 7.875 C 6.15 7.675 6.3 7.525 6.5 7.525 L 8.9 7.525 C 9.1 7.525 9.25 7.675 9.25 7.875 C 9.25 8.075 9.075 8.225 8.875 8.225 Z M 12.5 8.225 L 10.1 8.225 C 9.9 8.225 9.75 8.075 9.75 7.875 C 9.75 7.675 9.9 7.525 10.1 7.525 L 12.5 7.525 C 12.7 7.525 12.85 7.675 12.85 7.875 C 12.85 8.075 12.7 8.225 12.5 8.225 Z M 5.275 10.725 L 2.875 10.725 C 2.675 10.725 2.525 10.575 2.525 10.375 C 2.525 10.175 2.675 10.025 2.875 10.025 L 5.275 10.025 C 5.475 10.025 5.625 10.175 5.625 10.375 C 5.625 10.575 5.45 10.725 5.275 10.725 Z M 8.875 10.725 L 6.5 10.725 C 6.3 10.725 6.15 10.575 6.15 10.375 C 6.15 10.175 6.3 10.025 6.5 10.025 L 8.9 10.025 C 9.1 10.025 9.25 10.175 9.25 10.375 C 9.25 10.575 9.075 10.725 8.875 10.725 Z" fill="rgb(0, 0, 0)"></path>
+                                                                            </svg>
+                                                                            <span class="case-date">{{ blogs.date }}</span>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- 案例2 -->
-                                    <div class="processing-case-item">
-                                        <div class="case-background">
-                                            <div class="case-ipad">
-                                                <div class="case-image-container">
-                                                    <div class="case-main-image marble-case"></div>
-                                                </div>
-                                                <div class="case-content-container">
-                                                    <div class="case-link">
-                                                        <div class="case-info-container">
-                                                            <div class="case-youtube-link">
-                                                                <div class="case-title-frame">
-                                                                    <h3 class="case-title">
-                                                                        <span class="case-title-line">Marble Block Slab
-                                                                            Cutting Case - CNC Wire</span>
-                                                                        <span class="case-title-line">Saw Machine
-                                                                            Supports Spanish Factory</span>
-                                                                    </h3>
-                                                                </div>
-                                                            </div>
-                                                            <div class="case-date-section">
-                                                                <div class="case-date-container">
-                                                                    <span class="case-date">12/11/24</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- 案例3 -->
-                                    <div class="processing-case-item">
-                                        <div class="case-background">
-                                            <div class="case-ipad">
-                                                <div class="case-image-container">
-                                                    <div class="case-main-image granite-case"></div>
-                                                </div>
-                                                <div class="case-content-container">
-                                                    <div class="case-link">
-                                                        <div class="case-info-container">
-                                                            <div class="case-youtube-link">
-                                                                <div class="case-title-frame">
-                                                                    <h3 class="case-title">
-                                                                        <span class="case-title-line">Granite Tombstone
-                                                                            Case - CNC Wire Saw</span>
-                                                                        <span class="case-title-line">Machine Supports
-                                                                            Chongqing Factory</span>
-                                                                    </h3>
-                                                                </div>
-                                                            </div>
-                                                            <div class="case-date-section">
-                                                                <div class="case-date-container">
-                                                                    <span class="case-date">8/10/24</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                        </NuxtLink>
+                                    </template>
                                 </div>
                             </div>
                         </div>
@@ -436,315 +483,108 @@
                     <div class="guide-title-section">
                         <div class="guide-title-wrapper">
                             <h2 class="guide-main-title">
-                                Comprehensive Guide to<br>
-                                Choosing Stone Cutting Machine
+                                {{productDetail.select_machine_guide_title}}
                             </h2>
                         </div>
                     </div>
                     <div class="guide-image-section">
-                        <img 
-                            src="/images/stone-cutting-guide.svg" 
-                            alt="Stone Cutting Guide"
+                        <NuxtImg 
+                            :src="productDetail.select_machine_guide_background_image.url" 
                             class="guide-image"
                         />
                     </div>
                 </div>
                 
-                <!-- Content Section -->
-                <div class="guide-content">
-                    <!-- Introduction -->
-                    <div class="guide-intro">
-                        <p class="guide-intro-text">
-                            Selecting the right Stone Cutting Machine is crucial for optimizing production processes and meeting specific customer demands. Whether working with granite, marble, or engineered materials, DINOSAW machines provide tailored solutions for your stone fabrication needs.
-                        </p>
-                    </div>
-                    
-                    <!-- Understanding Your Raw Materials -->
-                    <div class="guide-section">
-                        <h3 class="guide-section-title">Understanding Your Raw Materials</h3>
-                        <p class="guide-section-desc">
-                            Each material has unique processing requirements based on hardness, density, and form. Choosing the right machine ensures efficiency and precision.
-                        </p>
-                        <p class="guide-paragraph">
-                            Hard natural stones like granite, quartzite, and basalt require powerful and stable machines to maintain cutting accuracy. The Bridge Saw is designed to handle these tasks, ensuring consistent results and reducing tool wear.
-                        </p>
-                        <p class="guide-paragraph">
-                            Soft natural stones and non-stone materials like bluestone, acrylic, and composite panels benefit from the Manual Cutting Machine. This flexible solution is ideal for small-scale processing and budget-conscious projects.
-                        </p>
-                        <p class="guide-paragraph">
-                            Large stone blocks such as limestone and sandstone require consistent performance for slab production. The Block Cutting Machine ensures even thickness and smooth finishes, making it perfect for large-scale operations.
-                        </p>
-                        <p class="guide-paragraph">
-                            Construction materials like concrete and tiles demand precision and versatility. The Bridge Saw supports multiple angles and complex patterns, meeting these requirements with ease.
-                        </p>
-                    </div>
-                    
-                    <!-- Matching the Stone Cutting Machine to Your Products -->
-                    <div class="guide-section">
-                        <h3 class="guide-section-title">Matching the Stone Cutting Machine to Your Products</h3>
-                        <p class="guide-section-desc">
-                            Production goals define the necessary features and capabilities in a Stone Cutting Machine.
-                        </p>
-                        <p class="guide-paragraph">
-                            For slabs and tiles, the Block Cutting Machine efficiently converts stone blocks into high-quality slabs and tiles, perfect for large-scale production.
-                        </p>
-                        <p class="guide-paragraph">
-                            For decorative interior products, the Bridge Saw offers precision cutting and CNC automation, ideal for high-end items like countertops and wall panels.
-                        </p>
-                        <p class="guide-paragraph">
-                            For architectural components, the Bridge Saw ensures smooth cutting for complex geometric shapes in large pieces like pillars and stair treads.
-                        </p>
-                        <p class="guide-paragraph">
-                            For outdoor decorative and structural products, the Block Cutting Machine excels in producing paving stones and curbstones, while the Bridge Saw handles detailed work on tombstones and monuments.
-                        </p>
-                        <p class="guide-paragraph">
-                            For small-scale custom products, the Manual Cutting Machine provides a reliable, budget-friendly option for projects like tabletops and custom décor.
-                        </p>
-                    </div>
-                    
-                    <!-- Addressing Your Operational Challenges -->
-                    <div class="guide-section">
-                        <h3 class="guide-section-title">Addressing Your Operational Challenges</h3>
-                        <p class="guide-section-desc">
-                            Stone Cutting Machines help resolve common operational challenges.
-                        </p>
-                        <p class="guide-paragraph">
-                            To reduce high material waste, the Block Cutting Machine ensures precision and maximizes material usage.
-                        </p>
-                        <p class="guide-paragraph">
-                            For handling complex designs, the Bridge Saw's CNC automation delivers precise results for intricate patterns and multi-angle cuts.
-                        </p>
-                        <p class="guide-paragraph">
-                            To overcome budget or space limitations, the Manual Cutting Machine offers a compact and affordable solution for small-scale operations.
-                        </p>
-                    </div>
-                    
-                    <!-- Practical Steps to Choose Your Stone Cutting Machine -->
-                    <div class="guide-section">
-                        <h3 class="guide-section-title">Practical Steps to Choose Your Stone Cutting Machine</h3>
-                        <div class="guide-steps">
-                            <p class="guide-paragraph">
-                                Evaluate your materials by identifying the type, hardness, and size you process most frequently.
-                            </p>
-                            <p class="guide-paragraph">
-                                Define your products, considering their shape, size, and complexity.
-                            </p>
-                            <p class="guide-paragraph">
-                                Analyze your production scale to determine whether speed, precision, or flexibility is your priority.
-                            </p>
-                            <p class="guide-paragraph">
-                                Pinpoint challenges, such as inefficiencies or limitations in your current processes.
-                            </p>
-                            <p class="guide-paragraph">
-                                Consult experts at Dinosaw to match your needs with the right machine, ensuring a tailored solution for your operations.
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <!-- Why Dinosaw Machines Are the Right Fit -->
-                    <div class="guide-section">
-                        <h3 class="guide-section-title">Why Dinosaw Machines Are the Right Fit</h3>
-                        <p class="guide-section-desc">
-                            Dinosaw machines address real-world challenges with tailored solutions:
-                        </p>
-                        <p class="guide-paragraph">
-                            The Bridge Saw is ideal for customers needing high precision, complex designs, and versatility.
-                        </p>
-                        <p class="guide-paragraph">
-                            The Block Cutting Machine is designed for high-volume factories requiring efficient slab and tile production.
-                        </p>
-                        <p class="guide-paragraph">
-                            The Manual Cutting Machine is perfect for small workshops and budget-conscious operations, offering reliable performance for small-scale projects.
-                        </p>
-                    </div>
-                    
-                    <!-- Conclusion -->
-                    <div class="guide-section">
-                        <h3 class="guide-section-title">Conclusion</h3>
-                        <div class="guide-conclusion">
-                            <p class="guide-paragraph">
-                                Choosing the right Stone Cutting Machine requires understanding your materials, production goals, and operational challenges. Dinosaw machines are designed to meet diverse needs, improving efficiency, reducing waste, and delivering superior results. Let Dinosaw help you find the perfect machine to support your success.
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                <div class="guide-content" v-html="productDetail.select_machine_guide_description"></div>
+                 <NuxtImg 
+                    class="guide-image-mobile"
+                    :src="productDetail.select_machine_guide_background_image.url" 
+                />
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
+import { formatDate, formatDateEN } from '~/utils/dateUtils';
+
 const props = defineProps({
     slug: {
         type: String,
         required: true
+    },
+    topProduct:{
+        type: Array,
+        default: () => []
     }
 });
 
+// 添加 emit 定义
+const emit = defineEmits(['headdata-loaded']);
+
+
+
 // 在模板中可以直接使用 props.slug 或者创建响应式引用
 const { slug } = toRefs(props);
+let processingCase = []
+let productDetail = {}
+
+// 导入日期格式化工具函数
+import { formatDateLong, formatDatesInArray, formatArrayDatesLong, formatArrayDatesShort } from '~/utils/dateFormatter'
 
 // 或者直接使用 props.slug
-console.log('Current slug in component:', props.slug);
+// console.log('Current slug in component:', props.slug);
 
-const processingCase = [
-    { id: 1, title: "The most popular related processing cases", subTitle: "You Can Refer To", text: "Diamond Tools" },
-    { id: 2, title: "The practical videos on", subTitle: "How to install, use, and maintain industrial", text: "Diamond Tools" },
-    { id: 3, title: "Worth-reading articles on", subTitle: "industrial processing Machinery Cases", text: "Diamond Tools" }
-]
+const { data: productDetailRes, pending, error } = await useApi('/product-categories?filters[category_value][$eq]=wire-saw-machine&populate=all')
+watch(productDetailRes, (newPosts) => {
+    if (newPosts) {
+        // console.log(newPosts)
+        let data = newPosts.data[0]
 
-// 模拟接口数据结构
-const contentData = computed(() => {
-  // 这里可以根据实际需求从API获取数据
-  // 目前使用静态数据作为示例，展示不同布局情况
-  
-  if (slug === 'profiling-machine') {
-    return {
-      title: 'CNC石材轮廓加工机',
-      descriptions: [
-        '专业的石材轮廓加工设备，适用于各种石材的精密加工。采用先进的CNC控制系统，确保加工精度和效率。',
-        '设备配备高精度导轨和伺服电机，能够实现复杂轮廓的精确加工。适用于建筑装饰、艺术雕刻等多个领域。',
-        '支持多种石材类型，包括花岗岩、大理石、砂岩等，是现代石材加工企业的理想选择。'
-      ],
-      products: [
-        {
-          image: '/images/5-axis-bridge-saw.svg',
-          title: '5轴CNC桥式锯',
-          date: '2025年4月17日',
-          subtitle: '旗舰产品2025',
-          description: 'Dinosaw精选设备'
-        },
-        {
-          image: '/images/4-axis-bridge-saw.svg',
-          title: '4+1轴桥式切割机',
-          date: '2025年4月17日',
-          subtitle: '旗舰产品2025',
-          description: 'Dinosaw精选设备'
-        },
-        {
-          image: '/images/bridge-cutting-machine.svg',
-          title: '天然石材和混凝土桥式切割机',
-          date: '2025年4月17日',
-          subtitle: '旗舰产品2025',
-          description: 'Dinosaw精选设备'
-        },
-        {
-          image: '/images/cnc-stone-bridge-saw.svg',
-          title: 'CNC石材桥式锯精密切割',
-          date: '2025年4月17日',
-          subtitle: '旗舰产品2025',
-          description: 'Dinosaw精选设备'
-        },
-        {
-          image: '/images/monoblock-bridge-saw.svg',
-          title: '整体式桥式锯CNC石材切割机',
-          date: '2025年4月17日',
-          subtitle: '旗舰产品2025',
-          description: 'Dinosaw精选设备'
+        productDetail = data.wire_saw_machine
+
+        // 格式化产品数组中的日期 (Jan 11, 2025 格式)
+        if (productDetail.cnc_mono_wire_saw_machine_products) {
+            productDetail.cnc_mono_wire_saw_machine_products = formatArrayDatesLong(
+                productDetail.cnc_mono_wire_saw_machine_products
+            )
         }
-      ]
-    };
-  } else if (slug === 'single-product') {
-    // 1张图片的示例
-    return {
-      title: '单产品展示页面',
-      descriptions: [
-        '这是一个单产品展示的示例页面，展示如何使用左右布局来展示产品信息。'
-      ],
-      products: [
-        {
-          image: '/images/stone-block-cutter.svg',
-          title: '水平刀片石材块切割机',
-          date: '2025年2月28日',
-          buttonText: '了解更多'
+        
+        if (productDetail.cnc_multi_wire_saw_machine_products) {
+            productDetail.cnc_multi_wire_saw_machine_products = formatArrayDatesLong(
+                productDetail.cnc_multi_wire_saw_machine_products
+            )
         }
-      ]
-    };
-  } else if (slug === 'double-product') {
-    // 2张图片的示例
-    return {
-      title: '双产品展示页面',
-      descriptions: [
-        '这是一个双产品展示的示例页面，展示两种不同的布局方式。'
-      ],
-      products: [
-        {
-          image: '/images/4-axis-bridge-saw.svg',
-          title: '4轴桥式切割机',
-          layout: 'vertical' // 垂直布局：上图下文
-        },
-        {
-          image: '/images/stone-block-cutter.svg',
-          title: '石材块切割机',
-          date: '2025年3月15日',
-          buttonText: '查看详情',
-          layout: 'horizontal' // 水平布局：左图右文
-        }
-      ]
-    };
-  } else if (slug === 'quad-product') {
-    // 4张图片的示例
-    return {
-      title: '四产品网格展示',
-      descriptions: [
-        '这是一个四产品网格展示的示例页面，使用2x2网格布局。'
-      ],
-      products: [
-        {
-          image: '/images/4-axis-bridge-saw.svg',
-          title: '4+1轴桥式切割机'
-        },
-        {
-          image: '/images/bridge-cutting-machine.svg',
-          title: '天然石材桥式切割机'
-        },
-        {
-          image: '/images/cnc-stone-bridge-saw.svg',
-          title: 'CNC石材桥式锯'
-        },
-        {
-          image: '/images/monoblock-bridge-saw.svg',
-          title: '整体式桥式锯'
-        }
-      ]
-    };
-  }
-  
-  // 默认使用5张图片布局
-  return {
-    title: 'CNC Mono Wire Saw Machine',
-    descriptions: [
-      'The CNC mono saw machine is a highly efficient cutting tool specifically designed for precision processing. It is composed of a diamond wire saw, a cast iron frame, a driving flywheel (to drive the wire saw for cutting), servo control, hydraulic tensioning, a worktable, and a CNC control system.',
-      'The machine operates by driving the diamond wire through the flywheel to achieve friction-based cutting. The CNC control system automatically adjusts the wire tension, ensuring smooth and accurate cutting. This system, combined with hydraulic tensioning, enhances operational efficiency and safety.',
-      'Ideal for cutting stone blocks, concrete, graphite, and various stones such as granite, marble, jade, and travertine, this machine is widely used in architectural materials, engineering components, and high-end stone processing. Its advantages include smooth cutting surfaces, minimal material waste, and suitability for small to medium-scale processing projects requiring high precision.'
-    ],
-    products: [
-      {
-        image: '/images/5-axis-bridge-saw.svg',
-        title: '5-Axis CNC Bridge Saw',
-        date: 'Apr 17, 2025',
-        subtitle: 'Flagship Products 2025',
-        description: 'Dinosaw Featured Machines'
-      },
-      {
-        image: '/images/4-axis-bridge-saw.svg',
-        title: '4+1 Axis Bridge Saw Cutting Machine'
-      },
-      {
-        image: '/images/bridge-cutting-machine.svg',
-        title: 'Bridge Cutting Machine for Natural Stone & Concrete'
-      },
-      {
-        image: '/images/cnc-stone-bridge-saw.svg',
-        title: 'CNC Stone Bridge Saw for Precision Cutting'
-      },
-      {
-        image: '/images/monoblock-bridge-saw.svg',
-        title: 'Monoblock Bridge Saw CNC Stone Cutter'
-      }
-    ]
-  };
-});
+
+        // console.log(productDetail)
+
+        processingCase = [
+            { 
+                id: 1, 
+                title: productDetail.wire_saw_machine_customer_cases_title, 
+                subTitle: productDetail.wire_saw_machine_customer_cases_subtitle, 
+                blogs: formatArrayDatesShort(productDetail.wire_saw_machine_customer_cases_blogs)
+            },
+            { 
+                id: 2, 
+                title: productDetail.wire_saw_operation_videos_title, 
+                subTitle: productDetail.wire_saw_operation_videos_subtitle, 
+                blogs: formatArrayDatesShort(productDetail.wire_saw_operation_videos_blogs)
+            },
+            { 
+                id: 3, 
+                title: productDetail.wire_saw_technology_news_title, 
+                subTitle: productDetail.wire_saw_technology_news_subtitle, 
+                blogs: formatArrayDatesShort(productDetail.wire_saw_technology_news_blogs)
+            }
+        ]
+        // 通知父组件数据已加载
+        emit('headdata-loaded', data.wire_saw_machine);
+    }
+
+}, { immediate: true })
+
+
 
 // 根据slug获取面包屑导航数据
 const productData = computed(() => {
@@ -762,7 +602,7 @@ const productData = computed(() => {
         },
         // 可以添加更多产品数据
         'default': {
-            title: contentData.value.title || 'Product Title',
+            title: productDetail.value.title || 'Product Title',
             description: 'Product description goes here...',
             materials: [
                 { name: 'Material 1', icon: '' },
@@ -889,6 +729,9 @@ const productData = computed(() => {
     line-height: 1.25em;
     color: #FFFFFF;
     text-align: center;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;
 }
 
 /* 响应式设计 */
@@ -972,6 +815,7 @@ const productData = computed(() => {
     width: 100%;
     max-width: 1200px;
     height: 58px;
+    margin-bottom:30px;
 }
 
 .cnc-title {
@@ -995,6 +839,7 @@ const productData = computed(() => {
     width: 100%;
     max-width: 1212px;
     gap: 0;
+    margin-bottom:30px;
 }
 
 .cnc-description-text {
@@ -1100,7 +945,7 @@ const productData = computed(() => {
 
     .case-background {
         width: 100%;
-        height: 280px;
+        height: 230px;
         border-radius:8px;
     }
 
@@ -1498,7 +1343,7 @@ const productData = computed(() => {
 .dynamic-content-section {
     width: 100%;
     background-color: #ffffff;
-    padding: 60px 40px;
+    padding: 50px 40px;
 }
 
 .content-wrapper {
@@ -1508,553 +1353,6 @@ const productData = computed(() => {
     flex-direction: column;
 }
 
-/* Dynamic Product Section */
-.dynamic-product-section {
-    width: 100%;
-}
-
-/* 1张图片布局：左侧图片，右侧信息 - 按照Figma节点 10:15239 */
-.layout-single {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px 0;
-    width: 100%;
-    max-width: 1400px;
-    height: 333px;
-    background-color: #f6f6f6;
-    border-radius: 30px;
-    margin: 0 auto;
-}
-
-.single-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: stretch;
-    align-items: stretch;
-    gap: 20px;
-    width: 1292px;
-    height: 313px;
-}
-
-.single-link {
-    display: flex;
-    align-items: center;
-    gap: 249px;
-    width: 100%;
-    height: 100%;
-}
-
-.single-image {
-    flex-shrink: 0;
-    width: 573px;
-    height: 313px;
-    border-radius: 8px;
-    overflow: hidden;
-    position: relative;
-}
-
-.single-image img {
-    width: 407px;
-    height: 313px;
-    object-fit: contain;
-    position: absolute;
-    left: 83px;
-    top: 0;
-}
-
-.single-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 60px;
-    width: 469px;
-    height: 194px;
-}
-
-.single-text-section {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-self: stretch;
-    gap: 10px;
-    height: 94px;
-}
-
-.single-title-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: stretch;
-    align-items: stretch;
-    align-self: stretch;
-    height: 48px;
-}
-
-.single-title {
-    font-family: Inter, sans-serif;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 1em;
-    text-align: left;
-    color: #333333;
-    margin: 0;
-    width: 378px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    position: relative;
-    top: -12px;
-}
-
-.single-date-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: stretch;
-    align-items: stretch;
-    width: 273px;
-    height: 36px;
-}
-
-.single-date {
-    font-family: Inter, sans-serif;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 1.1666666666666667em;
-    text-align: left;
-    color: rgba(61, 61, 61, 0.7);
-    margin: 0;
-    width: 112px;
-    height: 21px;
-    display: flex;
-    align-items: center;
-    position: relative;
-    top: 7px;
-}
-
-.single-button {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    padding: 16px;
-    width: 150px;
-    height: 40px;
-    background-color: #000000;
-    border-radius: 21px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.single-button:hover {
-    background-color: #333333;
-}
-
-.single-button-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: stretch;
-    align-items: stretch;
-    width: 104px;
-    height: 28px;
-}
-
-.button-text {
-    font-family: Inter, sans-serif;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 1.2142857142857142em;
-    text-align: left;
-    color: #ffffff;
-    margin: 0;
-    width: 98px;
-    height: 17px;
-    display: flex;
-    align-items: center;
-    position: relative;
-    top: 5px;
-}
-
-/* 2张图片布局：左右布局 */
-.layout-double {
-    display: flex;
-    gap: 24px;
-    align-items: stretch;
-}
-
-.double-item {
-    flex: 1;
-    background-color: #f6f6f6;
-    border-radius: 24px;
-    padding: 20px;
-}
-
-/* 垂直布局：上面图片，下面标题 */
-.double-item.vertical {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.double-image {
-    width: 100%;
-    max-width: 330px;
-    height: 192px;
-    margin-bottom: 16px;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.double-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.double-content {
-    flex: 1;
-}
-
-.double-title {
-    font-family: Inter, sans-serif;
-    font-weight: 600;
-    font-size: 22px;
-    line-height: 1.1818181818181819em;
-    color: #333333;
-    margin: 0;
-}
-
-/* 水平布局：左侧图片，右侧信息 - 按照Figma节点 7:11368 */
-.double-item.horizontal {
-    display: flex;
-    justify-content: stretch;
-    align-items: stretch;
-    padding: 10px 0;
-    width: 684px;
-    height: 307px;
-    background-color: #f6f6f6;
-    border-radius: 30px;
-}
-
-.horizontal-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: stretch;
-    align-items: stretch;
-    gap: 20px;
-    width: 100%;
-    height: 287px;
-}
-
-.horizontal-link {
-    display: flex;
-    align-items: center;
-    align-self: stretch;
-    gap: 24px;
-    padding: 24px;
-    width: 100%;
-    height: 100%;
-}
-
-.horizontal-image {
-    flex-shrink: 0;
-    width: 273px;
-    height: 170px;
-    border-radius: 8px;
-    overflow: hidden;
-    position: relative;
-}
-
-.horizontal-image img {
-    width: 221px;
-    height: 170px;
-    object-fit: contain;
-    position: absolute;
-    left: 26px;
-    top: 0;
-}
-
-.horizontal-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 60px;
-    width: 291px;
-    height: 225.22px;
-}
-
-.horizontal-text-section {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    align-self: stretch;
-    gap: 10px;
-    height: 125.22px;
-}
-
-.horizontal-title-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: stretch;
-    align-items: stretch;
-    align-self: stretch;
-    height: 79.22px;
-}
-
-.horizontal-title {
-    font-family: Inter, sans-serif;
-    font-weight: 600;
-    font-size: 22px;
-    line-height: 1.1818181818181819em;
-    text-align: left;
-    color: #333333;
-    margin: 0;
-    width: 261px;
-    height: 78px;
-    display: flex;
-    align-items: center;
-    position: relative;
-    top: -17px;
-}
-
-.horizontal-date-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: stretch;
-    align-items: stretch;
-    align-self: stretch;
-    height: 36px;
-}
-
-.horizontal-date {
-    font-family: Inter, sans-serif;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 1.1666666666666667em;
-    text-align: left;
-    color: rgba(61, 61, 61, 0.7);
-    margin: 0;
-    display: flex;
-    align-items: center;
-    position: relative;
-    top: 7px;
-}
-
-.horizontal-button {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    padding: 16px;
-    width: 150px;
-    height: 40px;
-    background-color: #000000;
-    border-radius: 21px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.horizontal-button:hover {
-    background-color: #333333;
-}
-
-.horizontal-button-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: stretch;
-    align-items: stretch;
-    width: 104px;
-    height: 28px;
-}
-
-.horizontal-button .button-text {
-    font-family: Inter, sans-serif;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 1.2142857142857142em;
-    text-align: left;
-    color: #ffffff;
-    margin: 0;
-    width: 98px;
-    height: 17px;
-    display: flex;
-    align-items: center;
-    position: relative;
-    top: 5px;
-}
-
-/* 4张图片布局：2x2网格 */
-.layout-quad {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 24px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.quad-item {
-    background-color: #f6f6f6;
-    border-radius: 24px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.quad-image {
-    width: 100%;
-    max-width: 330px;
-    height: 192px;
-    margin-bottom: 16px;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.quad-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.quad-content {
-    flex: 1;
-}
-
-.quad-title {
-    font-family: Inter, sans-serif;
-    font-weight: 600;
-    font-size: 22px;
-    line-height: 1.1818181818181819em;
-    color: #333333;
-    margin: 0;
-}
-
-/* 5张图片布局：左边1个大图，右边4个小图 */
-.layout-five {
-    display: flex;
-    gap: 24px;
-    align-items: stretch;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-/* 左侧特色产品 */
-.five-left {
-    flex: 1;
-    max-width: 696px;
-    background-color: #f6f6f6;
-    border-radius: 24px;
-    overflow: hidden;
-}
-
-.five-main-image {
-    padding: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.five-main-image img {
-    width: 100%;
-    max-width: 646px;
-    height: auto;
-    object-fit: cover;
-}
-
-.five-main-content {
-    padding: 20px;
-    text-align: center;
-}
-
-.five-main-title {
-    font-family: Inter, sans-serif;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 1em;
-    color: #333333;
-    margin: 0 0 10px 0;
-}
-
-.five-main-date {
-    font-family: Inter, sans-serif;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 1.1666666666666667em;
-    color: rgba(61, 61, 61, 0.7);
-    margin: 0 0 20px 0;
-}
-
-.five-main-info {
-    text-align: left;
-    margin-top: 20px;
-}
-
-.five-subtitle {
-    font-family: Inter, sans-serif;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 1em;
-    color: #000000;
-    margin: 0 0 10px 0;
-}
-
-.five-description {
-    font-family: Inter, sans-serif;
-    font-weight: 300;
-    font-size: 14px;
-    line-height: 1.1428571428571428em;
-    color: #3d3d3d;
-    margin: 0;
-}
-
-/* 右侧产品网格 */
-.five-right {
-    flex: 1;
-    max-width: 680px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 24px;
-}
-
-.five-grid-item {
-    background-color: #f6f6f6;
-    border-radius: 24px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.five-grid-image {
-    width: 100%;
-    max-width: 273px;
-    height: 192px;
-    margin-bottom: 16px;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.five-grid-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.five-grid-title {
-    font-family: Inter, sans-serif;
-    font-weight: 600;
-    font-size: 22px;
-    line-height: 1.1818181818181819em;
-    color: #333333;
-    margin: 0;
-}
 
 /* 响应式设计 */
 @media (max-width: 1200px) {
@@ -2215,202 +1513,6 @@ const productData = computed(() => {
     }
 }
 
-@media (max-width: 768px) {
-    .dynamic-content-section {
-        padding: 30px 15px;
-    }
-    .projects-banner{
-        padding-bottom:20px;
-        height:auto;
-        .content-wrapper{
-            height:auto;
-        }
-    }
-    
-    
-    .layout-quad,
-    .five-right {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    
-    .quad-title,
-    .five-grid-title {
-        font-size: 18px;
-        line-height: 1.3em;
-    }
-    
-    .single-title,
-    .five-main-title {
-        font-size: 20px;
-        line-height: 1.2em;
-    }
-    
-    .double-title,
-    .horizontal-title {
-        font-size: 18px;
-        line-height: 1.3em;
-    }
-    
-    .layout-single {
-        padding: 30px 20px;
-    }
-}
-
-@media (max-width: 480px) {
-    .dynamic-content-section {
-        padding: 30px 10px;
-    }
-    
-    .content-wrapper {
-        gap: 10px;
-    }
-    
-    .single-title,
-    .five-main-title {
-        font-size: 18px;
-    }
-    
-    .quad-title,
-    .five-grid-title,
-    .double-title,
-    .horizontal-title {
-        font-size: 16px;
-    }
-    
-    .single-date,
-    .five-main-date,
-    .horizontal-date {
-        font-size: 14px;
-    }
-    
-    .single-button,
-    .horizontal-button {
-        width: 120px;
-        height: 36px;
-        padding: 12px;
-    }
-    
-    .button-text {
-        font-size: 12px;
-    }
-    
-    .layout-single {
-        padding: 15px 10px;
-        height: auto;
-        min-height: 250px;
-    }
-    
-    .single-container {
-        width: 100%;
-        height: auto;
-    }
-    
-    .single-link {
-        flex-direction: column;
-        gap: 20px;
-    }
-    
-    .single-image {
-        width: 100%;
-        max-width: 300px;
-        height: auto;
-        margin: 0 auto;
-    }
-    
-    .single-image img {
-        width: 100%;
-        max-width: 280px;
-        height: auto;
-    }
-    
-    .single-content {
-        width: 100%;
-        gap: 20px;
-        align-items: center;
-    }
-    
-    .single-title {
-        font-size: 18px;
-        line-height: 1.2em;
-        text-align: center;
-    }
-    
-    .single-date {
-        font-size: 14px;
-        text-align: center;
-    }
-    
-    .single-button {
-        width: 120px;
-        height: 36px;
-        padding: 12px;
-    }
-    
-    .button-text {
-        font-size: 12px;
-        width: auto;
-        height: auto;
-        top: 0;
-        text-align: center;
-    }
-    
-    .single-button-content {
-        width: auto;
-        height: auto;
-    }
-    
-    /* 2张图片水平布局移动端样式 */
-    .double-item.horizontal {
-        flex-direction: column;
-        height: auto;
-        padding: 20px;
-    }
-    
-    .horizontal-image {
-        width: 100%;
-        height: 200px;
-        margin-bottom: 20px;
-    }
-    
-    .horizontal-image img {
-        width: 100%;
-        height: 100%;
-    }
-    
-    .horizontal-content {
-        width: 100%;
-        height: auto;
-        gap: 15px;
-        align-items: center;
-    }
-    
-    .horizontal-text-section {
-        width: 100%;
-        height: auto;
-        gap: 8px;
-        text-align: center;
-    }
-    
-    .horizontal-title {
-        font-size: 18px;
-        line-height: 1.2em;
-    }
-    
-    .horizontal-date {
-        font-size: 14px;
-    }
-    
-    .horizontal-button {
-        width: 120px;
-        height: 36px;
-        padding: 12px;
-    }
-    
-    .horizontal-button-text {
-        font-size: 12px;
-    }
-}
 
 /* Comprehensive Guide Section Styles */
 .comprehensive-guide-section {
@@ -2486,7 +1588,10 @@ const productData = computed(() => {
     object-fit: cover;
     border-radius: 8px;
 }
-
+.guide-image-mobile{
+    display:none;
+    width:100%;
+}
 /* Content Section */
 .guide-content {
     width: 1076px;
@@ -2621,6 +1726,11 @@ const productData = computed(() => {
         width: 100%;
         height: auto;
         top: 0;
+    }
+    
+    .layout-five{
+        flex-direction:column;
+        gap:30px;
     }
 }
 

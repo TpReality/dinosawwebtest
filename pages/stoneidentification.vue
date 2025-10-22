@@ -1,15 +1,12 @@
 <template>
     <div class="main">
-        <DinosawHeader />
+        <DinosawHeader :menuItems="menuItems" :contentDetail="contentDetail" />
         <div class="main-content">
             <div class="upload-guide">
                 <div class="file-input-bg">
                     <div class="upload-icon"></div>
-                    <h2>AI-Powered Stone Identifier</h2>
-                    <h1>
-                        Professional Stone Identification | Tools to Find
-                        Similar Choices Fast
-                    </h1>
+                    <h2>{{ stones.hero_main_title }}</h2>
+                    <h1>{{stones.hero_main_subtitle}}</h1>
                 </div>
             </div>
             <div class="tools-content">
@@ -20,15 +17,9 @@
                     />
                     <div class="file-input-bg">
                         <div class="upload-icon"></div>
-                        <div class="h3">
-                            Click to upload a stone image for more similar
-                            stone choices
-                        </div>
-                        <p>
-                            Supports JPG and PNG formats. Single image
-                            should not exceed 10MB.
-                        </p>
-                        <button>Select Image</button>
+                        <div class="h3">{{stones.select_image_panel_title}}</div>
+                        <p>{{ stones.select_image_panel_description }}</p>
+                        <button>{{ stones.select_image_panel_btn_text }}</button>
                     </div>
                     <div v-if="uploadLoading" class="upload-loading">
                         <div class="loader"></div>
@@ -54,12 +45,8 @@
                         </div>
                         <div class="guide-text-blur"></div>
                         <div class="guide-text">
-                            <h3>Upload Stone Pictures</h3>
-                            <p>
-                                Select clear photos of stones to upload, and
-                                make sure there is sufficient lighting and
-                                the background is simple.
-                            </p>
+                            <h3>{{ stones.upload_stone_pictures_title }}</h3>
+                            <p v-html="stones.upload_stone_pictures_description"></p>
                         </div>
                     </div>
                     <div class="guide-step">
@@ -79,12 +66,8 @@
                         </div>
                         <div class="guide-text-blur"></div>
                         <div class="guide-text">
-                            <h3>Quickly Stone Identification</h3>
-                            <p>
-                                The system automatically analyzes the
-                                characteristics of the stones and matches
-                                similar stone materials.
-                            </p>
+                            <h3>{{ stones.quickly_stone_identification_title }}</h3>
+                            <p v-html="stones.quickly_stone_identification_description"></p>
                         </div>
                     </div>
                     <div class="guide-step">
@@ -108,249 +91,114 @@
                         </div>
                         <div class="guide-text-blur"></div>
                         <div class="guide-text">
-                            <h3>View Stone Lists</h3>
-                            <p>Show the matched stone pictures.</p>
+                            <h3>{{ stones.view_stone_lists_title}}</h3>
+                            <p>{{ stones.view_stone_lists_description }}</p>
                         </div>
                     </div>
                 </div>
                 <div class="rel">
-                    <img class="bg" src="https://framerusercontent.com/images/4cNK7hR44yWDvsyolHiTPOzdfk.webp" />
+                    <NuxtImg class="bg" src="https://framerusercontent.com/images/4cNK7hR44yWDvsyolHiTPOzdfk.webp" />
                     <div class="stone-types">
-                        <h2>
-                            What Kind of Stone Is This：Common Stone Types
-                        </h2>
+                        <h2>{{ stones.what_kind_of_stone_is_this_title }}</h2>
                         <div class="stone-types-wrap">
                             <div class="stone-types-item">
                                 <div class="rel float">
-                                    <img
+                                    <NuxtImg
                                         src="http://mms1.baidu.com/it/u=4227657350,1935026197&fm=253&app=138&f=JPEG?w=664&h=500" />
                                 </div>
 
                                 <div class="stone-types-text">
-                                    <h3>Marble</h3>
-                                    <p>
-                                        Metamorphic rock with veining
-                                        patterns, fine texture and excellent
-                                        polish capability. Common varieties:
-                                        Carrara White, Volakas White, Crema
-                                        Marfil, Portoro Gold. Applications:
-                                        luxury walls, flooring, hotel
-                                        lobbies, sculptures, bathrooms, and
-                                        window sills.
-                                    </p>
+                                    <h3>{{ stones.what_kind_of_stone_is_this_left_top_title }}</h3>
+                                    <p v-html="stones.what_kind_of_stone_is_this_left_top_description"></p>
                                 </div>
                             </div>
                             <div class="stone-types-item">
                                 <div class="rel float">
-                                    <img
+                                    <NuxtImg
                                         src="http://mms0.baidu.com/it/u=776580578,2330098638&fm=253&app=138&f=GIF?w=360&h=360" />
                                 </div>
 
                                 <div class="stone-types-text">
-                                    <h3>Quartz Stone</h3>
-                                    <p>
-                                        Engineered stone with zero porosity,
-                                        scratch/stain resistance, and heat
-                                        tolerance. Common varieties:
-                                        Caesarstone, Corian, Silestone, LG
-                                        Hausys. Applications: kitchen
-                                        countertops, bathroom surfaces,
-                                        window sills, restaurant surfaces,
-                                        and laboratory worktops.
-                                    </p>
+                                    <h3>{{stones.what_kind_of_stone_is_this_right_top_title}}</h3>
+                                    <p v-html="stones.what_kind_of_stone_is_this_right_top_description"></p>
                                 </div>
                             </div>
                         </div>
                         <div class="stone-types-wrap">
                             <div class="stone-types-item">
                                 <div class="rel float">
-                                    <img
+                                    <NuxtImg
                                         src="https://img0.baidu.com/it/u=737944605,4071115033&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=440" />
                                 </div>
 
                                 <div class="stone-types-text">
-                                    <h3>Granite</h3>
-                                    <p>
-                                        Igneous rock with high density,
-                                        hardness, and acid/alkali
-                                        resistance. Common varieties: Indian
-                                        Red, Blue Pearl, Absolute Black,
-                                        White Galaxy. Applications: building
-                                        exteriors, flooring, stair treads,
-                                        kitchen countertops, bathroom
-                                        surfaces, and monuments.
-                                    </p>
+                                    <h3>{{ stones.what_kind_of_stone_is_this_left_bottom_title }}</h3>
+                                    <p v-html="stones.what_kind_of_stone_is_this_left_bottom_description"></p>
                                 </div>
                             </div>
                             <div class="stone-types-item">
                                 <div class="rel float">
-                                    <img
+                                    <NuxtImg
                                         src="https://p3-sdbk2-media.byteimg.com/tos-cn-i-xv4ileqgde/a1f4b528e8dd43b18e31a4984af33c9b~tplv-xv4ileqgde-image.image" />
                                 </div>
 
                                 <div class="stone-types-text">
-                                    <h3>Slate</h3>
-                                    <p>
-                                        Metamorphic rock with layered
-                                        structure, good waterproofing, and
-                                        natural cleavage into sheets. Common
-                                        varieties: Welsh Slate, Spanish
-                                        Rustic Slate, Chinese Black Slate,
-                                        Indian Purple Slate. Applications:
-                                        garden pathways, roofing tiles, wall
-                                        decorations, pool tables, and
-                                        stepping stones.
-                                    </p>
+                                    <h3>{{ stones.what_kind_of_stone_is_this_right_bottom_title }}</h3>
+                                    <p v-html="stones.what_kind_of_stone_is_this_right_bottom_description"></p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="faqs">
-                    <h2 class="h2">
-                        How can this AI Rock identifier and DINOSAW help?
-                    </h2>
+                    <h2 class="h2">{{stones.how_can_this_ai_rock_identifier_title}}</h2>
                     <ul>
                         <li>
-                            <h3 class="h3">Trade Name Precision</h3>
-                            <p>
-                                Instantly recognize commercial stone names
-                                like Carrara White, Bianco Venatino, or
-                                Absolute Black �?not just generic “marble�?
-                                or “granite.�?
-                            </p>
+                            <h3 class="h3">{{stones.trade_name_precision_title}}</h3>
+                            <p v-html="stones.trade_name_precision_description"></p>
                         </li>
                         <li>
-                            <h3 class="h3">
-                                Seamless Machinery Integration
-                            </h3>
-                            <div>
-                                <p>
-                                    After identifying a stone, explore
-                                    tailored tools on{" "}
-                                    <a href="https://www.dinosawmachine.com/Products">
-                                        DINOSAW Machinery
-                                    </a>
-                                    :
-                                </p>
-                                <p>
-                                    <a href="https://www.dinosawmachine.com/Products/wire-saw-machine">
-                                        Diamond wire saw machines for block
-                                        cutting and shaping.
-                                    </a>
-                                </p>
-                                <p>
-                                    <a
-                                        href="https://www.dinosawmachine.com/Products/5-axis-cnc-waterjet-machine-for-sale">
-                                        Waterjet for intricate marble
-                                        carvings.
-                                    </a>
-                                </p>
-                                <p>
-                                    <a
-                                        href="https://www.dinosawmachine.com/Products/cnc-5-axis-bridge-saw-for-stone-sink">
-                                        5-aixs bridge saw for sinks or
-                                        countertop manufacturing.
-                                    </a>
-                                </p>
-                                <p>
-                                    <a href="https://www.dinosawmachine.com/Products/diamond-saw-blade-for-granite">
-                                        Best diamond blades for cutting a
-                                        specific granite.
-                                    </a>
-                                </p>
-                                <p>
-                                    <a href="https://www.dinosawmachine.com/Products/diamond-polishing-pad">
-                                        Optimal polishing pads for marble
-                                        types.
-                                    </a>
-                                </p>
-                                <p>
-                                    Contact DINOSAW to get your stone
-                                    processing recommendations now.
-                                </p>
-                            </div>
+                            <h3 class="h3">{{ stones.seamless_machinery_integration_title }}</h3>
+                            <div v-html="stones.seamless_machinery_integration_description"></div>
                         </li>
                         <li>
-                            <h2 class="h2">
-                                Who Needs DINOSW Stone Identification Tools?
-                            </h2>
+                            <h2 class="h2">{{ stones.who_needs_dinosaw_stone_title }}</h2>
                             <div class="nine-pic-wrap">
                                 <div class="nine-pic">
-                                    <img alt="Interior decoration stone walls"
-                                        src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/upload/appicon/Interior decoration stone walls.webp" />
-                                    <h3 class="h3">
-                                        Stone Wholesale Traders
-                                    </h3>
-                                    <p>
-                                        Identify cost-effective alternatives
-                                        during material shortages (e.g.,
-                                        substitute Calacatta Gold with
-                                        Aurora Quartzite).
-                                    </p>
+                                    <NuxtImg alt="Interior decoration stone walls"
+                                        :src="stones.who_needs_dinosaw_stone_labout_image_1" />
+                                    <h3 class="h3">{{ stones.who_needs_dinosaw_stone_labout_title_1 }}</h3>
+                                    <p v-html="stones.who_needs_dinosaw_stone_labout__description_1"></p>
                                 </div>
                                 <div class="nine-pic">
-                                    <img alt="Marble backdrop wall"
+                                    <NuxtImg alt="Marble backdrop wall"
                                         src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/upload/appicon/Marble backdrop wall.webp" />
-                                    <h3 class="h3">
-                                        Luxury Interior Designers
-                                    </h3>
-                                    <p>
-                                        Match client requests for rare
-                                        stones (e.g., “Find a marble with
-                                        blue veins like Blue Bahia�? and
-                                        suggest visually identical but
-                                        cheaper options.
-                                    </p>
+                                    <h3 class="h3">{{ stones.who_needs_dinosaw_stone_labout_title_2 }}</h3>
+                                    <p v-html="stones.who_needs_dinosaw_stone_labout__description_2"></p>
                                 </div>
                                 <div class="nine-pic">
-                                    <img alt="Natural stone facades"
+                                    <NuxtImg alt="Natural stone facades"
                                         src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/upload/appicon/Natural stone facades.webp" />
-                                    <h3 class="h3">
-                                        Landscape Architects
-                                    </h3>
-                                    <p>
-                                        Source locally available stones to
-                                        reduce carbon footprint (e.g.,
-                                        replace imported Nero Marquina with
-                                        Indian Black Galaxy).
-                                    </p>
+                                    <h3 class="h3">{{ stones.who_needs_dinosaw_stone_labout_title_3 }}</h3>
+                                    <p v-html="stones.who_needs_dinosaw_stone_labout__description_3"></p>
                                 </div>
                                 <div class="nine-pic">
-                                    <img alt="Stone tombstones"
+                                    <NuxtImg alt="Stone tombstones"
                                         src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/upload/appicon/Stone tombstones.webp" />
-                                    <h3 class="h3">
-                                        Monument Workshops
-                                    </h3>
-                                    <p>
-                                        Distinguish tombstone materials
-                                        (e.g., Jet Black Granite vs. dyed
-                                        basalt) to comply with cemetery
-                                        durability standards.
-                                    </p>
+                                    <h3 class="h3">{{ stones.who_needs_dinosaw_stone_labout_title_4 }}</h3>
+                                    <p v-html="stones.who_needs_dinosaw_stone_labout__description_4"></p>
                                 </div>
                                 <div class="nine-pic">
-                                    <img alt="Stone construction"
+                                    <NuxtImg alt="Stone construction"
                                         src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/upload/appicon/Stone construction.webp" />
-                                    <h3 class="h3">Project Managers</h3>
-                                    <p>
-                                        Audit construction materials on-site
-                                        to ensure compliance with
-                                        specifications (e.g., confirm
-                                        Travertine cladding isn’t
-                                        substituted with cheaper limestone).
-                                    </p>
+                                    <h3 class="h3">{{ stones.who_needs_dinosaw_stone_labout_title_5 }}</h3>
+                                    <p v-html="stones.who_needs_dinosaw_stone_labout__description_5"></p>
                                 </div>
                                 <div class="nine-pic">
-                                    <img alt="Geology student"
+                                    <NuxtImg alt="Geology student"
                                         src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/upload/appicon/Geology student.webp" />
-                                    <h3 class="h3">Geology Students</h3>
-                                    <p>
-                                        Study commercial vs. geological
-                                        naming discrepancies (e.g.,
-                                        Travertine is limestone, not
-                                        marble).
-                                    </p>
+                                    <h3 class="h3">{{ stones.who_needs_dinosaw_stone_labout_title_6 }}</h3>
+                                    <p v-html="stones.who_needs_dinosaw_stone_labout__description_6"></p>
                                 </div>
                             </div>
                         </li>
@@ -364,7 +212,7 @@
                     class="overlay"
                 ></div>
                 <div class="upload-image">
-                    <img :src="uploadImg" />
+                    <NuxtImg :src="uploadImg" />
                 </div>
                 <div class="stone-list-wrap">
                     <div v-if="isSearchLoading" class="search-loading">
@@ -378,7 +226,7 @@
                                 class="stone-item"
                                 @click="showSinglePic(stone)"
                             >
-                                <img :src="stone.img_url" />
+                                <NuxtImg :src="stone.img_url" />
                                 <p>{{ stone.fileName }}</p>
                             </div>
                         </div>
@@ -403,13 +251,13 @@
             ></div>
             <div class="image-box">
                 <div class="image-name">{{ selectedImg?.fileName }}</div>
-                <img class="image" :src="selectedImg?.img_url" />
+                <NuxtImg class="image" :src="selectedImg?.img_url" />
                 <a
                     class="singlepic-href"
                     :href="getWhatsAppUrl(selectedImg?.fileName)"
                     target="_blank"
                 >
-                    <img
+                    <NuxtImg
                         src="https://framerusercontent.com/images/Gvfk53Mm3Aro3nRYf1sD677a4.png"
                         alt=""
                     />
@@ -417,17 +265,23 @@
                 </a>
             </div>
         </div>
-        <ContactType />
-        <WhatsApp />
-        <DinosawFooter />
+        <ContactType :contentDetail="contentDetail" />
+        <WhatsApp :contentDetail="contentDetail" />
+        <DinosawFooter :menuItems="menuItems" :contentDetail="contentDetail" />
     </div>
 </template>
 
 <script setup>
 import { ref, onMounted, watch } from 'vue'
 
-// 获取产品详情数据
-const { data: productDetailRes, pending, error } = await useApi('/cnc-diamond-wire-saw-cutting-machine-pro-for-sales?populate=all')
+// 使用菜单数据composable
+const { menuItems, initializeMenuData } = useMenuData()
+
+// 初始化菜单数据
+await initializeMenuData()
+
+// 使用全局 contentDetail
+const { contentDetail, isLoaded } = useContentDetail()
 
 // 响应式数据
 const uploadLoading = ref(false)
@@ -445,16 +299,22 @@ const list = ref([])
 const totalPages = ref(1)
 const currentPage = ref(1)
 
+// 获取产品详情数据
+const stones = ref({})
+const { data: stoneRes, pending, error } = await useApi('/stoneidentifications??filters[home_text][$eq]=Home')
+
 // 监听产品数据变化，设置页面元信息
-watch(productDetailRes, (newPosts) => {
+watch(stoneRes, (newPosts) => {
     if (newPosts) {
         console.log(newPosts)
+        let data = newPosts.data[0]
+        stones.value = data
         useHead({
-            title: newPosts.metaTitle,
+            title: data.metaTitle,
             meta: [
                 {
                     name: 'description',
-                    content: newPosts.metaDescription
+                    content: data.metaDescription
                 }
             ],
         })

@@ -208,9 +208,9 @@
     </section>
     
 
-    <ContactType />
-    <WhatsApp />
-    <DinosawFooter />
+    <ContactType :contentDetail="contentDetail" />
+    <WhatsApp :contentDetail="contentDetail" />
+    <DinosawFooter :contentDetail="contentDetail" />
   </div>
 </template>
 
@@ -220,6 +220,18 @@ import DinosawHeader from '~/components/DinosawHeader.vue'
 import DinosawFooter from '~/components/DinosawFooter.vue'
 import ContactType from '~/components/ContactType.vue'
 import WhatsApp from '~/components/WhatsApp.vue'
+
+let contentDetail = {}
+
+const { data: contentDetailRes, pending: contentPending, error: contentError } = await useApi('/public-page-infos?filters[get_a_free_quote_btn_text][$eq]=Get A Free Quote')
+
+watch(contentDetailRes, (newPosts) => {
+    if (newPosts) {
+        let data = newPosts.data[0]
+        contentDetail = data
+        console.log('contentDetail:', contentDetail)
+    }
+}, { immediate: true })
 
 // SEO and meta data
 useHead({
