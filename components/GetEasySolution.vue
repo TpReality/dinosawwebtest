@@ -102,7 +102,9 @@
                                                 <div class="select-wrapper">
                                                     <select class="select-display" required v-model="form.types">
                                                         <option value="" disabled="" selected="">{{ contentDetail.what_type_of_CNC_machine_or_diamond_placeholder_text }}</option>
-                                                        <option :value="type.category_name" v-for="type in topProduct" :key="type.id">{{ type.category_name }}</option>
+                                                        <template v-for="type in topProduct" :key="type.id">
+                                                        <option :value="type.column_attr_name">{{ type.category_name }}</option>
+                                                        </template>
                                                         
                                                         <!-- <option value="Wire saw machine series">Wire saw machine series</option>
                                                         <option value="Circular Saw Machine">Circular Saw Machine</option>
@@ -129,13 +131,19 @@
                                                 <div class="select-wrapper">
                                                     <select class="select-display" required v-model="form.materials">
                                                         <option value="" disabled="" selected="">{{ contentDetail.what_materials_will_you_placeholder_text }}</option>
-                                                        <option value="Marble">Marble</option>
+                                                        <template v-for="(stone, index) in selectStones" :key="index">
+                                                            <option :value="stone.category_value">{{stone.category_name}}</option>
+                                                        </template>
+                                                        
+                                                        
+                                                        <!-- <option value="Marble">Marble</option>
                                                         <option value="Granite">Granite</option>
                                                         <option value="Quartz">Quartz</option>
                                                         <option value="Ceramic">Ceramic</option>
                                                         <option value="Steel">Steel</option>
                                                         <option value="Concrete">Concrete</option>
-                                                        <option value="Other">Other</option></select>
+                                                        <option value="Other">Other</option> -->
+                                                    </select>
                                                     <div class="select-icon">
                                                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                                                             <path d="M4 6L8 10L12 6" stroke="#999999" stroke-width="1.5"
@@ -317,6 +325,7 @@ const props = defineProps({
 
 // 响应式数据
 const topProduct = ref([])
+const selectStone = ref([])
 const form = ref({
   types: "",
   materials: "",
@@ -333,7 +342,7 @@ const { data: topProductDetailRes, pending: topPending, error: topError } = awai
 watch(topProductDetailRes, (newPosts) => {
   if (newPosts) {
     let data = newPosts.data
-    
+    // console.log('Product',newPosts)
     // 根据 sort 字段从小到大排序
     if (Array.isArray(data)) {
       data = data.sort((a, b) => {
@@ -341,6 +350,10 @@ watch(topProductDetailRes, (newPosts) => {
         const sortA = a.sort !== undefined ? a.sort : Number.MAX_SAFE_INTEGER
         const sortB = b.sort !== undefined ? b.sort : Number.MAX_SAFE_INTEGER
         return sortA - sortB
+      })
+
+      data.forEach(val=>{
+            val.column_attr_name = val.column_attr_name.replace("_"," ")
       })
     }
     
@@ -350,6 +363,21 @@ watch(topProductDetailRes, (newPosts) => {
 
 // 计算属性
 const topProducts = computed(() => topProduct.value)
+
+// 获取石材数据
+const { data: selectStoneDetailRes, pending: selectStonePending, error: selectStoneError } = await useApi('/stone-categories')
+
+// 监听石材数据变化
+watch(selectStoneDetailRes, (newPosts) => {
+  if (newPosts) {
+    let data = newPosts.data
+    
+    selectStone.value = data
+  }
+}, { immediate: true })
+
+// 计算属性
+const selectStones = computed(() => selectStone.value)
 
 // 方法
 const submitForm = async () => {
