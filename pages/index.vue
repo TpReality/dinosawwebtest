@@ -1215,12 +1215,12 @@ watch(indexRes, (newPosts) => {
                                     "addressCountry": "CN"
                                 },
                                 "image": [
-                                    "https://www.stylecnc.com/uploads/logo.jpg",
-                                    "https://www.stylecnc.com/assets/img/hero-img/stylecnc.svg"
+                                    "https://www.dinosawmachine.com/uploads/logo.jpg",
+                                    "https://www.dinosawmachine.com/assets/img/hero-img/stylecnc.svg"
                                 ],
                                 "email": "info@stylecnc.com",
                                 "telePhone": "+86-531-83161518",
-                                "url": "https://www.stylecnc.com",
+                                "url": "https://www.dinosawmachine.com",
                                 "paymentAccepted": ["cash", "check", "credit card", "invoice", "paypal"],
                                 "openingHours": "Mo,Tu,We,Th,Fr,Sa 08:00-18:00",
                                 "openingHoursSpecification": [
@@ -1248,15 +1248,15 @@ watch(indexRes, (newPosts) => {
                             },
                             {
                                 "@type": "Organization",
-                                "name": "STYLECNC",
-                                "url": "https://www.stylecnc.com",
-                                "logo": "https://www.stylecnc.com/stylecnc-logo.png",
+                                "name": "DINOSAW",
+                                "url": "https://www.dinosawmachine.com/",
+                                "logo": "https://www.dinosawmachine.com//stylecnc-logo.png",
                                 "description": "Jinan Style Machinery Co., Ltd. (STYLECNC) is a world-leading CNC machine manufacturer, offering CNC routers, milling machines, laser machines, plasma cutters, lathes, edge banders, digital cutters."
                             },
                             {
                                 "@type": "WebSite",
-                                "name": "STYLECNC",
-                                "url": "https://www.stylecnc.com",
+                                "name": "DINOSAW",
+                                "url": "https://www.dinosawmachine.com/",
                                 "potentialAction": {
                                     "@type": "SearchAction",
                                     "target": {

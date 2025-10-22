@@ -765,7 +765,7 @@ figure {
 
 .case-content-container {
     display: flex;
-    flex-direction: column;
+    // flex-direction: column;
     justify-content: center;
 }
 
@@ -792,6 +792,7 @@ figure {
 
 .case-youtube-link {
     width: 344px;
+    margin:0 auto;
 }
 
 .case-title-frame {
@@ -819,6 +820,7 @@ figure {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin:0 auto;
 }
 
 .case-date-section {
