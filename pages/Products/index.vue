@@ -333,15 +333,15 @@
 
             <!-- Discover More 按钮 -->
             <div class="discover-more-section">
-                <div class="discover-more-button">
-                    <div class="discover-more-container">
-                        <div class="discover-more-wrapper">
-                            <NuxtLink :to="'/projects'" target="_blank">
+                <NuxtLink :to="'/projects'" target="_blank">
+                    <div class="discover-more-button">
+                        <div class="discover-more-container">
+                            <div class="discover-more-wrapper">
                                 <span class="discover-more-text">{{productDetail.more_text}}</span>
-                            </NuxtLink>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </NuxtLink>
             </div>
         </div>
 
@@ -404,15 +404,16 @@
 
             <!-- Discover More 按钮 -->
             <div class="discover-more-section">
+                <NuxtLink :to="'/video'" target="_blank">
                 <div class="discover-more-button">
                     <div class="discover-more-container">
                         <div class="discover-more-wrapper">
-                             <NuxtLink :to="'/video'" target="_blank">
+                             
                                 <span class="discover-more-text">{{productDetail.more_text}}</span>
-                            </NuxtLink>
                         </div>
                     </div>
                 </div>
+                </NuxtLink>
             </div>
         </div>
 
@@ -478,7 +479,7 @@
                 <div class="discover-more-button">
                     <div class="discover-more-container">
                         <div class="discover-more-wrapper">
-                            <NuxtLink :to="'/blog/industry-news'" target="_blank">
+                            
                                 <span class="discover-more-text">{{productDetail.more_text}}</span>
                             </NuxtLink>
                         </div>
