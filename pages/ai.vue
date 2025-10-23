@@ -303,9 +303,6 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed, watch, nextTick } from 'vue'
 import { marked } from 'marked'
-// 获取产品详情数据
-const { data: productDetailRes, pending, error } = await useApi('/cnc-diamond-wire-saw-cutting-machine-pro-for-sales?populate=all')
-
 // Nuxt 3 Composition API 语法
 const botId = "7494926120648409114"
 
