@@ -2,14 +2,14 @@
 import { $fetch } from 'ofetch';
 
 export default defineNuxtConfig({
- 
+  
   // 开发模式优化
   // dev: process.env.NODE_ENV !== 'production',
   
   // 启用更快的构建
   nitro: {
     prerender: {
-      concurrency: 10,
+      concurrency: 1,
       // 告诉 Nitro 从 '/' 开始爬取
       crawlLinks: false,
       routes: [

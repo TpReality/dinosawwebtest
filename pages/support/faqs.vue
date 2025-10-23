@@ -39,7 +39,7 @@
                                     </div>
                                 </div>
                                 <div class="breadcrumb-outer">
-                                    <div class="bg">
+                                    <div class="bg" v-if="curMenuItems?.length && Array.isArray(curMenuItems[0]?.children)">
                                         <p v-for="(menu, i) in curMenuItems[0].children" :key="i">
                                             <a :href="'/support'+menu.link" target="_blank" >{{ menu.text }}</a>
                                         </p>
@@ -369,7 +369,7 @@ const { data: faqsRes, pending, error } = await useApi('/product-categories?filt
 const faqs = ref({})
 watch(faqsRes, (newPosts) => {
     if (newPosts) {
-        console.log(newPosts)
+        // console.log(newPosts)
         let data = newPosts.data[0].faq
         faqs.value = data
         useHead({

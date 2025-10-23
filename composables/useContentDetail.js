@@ -14,18 +14,18 @@ export const useContentDetail = () => {
         watch(contentDetailRes, (newData) => {
           if (newData && newData.data && newData.data[0]) {
             contentDetail.value = newData.data[0]
-            console.log('Global contentDetail updated:', contentDetail.value)
+            // console.log('Global contentDetail updated:', contentDetail.value)
             
             // 设置全局 SEO
-            useHead(() => ({
-              title: contentDetail.value.meta_title || contentDetail.value.h1_page_inner_title,
-              meta: [
-                {
-                  name: 'description',
-                  content: contentDetail.value.meta_description || contentDetail.value.product_overview || ''
-                }
-              ]
-            }))
+            // useHead(() => ({
+            //   title: contentDetail.value.meta_title || contentDetail.value.h1_page_inner_title,
+            //   meta: [
+            //     {
+            //       name: 'description',
+            //       content: contentDetail.value.meta_description || contentDetail.value.product_overview || ''
+            //     }
+            //   ]
+            // }))
           }
         }, { immediate: true })
         

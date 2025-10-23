@@ -202,7 +202,7 @@ let processingCase = {}
 
 watch(newsRes, (newPosts) => {
     if (newPosts) {
-        // console.log(newPosts)
+        // // console.log(newPosts)
         
     let data = {}
         
@@ -259,7 +259,7 @@ if(props.slug == 'industry-news'){
 const { data: blogRes, blogPending, blogError } = await useApi(blogUrl)
   watch(blogRes, (newPosts) => {
     if (newPosts) {
-        // console.log(newPosts)
+        // // console.log(newPosts)
         let data = newPosts.data
 
         data.forEach(item => {
@@ -321,7 +321,7 @@ const { data: menuItemsRes, menuItemsPending, menuItemsError } = await useApi('/
 
 watch(menuItemsRes, (newPosts) => {
     if (newPosts) {
-        // console.log(newPosts)
+        // // console.log(newPosts)
         menuItems.value = newPosts.data
     }
 }, { immediate: true })

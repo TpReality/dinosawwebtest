@@ -667,7 +667,7 @@ watch(productDetailRes, (newPosts) => {
         )
 
         productDetail.value = data
-        console.log(newPosts)
+        // console.log(newPosts)
         useHead({
             title: data.meta_title,
             meta: [
@@ -712,8 +712,8 @@ watch(topProductDetailRes, (newPosts) => {
         //     })
         // }
         
-        // console.log('topP',topProduct)
-        // console.log(wireSawMachineSectionUrl)
+        // // console.log('topP',topProduct)
+        // // console.log(wireSawMachineSectionUrl)
     }
 }, { immediate: true })
 

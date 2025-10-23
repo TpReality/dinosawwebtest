@@ -306,7 +306,7 @@ const { data: stoneRes, pending, error } = await useApi('/product-categories?fil
 // 监听产品数据变化，设置页面元信息
 watch(stoneRes, (newPosts) => {
     if (newPosts) {
-        console.log(newPosts)
+        // console.log(newPosts)
         let data = newPosts.data[0].stoneidentification
         stones.value = data
         useHead({
@@ -334,7 +334,7 @@ const handleAlert = (message, type) => {
 // 选择图片方法
 const selectImage = (e) => {
     // 获取选择的文件
-    console.log(e)
+    // console.log(e)
     const files = e.target.files[0]
     
     if (!files) return
@@ -361,7 +361,7 @@ const handleDrop = (event) => {
 
 // 放大单个图片
 const showSinglePic = (stone) => {
-    console.log(stone)
+    // console.log(stone)
     isShowSinglePic.value = true
     selectedImg.value = stone
 }
@@ -369,7 +369,7 @@ const showSinglePic = (stone) => {
 // 上传图片
 const uploadImage = (file) => {
     // 验证文件类型
-    console.log(file.type)
+    // console.log(file.type)
     if (file.type === "image/jpeg" || file.type === "image/png") {
         const windowURL = window.URL || window.webkitURL
         uploadImg.value = windowURL.createObjectURL(file)
@@ -379,7 +379,7 @@ const uploadImage = (file) => {
         return false
     }
 
-    console.log(file)
+    // console.log(file)
     
     // 上传文件的异步函数
     const uploadFileRecursive = async (file) => {
@@ -418,7 +418,7 @@ const getFileNameFromUrl = (url) => {
 
 // 获取识别结果
 const getResult = async (result) => {
-    console.log(result)
+    // console.log(result)
     // 使用$fetch发送搜索请求
     isUploadLoading.value = false
     isSearchLoading.value = true
@@ -444,7 +444,7 @@ const getResult = async (result) => {
         
         isSearchLoading.value = false
         list.value = data
-        console.log(data)
+        // console.log(data)
     } catch (error) {
         console.error("请求失败:", error)
         isSearchLoading.value = false
@@ -457,7 +457,7 @@ const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages.value) {
         currentPage.value = page
         // 这里可以添加重新获取数据的逻辑
-        console.log('切换到第', page, '页')
+        // console.log('切换到第', page, '页')
     }
 }
 

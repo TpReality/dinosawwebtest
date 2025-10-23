@@ -978,10 +978,10 @@ const { data: productDetailRes, pending, error } = await useApi('/products?filte
                     image: productDetailRes.value.data[0].core_advantage_illustration_c_url,
                 }
             ]
-            console.log('productDetailRes',productDetailRes.value)
+            // console.log('productDetailRes',productDetailRes.value)
             return productDetailRes.value.data[0];
         }
-        // console.log('productDetailRes.value:', productDetailRes.value);
+        // // console.log('productDetailRes.value:', productDetailRes.value);
         // 否则返回 null 或一个空对象，方便判断
         return null; 
        
@@ -990,7 +990,7 @@ const { data: productDetailRes, pending, error } = await useApi('/products?filte
         // 监听 productDetail 变化并通知父组件
     watch(productDetail, (newData) => {
         if (newData) {
-            // console.log('Product data loaded in DefaultProductLayout:', newData);
+            // // console.log('Product data loaded in DefaultProductLayout:', newData);
             // 通知父组件数据已加载
             emit('headdata-loaded', newData);
         }
@@ -1423,7 +1423,7 @@ onUnmounted(() => {
 })
 
 // 在模板中可以直接使用 props.slug
-// console.log('Current slug in DefaultProductLayout:', props.slug);
+// // console.log('Current slug in DefaultProductLayout:', props.slug);
 </script>
 
 <style scoped lang="scss">

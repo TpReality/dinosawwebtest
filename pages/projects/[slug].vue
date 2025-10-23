@@ -38,7 +38,7 @@
                                     </div>
                                 </div>
                                 <div class="breadcrumb-outer">
-                                    <div class="bg">
+                                    <div class="bg" v-if="curMenuItems?.length && Array.isArray(curMenuItems[0]?.children)">
                                         <p v-for="(menu, i) in curMenuItems[0].children" :key="i">
                                             <a :href="'/projects'+menu.link" target="_blank" >{{ menu.text }}</a>
                                         </p>
@@ -208,7 +208,7 @@ let processingCase = []
 
 watch(projectsRes, (newPosts) => {
     if (newPosts) {
-        console.log(newPosts)
+        // console.log(newPosts)
         let data = {}
         if(slug == 'marble-projects'){
             data = newPosts.data[0].marble_project
@@ -247,7 +247,7 @@ watch(projectsRes, (newPosts) => {
 
         
 
-        console.log(processingCase)
+        // console.log(processingCase)
     }
 
 }, { immediate: true })

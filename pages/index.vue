@@ -1162,19 +1162,20 @@ const indexDetail = ref({})
 // }, { encodeValuesOnly: true })
 let populateQuery = `populate[flagship_tech_products][fields]=first_image_url, first_image_alt,h1_page_inner_title,date`
 
-populateQuery += `&populate[head_banner_images][populate][banner_img][filelds]=*`
+populateQuery += `&populate[head_banner_images][populate][banner_img][fields]=*`
+populateQuery += `&populate[head_banner_images][fields]=*`
 populateQuery += `&populate[mature_products_products][fields]=first_image_url, first_image_alt,h1_page_inner_title,date`
 populateQuery += `&populate[smart_value_products][fields]=first_image_url, first_image_alt,h1_page_inner_title,date`
 populateQuery += `&populate[what_you_need_blogs][fields]=first_image_url,title,date`
 populateQuery += `&populate[our_capabilities_presence_banner_1_image][fields]=*&populate[our_capabilities_presence_banner_2_image][fields]=*&populate[our_capabilities_presence_banner_3_image][fields]=*&populate[our_capabilities_presence_banner_4_image][fields]=*`
 populateQuery += `&populate[your_guide_to_choos_pannel_image_1][fields]=*&populate[your_guide_to_choos_pannel_image_2][fields]=*&populate[your_guide_to_choos_pannel_image_3][fields]=*&populate[your_guide_to_choos_pannel_image_4][fields]=*`
 
-console.log(`/home-pages?${populateQuery}`)
+// console.log(`/home-pages?${populateQuery}`)
 const { data: indexRes, pending, error } = await useApi(`/home-pages?${populateQuery}`)
 
 watch(indexRes, (newPosts) => {
     if (newPosts) {
-        console.log(newPosts)
+        // console.log(newPosts)
         let data = newPosts.data[0]
         data.what_you_need_blogs.forEach(val=>{
             val.date = formatDateShort(val.date)
@@ -1313,7 +1314,7 @@ watch(productsRes, (newPosts) => {
             }
             
         } 
-        console.log('productList',productsList)
+        // console.log('productList',productsList)
     }
 
 }, { immediate: true })
@@ -1325,7 +1326,7 @@ const groupedProducts = computed(() => {
         groups.push(productsList.value.slice(i, i + 4))
     }
 
-    // console.log('groupedProducts',groups)
+    // // console.log('groupedProducts',groups)
     return groups
 })
 

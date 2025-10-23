@@ -39,7 +39,7 @@
                                     </div>
                                 </div>
                                 <div class="breadcrumb-outer">
-                                    <div class="bg">
+                                    <div class="bg" v-if="curMenuItems?.length && Array.isArray(curMenuItems[0]?.children)">
                                         <p v-for="(menu, i) in curMenuItems[0].children" :key="i">
                                             <a :href="'/projects'+menu.link" target="_blank" >{{ menu.text }}</a>
                                         </p>
@@ -180,7 +180,7 @@ let processingCase = []
 
 watch(projectsDetailRes, (newPosts) => {
     if (newPosts) {
-        console.log(newPosts)
+        // console.log(newPosts)
         let data = newPosts.data[0].project_main_page
         projectDetail.value = data
 
@@ -191,7 +191,7 @@ watch(projectsDetailRes, (newPosts) => {
     { id: 3, beforeTitle: data.other_hard_materials_title, afterTitle:"", subTitle: data.other_hard_materials_subtitle, text: data.other_hard_materials_description, blogs:[], url:data.other_hard_materials_url }
 
         ]
-        console.log(processingCase)
+        // console.log(processingCase)
         useHead({
             title: data.meta_title,
             meta: [

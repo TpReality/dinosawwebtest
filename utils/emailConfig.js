@@ -21,7 +21,7 @@ export const initEmailJS = () => {
 
 // 发送邮件函数
 export const sendEmailViaEmailJS = async (templateParams) => {
-    console.log(templateParams)
+    // console.log(templateParams)
   try {
     const response = await emailjs.send(
       EMAIL_CONFIG.SERVICE_ID,

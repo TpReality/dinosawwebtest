@@ -39,7 +39,7 @@
                                     </div>
                                 </div>
                                 <div class="breadcrumb-outer">
-                                    <div class="bg">
+                                    <div class="bg" v-if="curMenuItems?.length && Array.isArray(curMenuItems[0]?.children)">
                                         <p v-for="(menu, i) in curMenuItems[0].children" :key="i">
                                             <a :href="'/blog'+menu.link" target="_blank" >{{ menu.text }}</a>
                                         </p>
@@ -183,7 +183,7 @@ let processingCase = []
 
 watch(blogRes, (newPosts) => {
     if (newPosts) {
-        console.log(newPosts)
+        // console.log(newPosts)
         let data = newPosts.data[0].blog_main_page
 
         blogs.value = data

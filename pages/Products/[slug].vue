@@ -89,7 +89,7 @@ watch(topProductDetailRes, (newPosts) => {
 
 // 处理子组件传递的产品数据并设置 meta 标签
 const handleHead = (headData) => {
-    console.log('Product data received from component:', headData);
+    // console.log('Product data received from component:', headData);
     
     // 设置页面 meta 标签
     if (headData && (headData.meta_title || headData.h1_page_inner_title)) {
@@ -106,7 +106,7 @@ const handleHead = (headData) => {
 }
 
 
-console.log('Current slug:', slug);
+// console.log('Current slug:', slug);
 </script>
 
 <style scoped lang="scss">

@@ -108,7 +108,7 @@ const { data: contactRes, pending, error } = await useApi('/product-categories?f
 const contact = ref({})
 watch(contactRes, (newPosts) => {
     if (newPosts) {
-        console.log(newPosts)
+        // console.log(newPosts)
         let data = newPosts.data[0].contact
         contact.value = data
         useHead({

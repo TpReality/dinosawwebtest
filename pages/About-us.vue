@@ -686,18 +686,18 @@ const setActiveTab = (tab) => {
 }
 const currentContent = computed(() => {
 
-    console.log(tabContents[activeTab.value])
-    console.log(activeTab.value)
+    // console.log(tabContents[activeTab.value])
+    // console.log(activeTab.value)
 
     return tabContents[activeTab.value]
 })
 
 watch(aboutusRes, (newPosts) => {
-    console.log(newPosts)
+    // console.log(newPosts)
     if (newPosts) {
         let data = newPosts.data[0].about_us
         aboutUs.value = data
-        console.log(aboutUs.value)
+        // console.log(aboutUs.value)
          useHead(() => ({
             title: data.meta_title,
             meta: [
@@ -730,7 +730,7 @@ watch(aboutusRes, (newPosts) => {
 const productsList = ref({})
 const { data: productsRes, productPending, productError } = await useApi('/product-categories?filters[parent_category_value][$eq]=Products&populate=all')
 watch(productsRes, (newPosts) => {
-    console.log(newPosts)
+    // console.log(newPosts)
     if (newPosts) {
         let data = newPosts.data
 
@@ -753,7 +753,7 @@ watch(productsRes, (newPosts) => {
             productsList.value = []
         }
         
-        console.log(productsList)
+        // console.log(productsList)
     }
 
 }, { immediate: true })

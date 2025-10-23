@@ -342,7 +342,7 @@ const { data: topProductDetailRes, pending: topPending, error: topError } = awai
 watch(topProductDetailRes, (newPosts) => {
   if (newPosts) {
     let data = newPosts.data
-    // console.log('Product',newPosts)
+    // // console.log('Product',newPosts)
     // 根据 sort 字段从小到大排序
     if (Array.isArray(data)) {
       data = data.sort((a, b) => {
@@ -507,12 +507,12 @@ const sendEmail = async ({ subject, content }) => {
       recipient_email: 'jun524404@gmail.com'
     };
 
-    console.log('📧 发送邮件参数:', templateParams);
+    // console.log('📧 发送邮件参数:', templateParams);
 
     // 使用配置文件发送邮件
     const response = await sendEmailViaEmailJS(templateParams);
     
-    console.log('✅ 邮件发送成功:', response);
+    // console.log('✅ 邮件发送成功:', response);
     return response;
 
   } catch (error) {

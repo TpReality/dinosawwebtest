@@ -263,16 +263,16 @@ const props = defineProps({
 
 let blogDetail = {}
  const { data: blogDetailRes, pending, error } = await useApi('/blogs?filters[slug][$eq]='+props.slug)
-// console.log('/blogs?filters[slug][$eq]='+props.slug)
+// // console.log('/blogs?filters[slug][$eq]='+props.slug)
 watch(error, (newError) => {
-  console.log(newError)
+  // console.log(newError)
      throw createError({ statusCode: 404, statusMessage: '文章不存在' });
 })
 watch(blogDetailRes, (newPosts) => {
   
     if (newPosts) {
 
-      console.log('blog',newPosts)
+      // console.log('blog',newPosts)
         let data = newPosts.data[0]
 
         blogDetail = data
@@ -291,7 +291,7 @@ const { data: blogListRes, blogListPending, blogListError } = await useApi('/blo
 
 watch(blogListRes, (newPosts) => {
     if (newPosts) {
-        // console.log('nlist',newPosts)
+        // // console.log('nlist',newPosts)
         let data = newPosts.data
         data.forEach(item => {
             item.date = formatDateLong(item.date)
@@ -306,7 +306,7 @@ const { data: productListRes, productListPending, productListError } = await use
 
 watch(productListRes, (newPosts) => {
     if (newPosts) {
-        // console.log('plist',newPosts)
+        // // console.log('plist',newPosts)
         let data = newPosts.data
         
         productList.value = data
@@ -319,7 +319,7 @@ const { data: menuItemsRes, menuItemsPending, menuItemsError } = await useApi('/
 
 watch(menuItemsRes, (newPosts) => {
     if (newPosts) {
-        // console.log('menuItems',newPosts)
+        // // console.log('menuItems',newPosts)
         menuItems.value = newPosts.data
     }
 }, { immediate: true })

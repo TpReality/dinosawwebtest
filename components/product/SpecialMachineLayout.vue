@@ -556,12 +556,12 @@ let productDetail = {}
 import { formatArrayDatesLong, formatArrayDatesShort } from '~/utils/dateFormatter'
 
 // 或者直接使用 props.slug
-// console.log('Current slug in component:', props.slug);
+// // console.log('Current slug in component:', props.slug);
 
 const { data: productDetailRes, pending, error } = await useApi('/product-categories?filters[category_value][$eq]=wire-saw-machine&populate=all')
 watch(productDetailRes, (newPosts) => {
     if (newPosts) {
-        console.log(newPosts)
+        // console.log(newPosts)
         
         let data = newPosts.data[0]
 
@@ -580,7 +580,7 @@ watch(productDetailRes, (newPosts) => {
             )
         }
 
-        // console.log(productDetail)
+        // // console.log(productDetail)
 
         processingCase = [
             { 

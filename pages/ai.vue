@@ -409,7 +409,7 @@ watch(isCommand, (newValue) => {
 })
 
 const keyPress = (e) => {
-    console.log(e)
+    // console.log(e)
     if (e.code == "Enter" && !e.shiftKey) {
         handleSendMessage()
     }
@@ -697,7 +697,7 @@ const pollingMessage = () => {
                         return
                     }
 
-                    console.log(value)
+                    // console.log(value)
 
                     // 处理接收到的数据块
                     const chunk = { data: value.buffer }
@@ -710,9 +710,9 @@ const pollingMessage = () => {
                                 String.fromCharCode.apply(null, uint8Array)
                             )
                         )
-                        console.log(str)
+                        // console.log(str)
                     } catch (err) {
-                        console.log(err)
+                        // console.log(err)
                     }
 
                     // 处理流数据
@@ -736,7 +736,7 @@ const pollingMessage = () => {
                     if (answer.answerStatus == "3") {
                         unparsedAnswer += answer.fullAnswer
                         answerStr = unparsedAnswer
-                        console.log(answerStr)
+                        // console.log(answerStr)
 
                         // 检查并清除加载动画
                         const lastMessageIndex = messageList.value.length - 1
@@ -897,7 +897,7 @@ const canSendMessage = () => {
 
 // 预览图片
 const predivImage = (path) => {
-    console.log("预览图片路径:", path)
+    // console.log("预览图片路径:", path)
 }
 
 // 复制消息内容
@@ -958,7 +958,7 @@ const startRecording = (e) => {
             mediaRecorderRef.value.ondataavailable = (event) => {
                 chunksRef.value.push(event.data)
             }
-            console.log("MediaRecorder created successfully")
+            // console.log("MediaRecorder created successfully")
         })
         .catch((error) => {
             console.error("Error accessing media devices:", error)
@@ -1203,7 +1203,7 @@ const switchSound = () => {
             isSound.value = true
         } catch (err) {
             isSound.value = false
-            console.log(err)
+            // console.log(err)
             return
         }
     } else {
@@ -1494,7 +1494,7 @@ onMounted(() => {
             )
 
             // 调试输出请求头信息
-            console.log("请求头信息:", headers)
+            // console.log("请求头信息:", headers)
 
             // 检查响应状态
             if (!response.ok) {
@@ -1517,7 +1517,7 @@ onMounted(() => {
             messageList.value = newList
 
             // 调试输出
-            console.log("机器人配置信息:", data)
+            // console.log("机器人配置信息:", data)
         } catch (error) {
             // 错误处理
             console.error("获取机器人配置信息失败:", error)
