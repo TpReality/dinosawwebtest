@@ -30,7 +30,7 @@ export default defineNuxtConfig({
     '/blog/**': { prerender: true }, // blog预渲染
     '/About-us': { prerender: true }, // About-us预渲染
     '/video': { prerender: true }, // video预渲染
-    '/contact-us': { prerender: true }, // contact-us预渲染
+    '/contact': { prerender: true }, // contact-us预渲染
     '/stoneidentification': { prerender: true }, // stoneidentification预渲染
     '/ai': { prerender: true }, // ai预渲染
     '/api/**': {

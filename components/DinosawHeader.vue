@@ -62,7 +62,7 @@
                       </svg>
                     </a>
                   </div>
-                  <a class="mobile-quote-btn" href="/contact" target="_blank">Get A Quote</a>
+                  <a class="mobile-quote-btn" href="/contact" target="_blank">{{ contentDetail.get_a_quote_text }}</a>
                 </div>
               </div>
           </div>

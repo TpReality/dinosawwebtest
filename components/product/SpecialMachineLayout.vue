@@ -55,7 +55,7 @@
                                 </div>
                                 <div class="breadcrumb-text">
                                     <div class="text-container">
-                                        <span> {{ props.slug }}</span>
+                                        <span> {{ productDetail.category_name }}</span>
                                     </div>
                                 </div>
                             </div>
