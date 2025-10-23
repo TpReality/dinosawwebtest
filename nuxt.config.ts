@@ -21,7 +21,7 @@ export default defineNuxtConfig({
   routeRules: {
     '/': { prerender: true }, // 首页预渲染
     '/api/**': {
-      proxy: 'http://192.168.1.9:1337/api/**', // 将所有 /api 请求代理到您的后端
+      proxy: 'https://cms.stoneboss.vip/api/**', // 将所有 /api 请求代理到您的后端
       headers: { 'cache-control': 's-maxage=60' } // 添加缓存
     },
   },

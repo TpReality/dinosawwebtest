@@ -418,7 +418,7 @@
                         <!-- Image Display Area with horizontal scrolling -->
                         <div class="slideshow-track" ref="benefitsSlideshowTrack">
                             <div v-for="(slide, index) in benefitsSlides" :key="index" class="slide-item">
-                                <NuxtImg :src="slide.image" :alt="slide.alt" />
+                                <NuxtImg :src="slide.image" />
                             </div>
                         </div>
 
