@@ -336,7 +336,7 @@ const form = ref({
 const isSubmitting = ref(false)
 
 // 获取产品数据
-const { data: topProductDetailRes, pending: topPending, error: topError } = await useApi('/product-categories?filters[parent_category_value][$eq]=Products&populate=all')
+const { data: topProductDetailRes, pending: topPending, error: topError } = await useApi('/product-categories?fields=sort,parent_category_value,category_name,menu_select_down_panel_is_show,column_attr_name,category_value')
 
 // 监听产品数据变化
 watch(topProductDetailRes, (newPosts) => {

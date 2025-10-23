@@ -1152,23 +1152,25 @@ const indexDetail = ref({})
 // +'&populate=all'
 
 // 构建复杂的populate查询
-const populateQuery = qs.stringify({
-  populate: {
-    head_banner_images: {
-      populate: {
-        banner_img: {
-          fields: ['url', 'alternativeText', 'width', 'height']
-        }
-      }
-    }
-    // flagship_tech_products:{
-    //     fields:['first_image','h1_page_inner_title','url']
-    // }
-  }
-}, { encodeValuesOnly: true })
+// const populateQuery = qs.stringify({
+//   populate: {
+    
+//     flagship_tech_products:{
+//         fields: ['url', 'first_image_url', 'h1_page_inner_title', 'date']
+//     }
+//   }
+// }, { encodeValuesOnly: true })
+let populateQuery = `populate[flagship_tech_products][fields]=first_image_url, first_image_alt,h1_page_inner_title,date`
+
+populateQuery += `&populate[head_banner_images][populate][banner_img][filelds]=*`
+populateQuery += `&populate[mature_products_products][fields]=first_image_url, first_image_alt,h1_page_inner_title,date`
+populateQuery += `&populate[smart_value_products][fields]=first_image_url, first_image_alt,h1_page_inner_title,date`
+populateQuery += `&populate[what_you_need_blogs][fields]=first_image_url,title,date`
+populateQuery += `&populate[our_capabilities_presence_banner_1_image][fields]=*&populate[our_capabilities_presence_banner_2_image][fields]=*&populate[our_capabilities_presence_banner_3_image][fields]=*&populate[our_capabilities_presence_banner_4_image][fields]=*`
+populateQuery += `&populate[your_guide_to_choos_pannel_image_1][fields]=*&populate[your_guide_to_choos_pannel_image_2][fields]=*&populate[your_guide_to_choos_pannel_image_3][fields]=*&populate[your_guide_to_choos_pannel_image_4][fields]=*`
 
 console.log(`/home-pages?${populateQuery}`)
-const { data: indexRes, pending, error } = await useApi(`/home-pages?populate=all`)
+const { data: indexRes, pending, error } = await useApi(`/home-pages?${populateQuery}`)
 
 watch(indexRes, (newPosts) => {
     if (newPosts) {
@@ -1275,26 +1277,14 @@ watch(indexRes, (newPosts) => {
 
 }, { immediate: true })
 
-const indexProduct = ref({})
-const { data: indexProductRes, indexProductPending, indexProductError } = await useApi(`/product-categories?filters[home_page_is_show][$eq]=1`)
-
-watch(indexProductRes, (newPosts) => {
-    if (newPosts) {
-        console.log(newPosts)
-        let data = newPosts.data[0]
-        indexProduct.value = data
-    }
-
-}, { immediate: true })
 
 const modules = [Autoplay, FreeMode, Navigation, Pagination];
 
 
 const productsList = ref([])
-const { data: productsRes, productPending, productError } = await useApi('/product-categories?filters[parent_category_value][$eq]=Products&populate=all')
+const { data: productsRes, productPending, productError } = await useApi(`/product-categories?filters[parent_category_value][$eq]=Products&fileds=category_name,column_attr_name,head_image,category_value,menu_select_down_panel_is_show`)
 const productsTips = ref(["Most Trusted","Established","Innovative","New Trend", "","","","Outstanding"])
 watch(productsRes, (newPosts) => {
-    
     if (newPosts) {
         let data = newPosts.data
         

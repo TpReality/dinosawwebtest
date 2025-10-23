@@ -58,8 +58,8 @@ export const useMenuData = () => {
   // 初始化菜单数据
   const initializeMenuData = async () => {
     try {
-      const { data: categoryRes } = await useApi('/product-categories')
-      
+      const { data: categoryRes } = await useApi('/product-categories?fields=sort,parent_category_value,category_name,menu_select_down_panel_is_show,category_value')
+      console.log(categoryRes)
       if (categoryRes.value && categoryRes.value.data) {
         // 转换数据为树状结构
         const transformedData = transformCategoryData(categoryRes.value.data)

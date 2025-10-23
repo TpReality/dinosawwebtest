@@ -2,38 +2,7 @@
 import { $fetch } from 'ofetch';
 
 export default defineNuxtConfig({
-  hooks: {
-      async 'prerender:routes'(ctx) {
-        // 1. 调用你的 API 来获取所有有效的文章 slug
-        // 假设你的 API 返回 [{ slug: 'post-a' }, { slug: 'post-b' }, ...]
-        let authToken = "8f80d6094edcd486411ddc90d4fa4f18ed87f9fe9edae7fe7cb423e3ce261b23ce76afdedfc3cf2e3689bd1b03e9f504cbded28e7645eed305db44f61e914053e9fb4b4999d30c743b67fe2a052bff812b6165825f1502f22f991ff41a44536c67a88f99ae0f525ee710ee010834ffddaa1501dc60c7da7dac18060f46612708"
-        const posts = await $fetch('https://cms.stoneboss.vip/api/blogs?pagination[page]=1&pagination[pageSize]=20',{
-            timeout: 50000,
-            headers: {
-                Authorization: `Bearer ${authToken}`,
-            }
-        }); 
-        console.log('prerender.routes1', posts)
-
-        // 2. 遍历结果并将完整的路由路径添加到预渲染列表
-        for (const post of posts.data) {
-          ctx.routes.add(`/blog/${post.slug}`);
-        }
-
-        const productPosts = await $fetch('https://cms.stoneboss.vip/api/products?pagination[page]=1&pagination[pageSize]=20',{
-           timeout: 50000,
-            headers: {
-                Authorization: `Bearer ${authToken}`,
-            }
-        }); 
-        console.log('prerender.routes2', productPosts.data)
-
-        // 2. 遍历结果并将完整的路由路径添加到预渲染列表
-        for (const post of productPosts.data) {
-          ctx.routes.add(`/Products/${post.url}`);
-        }
-      }
-    },
+ 
   // 开发模式优化
   // dev: process.env.NODE_ENV !== 'production',
   
