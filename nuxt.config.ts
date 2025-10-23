@@ -20,10 +20,24 @@ export default defineNuxtConfig({
   modules: ['@nuxt/image'],
   routeRules: {
     '/': { prerender: true }, // 首页预渲染
+    '/Products': { prerender: true }, // Products预渲染
+    '/Products/**': { prerender: true }, // Products预渲染
+    '/projects': { prerender: true }, // projects预渲染
+    '/projects/**': { prerender: true }, // projects预渲染
+    '/support': { prerender: true }, // support预渲染'
+    '/support/**': { prerender: true }, // support预渲染'
+    '/blog': { prerender: true }, // blog预渲染
+    '/blog/**': { prerender: true }, // blog预渲染
+    '/About-us': { prerender: true }, // About-us预渲染
+    '/video': { prerender: true }, // video预渲染
+    '/contact-us': { prerender: true }, // contact-us预渲染
+    '/stoneidentification': { prerender: true }, // stoneidentification预渲染
+    '/ai': { prerender: true }, // ai预渲染
     '/api/**': {
       proxy: 'https://cms.stoneboss.vip/api/**', // 将所有 /api 请求代理到您的后端
       headers: { 'cache-control': 's-maxage=60' } // 添加缓存
     },
+    
   },
   css: [
     '~/assets/main.scss'

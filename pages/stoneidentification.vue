@@ -103,8 +103,8 @@
                         <div class="stone-types-wrap">
                             <div class="stone-types-item">
                                 <div class="rel float">
-                                    <NuxtImg
-                                        src="http://mms1.baidu.com/it/u=4227657350,1935026197&fm=253&app=138&f=JPEG?w=664&h=500" />
+                                    <NuxtImg v-if="stones.what_kind_of_stone_is_this_left_top_image"
+                                        :src="stones.what_kind_of_stone_is_this_left_top_image.url" />
                                 </div>
 
                                 <div class="stone-types-text">
@@ -114,8 +114,8 @@
                             </div>
                             <div class="stone-types-item">
                                 <div class="rel float">
-                                    <NuxtImg
-                                        src="http://mms0.baidu.com/it/u=776580578,2330098638&fm=253&app=138&f=GIF?w=360&h=360" />
+                                    <NuxtImg v-if="stones.what_kind_of_stone_is_this_right_top_image"
+                                        :src="stones.what_kind_of_stone_is_this_right_top_image.url" />
                                 </div>
 
                                 <div class="stone-types-text">
@@ -127,8 +127,8 @@
                         <div class="stone-types-wrap">
                             <div class="stone-types-item">
                                 <div class="rel float">
-                                    <NuxtImg
-                                        src="https://img0.baidu.com/it/u=737944605,4071115033&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=440" />
+                                    <NuxtImg v-if="stones.what_kind_of_stone_is_this_left_bottom_image"
+                                        :src="stones.what_kind_of_stone_is_this_left_bottom_image.url" />
                                 </div>
 
                                 <div class="stone-types-text">
@@ -138,8 +138,8 @@
                             </div>
                             <div class="stone-types-item">
                                 <div class="rel float">
-                                    <NuxtImg
-                                        src="https://p3-sdbk2-media.byteimg.com/tos-cn-i-xv4ileqgde/a1f4b528e8dd43b18e31a4984af33c9b~tplv-xv4ileqgde-image.image" />
+                                    <NuxtImg v-if="stones.what_kind_of_stone_is_this_right_bottom_image"
+                                        :src="stones.what_kind_of_stone_is_this_right_bottom_image.url" />
                                 </div>
 
                                 <div class="stone-types-text">
@@ -166,37 +166,37 @@
                             <div class="nine-pic-wrap">
                                 <div class="nine-pic">
                                     <NuxtImg alt="Interior decoration stone walls"
-                                        :src="stones.who_needs_dinosaw_stone_labout_image_1" />
+                                        :src="stones.who_needs_dinosaw_stone_labout_image_1.url" />
                                     <h3 class="h3">{{ stones.who_needs_dinosaw_stone_labout_title_1 }}</h3>
                                     <div class="rich-text" v-html="stones.who_needs_dinosaw_stone_labout__description_1"></div>
                                 </div>
                                 <div class="nine-pic">
                                     <NuxtImg alt="Marble backdrop wall"
-                                        src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/upload/appicon/Marble backdrop wall.webp" />
+                                        :src="stones.who_needs_dinosaw_stone_labout_image_2.url" />
                                     <h3 class="h3">{{ stones.who_needs_dinosaw_stone_labout_title_2 }}</h3>
                                     <div class="rich-text" v-html="stones.who_needs_dinosaw_stone_labout__description_2"></div>
                                 </div>
                                 <div class="nine-pic">
                                     <NuxtImg alt="Natural stone facades"
-                                        src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/upload/appicon/Natural stone facades.webp" />
+                                        :src="stones.who_needs_dinosaw_stone_labout_image_3.url" />
                                     <h3 class="h3">{{ stones.who_needs_dinosaw_stone_labout_title_3 }}</h3>
                                     <div class="rich-text" v-html="stones.who_needs_dinosaw_stone_labout__description_3"></div>
                                 </div>
                                 <div class="nine-pic">
                                     <NuxtImg alt="Stone tombstones"
-                                        src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/upload/appicon/Stone tombstones.webp" />
+                                        :src="stones.who_needs_dinosaw_stone_labout_image_4.url" />
                                     <h3 class="h3">{{ stones.who_needs_dinosaw_stone_labout_title_4 }}</h3>
                                     <div class="rich-text" v-html="stones.who_needs_dinosaw_stone_labout__description_4"></div>
                                 </div>
                                 <div class="nine-pic">
                                     <NuxtImg alt="Stone construction"
-                                        src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/upload/appicon/Stone construction.webp" />
+                                        :src="stones.who_needs_dinosaw_stone_labout_image_5.url" />
                                     <h3 class="h3">{{ stones.who_needs_dinosaw_stone_labout_title_5 }}</h3>
                                     <div class="rich-text" v-html="stones.who_needs_dinosaw_stone_labout__description_5"></div>
                                 </div>
                                 <div class="nine-pic">
                                     <NuxtImg alt="Geology student"
-                                        src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/upload/appicon/Geology student.webp" />
+                                        :src="stones.who_needs_dinosaw_stone_labout_image_6.url" />
                                     <h3 class="h3">{{ stones.who_needs_dinosaw_stone_labout_title_6 }}</h3>
                                     <div class="rich-text" v-html="stones.who_needs_dinosaw_stone_labout__description_6"></div>
                                 </div>
@@ -1470,7 +1470,7 @@ body {
             width: 32%;
             margin-right: 1.333%;
             margin-bottom: 2.5%;
-            vertical-align: middle;
+            vertical-align: top;
 
             .h3 {
                 height: 42px;
