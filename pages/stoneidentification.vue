@@ -46,7 +46,7 @@
                         <div class="guide-text-blur"></div>
                         <div class="guide-text">
                             <h3>{{ stones.upload_stone_pictures_title }}</h3>
-                            <p v-html="stones.upload_stone_pictures_description"></p>
+                            <div class="rich-text" v-html="stones.upload_stone_pictures_description"></div>
                         </div>
                     </div>
                     <div class="guide-step">
@@ -67,7 +67,7 @@
                         <div class="guide-text-blur"></div>
                         <div class="guide-text">
                             <h3>{{ stones.quickly_stone_identification_title }}</h3>
-                            <p v-html="stones.quickly_stone_identification_description"></p>
+                            <div class="rich-text" v-html="stones.quickly_stone_identification_description"></div>
                         </div>
                     </div>
                     <div class="guide-step">
@@ -109,7 +109,7 @@
 
                                 <div class="stone-types-text">
                                     <h3>{{ stones.what_kind_of_stone_is_this_left_top_title }}</h3>
-                                    <p v-html="stones.what_kind_of_stone_is_this_left_top_description"></p>
+                                    <div class="rich-text" v-html="stones.what_kind_of_stone_is_this_left_top_description"></div>
                                 </div>
                             </div>
                             <div class="stone-types-item">
@@ -120,7 +120,7 @@
 
                                 <div class="stone-types-text">
                                     <h3>{{stones.what_kind_of_stone_is_this_right_top_title}}</h3>
-                                    <p v-html="stones.what_kind_of_stone_is_this_right_top_description"></p>
+                                    <div class="rich-text" v-html="stones.what_kind_of_stone_is_this_right_top_description"></div>
                                 </div>
                             </div>
                         </div>
@@ -133,7 +133,7 @@
 
                                 <div class="stone-types-text">
                                     <h3>{{ stones.what_kind_of_stone_is_this_left_bottom_title }}</h3>
-                                    <p v-html="stones.what_kind_of_stone_is_this_left_bottom_description"></p>
+                                    <div class="rich-text" v-html="stones.what_kind_of_stone_is_this_left_bottom_description"></div>
                                 </div>
                             </div>
                             <div class="stone-types-item">
@@ -144,7 +144,7 @@
 
                                 <div class="stone-types-text">
                                     <h3>{{ stones.what_kind_of_stone_is_this_right_bottom_title }}</h3>
-                                    <p v-html="stones.what_kind_of_stone_is_this_right_bottom_description"></p>
+                                    <div class="rich-text" v-html="stones.what_kind_of_stone_is_this_right_bottom_description"></div>
                                 </div>
                             </div>
                         </div>
@@ -155,7 +155,7 @@
                     <ul>
                         <li>
                             <h3 class="h3">{{stones.trade_name_precision_title}}</h3>
-                            <p v-html="stones.trade_name_precision_description"></p>
+                            <div class="rich-text" v-html="stones.trade_name_precision_description"></div>
                         </li>
                         <li>
                             <h3 class="h3">{{ stones.seamless_machinery_integration_title }}</h3>
@@ -168,37 +168,37 @@
                                     <NuxtImg alt="Interior decoration stone walls"
                                         :src="stones.who_needs_dinosaw_stone_labout_image_1" />
                                     <h3 class="h3">{{ stones.who_needs_dinosaw_stone_labout_title_1 }}</h3>
-                                    <p v-html="stones.who_needs_dinosaw_stone_labout__description_1"></p>
+                                    <div class="rich-text" v-html="stones.who_needs_dinosaw_stone_labout__description_1"></div>
                                 </div>
                                 <div class="nine-pic">
                                     <NuxtImg alt="Marble backdrop wall"
                                         src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/upload/appicon/Marble backdrop wall.webp" />
                                     <h3 class="h3">{{ stones.who_needs_dinosaw_stone_labout_title_2 }}</h3>
-                                    <p v-html="stones.who_needs_dinosaw_stone_labout__description_2"></p>
+                                    <div class="rich-text" v-html="stones.who_needs_dinosaw_stone_labout__description_2"></div>
                                 </div>
                                 <div class="nine-pic">
                                     <NuxtImg alt="Natural stone facades"
                                         src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/upload/appicon/Natural stone facades.webp" />
                                     <h3 class="h3">{{ stones.who_needs_dinosaw_stone_labout_title_3 }}</h3>
-                                    <p v-html="stones.who_needs_dinosaw_stone_labout__description_3"></p>
+                                    <div class="rich-text" v-html="stones.who_needs_dinosaw_stone_labout__description_3"></div>
                                 </div>
                                 <div class="nine-pic">
                                     <NuxtImg alt="Stone tombstones"
                                         src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/upload/appicon/Stone tombstones.webp" />
                                     <h3 class="h3">{{ stones.who_needs_dinosaw_stone_labout_title_4 }}</h3>
-                                    <p v-html="stones.who_needs_dinosaw_stone_labout__description_4"></p>
+                                    <div class="rich-text" v-html="stones.who_needs_dinosaw_stone_labout__description_4"></div>
                                 </div>
                                 <div class="nine-pic">
                                     <NuxtImg alt="Stone construction"
                                         src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/upload/appicon/Stone construction.webp" />
                                     <h3 class="h3">{{ stones.who_needs_dinosaw_stone_labout_title_5 }}</h3>
-                                    <p v-html="stones.who_needs_dinosaw_stone_labout__description_5"></p>
+                                    <div class="rich-text" v-html="stones.who_needs_dinosaw_stone_labout__description_5"></div>
                                 </div>
                                 <div class="nine-pic">
                                     <NuxtImg alt="Geology student"
                                         src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/upload/appicon/Geology student.webp" />
                                     <h3 class="h3">{{ stones.who_needs_dinosaw_stone_labout_title_6 }}</h3>
-                                    <p v-html="stones.who_needs_dinosaw_stone_labout__description_6"></p>
+                                    <div class="rich-text" v-html="stones.who_needs_dinosaw_stone_labout__description_6"></div>
                                 </div>
                             </div>
                         </li>

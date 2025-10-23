@@ -69,7 +69,7 @@
                         </h1>
                     </div>
                     <div class="description-section">
-                        <p class="description-text" v-html="blogs.hero_description"></p>
+                        <div class="description-text" v-html="blogs.hero_description"></div>
                     </div>
                 </div>
             </div>
@@ -106,7 +106,7 @@
                                      <template v-for="(blog, j) in item.blogs" :key="j">
                                         <NuxtLink :to="'/blog/'+blog.slug" target="_blank">
                                             <div class="processing-case-item">
-                                                <div class="case-background">
+                                                <div class="case-background" :class="item.className">
                                                     <div class="case-ipad">
                                                         <div class="case-image-container">
                                                             <div class="case-main-image cement-case">
@@ -197,9 +197,9 @@ watch(blogRes, (newPosts) => {
             ],
         })
         processingCase = [
-            { id: 1, title: data.industry_machinery_title, subTitle:data.industry_machinery_subtitle, text: data.industry_machinery_description, text:"", blogs: formatArrayDatesShort(data.industry_machinery_news_blogs), url:"/blog/industry-news" },
-            { id: 2, title: data.dinosaw_company_title, subTitle: data.dinosaw_company_subtitle, text: data.dinosaw_company_description, text:"", blogs: formatArrayDatesShort(data.dinosaw_company_news_blogs), url:"/blog/news-events" },
-            { id: 3, title: data.most_popular_cnc_industry_title, subTitle: data.most_popular_cnc_industry_subtitle, text:"", blogs: formatArrayDatesShort(data.most_popular_cnc_industry_machines_products), url:"" },
+            { id: 1, className:"yellow", title: data.industry_machinery_title, subTitle:data.industry_machinery_subtitle, text: data.industry_machinery_description, text:"", blogs: formatArrayDatesShort(data.industry_machinery_news_blogs), url:"/blog/industry-news" },
+            { id: 2, className:"yellow", title: data.dinosaw_company_title, subTitle: data.dinosaw_company_subtitle, text: data.dinosaw_company_description, text:"", blogs: formatArrayDatesShort(data.dinosaw_company_news_blogs), url:"/blog/news-events" },
+            { id: 3, className:"green", title: data.most_popular_cnc_industry_title, subTitle: data.most_popular_cnc_industry_subtitle, text:"", blogs: formatArrayDatesShort(data.most_popular_cnc_industry_machines_products), url:"" },
         ]
     }
 

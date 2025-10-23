@@ -11,12 +11,18 @@ export default defineNuxtConfig({
       }
     }
   },
+  // 添加预加载策略
+  experimental: {
+    payloadExtraction: false, // 减少 payload 大小
+  },
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   modules: ['@nuxt/image'],
   routeRules: {
+    '/': { prerender: true }, // 首页预渲染
     '/api/**': {
-      proxy: 'https://zsbzj1zv.p2link.483n.com/api/**', // 将所有 /api 请求代理到您的后端
+      proxy: 'http://192.168.1.9:1337/api/**', // 将所有 /api 请求代理到您的后端
+      headers: { 'cache-control': 's-maxage=60' } // 添加缓存
     },
   },
   css: [

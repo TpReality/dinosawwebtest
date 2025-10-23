@@ -42,7 +42,7 @@
                                         <h3 class="card-title">{{ contact.how_our_sales_team_left_top_title }}</h3>
                                     </div>
                                     <div class="card-description">
-                                        <p v-html="contact.how_our_sales_team_left_top_description"></p>
+                                        <div v-html="contact.how_our_sales_team_left_top_description"></div>
                                     </div>
                                 </div>
                             </div>
@@ -52,7 +52,7 @@
                                         <h3 class="card-title">{{ contact.how_our_sales_team_right_top_title }}</h3>
                                     </div>
                                     <div class="card-description">
-                                        <p v-html="contact.how_our_sales_team_rigth_top_description"></p>
+                                        <div v-html="contact.how_our_sales_team_rigth_top_description"></div>
                                     </div>
                                 </div>
                             </div>
@@ -66,7 +66,7 @@
                                         <h3 class="card-title">{{ contact.how_our_sales_team_left_bottom_title }}</h3>
                                     </div>
                                     <div class="card-description">
-                                        <p v-html="contact.how_our_sales_team_left_bottom_description"></p>
+                                        <div v-html="contact.how_our_sales_team_left_bottom_description"></div>
                                     </div>
                                 </div>
                             </div>
@@ -76,7 +76,7 @@
                                         <h3 class="card-title">{{ contact.how_our_sales_team_rigth_bottom_title }}</h3>
                                     </div>
                                     <div class="card-description">
-                                        <p v-html="contact.how_our_sales_team_rigth_bottom_description"></p>
+                                        <div v-html="contact.how_our_sales_team_rigth_bottom_description"></div>
                                     </div>
                                 </div>
                             </div>

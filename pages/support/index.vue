@@ -60,7 +60,7 @@
                                         <h3 class="card-title">{{ support.how_our_sales_team_left_top_title }}</h3>
                                     </div>
                                     <div class="card-description">
-                                        <p v-html="support.how_our_sales_team_left_top_description"></p>
+                                        <div v-html="support.how_our_sales_team_left_top_description"></div>
                                     </div>
                                 </div>
                             </div>
@@ -70,7 +70,7 @@
                                         <h3 class="card-title">{{ support.how_our_sales_team_right_top_title }}</h3>
                                     </div>
                                     <div class="card-description">
-                                        <p v-html="support.how_our_sales_team_rigth_top_description"></p>
+                                        <div v-html="support.how_our_sales_team_rigth_top_description"></div>
                                     </div>
                                 </div>
                             </div>
@@ -84,7 +84,7 @@
                                         <h3 class="card-title">{{support.how_our_sales_team_left_bottom_title }}</h3>
                                     </div>
                                     <div class="card-description">
-                                        <p v-html="support.how_our_sales_team_left_bottom_description"></p>
+                                        <div v-html="support.how_our_sales_team_left_bottom_description"></div>
                                     </div>
                                 </div>
                             </div>
@@ -94,7 +94,7 @@
                                         <h3 class="card-title">{{ support.how_our_sales_team_rigth_bottom_title }}</h3>
                                     </div>
                                     <div class="card-description">
-                                        <p v-html="support.how_our_sales_team_rigth_bottom_description"></p>
+                                        <div v-html="support.how_our_sales_team_rigth_bottom_description"></div>
                                     </div>
                                 </div>
                             </div>
@@ -122,7 +122,7 @@
                                         <h3 class="card-title">{{ support.how_our_technical_experts_keep_left_top_title }}</h3>
                                     </div>
                                     <div class="card-description">
-                                        <p v-html="support.how_our_technical_experts_keep_left_top_description"></p>
+                                        <div v-html="support.how_our_technical_experts_keep_left_top_description"></div>
                                     </div>
                                 </div>
                             </div>
@@ -132,7 +132,7 @@
                                         <h3 class="card-title">{{ support.how_our_technical_experts_keep_right_top_title }}</h3>
                                     </div>
                                     <div class="card-description">
-                                        <p v-html="support.how_our_technical_experts_keep_rigth_top_description"></p>
+                                        <div v-html="support.how_our_technical_experts_keep_rigth_top_description"></div>
                                     </div>
                                 </div>
                             </div>
@@ -146,7 +146,7 @@
                                         <h3 class="card-title">{{ support.how_our_technical_experts_keep_left_bottom_title }}</h3>
                                     </div>
                                     <div class="card-description">
-                                        <p v-html="support.how_our_technical_experts_keep_bottom_description"></p>
+                                        <div v-html="support.how_our_technical_experts_keep_bottom_description"></div>
                                     </div>
                                 </div>
                             </div>
@@ -156,7 +156,7 @@
                                         <h3 class="card-title">{{ support.how_our_technical_experts_keep_rigth_bottom_title }}</h3>
                                     </div>
                                     <div class="card-description">
-                                        <p v-html="support.how_our_technical_experts_keep_rigth_bottom_description"></p>
+                                        <div v-html="support.how_our_technical_experts_keep_rigth_bottom_description"></div>
                                     </div>
                                 </div>
                             </div>
@@ -183,10 +183,10 @@ const { contentDetail, isLoaded } = useContentDetail()
 const support = ref({})
 const { data: supportRes, pending, error } = await useApi('/support-main-pages?filters[products_btn_text][$eq]=Support')
 // 首字母大写函数
-const capitalizeFirstLetter = (string) => {
-    if (!string) return '';
-    return string.charAt(0).toUpperCase() + string.slice(1);
-};
+// const capitalizeFirstLetter = (string) => {
+//     if (!string) return '';
+//     return string.charAt(0).toUpperCase() + string.slice(1);
+// };
 
 watch(supportRes, (newPosts) => {
     if (newPosts) {

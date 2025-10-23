@@ -14,7 +14,7 @@
                                     {{ contentDetail.get_easy_solution }}
                                 </h2>
                                 <div class="contact-description">
-                                    <p v-html="contentDetail.get_easy_solution_description"></p>
+                                    <div class="rich-text" v-html="contentDetail.get_easy_solution_description"></div>
                                 </div>
                             </div>
 
@@ -255,7 +255,7 @@
                             <div class="contact-header">
                                 <h2 class="contact-title">{{ contentDetail.get_easy_solution }}</h2>
                                 <div class="contact-description">
-                                    <p v-html="contentDetail.get_easy_solution_description_1"></p>
+                                    <div class="rich-text" v-html="contentDetail.get_easy_solution_description_1"></div>
                                 </div>
                             </div>
 
@@ -816,7 +816,7 @@ const showMessage = (type, message) => {
                 max-width: 517px;
                 margin: 0 auto;
 
-                p {
+                p, .rich-text {
                     font-family: Inter;
                     font-weight: 300;
                     font-size: 16px;
@@ -1062,7 +1062,7 @@ const showMessage = (type, message) => {
                 }
 
                 .contact-description {
-                    p {
+                    p, .rich-text {
                         font-size: 14px;
                         font-weight:400;
                         margin-bottom: 12px;

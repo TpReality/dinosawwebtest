@@ -100,7 +100,7 @@
                         </h1>
                     </div>
                     <div class="description-section">
-                        <p class="description-text" v-html="support.hero_description"></p>
+                        <div class="description-text" v-html="support.hero_description"></div>
                     </div>
                 </div>
             </div>

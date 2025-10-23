@@ -23,7 +23,7 @@
               </div>
               <div class="text">
                   <div class="name">{{ contentDetail.chat_online_dialog_body_title }}</div>
-                  <p v-html="contentDetail.chat_online_dialog_body_description"></p>
+                  <div v-html="contentDetail.chat_online_dialog_body_description"></div>
               </div>
           </div>
           <div class="whats-button">

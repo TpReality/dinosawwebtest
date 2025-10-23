@@ -200,7 +200,7 @@
                                         <p class="card-title">{{ aboutUs.certifications_pannel_title_1 }}</p>
                                     </div>
                                     <div class="card-description-container">
-                                        <p class="card-description" v-html="aboutUs.certifications_pannel_description_1"></p>
+                                        <div class="card-description" v-html="aboutUs.certifications_pannel_description_1"></div>
                                     </div>
                                 </div>
                             </div>
@@ -221,7 +221,7 @@
                                         <p class="card-title">{{ aboutUs.certifications_pannel_title_2 }}</p>
                                     </div>
                                     <div class="card-description-container">
-                                        <p class="card-description" v-html="aboutUs.certifications_pannel_description_2"></p>
+                                        <div class="card-description" v-html="aboutUs.certifications_pannel_description_2"></div>
                                     </div>
                                 </div>
                             </div>
@@ -242,7 +242,7 @@
                                         <p class="card-title">{{ aboutUs.certifications_pannel_title_3 }}</p>
                                     </div>
                                     <div class="card-description-container">
-                                        <p class="card-description" v-html="aboutUs.certifications_pannel_description_3"></p>
+                                        <div class="card-description" v-html="aboutUs.certifications_pannel_description_3"></div>
                                     </div>
                                 </div>
                             </div>
@@ -266,7 +266,7 @@
                                         <p class="card-title">{{ aboutUs.certifications_pannel_title_4}}</p>
                                     </div>
                                     <div class="card-description-container">
-                                        <p class="card-description" v-html="aboutUs.certifications_pannel_description_4"></p>
+                                        <div class="card-description" v-html="aboutUs.certifications_pannel_description_4"></div>
                                     </div>
                                 </div>
                             </div>
@@ -287,7 +287,7 @@
                                         <p class="card-title">{{ aboutUs.certifications_pannel_title_5 }}</p>
                                     </div>
                                     <div class="card-description-container">
-                                        <p class="card-description" v-html="aboutUs.certifications_pannel_description_5"></p>
+                                        <div class="card-description" v-html="aboutUs.certifications_pannel_description_5"></div>
                                     </div>
                                 </div>
                             </div>
@@ -308,7 +308,7 @@
                                         <p class="card-title">{{ aboutUs.certifications_pannel_title_6 }}</p>
                                     </div>
                                     <div class="card-description-container">
-                                        <p class="card-description" v-html="aboutUs.certifications_pannel_description_6"></p>
+                                        <div class="card-description" v-html="aboutUs.certifications_pannel_description_6"></div>
                                     </div>
                                 </div>
                             </div>
@@ -343,7 +343,7 @@
                                     <h3 class="feature-title">{{ aboutUs.why_choose_dinosaw_labout_title_1 }}</h3>
                                 </div>
                                 <div class="feature-description-container">
-                                    <p class="feature-description" v-html="aboutUs.why_choose_dinosaw_labout_description_1"></p>
+                                    <div class="feature-description" v-html="aboutUs.why_choose_dinosaw_labout_description_1"></div>
                                 </div>
                             </div>
                         </div>
@@ -359,7 +359,7 @@
                                     <h3 class="feature-title">{{ aboutUs.why_choose_dinosaw_labout_title_2 }}</h3>
                                 </div>
                                 <div class="feature-description-container">
-                                    <p class="feature-description" v-html="aboutUs.why_choose_dinosaw_labout_description_2"></p>
+                                    <div class="feature-description" v-html="aboutUs.why_choose_dinosaw_labout_description_2"></div>
                                 </div>
                             </div>
                         </div>
@@ -382,7 +382,7 @@
                                     <h3 class="feature-title">{{ aboutUs.why_choose_dinosaw_labout_title_3 }}</h3>
                                 </div>
                                 <div class="feature-description-container">
-                                    <p class="feature-description" v-html="aboutUs.why_choose_dinosaw_labout_description_3"></p>
+                                    <div class="feature-description" v-html="aboutUs.why_choose_dinosaw_labout_description_3"></div>
                                 </div>
                             </div>
                         </div>
@@ -405,7 +405,7 @@
                                     <h3 class="feature-title">{{ aboutUs.why_choose_dinosaw_labout_title_4 }}</h3>
                                 </div>
                                 <div class="feature-description-container">
-                                    <p class="feature-description" v-html="aboutUs.why_choose_dinosaw_labout_description_4"></p>
+                                    <div class="feature-description" v-html="aboutUs.why_choose_dinosaw_labout_description_4"></div>
                                 </div>
                             </div>
                         </div>
@@ -424,7 +424,7 @@
                                     <h3 class="feature-title">{{ aboutUs.why_choose_dinosaw_labout_title_5 }}</h3>
                                 </div>
                                 <div class="feature-description-container">
-                                    <p class="feature-description" v-html="aboutUs.why_choose_dinosaw_labout_description_5"></p>
+                                    <div class="feature-description" v-html="aboutUs.why_choose_dinosaw_labout_description_5"></div>
                                 </div>
                             </div>
                         </div>
@@ -444,7 +444,7 @@
                                     <h3 class="feature-title">{{ aboutUs.why_choose_dinosaw_labout_title_6 }}</h3>
                                 </div>
                                 <div class="feature-description-container">
-                                    <p class="feature-description" v-html="aboutUs.why_choose_dinosaw_labout_description_6"></p>
+                                    <div class="feature-description" v-html="aboutUs.why_choose_dinosaw_labout_description_6"></div>
                                 </div>
                             </div>
                         </div>
@@ -525,8 +525,8 @@
                             <div class="tab-container">
                                 <div 
                                     class="tab-item"
-                                    :class="{ active: activeTab === 'vision' }"
-                                    @click="setActiveTab('vision')"
+                                    :class="{ active: activeTab === 'mission' }"
+                                    @click="setActiveTab('mission')"
                                 >
                                     <div class="tab-content">
                                         <span class="tab-text">{{ aboutUs.mission_values_tab_btn_text_1 }}</span>
@@ -534,8 +534,8 @@
                                 </div>
                                 <div 
                                     class="tab-item"
-                                    :class="{ active: activeTab === 'value' }"
-                                    @click="setActiveTab('value')"
+                                    :class="{ active: activeTab === 'vision' }"
+                                    @click="setActiveTab('vision')"
                                 >
                                     <div class="tab-content">
                                         <span class="tab-text">{{ aboutUs.mission_values_tab_btn_text_2 }}</span>
@@ -543,8 +543,8 @@
                                 </div>
                                 <div 
                                     class="tab-item"
-                                    :class="{ active: activeTab === 'mission' }"
-                                    @click="setActiveTab('mission')"
+                                    :class="{ active: activeTab === 'value' }"
+                                    @click="setActiveTab('value')"
                                 >
                                     <div class="tab-content">
                                         <span class="tab-text">{{ aboutUs.mission_values_tab_btn_text_3 }}</span>
@@ -600,7 +600,7 @@
                                     <h3 class="product-title">{{product.about_us_category_name}}</h3>
                                 </div>
                                 <div class="product-description">
-                                    <p class="product-text" v-html="product.about_us_category_description"></p>
+                                    <div class="product-text" v-html="product.about_us_category_description"></div>
                                 </div>
                                 <div class="product-image">
                                     <div class="image-container">
@@ -665,17 +665,17 @@ const { contentDetail, isLoaded } = useContentDetail()
 const aboutUs = ref({})
 const { data: aboutusRes, pending, error } = await useApi('/product-categories?filters[category_value][$eq]=About-us&populate=all')
 let tabContents = {
+            mission: {
+                text: "",
+                imageUrl:"https://framerusercontent.com/images/Pq4QoRnNoOhKtH4s1aqxFxBspc.webp"
+            },
             vision: {
-                text: "Serve 100,000 manufacturing enterprises",
+                text: "",
                 imageUrl:"https://framerusercontent.com/images/SQ042lGjZIHOQaaX7YTGPbU39Y.webp"
             },
             value: {
-                text: "Customer first /Teamwork /Embrace change /Integrity  /Passion /Commitment",
+                text: "",
                 imageUrl:"https://framerusercontent.com/images/GHvO21wv1tIfrg5rUvqk7yDA8.webp"
-            },
-            mission: {
-                text: "Continuously improve productivity for user",
-                imageUrl:"https://framerusercontent.com/images/Pq4QoRnNoOhKtH4s1aqxFxBspc.webp"
             }
         }
 // Mission & Values Tab功能
@@ -685,6 +685,10 @@ const setActiveTab = (tab) => {
     activeTab.value = tab
 }
 const currentContent = computed(() => {
+
+    console.log(tabContents[activeTab.value])
+    console.log(activeTab.value)
+
     return tabContents[activeTab.value]
 })
 
@@ -705,14 +709,17 @@ watch(aboutusRes, (newPosts) => {
         }));
 
         tabContents = {
+            mission: {
+                text: data.mission_values_tab_content_text_1,
+                imageUrl:"https://framerusercontent.com/images/Pq4QoRnNoOhKtH4s1aqxFxBspc.webp"
+            },
             vision: {
-                text: "Serve 100,000 manufacturing enterprises"
+                text: data.mission_values_tab_content_text_2,
+                imageUrl:"https://framerusercontent.com/images/SQ042lGjZIHOQaaX7YTGPbU39Y.webp"
             },
             value: {
-                text: "Customer first /Teamwork /Embrace change /Integrity  /Passion /Commitment"
-            },
-            mission: {
-                text: "Continuously improve productivity for user"
+                text: data.mission_values_tab_content_text_3,
+                imageUrl:"https://framerusercontent.com/images/GHvO21wv1tIfrg5rUvqk7yDA8.webp"
             }
         }
         

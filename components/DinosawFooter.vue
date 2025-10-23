@@ -2,7 +2,7 @@
   <footer class="dinosaw-footer">
       <div class="footer-top">
           <h2>{{contentDetail.continuously_improve_productivity_text}}</h2>
-          <p v-html="contentDetail.continuously_improve_productivity_description"></p>
+          <div v-html="contentDetail.continuously_improve_productivity_description"></div>
       </div>
       <div class="footer-content" v-if="menuItems.length > 0">
           <div class="footer-link">

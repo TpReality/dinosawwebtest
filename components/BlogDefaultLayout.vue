@@ -164,7 +164,7 @@
                 </div>
                 <div class="profile-info">
                   <p class="profile-name">{{ contentDetail.chat_online_dialog_body_title }}</p>
-                  <p class="profile-message" v-html="contentDetail.chat_online_dialog_body_description"></p>
+                  <div class="profile-message" v-html="contentDetail.chat_online_dialog_body_description"></div> 
                 </div>
               </div>
               <div class="chat-actions">

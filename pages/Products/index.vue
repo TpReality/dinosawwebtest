@@ -163,7 +163,7 @@
                                 <div class="description-section">
                                     <div class="description-frame">
                                         <div class="description-paragraph">
-                                            <p class="description-text" v-html="productDetail[`machinable_materials_${item}_description`]"></p>
+                                            <div class="description-text" v-html="productDetail[`machinable_materials_${item}_description`]"></div>
                                         </div>
                                     </div>
                                 </div>

@@ -94,9 +94,9 @@
                             <!-- Product Description -->
                             <div class="product-description">
                                 <div class="description-content">
-                                    <p v-html="productDetail.product_overview" class="description-text">
+                                    <div v-html="productDetail.product_overview" class="description-text">
                                         
-                                    </p>
+                                    </div>
                                 </div>
 
                             </div>
@@ -277,7 +277,7 @@
                                     <h3 class="title">
                                         <span class="title-main">{{productDetail.application_scenario_title_1}}</span>
                                     </h3>
-                                    <p class="case-description" v-html="productDetail.application_scenario_description_1"></p>
+                                    <div class="case-description" v-html="productDetail.application_scenario_description_1"></div>
                                     <div class="case-action">
                                         <button class="case-btn">
                                             <span>{{productDetail.button_text_1}}</span>
@@ -298,7 +298,7 @@
                                     <h3 class="title">
                                         <span class="title-main">{{productDetail.application_scenario_title_2}}</span>
                                     </h3>
-                                    <p class="case-description" v-html="productDetail.application_scenario_description_2"></p>
+                                    <div class="case-description" v-html="productDetail.application_scenario_description_2"></div>
                                     <div class="case-action">
                                         <button class="case-btn">
                                             <span>{{productDetail.button_text_2}}</span>
@@ -319,7 +319,7 @@
                                     <h3 class="title">
                                         <span class="title-main">{{productDetail.application_scenario_title_3}}</span>
                                     </h3>
-                                    <p class="case-description" v-html="productDetail.application_scenario_description_3"></p>
+                                    <div class="case-description" v-html="productDetail.application_scenario_description_3"></div>
                                     <div class="case-action">
                                         <button class="case-btn">
                                             <span>{{productDetail.button_text_3}}</span>

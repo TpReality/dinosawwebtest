@@ -73,7 +73,7 @@
                         </h1>
                     </div>
                     <div class="description-section">
-                        <p class="description-text" v-html="videos.hero_description"></p>
+                        <div class="description-text" v-html="videos.hero_description"></div>
                     </div>
                 </div>
             </div>
@@ -143,12 +143,12 @@
                         </div>
 
                         <!-- More 按钮 -->
-                        <div class="processing-cases-more-button" v-if="item.url">
+                        <div class="processing-cases-more-button" v-if="pageStates[categoryKeys[index]]?.hasMore">
                             <div class="more-button-container">
-                                <div class="more-button-wrapper">
-                                    <NuxtLink :to="item.url" target="_blank">
-                                        <span class="more-button-text">More</span>
-                                    </NuxtLink>
+                                <div class="more-button-wrapper" @click="loadMoreBlogs(index)" :class="{ 'loading': pageStates[categoryKeys[index]]?.loading }">
+                                    <span class="more-button-text">
+                                        {{ pageStates[categoryKeys[index]]?.loading ? 'Loading...' : (videos.load_more_text || 'More') }}
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -177,9 +177,101 @@ const { contentDetail, isLoaded } = useContentDetail()
 const videos = ref({})
 const { data: vidoeRes, pending, error } = await useApi('/product-categories?filters[category_value][$eq]=video&populate=all')
 
-let processingCase = []
+// 响应式的 processingCase 数组
+const processingCase = ref([])
 
-watch(vidoeRes, (newPosts) => {
+// 分页状态管理
+const pageStates = ref({
+    installation: { currentPage: 1, hasMore: true, loading: false },
+    repair: { currentPage: 1, hasMore: true, loading: false },
+    maintenance: { currentPage: 1, hasMore: true, loading: false }
+})
+
+// 分类映射
+const categoryMapping = ['Installation Video Tutorials', 'Repair Video Tutorials', 'Maintenance Video Tutorials']
+const categoryKeys = ['installation', 'repair', 'maintenance']
+
+// 获取不同分类的 blog 数据的函数
+const fetchBlogsByCategory = async (category, page = 1, pageSize = 6) => {
+    const blogUrl = `/blogs?pagination[page]=${page}&pagination[pageSize]=${pageSize}&sort[0]=date:desc&filters[category][$eq]=${category}`
+    try {
+        const { data } = await useApi(blogUrl)
+        const result = data.value?.data || []
+        const pagination = data.value?.meta?.pagination || {}
+        
+        return {
+            blogs: result,
+            hasMore: pagination.page < pagination.pageCount
+        }
+    } catch (error) {
+        console.error(`Error fetching blogs for category ${category}:`, error)
+        return {
+            blogs: [],
+            hasMore: false
+        }
+    }
+}
+
+// 同时获取三个分类的 blog 数据
+const fetchAllCategoryBlogs = async () => {
+    try {
+        // 并行请求三个不同分类的 blog
+        const [installationResult, repairResult, maintenanceResult] = await Promise.all([
+            fetchBlogsByCategory('Installation Video Tutorials'),
+            fetchBlogsByCategory('Repair Video Tutorials'), 
+            fetchBlogsByCategory('Maintenance Video Tutorials')
+        ])
+        
+        // 更新分页状态
+        pageStates.value.installation.hasMore = installationResult.hasMore
+        pageStates.value.repair.hasMore = repairResult.hasMore
+        pageStates.value.maintenance.hasMore = maintenanceResult.hasMore
+        
+        return {
+            installation: formatArrayDatesShort(installationResult.blogs),
+            repair: formatArrayDatesShort(repairResult.blogs),
+            maintenance: formatArrayDatesShort(maintenanceResult.blogs)
+        }
+    } catch (error) {
+        console.error('Error fetching category blogs:', error)
+        return {
+            installation: [],
+            repair: [],
+            maintenance: []
+        }
+    }
+}
+
+// 加载更多数据的函数
+const loadMoreBlogs = async (categoryIndex) => {
+    const categoryName = categoryMapping[categoryIndex]
+    const categoryKey = categoryKeys[categoryIndex]
+    const pageState = pageStates.value[categoryKey]
+    
+    if (!pageState.hasMore || pageState.loading) {
+        return
+    }
+    
+    pageState.loading = true
+    pageState.currentPage += 1
+    
+    try {
+        const result = await fetchBlogsByCategory(categoryName, pageState.currentPage)
+        
+        // 将新数据追加到现有数组中
+        const newBlogs = formatArrayDatesShort(result.blogs)
+        processingCase.value[categoryIndex].blogs.push(...newBlogs)
+        
+        // 更新分页状态
+        pageState.hasMore = result.hasMore
+        pageState.loading = false
+    } catch (error) {
+        console.error(`Error loading more blogs for category ${categoryName}:`, error)
+        pageState.loading = false
+    }
+}
+
+watch(vidoeRes, async (newPosts) => {
     if (newPosts) {
         console.log(newPosts)
         let data = newPosts.data[0].video
@@ -194,10 +286,32 @@ watch(vidoeRes, (newPosts) => {
             ],
         })
 
-        processingCase = [
-            { id: 1, title: data.installation_video_tutorials_before_title, subTitle: data.installation_video_tutorials_after_title, text: "", blogs:formatArrayDatesShort(data.installation_video_tutorials_blogs), url:"" },
-            { id: 2, title: data.repair_video_tutorials_before_title, subTitle: data.repair_video_tutorials_after_title, text: "", blogs:formatArrayDatesShort(data.repair_video_tutorials_blogs), url:"" },
-            { id: 3, title: data.maintenance_video_tutorials_before_title, subTitle: data.maintenance_video_tutorials_after_title, text: "", blogs:formatArrayDatesShort(data.maintenance_video_tutorials_blogs), url:"" }
+        // 获取三个分类的 blog 数据
+        const categoryBlogs = await fetchAllCategoryBlogs()
+        
+        // 更新 processingCase，使用从 API 获取的 blog 数据
+        processingCase.value = [
+            { 
+                id: 1, 
+                title: data.installation_video_tutorials_before_title, 
+                subTitle: data.installation_video_tutorials_after_title, 
+                text: "", 
+                blogs: categoryBlogs.installation, // 使用 API 获取的安装类 blog
+            },
+            { 
+                id: 2, 
+                title: data.repair_video_tutorials_before_title, 
+                subTitle: data.repair_video_tutorials_after_title, 
+                text: "", 
+                blogs: categoryBlogs.repair, // 使用 API 获取的维修类 blog
+            },
+            { 
+                id: 3, 
+                title: data.maintenance_video_tutorials_before_title, 
+                subTitle: data.maintenance_video_tutorials_after_title, 
+                text: "", 
+                blogs: categoryBlogs.maintenance, // 使用 API 获取的维护类 blog
+            }
         ]
     }
 
@@ -374,6 +488,20 @@ watch(vidoeRes, (newPosts) => {
 
     .more-button-text {
         font-size: 14px;
+    }
+
+    .more-button-wrapper {
+        cursor: pointer;
+        transition: opacity 0.3s ease;
+
+        &.loading {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        &:hover:not(.loading) {
+            opacity: 0.8;
+        }
     }
 
 }

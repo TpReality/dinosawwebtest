@@ -8,7 +8,7 @@
                         <span class="title">{{ indexDetail.hero_main_before_title }}</span> {{
                             indexDetail.hero_main_after_title }}
                     </h1>
-                    <p v-html="indexDetail.hero_description"></p>
+                    <div v-html="indexDetail.hero_description"></div>
                     <div class="banner-single">
                         <NuxtImg v-if="indexDetail.head_banner_images?.[0]?.banner_img?.url" :src="indexDetail.head_banner_images[0].banner_img.url" />
                     </div>
@@ -55,7 +55,7 @@
             </div>
             <div class="index-part">
                 <h2 class="default-title">{{ indexDetail.what_we_do_title }}</h2>
-                <p class="dinosaw-text" v-html="indexDetail.what_we_do_description"></p>
+                <div class="dinosaw-text" v-html="indexDetail.what_we_do_description"></div>
             </div>
 
 
