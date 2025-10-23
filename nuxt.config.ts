@@ -40,7 +40,7 @@ export default defineNuxtConfig({
   // 启用更快的构建
   nitro: {
     prerender: {
-      // concurrency: 20,
+      concurrency: 10,
       // 告诉 Nitro 从 '/' 开始爬取
       crawlLinks: false,
       routes: [
