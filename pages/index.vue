@@ -1163,7 +1163,6 @@ const indexDetail = ref({})
 let populateQuery = `populate[flagship_tech_products][fields]=first_image_url, first_image_alt,h1_page_inner_title,date`
 
 populateQuery += `&populate[head_banner_images][populate][banner_img][fields]=*`
-populateQuery += `&populate[head_banner_images][fields]=*`
 populateQuery += `&populate[mature_products_products][fields]=first_image_url, first_image_alt,h1_page_inner_title,date`
 populateQuery += `&populate[smart_value_products][fields]=first_image_url, first_image_alt,h1_page_inner_title,date`
 populateQuery += `&populate[what_you_need_blogs][fields]=first_image_url,title,date`

@@ -40,9 +40,11 @@
                                 </div>
                                 <div class="breadcrumb-outer">
                                     <div class="bg" v-if="curMenuItems?.length && Array.isArray(curMenuItems[0]?.children)">
-                                        <p v-for="(menu, i) in curMenuItems[0].children" :key="i">
-                                            <a :href="'/support'+menu.link" target="_blank" >{{ menu.text }}</a>
-                                        </p>
+                                        <template v-for="(menu, i) in curMenuItems[0].children" :key="i">
+                                            <p v-if="menu && menu.link">
+                                                <a :href="'/support'+menu.link" target="_blank" >{{ menu.text }}</a>
+                                            </p>
+                                        </template>
                                     </div>
                                 </div>
                             </div>

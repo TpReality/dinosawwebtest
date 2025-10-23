@@ -8,10 +8,14 @@ export default defineNuxtConfig({
   
   // 启用更快的构建
   nitro: {
+    // output: {
+    //   publicDir: '.output/public-retry'  // 你也可以换成绝对路径
+    // },
     prerender: {
-      concurrency: 1,
+      concurrency: 5,
       // 告诉 Nitro 从 '/' 开始爬取
       crawlLinks: false,
+      failOnError: false,
       routes: [
         '/Products/wire-saw-machine',
         '/Products/diamond-tools',

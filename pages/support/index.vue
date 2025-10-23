@@ -31,11 +31,13 @@
                         </div>
                     </div>
                     <div class="breadcrumb-outer">
-                        <div class="bg" v-if="curMenuItems?.length && Array.isArray(curMenuItems[0]?.children)">
-                            <p v-for="(menu, i) in curMenuItems[0].children" :key="i">
-                                <a :href="'/support'+menu.link" target="_blank" >{{ menu.text }}</a>
-                            </p>
-                        </div>
+                        <div class="bg" v-if="Array.isArray(safeChildren) && safeChildren.length">
+  <template v-for="(menu, i) in safeChildren" :key="i">
+    <p v-if="menu && typeof menu.link === 'string' && menu.link.length">
+      <a :href="menu?.link ? ('/support' + menu.link) : undefined" target="_blank">{{ menu?.text || '' }}</a>
+    </p>
+  </template>
+</div>
                       </div>
                 </div>
             </div>
@@ -176,6 +178,11 @@
 // 使用菜单数据composable
 const { menuItems, initializeMenuData } = useMenuData()
 const curMenuItems = computed(() => menuItems.value.filter(item => item.title === 'Support'))
+const safeChildren = computed(() => {
+  const first = Array.isArray(curMenuItems.value) && curMenuItems.value[0] ? curMenuItems.value[0] : null
+  const arr = Array.isArray(first?.children) ? first.children : []
+  return arr.filter(m => m && typeof m.link === 'string' && m.link.length)
+})
 // 初始化菜单数据
 await initializeMenuData()
 // 使用全局 contentDetail

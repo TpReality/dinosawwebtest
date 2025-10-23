@@ -24,7 +24,6 @@ export const useMenuData = () => {
     
     // 构建树状结构
     const treeStructure = topLevelCategories.map(topCategory => {
-      // console.log(topCategory)
       // 查找该顶级分类的子分类
       const children = childCategories
         .filter(child => child.parent_category_value === topCategory.category_value)

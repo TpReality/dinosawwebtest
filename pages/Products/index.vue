@@ -647,9 +647,26 @@ const swiperBreakpoints = {
 }
 // 使用 useFetch 获取数据
 const productDetail = ref({})
-const { data: productDetailRes, pending, error } = await useApi('/product-categories?filters[category_value][$eq]=Products&populate=all')
+const productDetailUrl = `/product-categories?filters[category_value][$eq]=Products&populate[product_main_page][fields]=*
+&populate[product_main_page][populate][machinable_materials_eight_cicly_img][populate][banner_img][fields]=*&populate[product_main_page][populate][machinable_materials_eight_products][fields]=h1_page_inner_title,first_image_url, url
+&populate[product_main_page][populate][machinable_materials_five_cicly_imgs][populate][banner_img][fields]=*&populate[product_main_page][populate][machinable_materials_five_products][fields]=h1_page_inner_title,first_image_url, url
+&populate[product_main_page][populate][machinable_materials_four_cicly_img][populate][banner_img][fields]=*&populate[product_main_page][populate][machinable_materials_four_products][fields]=h1_page_inner_title,first_image_url, url
+&populate[product_main_page][populate][machinable_materials_one_cicly_imgs][populate][banner_img][fields]=*&populate[product_main_page][populate][machinable_materials_one_products][fields]=h1_page_inner_title,first_image_url, url
+&populate[product_main_page][populate][machinable_materials_seven_cicly_img][populate][banner_img][fields]=*&populate[product_main_page][populate][machinable_materials_seven_products][fields]=h1_page_inner_title,first_image_url, url
+&populate[product_main_page][populate][machinable_materials_six_cicly_img][populate][banner_img][fields]=*&populate[product_main_page][populate][machinable_materials_six_products][fields]=h1_page_inner_title,first_image_url, url
+&populate[product_main_page][populate][machinable_materials_three_cicly_img][populate][banner_img][fields]=*&populate[product_main_page][populate][machinable_materials_three_products][fields]=h1_page_inner_title,first_image_url, url
+&populate[product_main_page][populate][machinable_materials_two_cicly_img][populate][banner_img][fields]=*&populate[product_main_page][populate][machinable_materials_two_products][fields]=h1_page_inner_title,first_image_url, url
+&populate[product_main_page][populate][machinable_materials_right_two_banners][fields]=*&populate[product_main_page][populate][machinable_materials_right_three_banners][fields]=*
+&populate[product_main_page][populate][machinable_materials_right_six_banners][fields]=*&populate[product_main_page][populate][machinable_materials_right_seven_banners][fields]=*
+&populate[product_main_page][populate][machinable_materials_right_one_banners][fields]=*&populate[product_main_page][populate][machinable_materials_right_four_banners][fields]=*
+&populate[product_main_page][populate][machinable_materials_right_five_banners][fields]=*&populate[product_main_page][populate][machinable_materials_right_eight_banners][fields]=*
+&populate[product_main_page][populate][select_machine_guide_image][fields]=*&populate[product_main_page][populate][the_most_popular_related_process_cases_blogs][fields]=*
+&populate[product_main_page][populate][the_practical_videos_on_blogs][fields]=*&populate[product_main_page][populate][worth_reading_articles_on_blogs][fields]=*`
+
+
+const { data: productDetailRes, pending, error } = await useApi(productDetailUrl)
 const topProduct = ref([])
-const { data: topProductDetailRes, topPending, topError } = await useApi('/product-categories?filters[parent_category_value][$eq]=Products&populate=all')
+const { data: topProductDetailRes, topPending, topError } = await useApi('/product-categories?filters[parent_category_value][$eq]=Products&populate[fields]=category_name,category_value,id&populate[head_image][fields]=*')
 const wireSawMachineSectionList = ["one", "two", "three", "four", "five", "six", "seven", "eight"]
 
 watch(productDetailRes, (newPosts) => {
