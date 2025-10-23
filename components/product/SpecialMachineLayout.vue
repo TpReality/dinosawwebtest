@@ -553,7 +553,7 @@ let processingCase = []
 let productDetail = {}
 
 // 导入日期格式化工具函数
-import { formatDateLong, formatDatesInArray, formatArrayDatesLong, formatArrayDatesShort } from '~/utils/dateFormatter'
+import { formatArrayDatesLong, formatArrayDatesShort } from '~/utils/dateFormatter'
 
 // 或者直接使用 props.slug
 // console.log('Current slug in component:', props.slug);
@@ -562,6 +562,7 @@ const { data: productDetailRes, pending, error } = await useApi('/product-catego
 watch(productDetailRes, (newPosts) => {
     if (newPosts) {
         console.log(newPosts)
+        
         let data = newPosts.data[0]
 
         productDetail = data.wire_saw_machine
@@ -607,6 +608,9 @@ watch(productDetailRes, (newPosts) => {
 
 }, { immediate: true })
 
+watch(error, (newError) => {
+     throw createError({ statusCode: 404, statusMessage: '文章不存在' });
+})
 
 
 // 根据slug获取面包屑导航数据

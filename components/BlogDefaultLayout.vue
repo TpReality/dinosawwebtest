@@ -260,12 +260,18 @@ const props = defineProps({
     default: () => ({})
   }
 })
-let blogDetail = {}
 
-const { data: blogDetailRes, pending, error } = await useApi('/blogs?filters[slug][$eq]='+props.slug)
+let blogDetail = {}
+ const { data: blogDetailRes, pending, error } = await useApi('/blogs?filters[slug][$eq]='+props.slug)
 // console.log('/blogs?filters[slug][$eq]='+props.slug)
+watch(error, (newError) => {
+  console.log(newError)
+     throw createError({ statusCode: 404, statusMessage: '文章不存在' });
+})
 watch(blogDetailRes, (newPosts) => {
+  
     if (newPosts) {
+
       console.log('blog',newPosts)
         let data = newPosts.data[0]
 
@@ -274,7 +280,11 @@ watch(blogDetailRes, (newPosts) => {
         emit('headdata-loaded', data);
     }
 
+  
+
 }, { immediate: true })
+
+
 
 const blogList = ref({})
 const { data: blogListRes, blogListPending, blogListError } = await useApi('/blogs?pagination[page]=1&pagination[pageSize]=10&sort[0]=date:desc')

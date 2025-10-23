@@ -1,5 +1,5 @@
 <template>
-    <div class="default-product-layout">
+    <div class="default-product-layout" v-if="productDetail">
         <!-- Hero Section with Background -->
         <div class="hero-section">
             <!-- Background Images -->
@@ -953,6 +953,7 @@ const activeNavIndex = ref(0)
 const currentBenefitsSlide = ref(0)
 const benefitsSlideshowTrack = ref(null)
 const benefitsSlideWidth = ref(400) // 响应式slide宽度
+const benefitsSlides = ref([])
 
 const applicableMaterials  = ref(["a_applicable_materials","b_applicable_materials","c_applicable_materials","d_applicable_materials","e_applicable_materials","f_applicable_materials"])
 const faqs = ref({
@@ -960,40 +961,44 @@ const faqs = ref({
     answers: ["answer_a", "answer_b", "answer_c", "answer_d", "answer_e", "answer_f", "answer_g", "answer_h", "answer_i", "answer_j"]
 })
 
-const benefitsSlides = ref([])
-
 const { data: productDetailRes, pending, error } = await useApi('/products?filters[url][$eq]='+props.slug)
-const productDetail = computed(() => {
-    // 检查 productDetailRes.value 是否存在
-    if (productDetailRes.value && productDetailRes.value.data && productDetailRes.value.data.length > 0) {
-        // 返回你需要的具体数据对象
-        benefitsSlides.value = [
-            {
-                image: productDetailRes.value.data[0].core_advantage_illustration_a_url,
-            },
-            {
-                image: productDetailRes.value.data[0].core_advantage_illustration_b_url,
-            },
-            {
-                image: productDetailRes.value.data[0].core_advantage_illustration_c_url,
-            }
-        ]
-        console.log('productDetailRes',productDetailRes.value)
-        return productDetailRes.value.data[0];
-    }
-    // console.log('productDetailRes.value:', productDetailRes.value);
-    // 否则返回 null 或一个空对象，方便判断
-    return null; 
-});
+    const productDetail = computed(() => {
+        // 检查 productDetailRes.value 是否存在
+       
+ if (productDetailRes.value && productDetailRes.value.data && productDetailRes.value.data.length > 0) {
+            // 返回你需要的具体数据对象
+            benefitsSlides.value = [
+                {
+                    image: productDetailRes.value.data[0].core_advantage_illustration_a_url,
+                },
+                {
+                    image: productDetailRes.value.data[0].core_advantage_illustration_b_url,
+                },
+                {
+                    image: productDetailRes.value.data[0].core_advantage_illustration_c_url,
+                }
+            ]
+            console.log('productDetailRes',productDetailRes.value)
+            return productDetailRes.value.data[0];
+        }
+        // console.log('productDetailRes.value:', productDetailRes.value);
+        // 否则返回 null 或一个空对象，方便判断
+        return null; 
+       
+       
+    });
+        // 监听 productDetail 变化并通知父组件
+    watch(productDetail, (newData) => {
+        if (newData) {
+            // console.log('Product data loaded in DefaultProductLayout:', newData);
+            // 通知父组件数据已加载
+            emit('headdata-loaded', newData);
+        }
+    }, { immediate: true });
+ watch(error, (newError) => {
+     throw createError({ statusCode: 404, statusMessage: '文章不存在' });
+})
 
-// 监听 productDetail 变化并通知父组件
-watch(productDetail, (newData) => {
-    if (newData) {
-        // console.log('Product data loaded in DefaultProductLayout:', newData);
-        // 通知父组件数据已加载
-        emit('headdata-loaded', newData);
-    }
-}, { immediate: true });
 
 
 

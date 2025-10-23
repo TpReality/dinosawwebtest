@@ -203,7 +203,8 @@ let processingCase = {}
 watch(newsRes, (newPosts) => {
     if (newPosts) {
         // console.log(newPosts)
-        let data = {}
+        
+    let data = {}
         
 
         if(props.slug == 'industry-news'){
@@ -233,10 +234,15 @@ watch(newsRes, (newPosts) => {
                 }
             ],
         })
+  
+        
         
     }
 
 }, { immediate: true })
+watch(error, (newError) => {
+     throw createError({ statusCode: 404, statusMessage: '文章不存在' });
+})
 
 const page = ref(1)
 const blogList = ref([])
@@ -251,8 +257,7 @@ if(props.slug == 'industry-news'){
   blogUrl +='&filters[category][$eq]=Company News'
 }
 const { data: blogRes, blogPending, blogError } = await useApi(blogUrl)
-
-watch(blogRes, (newPosts) => {
+  watch(blogRes, (newPosts) => {
     if (newPosts) {
         // console.log(newPosts)
         let data = newPosts.data

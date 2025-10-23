@@ -196,6 +196,7 @@ const fetchBlogsByCategory = async (category, page = 1, pageSize = 6) => {
     const blogUrl = `/blogs?pagination[page]=${page}&pagination[pageSize]=${pageSize}&sort[0]=date:desc&filters[category][$eq]=${category}`
     try {
         const { data } = await useApi(blogUrl)
+        // console.log('blogs',data)
         const result = data.value?.data || []
         const pagination = data.value?.meta?.pagination || {}
         
@@ -273,7 +274,7 @@ const loadMoreBlogs = async (categoryIndex) => {
 
 watch(vidoeRes, async (newPosts) => {
     if (newPosts) {
-        console.log(newPosts)
+        // console.log(newPosts)
         let data = newPosts.data[0].video
         videos.value = data
         useHead({
