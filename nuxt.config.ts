@@ -10,7 +10,7 @@ export default defineNuxtConfig({
     async 'prerender:routes'(ctx) {
       // 假设这是从 API 获取所有文章 slug 的函数
       let authToken = "8f80d6094edcd486411ddc90d4fa4f18ed87f9fe9edae7fe7cb423e3ce261b23ce76afdedfc3cf2e3689bd1b03e9f504cbded28e7645eed305db44f61e914053e9fb4b4999d30c743b67fe2a052bff812b6165825f1502f22f991ff41a44536c67a88f99ae0f525ee710ee010834ffddaa1501dc60c7da7dac18060f46612708"
-      const blogs = await $fetch('/blogs?pagination[page]=1&pagination[pageSize]=200&sort[0]=date:desc',
+      const blogs = await $fetch('/blogs?pagination[page]=1&pagination[pageSize]=100000&sort[0]=date:desc',
         {
           baseURL: 'https://cms.stoneboss.vip/api',
           headers: {
@@ -22,6 +22,20 @@ export default defineNuxtConfig({
       for (const blog of blogs.data) {
         // 添加具体的动态路由路径
         ctx.routes.add(`/blog/${blog.slug}`);
+      }
+
+      const products = await $fetch('/products?pagination[page]=1&pagination[pageSize]=100000&sort[0]=date:desc',
+        {
+          baseURL: 'https://cms.stoneboss.vip/api',
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          }
+        }
+      ); 
+// console.log(blogs)
+      for (const product of products.data) {
+        // 添加具体的动态路由路径
+        ctx.routes.add(`/Pruducts/${product.url}`);
       }
     },
   },
