@@ -88,7 +88,7 @@
                   </svg>
                 </div>
                 <!-- 移动端菜单 -->
-                <div class="mobile-menu" :class="{ 'mobile-menu-open': isMobileMenuOpen }">
+                <div class="mobile-menu" :class="{ 'mobile-menu-open': isMobileMenuOpen }" v-if="menuItems && menuItems.length > 0">
                   <div class="menu-item" v-for="(item, index) in menuItems" :key="index">
                     <div class="menu-item-header" @click="toggleSubMenu(index)">
                       <span @click.stop="stopPoint()" v-if="item.title"> <a :href="item.link" target="_blank">{{ item.title }}</a></span>
@@ -108,7 +108,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="dinosaw-menu flex">
+                <div class="dinosaw-menu flex" v-if="menuItems && menuItems.length > 0">
                     <div class="menu-item" v-for="(item, index) in menuItems" :key="index">
                       <!-- 有子菜单的项目 -->
                       <div v-if="item.children" class="flex">

@@ -58,35 +58,34 @@ export const useMenuData = () => {
   // 初始化菜单数据
   const initializeMenuData = async () => {
     try {
-      const { data: categoryRes, pending, error } = await useApi('/product-categories?fields=sort,parent_category_value,category_name,menu_select_down_panel_is_show,category_value')
+       const config = useRuntimeConfig()
+        const baseUrl = config.public.apiBase || 'https://cms.stoneboss.vip/api'
+        let authToken = "8f80d6094edcd486411ddc90d4fa4f18ed87f9fe9edae7fe7cb423e3ce261b23ce76afdedfc3cf2e3689bd1b03e9f504cbded28e7645eed305db44f61e914053e9fb4b4999d30c743b67fe2a052bff812b6165825f1502f22f991ff41a44536c67a88f99ae0f525ee710ee010834ffddaa1501dc60c7da7dac18060f46612708"
+        
+        // 直接使用fetch获取数据
+        const response = await $fetch('/product-categories?populate=*&fields[0]=sort&fields[1]=parent_category_value&fields[2]=category_name&fields[3]=menu_select_down_panel_is_show&fields[4]=category_value', {
+          baseURL: baseUrl,
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          }
+        })
+      // const { data: categoryRes, pending, error } = await $fetch('/product-categories?fields=sort,parent_category_value,category_name,menu_select_down_panel_is_show,category_value')
       // console.log('categoryRes',categoryRes.value.data)
-      if (categoryRes.value && categoryRes.value.data) {
+      if (response && response.data) {
         // 转换数据为树状结构
-        const transformedData = transformCategoryData(categoryRes.value.data)
+        const transformedData = transformCategoryData(response.data)
         menuItems.value = transformedData
         
         // 保留原有逻辑
-        let data = categoryRes.value.data[0]
+        let data = response.data[0]
         categoryDetail.value = data?.wire_saw_machine
       }
       
       // 监听数据变化
-      watch(categoryRes, (newData) => {
-        if (newData && newData.data) {
-          // 转换数据为树状结构
-          const transformedData = transformCategoryData(newData.data)
-          menuItems.value = transformedData
-          
-          // 保留原有逻辑
-          let data = newData.data[0]
-          categoryDetail.value = data?.wire_saw_machine
-        }
-      }, { immediate: true })
-      watch(error, (newError) => {
-        console.error('Error fetching menu data:', newError)
-      })
+      return menuItems.value
       
     } catch (error) {
+      return []
       console.error('Failed to initialize menu data:', error)
     }
   }
