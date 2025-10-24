@@ -291,7 +291,7 @@ const { data: blogListRes, blogListPending, blogListError } = await useApi('/blo
 
 watch(blogListRes, (newPosts) => {
     if (newPosts) {
-        // // console.log('nlist',newPosts)
+        // console.log('nlist',newPosts)
         let data = newPosts.data
         data.forEach(item => {
             item.date = formatDateLong(item.date)
@@ -302,11 +302,11 @@ watch(blogListRes, (newPosts) => {
 }, { immediate: true })
 
 const productList = ref({})
-const { data: productListRes, productListPending, productListError } = await useApi('/product-categories?filters[parent_category_value][$eq]=Products&populate=all')
+const { data: productListRes, productListPending, productListError } = await useApi('/product-categories?filters[parent_category_value][$eq]=Products&populate[fields]=category_value,category_name')
 
 watch(productListRes, (newPosts) => {
     if (newPosts) {
-        // // console.log('plist',newPosts)
+        // console.log('plist',newPosts)
         let data = newPosts.data
         
         productList.value = data
@@ -315,11 +315,11 @@ watch(productListRes, (newPosts) => {
 }, { immediate: true })
 
 const menuItems = ref([])
-const { data: menuItemsRes, menuItemsPending, menuItemsError } = await useApi('/product-categories?filters[parent_category_value][$eq]=blog&populate=all')
+const { data: menuItemsRes, menuItemsPending, menuItemsError } = await useApi('/product-categories?filters[parent_category_value][$eq]=blog&populate[fields]=category_value,category_name')
 
 watch(menuItemsRes, (newPosts) => {
     if (newPosts) {
-        // // console.log('menuItems',newPosts)
+        // console.log('menuItems',newPosts)
         menuItems.value = newPosts.data
     }
 }, { immediate: true })

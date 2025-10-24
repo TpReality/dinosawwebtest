@@ -58,8 +58,8 @@ export const useMenuData = () => {
   // 初始化菜单数据
   const initializeMenuData = async () => {
     try {
-      const { data: categoryRes } = await useApi('/product-categories?fields=sort,parent_category_value,category_name,menu_select_down_panel_is_show,category_value')
-      // console.log(categoryRes)
+      const { data: categoryRes, pending, error } = await useApi('/product-categories?fields=sort,parent_category_value,category_name,menu_select_down_panel_is_show,category_value')
+      // console.log('categoryRes',categoryRes.value.data)
       if (categoryRes.value && categoryRes.value.data) {
         // 转换数据为树状结构
         const transformedData = transformCategoryData(categoryRes.value.data)
@@ -82,6 +82,9 @@ export const useMenuData = () => {
           categoryDetail.value = data?.wire_saw_machine
         }
       }, { immediate: true })
+      watch(error, (newError) => {
+        console.error('Error fetching menu data:', newError)
+      })
       
     } catch (error) {
       console.error('Failed to initialize menu data:', error)

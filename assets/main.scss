@@ -1010,7 +1010,6 @@ figure {
     text-align: left;
     color: #ffffff;
     margin: 0;
-    width: 98px;
     height: 17px;
     display: flex;
     align-items: center;
@@ -1143,9 +1142,9 @@ figure {
     justify-content: center;
     align-items: center;
     gap: 10px;
-    padding: 16px;
     width: 150px;
     height: 40px;
+    text-align:center;
     background-color: #000000;
     border-radius: 21px;
     cursor: pointer;
@@ -1160,7 +1159,7 @@ figure {
     display: flex;
     flex-direction: column;
     justify-content: stretch;
-    align-items: stretch;
+    align-items: center;
     width: 104px;
     height: 28px;
 }
@@ -1373,7 +1372,6 @@ figure {
     text-align: left;
     color: #ffffff;
     margin: 0;
-    width: 98px;
     height: 17px;
     display: flex;
     align-items: center;
@@ -1436,6 +1434,10 @@ figure {
     align-items: stretch;
     max-width: 1400px;
     margin: 0 auto;
+}
+.layout-five+.layout-double,
+.layout-five+.layout-single { 
+    margin-top:25px;
 }
 
 /* 左侧特色产品 */

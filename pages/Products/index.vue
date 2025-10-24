@@ -171,11 +171,11 @@
                             <!-- 轮播图背景 -->
                             <div class="carousel-background">
                                 <div class="carousel-background-container">
-                                    <div class="carousel-background-list">
+                                    <div class="carousel-background-list" v-if="productDetail[`machinable_materials_right_${item}_banners`]">
                                         <Swiper :slides-per-view="1" :space-between="20" :modules="modules"
                                             :navigation="{
-                                                nextEl: '.background-button-prev',
-                                                prevEl: '.background-button-next',
+                                                prevEl: '.background-button-prev-'+item,
+                                                nextEl: '.background-button-next-'+item,
                                             }">
                                             <SwiperSlide v-for="(carousel, j) in productDetail[`machinable_materials_right_${item}_banners`]" :key="carousel.id">
                                                 <div class="carousel-item">
@@ -195,13 +195,13 @@
                                         <!-- 轮播图项目 -->
                                         <!-- 轮播图控制按钮 -->
                                         <div class="carousel-pagination-controls">
-                                            <div class="background-button-prev">
+                                            <div class="background-button-prev" :class="'background-button-prev-'+item">
                                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                     <path d="M15 18L9 12L15 6" stroke="white" stroke-width="2" stroke-linecap="round"
                                                         stroke-linejoin="round" />
                                                 </svg>
                                             </div>
-                                            <div class="background-button-next">
+                                            <div class="background-button-next" :class="'background-button-next-'+item">
                                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                     <path d="M9 18L15 12L9 6" stroke="white" stroke-width="2"
                                                         stroke-linecap="round" stroke-linejoin="round" />
@@ -656,10 +656,10 @@ const productDetailUrl = `/product-categories?filters[category_value][$eq]=Produ
 &populate[product_main_page][populate][machinable_materials_six_cicly_img][populate][banner_img][fields]=*&populate[product_main_page][populate][machinable_materials_six_products][fields]=h1_page_inner_title,first_image_url, url
 &populate[product_main_page][populate][machinable_materials_three_cicly_img][populate][banner_img][fields]=*&populate[product_main_page][populate][machinable_materials_three_products][fields]=h1_page_inner_title,first_image_url, url
 &populate[product_main_page][populate][machinable_materials_two_cicly_img][populate][banner_img][fields]=*&populate[product_main_page][populate][machinable_materials_two_products][fields]=h1_page_inner_title,first_image_url, url
-&populate[product_main_page][populate][machinable_materials_right_two_banners][fields]=*&populate[product_main_page][populate][machinable_materials_right_three_banners][fields]=*
-&populate[product_main_page][populate][machinable_materials_right_six_banners][fields]=*&populate[product_main_page][populate][machinable_materials_right_seven_banners][fields]=*
-&populate[product_main_page][populate][machinable_materials_right_one_banners][fields]=*&populate[product_main_page][populate][machinable_materials_right_four_banners][fields]=*
-&populate[product_main_page][populate][machinable_materials_right_five_banners][fields]=*&populate[product_main_page][populate][machinable_materials_right_eight_banners][fields]=*
+&populate[product_main_page][populate][machinable_materials_right_two_banners][populate][banner_img][fields]=*&populate[product_main_page][populate][machinable_materials_right_three_banners][populate][banner_img][fields]=*
+&populate[product_main_page][populate][machinable_materials_right_six_banners][populate][banner_img][fields]=*&populate[product_main_page][populate][machinable_materials_right_seven_banners][populate][banner_img][fields]=*
+&populate[product_main_page][populate][machinable_materials_right_one_banners][populate][banner_img][fields]=*&populate[product_main_page][populate][machinable_materials_right_four_banners][populate][banner_img][fields]=*
+&populate[product_main_page][populate][machinable_materials_right_five_banners][populate][banner_img][fields]=*&populate[product_main_page][populate][machinable_materials_right_eight_banners][populate][banner_img][fields]=*
 &populate[product_main_page][populate][select_machine_guide_image][fields]=*&populate[product_main_page][populate][the_most_popular_related_process_cases_blogs][fields]=*
 &populate[product_main_page][populate][the_practical_videos_on_blogs][fields]=*&populate[product_main_page][populate][worth_reading_articles_on_blogs][fields]=*`
 
@@ -684,7 +684,7 @@ watch(productDetailRes, (newPosts) => {
         )
 
         productDetail.value = data
-        // console.log(newPosts)
+        console.log(newPosts)
         useHead({
             title: data.meta_title,
             meta: [

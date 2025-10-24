@@ -990,7 +990,7 @@ const { data: productDetailRes, pending, error } = await useApi('/products?filte
         // 监听 productDetail 变化并通知父组件
     watch(productDetail, (newData) => {
         if (newData) {
-            // // console.log('Product data loaded in DefaultProductLayout:', newData);
+            // console.log('Product data loaded in DefaultProductLayout:', newData);
             // 通知父组件数据已加载
             emit('headdata-loaded', newData);
         }

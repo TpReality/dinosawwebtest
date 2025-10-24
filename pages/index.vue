@@ -350,16 +350,20 @@
                     <div class="blog-cards-container" ref="blogCardsContainer">
                         <div class="blog-cards-grid" ref="blogCardsGrid">
                             <!-- Blog Card 1 -->
-                            <div class="blog-card" v-for="(item, i) in indexDetail.what_you_need_blogs" :key="i">
-                                <div class="blog-image">
-                                    <NuxtImg :src="item.first_image_url"
-                                      ></NuxtImg>
+                            <template  v-for="(item, i) in indexDetail.what_you_need_blogs" :key="i">
+                                <NuxtLink :to="'/blog/'+item.slug" target="_blank">
+                                <div class="blog-card">
+                                    <div class="blog-image">
+                                        <NuxtImg :src="item.first_image_url"
+                                        ></NuxtImg>
+                                    </div>
+                                    <div class="blog-content">
+                                        <h3 class="blog-title">{{ item.title }}</h3>
+                                        <div class="blog-date">{{ item.date }}</div>
+                                    </div>
                                 </div>
-                                <div class="blog-content">
-                                    <h3 class="blog-title">{{ item.title }}</h3>
-                                    <div class="blog-date">{{ item.date }}</div>
-                                </div>
-                            </div>
+                                </NuxtLink>
+                            </template>
                         </div>
 
                         <!-- Navigation Buttons for 1024-1440px -->
@@ -1160,12 +1164,12 @@ const indexDetail = ref({})
 //     }
 //   }
 // }, { encodeValuesOnly: true })
-let populateQuery = `populate[flagship_tech_products][fields]=first_image_url, first_image_alt,h1_page_inner_title,date`
+let populateQuery = `populate[flagship_tech_products][fields]=first_image_url, url,first_image_alt,h1_page_inner_title,date`
 
 populateQuery += `&populate[head_banner_images][populate][banner_img][fields]=*`
-populateQuery += `&populate[mature_products_products][fields]=first_image_url, first_image_alt,h1_page_inner_title,date`
-populateQuery += `&populate[smart_value_products][fields]=first_image_url, first_image_alt,h1_page_inner_title,date`
-populateQuery += `&populate[what_you_need_blogs][fields]=first_image_url,title,date`
+populateQuery += `&populate[mature_products_products][fields]=first_image_url,url, first_image_alt,h1_page_inner_title,date`
+populateQuery += `&populate[smart_value_products][fields]=first_image_url, url,first_image_alt,h1_page_inner_title,date`
+populateQuery += `&populate[what_you_need_blogs][fields]=first_image_url,title,date, slug`
 populateQuery += `&populate[our_capabilities_presence_banner_1_image][fields]=*&populate[our_capabilities_presence_banner_2_image][fields]=*&populate[our_capabilities_presence_banner_3_image][fields]=*&populate[our_capabilities_presence_banner_4_image][fields]=*`
 populateQuery += `&populate[your_guide_to_choos_pannel_image_1][fields]=*&populate[your_guide_to_choos_pannel_image_2][fields]=*&populate[your_guide_to_choos_pannel_image_3][fields]=*&populate[your_guide_to_choos_pannel_image_4][fields]=*`
 

@@ -14,7 +14,7 @@
                         <div class="breadcrumb-wrapper">
                             <div class="breadcrumb-link">
                                 <div class="breadcrumb-text">
-                                    <div class="text-container">
+                                    <div class="text-container" v-if="productDetail.home_text">
                                         <NuxtLink to="/" target="_blank"><span class="breadcrumb-home">{{ productDetail.home_text }}</span></NuxtLink>
                                     </div>
                                 </div>
@@ -110,34 +110,35 @@
         </div>
         
         <!-- Dynamic Content Section -->
-        <div class="dynamic-content-section">
+         <template v-for="(item, index) in dynamicContent" :key="index">
+        <div class="dynamic-content-section" >
             <div class="content-wrapper">
                 <!-- 标题部分 -->
                 <div class="cnc-title-section">
-                    <h2 class="cnc-title">{{ productDetail.cnc_mono_wire_saw_machine_title }}</h2>
+                    <h2 class="cnc-title">{{ item.title }}</h2>
                 </div>
                 
                 <!-- 描述内容部分 -->
-                <div class="cnc-description-section" v-html="productDetail.cnc_mono_wire_saw_machine_description">
+                <div class="cnc-description-section" v-html="item.description">
                 </div>
                 
                 <!-- 动态产品图片展示区域 -->
-                <div class="dynamic-product-section" v-if="productDetail.cnc_mono_wire_saw_machine_products && productDetail.cnc_mono_wire_saw_machine_products.length">
+                <div class="dynamic-product-section" v-if="item.productList && item.productList.length">
                     <!-- 1张图片布局：左侧图片，右侧信息 - 按照Figma节点 10:15239 -->
-                    <div v-if="productDetail.cnc_mono_wire_saw_machine_products.length === 1" class="layout-single">
-                        <NuxtLink :to="'/Products/'+productDetail.cnc_mono_wire_saw_machine_products[0].url" target="_blank">
+                    <div v-if="item.productList.length === 1" class="layout-single">
+                        <NuxtLink :to="'/Products/'+item.productList[0].url" target="_blank">
                         <div class="single-container">
                             <div class="single-link">
                                 <div class="single-image">
-                                    <NuxtImg :src="productDetail.cnc_mono_wire_saw_machine_products[0].first_image_url" />
+                                    <NuxtImg :src="item.productList[0].first_image_url" />
                                 </div>
                                 <div class="single-content">
                                     <div class="single-text-section">
                                         <div class="single-title-wrapper">
-                                            <h3 class="single-title">{{ productDetail.cnc_mono_wire_saw_machine_products[0].h1_page_inner_title }}</h3>
+                                            <h3 class="single-title">{{ item.productList[0].h1_page_inner_title }}</h3>
                                         </div>
-                                        <div class="single-date-wrapper" v-if="productDetail.cnc_mono_wire_saw_machine_products[0].date">
-                                            <p class="single-date">{{ productDetail.cnc_mono_wire_saw_machine_products[0].date }}</p>
+                                        <div class="single-date-wrapper" v-if="item.productList[0].date">
+                                            <p class="single-date">{{ item.productList[0].date }}</p>
                                         </div>
                                     </div>
                                     <div class="single-button" v-if="productDetail.buy_now_text">
@@ -152,8 +153,8 @@
                     </div>
                     
                     <!-- 2张图片布局：左右布局 -->
-                    <div v-else-if="productDetail.cnc_mono_wire_saw_machine_products.length === 2" class="layout-double">
-                        <template v-for="(product, index) in productDetail.cnc_mono_wire_saw_machine_products" 
+                    <div v-else-if="item.productList.length === 2" class="layout-double">
+                        <template v-for="(product, index) in item.productList" 
                             :key="index">
                         <NuxtLink :to="'/Products/'+product.url" target="_blank">
                         <div 
@@ -202,8 +203,8 @@
                     </div>
                     
                     <!-- 4张图片布局：2x2网格 -->
-                    <div v-else-if="productDetail.cnc_mono_wire_saw_machine_products.length === 4" class="layout-quad">
-                        <template v-for="(product, index) in productDetail.cnc_mono_wire_saw_machine_products" 
+                    <div v-else-if="item.productList.length === 4" class="layout-quad">
+                        <template v-for="(product, index) in item.productList" 
                             :key="index">
                             <NuxtLink :to="'/Products/'+product.url" target="_blank">
                         <div 
@@ -222,20 +223,20 @@
                     </div>
                     
                     <!-- 5张图片布局：左边1个大图，右边4个小图 -->
-                    <div v-else-if="productDetail.cnc_mono_wire_saw_machine_products.length === 5" class="layout-five">
+                    <div v-else-if="item.productList.length === 5" class="layout-five">
                        
                         <div class="five-left">
                              
                             <div class="five-main-image">
-                                <NuxtLink :to="'/Products/'+productDetail.cnc_mono_wire_saw_machine_products[0].url" target="_blank"><NuxtImg :src="productDetail.cnc_mono_wire_saw_machine_products[0].first_image_url" /></NuxtLink>
+                                <NuxtLink :to="'/Products/'+item.productList[0].url" target="_blank"><NuxtImg :src="item.productList[0].first_image_url" /></NuxtLink>
                             </div>
-                            <NuxtLink :to="'/Products/'+productDetail.cnc_mono_wire_saw_machine_products[0].url" target="_blank">
+                            <NuxtLink :to="'/Products/'+item.productList[0].url" target="_blank">
                             <div class="five-main-content">
-                                <h3 class="five-main-title">{{ productDetail.cnc_mono_wire_saw_machine_products[0].h1_page_inner_title }}</h3>
-                                <p class="five-main-date" v-if="productDetail.cnc_mono_wire_saw_machine_products[0].date">{{ productDetail.cnc_mono_wire_saw_machine_products[0].date }}</p>
+                                <h3 class="five-main-title">{{ item.productList[0].h1_page_inner_title }}</h3>
+                                <p class="five-main-date" v-if="item.productList[0].date">{{ item.productList[0].date }}</p>
                                 <div class="five-main-info" v-if="productDetail.flagship_products_2025_text">
                                     <h3 class="five-subtitle">{{ productDetail.flagship_products_2025_text }}</h3>
-                                    <p class="five-description" v-if="productDetail.flagship_products_2025_description">{{ productDetail.cnc_mono_wire_saw_machine_products[0].description }}</p>
+                                    <p class="five-description" v-if="productDetail.flagship_products_2025_description">{{ item.productList[0].description }}</p>
                                     <button class="buy-now-btn">{{productDetail.buy_now_text}}</button>
                                 </div>
                             </div>
@@ -243,7 +244,7 @@
                         </div>
                         <div class="five-right">
                             <div 
-                                v-for="(product, index) in productDetail.cnc_mono_wire_saw_machine_products.slice(1)" 
+                                v-for="(product, index) in item.productList.slice(1)" 
                                 :key="index + 1"
                                 class="five-grid-item"
                             >
@@ -258,167 +259,160 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="dynamic-content-section" v-if="productDetail.cnc_multi_wire_saw_machine_title">
-            <div class="content-wrapper">
-                <!-- 标题部分 -->
-                <div class="cnc-title-section">
-                    <h2 class="cnc-title">{{ productDetail.cnc_multi_wire_saw_machine_title }}</h2>
-                </div>
-                
-                <!-- 描述内容部分 -->
-                <div class="cnc-description-section" v-html="productDetail.cnc_multi_wire_saw_machine_description">
-                </div>
-                
-                <!-- 动态产品图片展示区域 -->
-                <div class="dynamic-product-section" v-if="productDetail.cnc_multi_wire_saw_machine_products && productDetail.cnc_multi_wire_saw_machine_products.length">
-                    <!-- 1张图片布局：左侧图片，右侧信息 - 按照Figma节点 10:15239 -->
-                    <div v-if="productDetail.cnc_multi_wire_saw_machine_products.length === 1" class="layout-single">
-                        <NuxtLink :to="'/Products/'+productDetail.cnc_multi_wire_saw_machine_products[0].url">
-                            <div class="single-container">
-                                <div class="single-link">
-                                    <div class="single-image">
-                                        <NuxtImg :src="productDetail.cnc_multi_wire_saw_machine_products[0].first_image_url" />
-                                    </div>
-                                    <div class="single-content">
-                                        <div class="single-text-section">
-                                            <div class="single-title-wrapper">
-                                                <h3 class="single-title">{{ productDetail.cnc_multi_wire_saw_machine_products[0].h1_page_inner_title }}</h3>
-                                            </div>
-                                            <div class="single-date-wrapper" v-if="productDetail.cnc_multi_wire_saw_machine_products[0].date">
-                                                <p class="single-date">{{ productDetail.cnc_multi_wire_saw_machine_products[0].date }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="single-button" v-if="productDetail.cnc_multi_wire_saw_machine_products[0].buttonText">
-                                            <div class="single-button-content">
-                                                <span class="button-text">{{ productDetail.cnc_multi_wire_saw_machine_products[0].buttonText }}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </NuxtLink>
-                    </div>
-                    
-                    <!-- 2张图片布局：左右布局 -->
-                    <div v-else-if="productDetail.cnc_multi_wire_saw_machine_products.length === 2" class="layout-double">
-                        <template v-for="(product, index) in productDetail.cnc_multi_wire_saw_machine_products" 
-                            :key="index">
-                            <NuxtLink :to="'/Products/'+product.url">
-                                    <div 
-                                    class="double-item"
-                                    :class="product.layout || 'vertical'"
-                                >
-                                
-                                    <!-- 垂直布局：上面图片，下面标题 -->
-                                    <template v-if="!product.layout || product.layout === 'vertical'">
-                                        <div class="double-image">
-                                            <NuxtImg :src="product.first_image_url" />
-                                        </div>
-                                        <div class="double-content">
-                                            <h3 class="double-title">{{ product.h1_page_inner_title }}</h3>
-                                        </div>
-                                    </template>
-                                    
-                                    <!-- 水平布局：左侧图片，右侧信息 - 按照Figma节点 7:11368 -->
-                                    <template v-else-if="product.layout === 'horizontal'">
-                                        <div class="horizontal-container">
-                                            <div class="horizontal-link">
-                                                <div class="horizontal-image">
-                                                    <NuxtImg :src="product.first_image_url" />
-                                                </div>
-                                                <div class="horizontal-content">
-                                                    <div class="horizontal-text-section">
-                                                        <div class="horizontal-title-wrapper">
-                                                            <h3 class="horizontal-title">{{ product.h1_page_inner_title }}</h3>
-                                                        </div>
-                                                        <div class="horizontal-date-wrapper" v-if="product.date">
-                                                            <p class="horizontal-date">{{ product.date }}</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="horizontal-button" v-if="product.buttonText">
-                                                        <div class="horizontal-button-content">
-                                                            <span class="button-text">{{ product.buttonText }}</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </template>
-                                </div>
-                                </NuxtLink>
-                        </template>
-                        
-                    </div>
-                    
-                    <!-- 4张图片布局：2x2网格 -->
-                    <div v-else-if="productDetail.cnc_multi_wire_saw_machine_products.length === 4" class="layout-quad">
-                        <template v-for="(product, index) in productDetail.cnc_multi_wire_saw_machine_products" 
-                            :key="index">
-                            <NuxtLink :to="'/Products/'+product.url">
-                            <div 
-                                
-                                class="quad-item"
-                            >
-                                <div class="quad-image">
-                                    <NuxtImg :src="product.first_image_url" />
-                                </div>
-                                <div class="quad-content">
-                                    <h3 class="quad-title">{{ product.h1_page_inner_title }}</h3>
-                                </div>
-                            </div>
-                            </NuxtLink>
-                        </template>
-                    </div>
-                    
-                    <!-- 5张图片布局：左边1个大图，右边4个小图 -->
-                    <div v-else-if="productDetail.cnc_multi_wire_saw_machine_products.length === 5" class="layout-five">
+<!-- 6张图片布局： -->
+                    <div v-else-if="item.productList.length === 6">
+                        <div class="layout-five">
                         <div class="five-left">
+                             
                             <div class="five-main-image">
-                                <NuxtLink :to="'/Products/'+productDetail.cnc_multi_wire_saw_machine_products[0].url">
-                                    <NuxtImg :src="productDetail.cnc_multi_wire_saw_machine_products[0].first_image_url" />
-                                </NuxtLink>
+                                <NuxtLink :to="'/Products/'+item.productList[0].url" target="_blank"><NuxtImg :src="item.productList[0].first_image_url" /></NuxtLink>
                             </div>
+                            <NuxtLink :to="'/Products/'+item.productList[0].url" target="_blank">
                             <div class="five-main-content">
-                                <h3 class="five-main-title">{{ productDetail.cnc_multi_wire_saw_machine_products[0].h1_page_inner_title }}</h3>
-                                <p class="five-main-date" v-if="productDetail.cnc_multi_wire_saw_machine_products[0].date">{{ productDetail.cnc_multi_wire_saw_machine_products[0].date }}</p>
+                                <h3 class="five-main-title">{{ item.productList[0].h1_page_inner_title }}</h3>
+                                <p class="five-main-date" v-if="item.productList[0].date">{{ item.productList[0].date }}</p>
                                 <div class="five-main-info" v-if="productDetail.flagship_products_2025_text">
                                     <h3 class="five-subtitle">{{ productDetail.flagship_products_2025_text }}</h3>
-                                    <p class="five-description" v-if="productDetail.flagship_products_2025_description">{{ productDetail.cnc_mono_wire_saw_machine_products[0].description }}</p>
+                                    <p class="five-description" v-if="productDetail.flagship_products_2025_description">{{ item.productList[0].description }}</p>
                                     <button class="buy-now-btn">{{productDetail.buy_now_text}}</button>
                                 </div>
                             </div>
+                            </NuxtLink>
                         </div>
                         <div class="five-right">
                             <div 
-                                v-for="(product, index) in productDetail.cnc_multi_wire_saw_machine_products.slice(1)" 
+                                v-for="(product, index) in item.productList.slice(1,5)" 
                                 :key="index + 1"
                                 class="five-grid-item"
                             >
                                 <div class="five-grid-image">
-                                    <NuxtImg :src="product.first_image_url" />
+                                    <NuxtLink :to="'/Products/'+product.url" target="_blank">
+                                        <NuxtImg :src="product.first_image_url" />
+                                    </NuxtLink>
                                 </div>
-                                <h3 class="five-grid-title">{{ product.h1_page_inner_title }}</h3>
+                                <h3 class="five-grid-title">
+                                    <NuxtLink :to="'/Products/'+product.url" target="_blank">{{ product.h1_page_inner_title }}</NuxtLink>
+                                </h3>
                             </div>
                         </div>
+                        </div>
+                        <div class="layout-single">
+                        <NuxtLink :to="'/Products/'+item.productList[5].url" target="_blank">
+                        <div class="single-container">
+                            <div class="single-link">
+                                <div class="single-image">
+                                    <NuxtImg :src="item.productList[5].first_image_url" />
+                                </div>
+                                <div class="single-content">
+                                    <div class="single-text-section">
+                                        <div class="single-title-wrapper">
+                                            <h3 class="single-title">{{ item.productList[5].h1_page_inner_title }}</h3>
+                                        </div>
+                                        <div class="single-date-wrapper" v-if="item.productList[5].date">
+                                            <p class="single-date">{{ item.productList[5].date }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="single-button" v-if="productDetail.buy_now_text">
+                                        <div class="single-button-content">
+                                            <span class="button-text">{{ productDetail.buy_now_text }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </NuxtLink>
+                    </div>
+                    </div>
+                    <div v-else-if="item.productList.length === 7">
+                        <div class="layout-five">
+                        <div class="five-left">
+                             
+                            <div class="five-main-image">
+                                <NuxtLink :to="'/Products/'+item.productList[0].url" target="_blank"><NuxtImg :src="item.productList[0].first_image_url" /></NuxtLink>
+                            </div>
+                            <NuxtLink :to="'/Products/'+item.productList[0].url" target="_blank">
+                            <div class="five-main-content">
+                                <h3 class="five-main-title">{{ item.productList[0].h1_page_inner_title }}</h3>
+                                <p class="five-main-date" v-if="item.productList[0].date">{{ item.productList[0].date }}</p>
+                                <div class="five-main-info" v-if="productDetail.flagship_products_2025_text">
+                                    <h3 class="five-subtitle">{{ productDetail.flagship_products_2025_text }}</h3>
+                                    <p class="five-description" v-if="productDetail.flagship_products_2025_description">{{ item.productList[0].description }}</p>
+                                    <button class="buy-now-btn">{{productDetail.buy_now_text}}</button>
+                                </div>
+                            </div>
+                            </NuxtLink>
+                        </div>
+                        <div class="five-right">
+                            <div 
+                                v-for="(product, index) in item.productList.slice(1,5)" 
+                                :key="index + 1"
+                                class="five-grid-item"
+                            >
+                                <div class="five-grid-image">
+                                    <NuxtLink :to="'/Products/'+product.url" target="_blank">
+                                        <NuxtImg :src="product.first_image_url" />
+                                    </NuxtLink>
+                                </div>
+                                <h3 class="five-grid-title">
+                                    <NuxtLink :to="'/Products/'+product.url" target="_blank">{{ product.h1_page_inner_title }}</NuxtLink>
+                                </h3>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="layout-double">
+                        <template v-for="(product, index) in item.productList.slice(5,7)" 
+                            :key="index">
+                        <NuxtLink :to="'/Products/'+product.url" target="_blank">
+                        <div 
+                            
+                            class="double-item"
+                            :class="product.layout || 'vertical'"
+                        >
+                            <!-- 垂直布局：上面图片，下面标题 -->
+                            <template v-if="!product.layout || product.layout === 'vertical'">
+                                <div class="double-image">
+                                    <NuxtImg :src="product.first_image_url" :alt="product.h1_page_inner_title" />
+                                </div>
+                                <div class="double-content">
+                                    <h3 class="double-title">{{ product.h1_page_inner_title }}</h3>
+                                </div>
+                            </template>
+                            
+                            <!-- 水平布局：左侧图片，右侧信息 - 按照Figma节点 7:11368 -->
+                            <template v-else-if="product.layout === 'horizontal'">
+                                <div class="horizontal-container">
+                                    <div class="horizontal-link">
+                                        <div class="horizontal-image">
+                                            <NuxtImg :src="product.first_image_url" :alt="product.h1_page_inner_title" />
+                                        </div>
+                                        <div class="horizontal-content">
+                                            <div class="horizontal-text-section">
+                                                <div class="horizontal-title-wrapper">
+                                                    <h3 class="horizontal-title">{{ product.h1_page_inner_title }}</h3>
+                                                </div>
+                                                <div class="horizontal-date-wrapper" v-if="product.date">
+                                                    <p class="horizontal-date">{{ product.date }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="horizontal-button" v-if="product.buttonText">
+                                                <div class="horizontal-button-content">
+                                                    <span class="button-text">{{ product.buttonText }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                        </NuxtLink>
+                        </template>
+                    </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="dynamic-content-section" v-if="productDetail.what_is_a_wire_saw_machine_title">
-            <div class="content-wrapper">
-                <!-- 标题部分 -->
-                <div class="cnc-title-section">
-                    <h2 class="cnc-title">{{ productDetail.what_is_a_wire_saw_machine_title }}</h2>
-                </div>
-                
-                <!-- 描述内容部分 -->
-                <div class="cnc-description-section" v-html="productDetail.what_is_a_wire_saw_machine_description">
-                </div>
-            </div>
-        </div>
+        </template>
+       
         <!-- Processing Cases 部分 - 对应Figma 19:13136 -->
         <div class="processing-cases-section" v-for="(item, index) in processingCase" :key="index">
             <!-- 背景图片 -->
@@ -529,7 +523,6 @@
 </template>
 
 <script setup>
-import { formatDate, formatDateEN } from '~/utils/dateUtils';
 
 const props = defineProps({
     slug: {
@@ -545,65 +538,599 @@ const props = defineProps({
 // 添加 emit 定义
 const emit = defineEmits(['headdata-loaded']);
 
-
-
-// 在模板中可以直接使用 props.slug 或者创建响应式引用
-const { slug } = toRefs(props);
-let processingCase = []
-let productDetail = {}
+const processingCase = ref([])
+const dynamicContent = ref([])
+const productDetail = ref({})
 
 // 导入日期格式化工具函数
 import { formatArrayDatesLong, formatArrayDatesShort } from '~/utils/dateFormatter'
 
 // 或者直接使用 props.slug
 // // console.log('Current slug in component:', props.slug);
-
-const { data: productDetailRes, pending, error } = await useApi('/product-categories?filters[category_value][$eq]=wire-saw-machine&populate=all')
+let url = '/product-categories?filters[category_value][$eq]='+props.slug+'&populate'
+switch(props.slug){
+    case 'wire-saw-machine':
+        url +=`[wire_saw_machine][populate][cnc_mono_wire_saw_machine_products][fields]=first_image_url,h1_page_inner_title,url, date
+        &populate[wire_saw_machine][populate][cnc_multi_wire_saw_machine_products][populate][fields]=first_image_url,h1_page_inner_title,url, date
+        &populate[wire_saw_machine][populate][hero_circle_background_images][populate][banner_img][fields]
+        &populate[wire_saw_machine][populate][select_machine_guide_background_image][fields]
+        &populate[wire_saw_machine][populate][wire_saw_machine_customer_cases_blogs][fields]
+        &populate[wire_saw_machine][populate][wire_saw_operation_videos_blogs][fields]
+        &populate[wire_saw_machine][populate][wire_saw_technology_news_blogs][fields]
+        `; 
+        
+    break;
+    case 'circle-saw-machine':
+        url +=`[circle_saw_machine][populate][bridge_saw_for_precision_stone_cutting_products][fields]=first_image_url,h1_page_inner_title,url, date
+        &populate[circle_saw_machine][populate][compact_manual_stone_cutting_machine_products][populate][fields]=first_image_url,h1_page_inner_title,url, date
+        &populate[circle_saw_machine][populate][stone_block_cutting_machine_for_high_volume_products][populate][fields]=first_image_url,h1_page_inner_title,url, date
+        &populate[circle_saw_machine][populate][circle_saw_machine_head_circle_images][populate][banner_img][fields]
+        &populate[circle_saw_machine][populate][select_machine_guide_background_image][fields]
+        &populate[circle_saw_machine][populate][stone_cutting_machine_Industry_news_blogs][fields]
+        &populate[circle_saw_machine][populate][stone_cutting_machine_operation_guide_blogs][fields]
+        &populate[circle_saw_machine][populate][stone_cutting_saw_success_stories_blogs][fields]
+        `; 
+    break;
+    case 'drilling-and-engraving-machine':
+        url +=`[drilling_and_engraving_machine][populate][drilling_machine_products][fields]=first_image_url,h1_page_inner_title,url, date
+        &populate[drilling_and_engraving_machine][populate][engracving_machine_products][populate][fields]=first_image_url,h1_page_inner_title,url, date
+        &populate[drilling_and_engraving_machine][populate][drilling_and_engraving_machine_head_circly_images][populate][banner_img][fields]
+        &populate[drilling_and_engraving_machine][populate][drilling_engraving_cases_blogs][fields]
+        &populate[drilling_and_engraving_machine][populate][drilling_engraving_machine_tutorials_blogs][fields]
+        &populate[drilling_and_engraving_machine][populate][drilling_engraving_technology_news_blogs][fields]
+        &populate[drilling_and_engraving_machine][populate][select_machine_guide_background_image][fields]
+        `; 
+    break;
+    case 'mining-and-quarry-machine':
+        url +=`[mining_and_quarry_machine][populate][mining_and_quarrying_machinery_types_products][fields]=first_image_url,h1_page_inner_title,url, date
+        &populate[mining_and_quarry_machine][populate][mining_and_quarrying_machinery_head_circly_images][populate][banner_img][fields]
+        &populate[mining_and_quarry_machine][populate][quarrying_equipment_success_stories_blogs][fields]
+        &populate[mining_and_quarry_machine][populate][quarrying_equipment_training_videos_blogs][fields]
+        &populate[mining_and_quarry_machine][populate][quarrying_industry_news_blogs][fields]
+        &populate[mining_and_quarry_machine][populate][select_machine_guide_background_image][fields]
+        `; 
+    break;
+    case 'grinding-and-polishing-machine':
+        url +=`[grinding_and_polishing_machine][populate][automatic_polishing_grinding_machine_products][fields]=first_image_url,h1_page_inner_title,url, date
+        &populate[grinding_and_polishing_machine][populate][manual_stone_polishing_machines_products][populate][fields]=first_image_url,h1_page_inner_title,url, date
+        &populate[grinding_and_polishing_machine][populate][grinding_and_polishing_machine_head_circly_images][populate][banner_img][fields]
+        &populate[grinding_and_polishing_machine][populate][polishing_machine_success_cases_blogs][fields]
+        &populate[grinding_and_polishing_machine][populate][polishing_technology_news_blogs][fields]
+        &populate[grinding_and_polishing_machine][populate][stone_polishing_video_training_blogs][fields]
+        &populate[grinding_and_polishing_machine][populate][select_machine_guide_background_image][fields]
+        `; 
+    break;
+    case 'profiling-machine':
+        url +=`[profiling_machine][populate][profiling_machine_products][fields]=first_image_url,h1_page_inner_title,url, date
+        &populate[profiling_machine][populate][profiling_machine_head_circly_images][populate][banner_img][fields]
+        &populate[profiling_machine][populate][profiling_machine_operation_guide_blogs][fields]
+        &populate[profiling_machine][populate][profiling_machine_project_cases_blogs][fields]
+        &populate[profiling_machine][populate][profiling_technology_news_blogs][fields]
+        &populate[profiling_machine][populate][select_machine_guide_background_image][fields]
+        `; 
+    break;
+    case 'other-industrial-machine':
+        url +=`[other_industrial_machine][populate][machining_center_products][fields]=first_image_url,h1_page_inner_title,url, date
+        &populate[other_industrial_machine][populate][other_machine_products][populate][fields]=first_image_url,h1_page_inner_title,url, date
+        &populate[other_industrial_machine][populate][other_industrial_machine_head_circly_images][populate][banner_img][fields]
+        &populate[other_industrial_machine][populate][industrial_equipment_news_blogs][fields]
+        &populate[other_industrial_machine][populate][industrial_equipment_success_cases_blogs][fields]
+        &populate[other_industrial_machine][populate][industrial_equipment_video_training_blogs][fields]
+        &populate[other_industrial_machine][populate][select_machine_guide_background_image][fields]
+        `; 
+    break;
+    case 'diamond-tools':
+        url +=`[diamond_tool][populate][diamond_core_drill_bit_products][fields]=first_image_url,h1_page_inner_title,url, date
+        &populate[diamond_tool][populate][diamond_cutting_disc_products][populate][fields]=first_image_url,h1_page_inner_title,url, date
+        &populate[diamond_tool][populate][diamond_grinding_and_polishing_tools_products][populate][fields]=first_image_url,h1_page_inner_title,url, date
+        &populate[diamond_tool][populate][diamond_saw_blades_products][populate][fields]=first_image_url,h1_page_inner_title,url, date
+        &populate[diamond_tool][populate][diamond_segments_products][populate][fields]=first_image_url,h1_page_inner_title,url, date
+        &populate[diamond_tool][populate][diamond_wire_saw_products][populate][fields]=first_image_url,h1_page_inner_title,url, date
+        &populate[diamond_tool][populate][diamond_tool_head_circly_images][populate][banner_img][fields]
+        &populate[diamond_tool][populate][diamond_tools_technology_news_blogs][fields]
+        &populate[diamond_tool][populate][diamond_tools_performance_cases_blogs][fields]
+        &populate[diamond_tool][populate][diamond_tools_usage_guide_blogs][fields]
+        &populate[diamond_tool][populate][select_machine_guide_background_image][fields]
+        `; 
+        
+    break;
+}
+const { data: productDetailRes, pending, error } = await useApi(url)
 watch(productDetailRes, (newPosts) => {
     if (newPosts) {
-        // console.log(newPosts)
+        console.log(newPosts)
         
         let data = newPosts.data[0]
 
-        productDetail = data.wire_saw_machine
+        productDetail.value = data[data.column_attr_name]
 
-        // 格式化产品数组中的日期 (Jan 11, 2025 格式)
-        if (productDetail.cnc_mono_wire_saw_machine_products) {
-            productDetail.cnc_mono_wire_saw_machine_products = formatArrayDatesLong(
-                productDetail.cnc_mono_wire_saw_machine_products
-            )
+        switch(data.column_attr_name){
+            case 'wire_saw_machine':
+            // 格式化产品数组中的日期 (Jan 11, 2025 格式)
+                if (productDetail.value.cnc_mono_wire_saw_machine_products) {
+                    productDetail.value.cnc_mono_wire_saw_machine_products = formatArrayDatesLong(
+                        productDetail.value.cnc_mono_wire_saw_machine_products
+                    )
+                }
+                
+                if (productDetail.value.cnc_multi_wire_saw_machine_products) {
+                    productDetail.value.cnc_multi_wire_saw_machine_products = formatArrayDatesLong(
+                        productDetail.value.cnc_multi_wire_saw_machine_products
+                    )
+                }
+
+                dynamicContent.value = [
+                    { 
+                        id: 1, 
+                        title: productDetail.value.cnc_mono_wire_saw_machine_title, 
+                        description: productDetail.value.cnc_mono_wire_saw_machine_description, 
+                        productList: productDetail.value.cnc_mono_wire_saw_machine_products
+                    },
+                    { 
+                        id: 2, 
+                        title: productDetail.value.cnc_multi_wire_saw_machine_title, 
+                        description: productDetail.value.cnc_multi_wire_saw_machine_description, 
+                        productList: productDetail.value.cnc_multi_wire_saw_machine_products
+                    },
+                    { 
+                        id: 3, 
+                        title: productDetail.value.what_is_a_wire_saw_machine_title, 
+                        description: productDetail.value.what_is_a_wire_saw_machine_description, 
+                        productList: []
+                    },
+                ]
+
+                processingCase.value = [
+                    { 
+                        id: 1, 
+                        title: productDetail.wire_saw_machine_customer_cases_title, 
+                        subTitle: productDetail.wire_saw_machine_customer_cases_subtitle, 
+                        blogs: formatArrayDatesShort(productDetail.wire_saw_machine_customer_cases_blogs)
+                    },
+                    { 
+                        id: 2, 
+                        title: productDetail.wire_saw_operation_videos_title, 
+                        subTitle: productDetail.wire_saw_operation_videos_subtitle, 
+                        blogs: formatArrayDatesShort(productDetail.wire_saw_operation_videos_blogs)
+                    },
+                    { 
+                        id: 3, 
+                        title: productDetail.wire_saw_technology_news_title, 
+                        subTitle: productDetail.wire_saw_technology_news_subtitle, 
+                        blogs: formatArrayDatesShort(productDetail.wire_saw_technology_news_blogs)
+                    }
+                ]
+            break;
+            case 'circle_saw_machine':
+                productDetail.value.hero_circle_background_images = productDetail.value.circle_saw_machine_head_circle_images
+                if (productDetail.value.bridge_saw_for_precision_stone_cutting_products) {
+                    productDetail.value.bridge_saw_for_precision_stone_cutting_products = formatArrayDatesLong(
+                        productDetail.value.bridge_saw_for_precision_stone_cutting_products
+                    )
+                }
+                
+                if (productDetail.value.compact_manual_stone_cutting_machine_products) {
+                    productDetail.value.compact_manual_stone_cutting_machine_products = formatArrayDatesLong(
+                        productDetail.value.compact_manual_stone_cutting_machine_products
+                    )
+                }
+                if (productDetail.value.stone_block_cutting_machine_for_high_volume_products) {
+                    productDetail.value.stone_block_cutting_machine_for_high_volume_products = formatArrayDatesLong(
+                        productDetail.value.stone_block_cutting_machine_for_high_volume_products
+                    )
+                }
+
+                dynamicContent.value = [
+                    { 
+                        id: 1, 
+                        title: productDetail.value.bridge_saw_for_precision_stone_cutting_title, 
+                        description: productDetail.value.bridge_saw_for_precision_stone_cutting_description, 
+                        productList: productDetail.value.bridge_saw_for_precision_stone_cutting_products
+                    },
+                    { 
+                        id: 2, 
+                        title: productDetail.value.stone_block_cutting_stone_product_title, 
+                        description: productDetail.value.stone_block_cutting_stone_product_description, 
+                        productList: productDetail.value.stone_block_cutting_machine_for_high_volume_products
+                    },
+                    { 
+                        id: 3, 
+                        title: productDetail.value.compact_manual_stone_cutting_machine_title, 
+                        description: productDetail.value.compact_manual_stone_cutting_machine_description, 
+                        productList: productDetail.value.compact_manual_stone_cutting_machine_products
+                    },
+                    { 
+                        id: 4, 
+                        title: productDetail.value.what_are_stone_cutting_machines_title, 
+                        description: productDetail.value.what_are_stone_cutting_machines_description, 
+                        productList: []
+                    }
+                ]
+
+                processingCase.value = [
+                    { 
+                        id: 1, 
+                        title: productDetail.value.stone_cutting_saw_success_stories_title, 
+                        subTitle: productDetail.value.stone_cutting_saw_success_stories_subtitle, 
+                        blogs: formatArrayDatesShort(productDetail.value.stone_cutting_saw_success_stories_blogs)
+                    },
+                    { 
+                        id: 2, 
+                        title: productDetail.value.stone_cutting_machine_operation_guide_title, 
+                        subTitle: productDetail.value.stone_cutting_machine_operation_guide_subtitle, 
+                        blogs: formatArrayDatesShort(productDetail.value.stone_cutting_machine_operation_guide_blogs)
+                    },
+                    { 
+                        id: 3, 
+                        title: productDetail.value.stone_cutting_machine_industry_title, 
+                        subTitle: productDetail.value.stone_cutting_machine_industry_subtitle, 
+                        blogs: formatArrayDatesShort(productDetail.value.stone_cutting_machine_Industry_news_blogs)
+                    }
+                ]
+            break;
+            case 'diamond_tool':
+                productDetail.value.hero_circle_background_images = productDetail.value.diamond_tool_head_circly_images
+                    if (productDetail.value.diamond_segments_products) {
+                    productDetail.value.diamond_segments_products = formatArrayDatesLong(
+                        productDetail.value.diamond_segments_products
+                    )
+                }
+                
+                if (productDetail.value.diamond_saw_blades_products) {
+                    productDetail.value.diamond_saw_blades_products = formatArrayDatesLong(
+                        productDetail.value.diamond_saw_blades_products
+                    )
+                }
+                if(productDetail.value.diamond_cutting_disc_products){
+                    productDetail.value.diamond_cutting_disc_products = formatArrayDatesLong(
+                        productDetail.value.diamond_cutting_disc_products
+                    )
+                    
+                }
+                if(productDetail.value.diamond_wire_saw_products){
+                    productDetail.value.diamond_wire_saw_products = formatArrayDatesLong(
+                        productDetail.value.diamond_wire_saw_products
+                    )
+                }
+                if(productDetail.value.diamond_core_drill_bit_products){
+                    productDetail.value.diamond_core_drill_bit_products = formatArrayDatesLong(
+                        productDetail.value.diamond_core_drill_bit_products
+                    )
+                }
+                if(productDetail.value.diamond_grinding_and_polishing_tools_products){
+                    productDetail.value.diamond_grinding_and_polishing_tools_products = formatArrayDatesLong(
+                        productDetail.value.diamond_grinding_and_polishing_tools_products
+                    )
+                }
+
+                dynamicContent.value = [
+                    { 
+                        id: 1, 
+                        title: productDetail.value.diamond_segments_title, 
+                        description: productDetail.value.diamond_segments_description, 
+                        productList: productDetail.value.diamond_segments_products
+                    },
+                    { 
+                        id: 2, 
+                        title: productDetail.value.diamond_saw_blades_title, 
+                        description: productDetail.value.diamond_saw_blades_description, 
+                        productList: productDetail.value.diamond_saw_blades_products
+                    },
+                    { 
+                        id: 3, 
+                        title: productDetail.value.diamond_cutting_disc_title, 
+                        description: productDetail.value.diamond_cutting_disc_description, 
+                        productList: productDetail.value.diamond_cutting_disc_products
+                    },
+                    { 
+                        id: 4, 
+                        title: productDetail.value.diamond_wire_saw_title, 
+                        description: productDetail.value.diamond_wire_saw_description, 
+                        productList: productDetail.value.diamond_wire_saw_products
+                    },
+                    { 
+                        id: 5, 
+                        title: productDetail.value.diamond_core_drill_bit_title, 
+                        description: productDetail.value.diamond_core_drill_bit_description, 
+                        productList: productDetail.value.diamond_core_drill_bit_products
+                    },
+                    { 
+                        id: 6, 
+                        title: productDetail.value.diamond_grinding_polish_tools_title, 
+                        description: productDetail.value.diamond_grinding_polish_tools_description, 
+                        productList: productDetail.value.diamond_grinding_and_polishing_tools_products
+                    },
+                    { 
+                        id: 7, 
+                        title: productDetail.value.what_are_high_performance_title, 
+                        description: productDetail.value.what_are_high_performance_description, 
+                        productList: []
+                    }
+                ]
+
+                processingCase.value = [
+                    { 
+                        id: 1, 
+                        title: productDetail.diamond_tools_performance_cases_title, 
+                        subTitle: productDetail.diamond_tools_performance_cases_subtitle, 
+                        blogs: formatArrayDatesShort(productDetail.diamond_tools_performance_cases_blogs)
+                    },
+                    { 
+                        id: 2, 
+                        title: productDetail.diamond_tools_usage_guide_title, 
+                        subTitle: productDetail.diamond_tools_usage_guide_subtitle, 
+                        blogs: formatArrayDatesShort(productDetail.diamond_tools_usage_guide_blogs)
+                    },
+                    { 
+                        id: 3, 
+                        title: productDetail.diamond_tools_technology_news_title, 
+                        subTitle: productDetail.diamond_tools_technology_news_subtitle, 
+                        blogs: formatArrayDatesShort(productDetail.diamond_tools_technology_news_blogs)
+                    }
+                ]
+            break;
+            case 'mining_and_quarry_machine':
+                productDetail.value.hero_circle_background_images = productDetail.value.mining_and_quarrying_machinery_head_circly_images
+                
+                if (productDetail.value.mining_and_quarrying_machinery_types_products) {
+                    productDetail.value.mining_and_quarrying_machinery_types_products = formatArrayDatesLong(
+                        productDetail.value.mining_and_quarrying_machinery_types_products
+                    )
+                }
+
+                dynamicContent.value = [
+                    { 
+                        id: 1, 
+                        title: productDetail.value.mining_quarrying_machinery_title, 
+                        description: productDetail.value.mining_quarrying_machinery_description, 
+                        productList: productDetail.value.mining_and_quarrying_machinery_types_products
+                    },
+                    { 
+                        id: 3, 
+                        title: productDetail.value.what_is_mining_quarry_machine_title, 
+                        description: productDetail.value.what_is_mining_quarry_machine_description, 
+                        productList: []
+                    },
+                ]
+
+                processingCase.value = [
+                    { 
+                        id: 1, 
+                        title: productDetail.value.quarry_equipment_success_stories_title, 
+                        subTitle: productDetail.value.quarry_equipment_success_stories_subtitle, 
+                        blogs: formatArrayDatesShort(productDetail.value.quarrying_equipment_success_stories_blogs)
+                    },
+                    { 
+                        id: 2, 
+                        title: productDetail.value.quarry_equipment_Train_videosn_title, 
+                        subTitle: productDetail.value.quarry_equipment_Train_videosn_subtitle, 
+                        blogs: formatArrayDatesShort(productDetail.value.quarrying_equipment_training_videos_blogs)
+                    },
+                    { 
+                        id: 3, 
+                        title: productDetail.value.Quarry_industry_news_title, 
+                        subTitle: productDetail.value.Quarry_industry_news_subtitle, 
+                        blogs: formatArrayDatesShort(productDetail.value.quarrying_industry_news_blogs)
+                    }
+                ]
+            break;
+            case 'drilling_and_engraving_machine':
+                productDetail.value.hero_circle_background_images = productDetail.value.drilling_and_engraving_machine_head_circly_images
+                if (productDetail.value.engracving_machine_products) {
+                    productDetail.value.engracving_machine_products = formatArrayDatesLong(
+                        productDetail.value.engracving_machine_products
+                    )
+                }
+                
+                if (productDetail.value.drilling_machine_products) {
+                    productDetail.value.drilling_machine_products = formatArrayDatesLong(
+                        productDetail.value.drilling_machine_products
+                    )
+                }
+
+                dynamicContent.value = [
+                    { 
+                        id: 1, 
+                        title: productDetail.value.engracving_machine_title, 
+                        description: productDetail.value.engracving_machine_description, 
+                        productList: productDetail.value.engracving_machine_products
+                    },
+                    { 
+                        id: 2, 
+                        title: productDetail.value.drilling_machine_title, 
+                        description: productDetail.value.drilling_machine_description, 
+                        productList: productDetail.value.drilling_machine_products
+                    },
+                    { 
+                        id: 3, 
+                        title: productDetail.value.what_are_drilling_machines_title, 
+                        description: productDetail.value.what_are_drilling_machines_description, 
+                        productList: []
+                    },
+                ]
+
+                processingCase.value = [
+                    { 
+                        id: 1, 
+                        title: productDetail.value.engraving_cases_title, 
+                        subTitle: productDetail.value.engraving_cases_subtitle, 
+                        blogs: formatArrayDatesShort(productDetail.value.drilling_engraving_cases_blogs)
+                    },
+                    { 
+                        id: 2, 
+                        title: productDetail.value.engraving_machine_tutorials_title, 
+                        subTitle: productDetail.value.engraving_machine_tutorials_subtitle, 
+                        blogs: formatArrayDatesShort(productDetail.value.drilling_engraving_machine_tutorials_blogs)
+                    },
+                    { 
+                        id: 3, 
+                        title: productDetail.value.engraving_technology_news_title, 
+                        subTitle: productDetail.value.engraving_technology_news_subtitle, 
+                        blogs: formatArrayDatesShort(productDetail.value.drilling_engraving_technology_news_blogs)
+                    }
+                ]
+            break;
+            case 'grinding_and_polishing_machine':
+                productDetail.value.hero_circle_background_images = productDetail.value.grinding_and_polishing_machine_head_circly_images
+                if (productDetail.value.automatic_polishing_grinding_machine_products) {
+                    productDetail.value.automatic_polishing_grinding_machine_products = formatArrayDatesLong(
+                        productDetail.value.automatic_polishing_grinding_machine_products
+                    )
+                }
+                
+                if (productDetail.value.manual_stone_polishing_machines_products) {
+                    productDetail.value.manual_stone_polishing_machines_products = formatArrayDatesLong(
+                        productDetail.value.manual_stone_polishing_machines_products
+                    )
+                }
+
+                dynamicContent.value = [
+                    { 
+                        id: 1, 
+                        title: productDetail.value.polishing_grinding_machine_title, 
+                        description: productDetail.value.polishing_grinding_machine_description, 
+                        productList: productDetail.value.automatic_polishing_grinding_machine_products
+                    },
+                    { 
+                        id: 2, 
+                        title: productDetail.value.manual_stone_polishing_title, 
+                        description: productDetail.value.manual_stone_polishing_description, 
+                        productList: productDetail.value.manual_stone_polishing_machines_products
+                    },
+                    { 
+                        id: 3, 
+                        title: productDetail.value.what_are_grinding_polishing_title, 
+                        description: productDetail.value.what_are_grinding_polishing_description, 
+                        productList: []
+                    },
+                ]
+
+                processingCase.value = [
+                    { 
+                        id: 1, 
+                        title: productDetail.value.polishing_machine_success_cases_title, 
+                        subTitle: productDetail.value.polishing_machine_success_cases_subtitle, 
+                        blogs: formatArrayDatesShort(productDetail.value.polishing_machine_success_cases_blogs)
+                    },
+                    { 
+                        id: 2, 
+                        title: productDetail.value.polishing_video_training_title, 
+                        subTitle: productDetail.value.polishing_video_training_subtitle, 
+                        blogs: formatArrayDatesShort(productDetail.value.stone_polishing_video_training_blogs)
+                    },
+                    { 
+                        id: 3, 
+                        title: productDetail.value.polishing_technology_news_title, 
+                        subTitle: productDetail.value.polishing_technology_news_subtitle, 
+                        blogs: formatArrayDatesShort(productDetail.value.polishing_technology_news_blogs)
+                    }
+                ]
+            break;
+            case 'profiling_machine':
+                productDetail.value.hero_circle_background_images = productDetail.value.profiling_machine_head_circly_images
+                    if (productDetail.value.profiling_machine_products) {
+                    productDetail.value.profiling_machine_products = formatArrayDatesLong(
+                        productDetail.value.profiling_machine_products
+                    )
+                }
+
+                dynamicContent.value = [
+                    { 
+                        id: 1, 
+                        title: productDetail.value.profiling_machine_title, 
+                        description: productDetail.value.profiling_machine_description, 
+                        productList: productDetail.value.profiling_machine_products
+                    },
+                    { 
+                        id: 3, 
+                        title: productDetail.value.what_is_profil_machine_title, 
+                        description: productDetail.value.what_is_profil_machine_description, 
+                        productList: []
+                    },
+                ]
+
+                processingCase.value = [
+                    { 
+                        id: 1, 
+                        title: productDetail.value.profil_machine_project_cases_title, 
+                        subTitle: productDetail.value.profil_machine_project_cases_subtitle, 
+                        blogs: formatArrayDatesShort(productDetail.value.profiling_machine_project_cases_blogs)
+                    },
+                    { 
+                        id: 2, 
+                        title: productDetail.value.profil_machine_operation_guide_title, 
+                        subTitle: productDetail.value.profil_machine_operation_guide_subtitle, 
+                        blogs: formatArrayDatesShort(productDetail.value.profiling_machine_operation_guide_blogs)
+                    },
+                    { 
+                        id: 3, 
+                        title: productDetail.value.profil_technology_news_title, 
+                        subTitle: productDetail.value.profil_technology_news_subtitle, 
+                        blogs: formatArrayDatesShort(productDetail.value.profiling_technology_news_blogs)
+                    }
+                ]
+            break;
+            case 'other_industrial_machine':
+                productDetail.value.hero_circle_background_images = productDetail.value.other_industrial_machine_head_circly_images
+                     if (productDetail.value.machining_center_products) {
+                    productDetail.value.machining_center_products = formatArrayDatesLong(
+                        productDetail.value.machining_center_products
+                    )
+                }
+                
+                if (productDetail.value.other_machine_products) {
+                    productDetail.value.other_machine_products = formatArrayDatesLong(
+                        productDetail.value.other_machine_products
+                    )
+                }
+
+                dynamicContent.value = [
+                    { 
+                        id: 1, 
+                        title: productDetail.value.machining_enter_title, 
+                        description: productDetail.value.machining_enter_description, 
+                        productList: productDetail.value.machining_center_products
+                    },
+                    { 
+                        id: 2, 
+                        title: productDetail.value.other_machine_title, 
+                        description: productDetail.value.other_machine_description, 
+                        productList: productDetail.value.other_machine_products
+                    },
+                    { 
+                        id: 3, 
+                        title: productDetail.value.what_are_other_industry_machines_title, 
+                        description: productDetail.value.what_are_other_industry_machines_description, 
+                        productList: []
+                    },
+                ]
+
+                processingCase.value = [
+                    { 
+                        id: 1, 
+                        title: productDetail.value.industrial_equipment_success_cases_title, 
+                        subTitle: productDetail.value.industrial_equipment_success_cases_subtitle, 
+                        blogs: formatArrayDatesShort(productDetail.value.industrial_equipment_success_cases_blogs)
+                    },
+                    { 
+                        id: 2, 
+                        title: productDetail.value.industrial_equipment_video_train_title, 
+                        subTitle: productDetail.value.industrial_equipment_video_train_subtitle, 
+                        blogs: formatArrayDatesShort(productDetail.value.industrial_equipment_video_training_blogs)
+                    },
+                    { 
+                        id: 3, 
+                        title: productDetail.value.industrial_equipment_news_title, 
+                        subTitle: productDetail.value.industrial_equipment_news_subtitle, 
+                        blogs: formatArrayDatesShort(productDetail.value.industrial_equipment_news_blogs)
+                    }
+                ]
+            break;
         }
+
         
-        if (productDetail.cnc_multi_wire_saw_machine_products) {
-            productDetail.cnc_multi_wire_saw_machine_products = formatArrayDatesLong(
-                productDetail.cnc_multi_wire_saw_machine_products
-            )
-        }
-
-        // // console.log(productDetail)
-
-        processingCase = [
-            { 
-                id: 1, 
-                title: productDetail.wire_saw_machine_customer_cases_title, 
-                subTitle: productDetail.wire_saw_machine_customer_cases_subtitle, 
-                blogs: formatArrayDatesShort(productDetail.wire_saw_machine_customer_cases_blogs)
-            },
-            { 
-                id: 2, 
-                title: productDetail.wire_saw_operation_videos_title, 
-                subTitle: productDetail.wire_saw_operation_videos_subtitle, 
-                blogs: formatArrayDatesShort(productDetail.wire_saw_operation_videos_blogs)
-            },
-            { 
-                id: 3, 
-                title: productDetail.wire_saw_technology_news_title, 
-                subTitle: productDetail.wire_saw_technology_news_subtitle, 
-                blogs: formatArrayDatesShort(productDetail.wire_saw_technology_news_blogs)
-            }
-        ]
         // 通知父组件数据已加载
-        emit('headdata-loaded', data.wire_saw_machine);
+        emit('headdata-loaded', data[data.column_attr_name]);
     }
 
 }, { immediate: true })
@@ -611,37 +1138,6 @@ watch(productDetailRes, (newPosts) => {
 watch(error, (newError) => {
      throw createError({ statusCode: 404, statusMessage: '文章不存在' });
 })
-
-
-// 根据slug获取面包屑导航数据
-const productData = computed(() => {
-    // 这里可以根据slug从API或静态数据中获取产品信息
-    const products = {
-        'profiling-machine': {
-            title: 'CNC Stone Profiling Machines for Marble & Granite Processing',
-            description: `Dinosaw's profiling machines are engineered to meet the demands of complex stone shaping tasks. With options including bridge profiling machines, vertical models, and horizontal models, these machines cater to various production scales and materials. From Roman columns to intricate decorative moldings, our profiling machines deliver precision and efficiency.`,
-            materials: [
-                { name: 'Granite', icon: '/images/granite-icon.svg' },
-                { name: 'Marble', icon: '/images/marble-icon.svg' },
-                { name: 'cement', icon: '/images/cement-icon.svg' },
-                { name: 'foamed ceramic', icon: '/images/ceramic-icon.svg' }
-            ]
-        },
-        // 可以添加更多产品数据
-        'default': {
-            title: productDetail.value.title || 'Product Title',
-            description: 'Product description goes here...',
-            materials: [
-                { name: 'Material 1', icon: '' },
-                { name: 'Material 2', icon: '' },
-                { name: 'Material 3', icon: '' },
-                { name: 'Material 4', icon: '' }
-            ]
-        }
-    };
-
-    return products[slug] || products['default'];
-});
 </script>
 
 <style scoped lang="scss">
@@ -842,7 +1338,6 @@ const productData = computed(() => {
     align-items: stretch;
     width: 100%;
     max-width: 1200px;
-    height: 58px;
     margin:0 auto 30px;
 }
 
