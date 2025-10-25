@@ -191,22 +191,8 @@
         <div class="similar-ideas-header">
           <h2>{{ contentDetail.similar_ideas_to_stimulate_your_creativity_text }}</h2>
         </div>
-        
-        <div class="similar-ideas-grid">
-          <!-- 文章卡片 1 -->
-           <template v-for="(item, index) in blogList" :key="index">
-          <div class="idea-card" v-if="index >5">
-            <NuxtLink :to="'/blog/'+item.slug" target="_blank" class="idea-link">
-              <div class="idea-image">
-                <NuxtImg :src="item.first_image_url"  />
-              </div>
-              <div class="idea-content">
-                <p>{{ item.title }}</p>
-              </div>
-            </NuxtLink>
-          </div>
-          </template>
-        </div>
+        {{ blogList }}
+       
       </div>
     </div>
 
@@ -295,11 +281,11 @@ watch(blogDetailRes, (newPosts) => {
 
 
 const blogList = ref([])
-const { data: blogListRes, blogListPending, blogListError } = await useApi('/blogs?pagination[page]=1&pagination[pageSize]=10&sort[0]=date:desc')
+const { data: blogListRes, blogListPending, blogListError } = await useApi('/products?pagination[page]=1&pagination[pageSize]=10&sort[0]=date:desc')
 
 watch(blogListRes, (newPosts) => {
     if (newPosts) {
-        // console.log('nlist',newPosts)
+        console.log('nlist',newPosts)
         let data = newPosts.data
         data.forEach(item => {
             item.date = formatDateLong(item.date)
