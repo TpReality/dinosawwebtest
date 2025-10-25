@@ -1004,7 +1004,7 @@ const { data: productDetailRes, pending, error } = await useApi('/products?filte
                     image: productDetailRes.value.data[0].core_advantage_illustration_c_url,
                 }
             ]
-            console.log('productDetailRes',productDetailRes.value)
+            // console.log('productDetailRes',productDetailRes.value)
             return productDetailRes.value.data[0];
         }
         // console.log('productDetailRes.value:', productDetailRes.value);

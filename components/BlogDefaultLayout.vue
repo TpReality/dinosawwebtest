@@ -280,7 +280,7 @@ watch(blogDetailRes, (newPosts) => {
   
     if (newPosts) {
 
-      console.log('blog',newPosts)
+      // console.log('blog',newPosts)
         let data = newPosts.data[0]
 
         blogDetail = data
@@ -299,7 +299,7 @@ const { data: blogListRes, blogListPending, blogListError } = await useApi('/blo
 
 watch(blogListRes, (newPosts) => {
     if (newPosts) {
-        console.log('nlist',newPosts)
+        // console.log('nlist',newPosts)
         let data = newPosts.data
         data.forEach(item => {
             item.date = formatDateLong(item.date)

@@ -215,7 +215,7 @@ const capitalizeFirstLetter = (string) => {
 
 watch(supportRes, (newPosts) => {
     if (newPosts) {
-        // console.log(newPosts)
+        console.log(newPosts)
         let data = newPosts.data[0].user_manual
         support.value = data
         useHead({
@@ -223,7 +223,7 @@ watch(supportRes, (newPosts) => {
             meta: [
                 {
                     name: 'description',
-                    content: data.meta_tescription
+                    content: data.meta_description
                 }
             ],
         })

@@ -228,10 +228,7 @@ const fetchAllCategoryBlogs = async () => {
         pageStates.value.repair.hasMore = repairResult.hasMore
         pageStates.value.maintenance.hasMore = maintenanceResult.hasMore
         
-        console.log(installationResult)
-        console.log(repairResult)
-
-        console.log(maintenanceResult)
+        
         return {
             installation: formatArrayDatesShort(installationResult.blogs),
             repair: formatArrayDatesShort(repairResult.blogs),
@@ -278,7 +275,7 @@ const loadMoreBlogs = async (categoryIndex) => {
 
 watch(vidoeRes, async (newPosts) => {
     if (newPosts) {
-        console.log(newPosts)
+        // console.log(newPosts)
         let data = newPosts.data[0].video
         videos.value = data
         useHead({

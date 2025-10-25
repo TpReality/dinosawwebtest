@@ -806,7 +806,7 @@ switch(props.slug){
 const { data: productDetailRes, pending, error } = await useApi(url)
 watch(productDetailRes, (newPosts) => {
     if (newPosts) {
-        console.log(newPosts)
+        // console.log(newPosts)
         
         let data = newPosts.data[0]
 

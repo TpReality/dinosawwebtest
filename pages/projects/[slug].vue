@@ -217,7 +217,7 @@ const processingCase = ref([])
 
 watch(projectsRes, (newPosts) => {
     if (newPosts) {
-        console.log(newPosts)
+        // console.log(newPosts)
         let data = {}
         if(slug == 'marble-projects'){
             data = newPosts.data[0].marble_project
@@ -283,7 +283,7 @@ const loadMore = async (blog) => {
     const { data: res } = await useApi(url)
     const list = Array.isArray(res.value?.data) ? res.value.data : []
     list.forEach(val=>{
-        console.log(val)
+        // console.log(val)
         val.date = formatDateShort(val.date)
         processingCase.value[0].blogs.push(val)
     })
