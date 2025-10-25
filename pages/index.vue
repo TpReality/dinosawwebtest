@@ -384,7 +384,7 @@
                 </div>
             </section>
 
-            <GetEasySolution :contentDetail="contentDetail" />
+            <GetEasySolution :contentDetail="contentDetail" :getEasySolutionType="1" />
 
             <!-- Your Guide to Choosing Machines Section -->
             <section class="guide-section">

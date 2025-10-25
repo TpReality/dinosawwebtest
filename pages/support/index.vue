@@ -44,7 +44,7 @@
         </div>
         <h1 class="title">{{ support.hero_main_title }}
         </h1>
-        <GetEasySolution :contentDetail="contentDetail" />
+        <GetEasySolution :contentDetail="contentDetail" :getEasySolutionType="1" />
         <div class="sales-support-section">
             <div class="sales-container">
                 <div class="sales-wrapper">
