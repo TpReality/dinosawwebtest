@@ -295,7 +295,7 @@ watch(blogDetailRes, (newPosts) => {
 
 
 const blogList = ref({})
-const { data: blogListRes, blogListPending, blogListError } = await useApi('/blogs?pagination[page]=1&pagination[pageSize]=10&sort[0]=date:desc')
+const { data: blogListRes, blogListPending, blogListError } = await useApi('/blogs?pagination[page]=1&pagination[pageSize]=11&sort[0]=date:desc')
 
 watch(blogListRes, (newPosts) => {
     if (newPosts) {
