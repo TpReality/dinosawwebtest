@@ -741,7 +741,7 @@ watch(aboutusRes, (newPosts) => {
 const productsList = ref({})
 const { data: productsRes, productPending, productError } = await useApi('/product-categories?filters[parent_category_value][$eq]=Products&fields=sort,about_us_category_description,about_us_category_name,category_value&populate[head_image][fields]')
 watch(productsRes, (newPosts) => {
-    console.log(newPosts)
+    // console.log(newPosts)
     if (newPosts) {
         let data = newPosts.data
 

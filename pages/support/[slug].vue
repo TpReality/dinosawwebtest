@@ -206,7 +206,7 @@ await initializeMenuData()
 const { contentDetail, isLoaded } = useContentDetail()
 const support = ref({})
 const { data: supportRes, pending, error } = await useApi('/product-categories?filters[category_value][$eq]=user-manual&populate=all')
-let processingCase = []
+let processingCase = ref([])
 // 首字母大写函数
 const capitalizeFirstLetter = (string) => {
     if (!string) return '';
@@ -215,7 +215,7 @@ const capitalizeFirstLetter = (string) => {
 
 watch(supportRes, (newPosts) => {
     if (newPosts) {
-        console.log(newPosts)
+        // console.log(newPosts)
         let data = newPosts.data[0].user_manual
         support.value = data
         useHead({
@@ -228,7 +228,7 @@ watch(supportRes, (newPosts) => {
             ],
         })
 
-        processingCase = [
+        processingCase.value = [
             { id: 1, title: data.easy_to_understand_title, subTitle: data.easy_to_understand_subtitle, text: "", blogs:formatArrayDatesShort(data.easy_to_understand_blogs) }
         ]
 

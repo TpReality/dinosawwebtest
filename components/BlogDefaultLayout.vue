@@ -269,7 +269,7 @@ const props = defineProps({
   }
 })
 
-let blogDetail = {}
+let blogDetail = ref({})
  const { data: blogDetailRes, pending, error } = await useApi('/blogs?filters[slug][$eq]='+props.slug)
 // // console.log('/blogs?filters[slug][$eq]='+props.slug)
 watch(error, (newError) => {
@@ -283,7 +283,7 @@ watch(blogDetailRes, (newPosts) => {
       // console.log('blog',newPosts)
         let data = newPosts.data[0]
 
-        blogDetail = data
+        blogDetail.value = data
         // 通知父组件数据已加载
         emit('headdata-loaded', data);
     }
@@ -294,8 +294,8 @@ watch(blogDetailRes, (newPosts) => {
 
 
 
-const blogList = ref({})
-const { data: blogListRes, blogListPending, blogListError } = await useApi('/blogs?pagination[page]=1&pagination[pageSize]=11&sort[0]=date:desc')
+const blogList = ref([])
+const { data: blogListRes, blogListPending, blogListError } = await useApi('/blogs?pagination[page]=1&pagination[pageSize]=10&sort[0]=date:desc')
 
 watch(blogListRes, (newPosts) => {
     if (newPosts) {
@@ -309,7 +309,7 @@ watch(blogListRes, (newPosts) => {
 
 }, { immediate: true })
 
-const productList = ref({})
+const productList = ref([])
 const { data: productListRes, productListPending, productListError } = await useApi('/product-categories?filters[parent_category_value][$eq]=Products&populate[fields]=category_value,category_name')
 
 watch(productListRes, (newPosts) => {

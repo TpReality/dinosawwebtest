@@ -197,7 +197,7 @@ watch(blogRes, (newPosts) => {
                 }
             ],
         })
-        console.log(data.industry_machinery_description)
+        // console.log(data.industry_machinery_description)
         processingCase.value = [
             { id: 1, className:"yellow", title: data.industry_machinery_title, subTitle:data.industry_machinery_subtitle, text: data.industry_machinery_description,  blogs: formatArrayDatesShort(data.industry_machinery_news_blogs), url:"/blog/industry-news" },
             { id: 2, className:"yellow", title: data.dinosaw_company_title, subTitle: data.dinosaw_company_subtitle, text: data.dinosaw_company_description, blogs: formatArrayDatesShort(data.dinosaw_company_news_blogs), url:"/blog/news-events" },
