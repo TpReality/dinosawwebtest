@@ -63,7 +63,7 @@ export const useMenuData = () => {
         let authToken = "8f80d6094edcd486411ddc90d4fa4f18ed87f9fe9edae7fe7cb423e3ce261b23ce76afdedfc3cf2e3689bd1b03e9f504cbded28e7645eed305db44f61e914053e9fb4b4999d30c743b67fe2a052bff812b6165825f1502f22f991ff41a44536c67a88f99ae0f525ee710ee010834ffddaa1501dc60c7da7dac18060f46612708"
         
         // 直接使用fetch获取数据
-        const response = await $fetch('/product-categories?populate=*&fields[0]=sort&fields[1]=parent_category_value&fields[2]=category_name&fields[3]=menu_select_down_panel_is_show&fields[4]=category_value', {
+        const response = await $fetch('/product-categories?fields=sort,parent_category_value,category_name,menu_select_down_panel_is_show,category_value', {
           baseURL: baseUrl,
           headers: {
             Authorization: `Bearer ${authToken}`,

@@ -15,12 +15,12 @@
                     <!-- Figma设计的按钮容器 -->
                     <div class="banner-buttons">
                         <div class="button-primary">
-                            <a href="/Products" class="btn-learn-more">
+                            <a href="/Products" target="_blank" class="btn-learn-more">
                                 <span>{{ indexDetail.learn_more_products_btn_text }}</span>
                             </a>
                         </div>
                         <div class="button-secondary">
-                            <a href="/About-us" class="btn-meet-us">
+                            <a href="/About-us" target="_blank" class="btn-meet-us">
                                 <span>{{ indexDetail.meet_us_btn_text }}</span>
                             </a>
                         </div>
@@ -48,11 +48,11 @@
                 </div>
 
             </div>
-            <div v-if="indexDetail.show_activity_text" class="banner-activety" :style="indexDetail.show_activity_image?.url?'background:url('+indexDetail.show_activity_image.url+') no-repeat center center':''">
-                <nuxtLink :to="indexDetail.show_activity_url">
+            <nuxtLink v-if="indexDetail.show_activity_text" :to="indexDetail.show_activity_url" target="_blank">
+                <div class="banner-activety" :style="indexDetail.show_activity_image?.url?'background:url('+indexDetail.show_activity_image.url+') no-repeat center center; background-size:100% auto':''">
                     <div v-html="indexDetail.show_activity_text"></div>
-                </nuxtLink>
-            </div>
+                </div>
+            </nuxtLink>
             <div class="index-part">
                 <h2 class="default-title">{{ indexDetail.what_we_do_title }}</h2>
                 <div class="dinosaw-text" v-html="indexDetail.what_we_do_description"></div>
@@ -93,7 +93,7 @@
                                     <!-- 新增的圆形图片展示区域 -->
                                     <div class="features-section">
                                         <div class="features-container" v-if="product.columnList" >
-                                            <template v-for="(item, j) in product.columnList.hero_circle_background_images" :key="j">
+                                            <template v-for="(item, j) in product.columnList[product.circleName]" :key="j">
                                                 <div class="feature-item" v-if="j < 4">
                                                     <div class="feature-image" v-if="item.banner_img">
                                                         <NuxtImg :src="item.banner_img.url"
@@ -157,7 +157,7 @@
                                     <!-- 新增的圆形图片展示区域 -->
                                     <div class="features-section">
                                         <div class="features-container" v-if="product.columnList" >
-                                            <template v-for="(item, j) in product.columnList.hero_circle_background_images" :key="j">
+                                            <template v-for="(item, j) in product.columnList[product.circleName]" :key="j">
                                                 <div class="feature-item" v-if="j < 4">
                                                     <div class="feature-image" v-if="item.banner_img">
                                                         <NuxtImg :src="item.banner_img.url"
@@ -355,6 +355,7 @@
                                 <div class="blog-card">
                                     <div class="blog-image">
                                         <NuxtImg :src="item.first_image_url"
+                                        sizes="sm:100vw md:50vw lg:800px"
                                         ></NuxtImg>
                                     </div>
                                     <div class="blog-content">
@@ -399,8 +400,8 @@
                             <div class="step-overlay">
                                 <div class="step-content">
                                     <h3 class="step-title">{{ indexDetail.your_guide_to_choos_pannel_title_1 }}</h3>
-                                    <p class="step-description"
-                                        v-html="indexDetail.your_guide_to_choos_pannel_description_1"></p>
+                                    <div class="step-description"
+                                        v-html="indexDetail.your_guide_to_choos_pannel_description_1"></div>
                                 </div>
                             </div>
                             <div class="step-background">
@@ -413,8 +414,8 @@
                             <div class="step-overlay">
                                 <div class="step-content">
                                     <h3 class="step-title">{{ indexDetail.your_guide_to_choos_pannel_title_2 }}</h3>
-                                    <p class="step-description"
-                                        v-html="indexDetail.your_guide_to_choos_pannel_description_2"></p>
+                                    <div class="step-description"
+                                        v-html="indexDetail.your_guide_to_choos_pannel_description_2"></div>
                                 </div>
                             </div>
                             <div class="step-background">
@@ -427,8 +428,8 @@
                             <div class="step-overlay">
                                 <div class="step-content">
                                     <h3 class="step-title">{{ indexDetail.your_guide_to_choos_pannel_title_3 }}</h3>
-                                    <p class="step-description"
-                                        v-html="indexDetail.your_guide_to_choos_pannel_description_3"></p>
+                                    <div class="step-description"
+                                        v-html="indexDetail.your_guide_to_choos_pannel_description_3"></div>
                                 </div>
                             </div>
                             <div class="step-background">
@@ -441,8 +442,8 @@
                             <div class="step-overlay">
                                 <div class="step-content">
                                     <h3 class="step-title">{{ indexDetail.your_guide_to_choos_pannel_title_4 }}</h3>
-                                    <p class="step-description"
-                                        v-html="indexDetail.your_guide_to_choos_pannel_description_4"></p>
+                                    <div class="step-description"
+                                        v-html="indexDetail.your_guide_to_choos_pannel_description_4"></div>
                                 </div>
                             </div>
                             <div class="step-background">
@@ -967,14 +968,14 @@
                             <div class="testimonial-header">
                                 <div class="customer-info">
                                     <div class="customer-avatar">
-                                        <NuxtImg v-if="indexDetail.what_our_customers_say_panel_1_head_pic" :src="indexDetail.what_our_customers_say_panel_1_head_pic" />
+                                        <NuxtImg v-if="indexDetail.what_our_customers_say_panel_1_head_pic" :src="indexDetail.what_our_customers_say_panel_1_head_pic.url" />
                                         <!-- Placeholder for customer image -->
                                     </div>
                                     <div class="customer-details">
                                         <div class="customer-name-section">
                                             <h4>{{ indexDetail.what_our_customers_say_panel_1_user_name }}</h4>
                                             <div class="company-flag">
-                                                 <NuxtImg v-if="indexDetail.what_our_customers_say_panel_1_country_icon" :src="indexDetail.what_our_customers_say_panel_1_country_icon" />
+                                                 <NuxtImg v-if="indexDetail.what_our_customers_say_panel_1_country_icon" :src="indexDetail.what_our_customers_say_panel_1_country_icon.url" />
                                             </div>
                                         </div>
                                         <p class="customer-title">{{ indexDetail.what_our_customers_say_panel_1_position }}</p>
@@ -1003,14 +1004,14 @@
                             <div class="testimonial-header">
                                 <div class="customer-info">
                                     <div class="customer-avatar">
-                                        <NuxtImg v-if="indexDetail.what_our_customers_say_panel_2_head_pic" :src="indexDetail.what_our_customers_say_panel_2_head_pic" />
+                                        <NuxtImg v-if="indexDetail.what_our_customers_say_panel_2_head_pic" :src="indexDetail.what_our_customers_say_panel_2_head_pic.url" />
                                         <!-- Placeholder for customer image -->
                                     </div>
                                     <div class="customer-details">
                                         <div class="customer-name-section">
                                             <h4>{{ indexDetail.what_our_customers_say_panel_2_user_name }}</h4>
                                             <div class="company-flag">
-                                                 <NuxtImg v-if="indexDetail.what_our_customers_say_panel_2_country_icon" :src="indexDetail.what_our_customers_say_panel_2_country_icon" />
+                                                 <NuxtImg v-if="indexDetail.what_our_customers_say_panel_2_country_icon" :src="indexDetail.what_our_customers_say_panel_2_country_icon.url" />
                                             </div>
                                         </div>
                                         <p class="customer-title">{{ indexDetail.what_our_customers_say_panel_2_position }}</p>
@@ -1039,13 +1040,13 @@
                             <div class="testimonial-header">
                                 <div class="customer-info">
                                     <div class="customer-avatar">
-                                         <NuxtImg v-if="indexDetail.what_our_customers_say_panel_3_head_pic" :src="indexDetail.what_our_customers_say_panel_3_head_pic" />
+                                         <NuxtImg v-if="indexDetail.what_our_customers_say_panel_3_head_pic" :src="indexDetail.what_our_customers_say_panel_3_head_pic.url" />
                                     </div>
                                     <div class="customer-details">
                                         <div class="customer-name-section">
                                             <h4>{{ indexDetail.what_our_customers_say_panel_3_user_name }}</h4>
                                             <div class="company-flag">
-                                                 <NuxtImg v-if="indexDetail.what_our_customers_say_panel_3_country_icon" :src="indexDetail.what_our_customers_say_panel_3_country_icon" />
+                                                 <NuxtImg v-if="indexDetail.what_our_customers_say_panel_3_country_icon" :src="indexDetail.what_our_customers_say_panel_3_country_icon.url" />
                                             </div>
                                         </div>
                                         <p class="customer-title">{{ indexDetail.what_our_customers_say_panel_3_position }}</p>
@@ -1165,20 +1166,23 @@ const indexDetail = ref({})
 //   }
 // }, { encodeValuesOnly: true })
 let populateQuery = `populate[flagship_tech_products][fields]=first_image_url, url,first_image_alt,h1_page_inner_title,date`
-
+populateQuery += `&populate[show_activity_image][fields]=*`
 populateQuery += `&populate[head_banner_images][populate][banner_img][fields]=*`
 populateQuery += `&populate[mature_products_products][fields]=first_image_url,url, first_image_alt,h1_page_inner_title,date`
 populateQuery += `&populate[smart_value_products][fields]=first_image_url, url,first_image_alt,h1_page_inner_title,date`
 populateQuery += `&populate[what_you_need_blogs][fields]=first_image_url,title,date, slug`
 populateQuery += `&populate[our_capabilities_presence_banner_1_image][fields]=*&populate[our_capabilities_presence_banner_2_image][fields]=*&populate[our_capabilities_presence_banner_3_image][fields]=*&populate[our_capabilities_presence_banner_4_image][fields]=*`
 populateQuery += `&populate[your_guide_to_choos_pannel_image_1][fields]=*&populate[your_guide_to_choos_pannel_image_2][fields]=*&populate[your_guide_to_choos_pannel_image_3][fields]=*&populate[your_guide_to_choos_pannel_image_4][fields]=*`
+populateQuery += `&populate[what_our_customers_say_panel_1_head_pic][fields]=*&populate[what_our_customers_say_panel_1_country_icon][fields]=*`
+populateQuery += `&populate[what_our_customers_say_panel_2_head_pic][fields]=*&populate[what_our_customers_say_panel_2_country_icon][fields]=*`
+populateQuery += `&populate[what_our_customers_say_panel_3_head_pic][fields]=*&populate[what_our_customers_say_panel_3_country_icon][fields]=*`
 
 // console.log(`/home-pages?${populateQuery}`)
 const { data: indexRes, pending, error } = await useApi(`/home-pages?${populateQuery}`)
 
 watch(indexRes, (newPosts) => {
     if (newPosts) {
-        // console.log(newPosts)
+        console.log(newPosts)
         let data = newPosts.data[0]
         data.what_you_need_blogs.forEach(val=>{
             val.date = formatDateShort(val.date)
@@ -1209,23 +1213,22 @@ watch(indexRes, (newPosts) => {
                         "@graph": [
                             {
                                 "@type": "LocalBusiness",
-                                "name": "STYLECNC",
-                                "legalName": "Jinan Style Machinery Co., Ltd.",
-                                "description": "Jinan Style Machinery Co., Ltd. (STYLECNC) is a world-leading CNC machine manufacturer, offering CNC routers, milling machines, laser machines, plasma cutters, lathes, edge banders, digital cutters.",
+                                "name": "Dinosaw",
+                                "legalName": "Quanzhou Dinosaw Machine Co., Ltd.",
+                                "description": "Reliable stone machinery engineered for performance. DINOSAW provides a complete range of solutions, from CNC cutting and polishing machines to heavy-duty quarry equipment. Increase your productivity and achieve the perfect finish.",
                                 "address": {
                                     "@type": "PostalAddress",
-                                    "streetAddress": "Rongsheng Times International, 16F, Building A, 9 Beiyuan Street",
-                                    "addressLocality": "Jinan",
-                                    "addressRegion": "Shandong",
-                                    "postalCode": "250131",
+                                    "streetAddress": "Dinosaw Machinery Factory No. 3, Jinhé Avenue Nan'an City, Quanzhou",
+                                    "addressLocality": "Quanzhou",
+                                    "addressRegion": "Fujian",
+                                    "postalCode": "362000",
                                     "addressCountry": "CN"
                                 },
                                 "image": [
-                                    "https://www.dinosawmachine.com/uploads/logo.jpg",
-                                    "https://www.dinosawmachine.com/assets/img/hero-img/stylecnc.svg"
+                                    "https://framerusercontent.com/images/Rgs09IZlnBALMtEN2nX5mwe26rw.webp?scale-down-to=512"
                                 ],
                                 "email": "info@stylecnc.com",
-                                "telePhone": "+86-531-83161518",
+                                "telePhone": "+86-19859013937",
                                 "url": "https://www.dinosawmachine.com",
                                 "paymentAccepted": ["cash", "check", "credit card", "invoice", "paypal"],
                                 "openingHours": "Mo,Tu,We,Th,Fr,Sa 08:00-18:00",
@@ -1238,17 +1241,15 @@ watch(indexRes, (newPosts) => {
                                     }
                                 ],
                                 "sameAs": [
-                                    "https://www.facebook.com/stylecnc/",
-                                    "https://twitter.com/stylecnc/",
-                                    "https://www.linkedin.com/company/jinan-style-machinery-co-ltd/",
-                                    "https://www.pinterest.com/stylecncmachine/",
-                                    "https://www.instagram.com/stylecnc/",
-                                    "https://www.youtube.com/@stylecnc"
+                                    "https://www.facebook.com/kylie.hong.896784/",
+                                    "https://www.pinterest.com/dinosawmachine/",
+                                    "https://www.instagram.com/dinosawstonemachinery/",
+                                    "https://www.youtube.com/channel/UCQO1ulyaGxbhk4X0ELy8r5g"
                                 ],
                                 "geo": {
                                     "@type": "GeoCoordinates",
-                                    "latitude": "36.68607",
-                                    "longitude": "117.03293"
+                                    "latitude": "24.9083",
+                                    "longitude": "118.5983"
                                 },
                                 "priceRange": "$$$"
                             },
@@ -1286,8 +1287,27 @@ const modules = [Autoplay, FreeMode, Navigation, Pagination];
 
 
 const productsList = ref([])
-const { data: productsRes, productPending, productError } = await useApi(`/product-categories?filters[parent_category_value][$eq]=Products&fileds=category_name,column_attr_name,head_image,category_value,menu_select_down_panel_is_show`)
+const { data: productsRes, productPending, productError } = await useApi(`/product-categories?filters[parent_category_value][$eq]=Products&fileds=category_name,column_attr_name,head_image,category_value,menu_select_down_panel_is_show&populate[head_image][fields]
+&populate[wire_saw_machine][populate][hero_circle_background_images][populate][banner_img][fields]&populate[circle_saw_machine][populate][circle_saw_machine_head_circle_images][populate][banner_img][fields]
+&populate[drilling_and_engraving_machine][populate][drilling_and_engraving_machine_head_circly_images][populate][banner_img][fields]
+&populate[mining_and_quarry_machine][populate][mining_and_quarrying_machinery_head_circly_images][populate][banner_img][fields]
+&populate[grinding_and_polishing_machine][populate][grinding_and_polishing_machine_head_circly_images][populate][banner_img][fields]
+&populate[profiling_machine][populate][profiling_machine_head_circly_images][populate][banner_img][fields]
+&populate[other_industrial_machine][populate][other_industrial_machine_head_circly_images][populate][banner_img][fields]
+&populate[diamond_tool][populate][diamond_tool_head_circly_images][populate][banner_img][fields]
+`)
 const productsTips = ref(["Most Trusted","Established","Innovative","New Trend", "","","","Outstanding"])
+const productsCircleName = ref({
+    wire_saw_machine:"hero_circle_background_images",
+    circle_saw_machine:"circle_saw_machine_head_circle_images",
+    drilling_and_engraving_machine:"drilling_and_engraving_machine_head_circly_images",
+    mining_and_quarry_machine:"mining_and_quarrying_machinery_head_circly_images",
+    grinding_and_polishing_machine:"grinding_and_polishing_machine_head_circly_images",
+    profiling_machine:"profiling_machine_head_circly_images",
+    other_industrial_machine:"other_industrial_machine_head_circly_images",
+    diamond_tool:"diamond_tool_head_circly_images",
+
+})
 watch(productsRes, (newPosts) => {
     if (newPosts) {
         let data = newPosts.data
@@ -1302,6 +1322,7 @@ watch(productsRes, (newPosts) => {
             
             for (let i = 0; i < data.length; i++) {
                 if(data[i].menu_select_down_panel_is_show){
+
                         let columnList = data[i][data[i].column_attr_name]
                         productsList.value.push({
                         id: i+1,
@@ -1310,6 +1331,7 @@ watch(productsRes, (newPosts) => {
                         image: data[i].head_image,
                         materials: 'Machinable Materials',
                         columnList:columnList,
+                        circleName:productsCircleName.value[data[i].column_attr_name],
                         link: '/Products/'+data[i].category_value
                     })
                 }
@@ -1415,6 +1437,7 @@ const scrollBlogCards = (direction) => {
     margin: 0 auto;
     padding-top: 135px;
     font-size: 0;
+    overflow:hidden;
 
     .banner-text {
         position: relative;
@@ -1654,13 +1677,14 @@ const scrollBlogCards = (direction) => {
 
     .product-card img {
         width: 100%;
-        height: 200px;
+        height: 150px;
         object-fit: contain;
         border-radius: 15px;
         margin-bottom: 20px;
     }
 
     .product-card h3 {
+        height:52px;
         font-size: 18px;
         font-weight: 700;
         color: #333;
@@ -3419,6 +3443,10 @@ const scrollBlogCards = (direction) => {
                     width: 71px;
                     height: 60px;
                     border-radius: 4px;
+                    img{
+                        margin-top:10px;
+                        transform:scale(2);
+                    }
                 }
             }
 
@@ -3676,6 +3704,7 @@ const scrollBlogCards = (direction) => {
 
                         h3 {
                             width: 160px;
+                            height:auto;
                             font-size: 14px;
                         }
 
@@ -3713,6 +3742,7 @@ const scrollBlogCards = (direction) => {
 
                                 .feature-label {
                                     font-size: 10px;
+                                    white-space:nowrap;
                                 }
                             }
                         }
@@ -5722,7 +5752,6 @@ const scrollBlogCards = (direction) => {
                                 color: #439df1;
                             }
                         }
-
                         h3 {
                             width: 100%;
                             height:39px;
@@ -5803,6 +5832,7 @@ const scrollBlogCards = (direction) => {
                                         text-transform: uppercase;
                                         text-align: center;
                                         color: #000000;
+                                        white-space:nowrap;
                                     }
                                 }
                             }

@@ -85,7 +85,7 @@
             <div class="processing-cases-title-section">
                 <div class="processing-cases-title-frame">
                     <h2 class="processing-cases-title">
-                        {{ item.beforeTitle }}<span class="c-black" v-if="item.afterTitle">{{ item.afterTitle }}</span>
+                        {{ item.beforeTitle }} <span class="c-black" v-if="item.afterTitle">{{ item.afterTitle }}</span>
                         <div class="c-black">{{ item.subTitle }}</div>
                     </h2>
                 </div>
@@ -99,8 +99,9 @@
                             <div class="processing-cases-section-inner">
                                 <div class="processing-cases-list">
                                     <!-- 案例1 -->
+                                     
                                      <template v-for="(blog, i) in item.blogs" :key="j">
-                                        <NuxtLink :to="'/blog/' + blog.slug" target="_blank">
+                                        <NuxtLink class="processing-case-item-link" :to="'/blog/' + blog.slug" target="_blank">
                                             <div class="processing-case-item">
                                                 <div class="case-background green">
                                                     <div class="case-ipad">
@@ -299,9 +300,9 @@ onMounted(() => {
 
     .processing-case-item {
         min-width: auto;
-        width: calc(50% - 6px);
-        flex: 0 0 calc(50% - 6px);
-        max-width: calc(50% - 6px);
+        // width: calc(50% - 6px);
+        // flex: 0 0 calc(50% - 6px);
+        // max-width: calc(50% - 6px);
 
         .case-youtube-link {
             width: 100%;

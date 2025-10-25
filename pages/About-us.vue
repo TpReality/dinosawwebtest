@@ -593,25 +593,32 @@
                 <!-- Products Grid -->
                 <div class="products-grid">
                     <!-- Row 1 -->
-                    <div class="products-row" v-for="(group, index) in productsList" :key="index">
-                        <div class="product-card" v-for="(product, j) in group" :key="j">
-                            <div class="product-content">
-                                <div class="product-header">
-                                    <h3 class="product-title">{{product.about_us_category_name}}</h3>
-                                </div>
-                                <div class="product-description">
-                                    <div class="product-text" v-html="product.about_us_category_description"></div>
-                                </div>
-                                <div class="product-image">
-                                    <div class="image-container">
-                                        <div class="product-img" v-if="product.head_image">
-                                            <NuxtImg :src="product.head_image.url" />
+                    <template v-for="(group, index) in productsList" :key="index">
+                        
+                        <div class="products-row">
+                            <template v-for="(product, j) in group" :key="j">
+                                <NuxtLink :to="'/Products/' + product.category_value" target="_blank">
+                                    <div class="product-card">
+                                        <div class="product-content">
+                                            <div class="product-header">
+                                                <h3 class="product-title">{{product.about_us_category_name}}</h3>
+                                            </div>
+                                            <div class="product-description">
+                                                <div class="product-text" v-html="product.about_us_category_description"></div>
+                                            </div>
+                                            <div class="product-image">
+                                                <div class="image-container">
+                                                    <div class="product-img" v-if="product.head_image">
+                                                        <NuxtImg :src="product.head_image.url" />
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
+                                </NuxtLink>
+                            </template>
                         </div>
-                    </div>
+                    </template>
                 </div>
             </div>
         </div>
@@ -728,7 +735,7 @@ watch(aboutusRes, (newPosts) => {
 }, { immediate: true })
 
 const productsList = ref({})
-const { data: productsRes, productPending, productError } = await useApi('/product-categories?filters[parent_category_value][$eq]=Products&populate=all')
+const { data: productsRes, productPending, productError } = await useApi('/product-categories?filters[parent_category_value][$eq]=Products&fields=sort,about_us_category_description,about_us_category_name,category_value&populate[head_image][fields]')
 watch(productsRes, (newPosts) => {
     // console.log(newPosts)
     if (newPosts) {
@@ -1922,42 +1929,6 @@ watch(productsRes, (newPosts) => {
         gap: 10px;
         padding: 0 31px;
         box-sizing: border-box;
-    }
-    
-    /* 添加图标区域 */
-    .feature-card::before {
-        content: '';
-        width: 56px;
-        height: 56px;
-        background: #FFFFFF;
-        border-radius: 8px;
-        margin-bottom: 10px;
-        flex-shrink: 0;
-    }
-    
-    /* 为不同的特性卡片设置不同的图标背景色 */
-    .feature-card:nth-child(1)::before {
-        background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-    }
-    
-    .feature-card:nth-child(2)::before {
-        background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
-    }
-    
-    .feature-card:nth-child(3)::before {
-        background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c8 100%);
-    }
-    
-    .features-row:nth-child(2) .feature-card:nth-child(1)::before {
-        background: linear-gradient(135deg, #fff3e0 0%, #ffcc02 100%);
-    }
-    
-    .features-row:nth-child(2) .feature-card:nth-child(2)::before {
-        background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);
-    }
-    
-    .features-row:nth-child(2) .feature-card:nth-child(3)::before {
-        background: linear-gradient(135deg, #e0f2f1 0%, #b2dfdb 100%);
     }
     
     .feature-content {

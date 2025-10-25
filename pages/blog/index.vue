@@ -104,7 +104,7 @@
                                 <div class="processing-cases-list">
                                     <!-- 案例1 -->
                                      <template v-for="(blog, j) in item.blogs" :key="j">
-                                        <NuxtLink :to="'/blog/'+blog.slug" target="_blank">
+                                        <NuxtLink :to="index==2?'/Products/'+blog.url:'/blog/'+blog.slug" target="_blank">
                                             <div class="processing-case-item">
                                                 <div class="case-background" :class="item.className">
                                                     <div class="case-ipad">
@@ -119,7 +119,7 @@
                                                                     <div class="case-youtube-link">
                                                                         <div class="case-title-frame">
                                                                             <h3 class="case-title">
-                                                                                <span class="case-title-line">{{ blog.title }}</span>
+                                                                                <span class="case-title-line">{{index==2?blog.h1_page_inner_title: blog.title }}</span>
                                                                             </h3>
                                                                         </div>
                                                                     </div>

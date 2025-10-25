@@ -66,7 +66,7 @@
               {{ blogDetail.title }}
             </h1>
             
-            <div class="hero-meta">
+            <div class="hero-meta is-pc">
               <NuxtImg src="https://framerusercontent.com/images/kb04PIvrLwFZGpVkwv4cn7XR54.png" />
               <span class="author-name">{{ blogDetail.author }}</span>
               <span class="meta-separator">·</span>
@@ -83,6 +83,14 @@
                 :src="blogDetail.first_image_url"
                 class="hero-image" 
               />
+            </div>
+            <div class="hero-meta is-mobile">
+              <NuxtImg src="https://framerusercontent.com/images/kb04PIvrLwFZGpVkwv4cn7XR54.png" />
+              <span class="author-name">{{ blogDetail.author }}</span>
+              <span class="meta-separator">·</span>
+              <span class="publish-date">{{ formatDateEN(blogDetail.date) }}</span>
+              <span class="meta-separator">·</span>
+              <span class="read-time">{{ blogDetail.reading_time }}</span>
             </div>
           </div>
         </div>
@@ -133,7 +141,7 @@
             <h3 class="widget-title">{{ contentDetail.interested_in_best_stone_machine_catalog_text }}</h3>
             <div class="product-categories">
               <template v-for="(item, index) in productList" :key="index">
-                <a :href="'/Products/'+item.category_value" class="product-category-link" v-if="index<=4">
+                <a :href="'/Products/'+item.category_value" class="product-category-link" target="_blank" v-if="index<=4">
                   <div class="category-icon">
                     <svg style="width:100%;height:100%;" viewBox="0 0 22 22" preserveAspectRatio="none" width="100%" height="100%">
                       <use href="#svg-1021927419_1735"></use>
@@ -144,7 +152,7 @@
                  </template>
               </div>
            
-            <a href="/Products" class="learn-more-link">{{ contentDetail.learn_more_text }}</a>
+            <a href="/Products" class="learn-more-link" target="_blank">{{ contentDetail.learn_more_text }}</a>
           </div>
 
           <!-- 在线聊天功能区域 -->
@@ -326,7 +334,7 @@ watch(menuItemsRes, (newPosts) => {
 
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 /* 主容器 - 对应Figma节点 52:8205 */
 .framer-jvgxp0 {
   width: 100%;
@@ -388,6 +396,9 @@ watch(menuItemsRes, (newPosts) => {
   img{
     width:36px;
     margin-right:20px;
+  }
+  &.is-mobile{
+    display:none;
   }
 }
 
@@ -1592,7 +1603,7 @@ watch(menuItemsRes, (newPosts) => {
   
   .hero-content {
     flex-direction: column;
-    gap: 40px;
+    gap: 10px;
     padding: 60px 0;
     text-align: center;
   }
@@ -1871,9 +1882,17 @@ watch(menuItemsRes, (newPosts) => {
   }
   
   .hero-meta {
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     gap: 8px;
+    &.is-pc{
+      display:none;
+    }
+    &.is-mobile{
+      display:flex;
+      margin-top:10px;
+      justify-content:center;
+    }
   }
   
   .article-intro {

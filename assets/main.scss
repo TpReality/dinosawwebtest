@@ -24,6 +24,7 @@ button {
 }
 
 a {
+    color: inherit;
     text-decoration: none;
 }
 
@@ -696,13 +697,17 @@ figure {
     flex-wrap: wrap;
     justify-content: flex-start;
 }
-
-.processing-case-item {
-    display: flex;
-    flex-direction: column;
+.processing-case-item-link { 
     min-width: 378px;
     flex: 0 0 calc(33.333% - 22px);
     max-width: calc(33.333% - 22px);
+}
+.processing-case-item {
+    display: flex;
+    flex-direction: column;
+    // min-width: 378px;
+    // flex: 0 0 calc(33.333% - 22px);
+    // max-width: calc(33.333% - 22px);
 }
 
 .case-background {
@@ -739,7 +744,7 @@ figure {
 .case-main-image {
     width: 378px;
     height: 277px;
-    background-color: #F5F5F5;
+    background-color: #fff;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -753,15 +758,15 @@ figure {
 }
 
 .cement-case {
-    background-color: #E8E8E8;
+    background-color: #fff;
 }
 
 .marble-case {
-    background-color: #E8E8E8;
+    background-color: #fff;
 }
 
 .granite-case {
-    background-color: #E8E8E8;
+    background-color: #fff;
 }
 
 .case-content-container {
@@ -924,12 +929,22 @@ figure {
     }
 
     .processing-cases-list {
-        gap: 20px;
+        width:360px;
+        gap: 40px;
     }
 
-    .processing-case-item {
-        min-width: 320px;
+    .processing-case-item-link{
+            min-width: auto;
+            width:160px;
+            flex: 0 0 160px;
+            max-width: 160px;
+            // width: calc(50% - 40px);
+            // flex: 0 0 calc(50% - 40px);
+            // max-width: calc(50% - 40px);
     }
+    // .processing-case-item {
+        // min-width: 320px;
+    // }
 
     .case-background {
         width: 320px;
@@ -1439,6 +1454,9 @@ figure {
 .layout-five+.layout-single { 
     margin-top:25px;
 }
+.layout-double+.layout-five{
+    margin-top:25px;
+}
 
 /* 左侧特色产品 */
 .five-left {
@@ -1455,6 +1473,8 @@ figure {
     justify-content: center;
     align-items: center;
     max-height:450px;
+    width:646px;
+    height:378px;
 }
 
 .five-main-image img {
@@ -1619,6 +1639,10 @@ figure {
     .layout-five{
         flex-direction: column;
         gap:30px;
+        .five-main-image {
+            width: auto;
+            height:auto;
+        }
     }
 }
 @media (max-width: 768px) {
@@ -1822,4 +1846,47 @@ figure {
     .horizontal-button-text {
         font-size: 12px;
     }
+}
+
+/*富文本内容样式*/
+table{
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: auto;
+    border: 1px solid #e8e8e8;
+    border-radius: 8px;
+    width: 100%;
+    overflow: hidden;
+    margin-top:32px;
+    th{
+        background:#f7f7f7;
+        padding:10px;
+        min-width:16ch;
+        vertical-align: top;
+    }
+    td{
+        padding:10px;
+        min-width:16ch;
+        vertical-align: top;
+        a{
+            color:rgb(67, 157, 241) !important;
+        }
+    }
+    th+th{
+        border-left:1px solid #e8e8e8;
+    }
+    td+td{
+        border-left:1px solid #e8e8e8;
+    }
+    
+    tr+tr td{
+        border-top:1px solid #e8e8e8;
+    }
+
+}
+.blog-article-details{
+  max-width: 788px;
+  a{
+    color:rgb(67, 157, 241);
+  }
 }

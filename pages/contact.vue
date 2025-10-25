@@ -24,7 +24,7 @@
             </div>
         </div>
         
-        <GetEasySolution :contentDetail="contentDetail" :getEasySolutionType="3" />
+        <GetEasySolution :contentDetail="contentDetail" :getEasySolutionType="3" :isContact="true" />
        <div class="sales-support-section">
             <div class="sales-container">
                 <div class="sales-wrapper">

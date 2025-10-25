@@ -101,7 +101,7 @@
                                 <div class="processing-cases-list">
                                     <!-- 案例1 -->
                                      <template v-for="(blog, j) in item.blogs" :key="j">
-                                        <NuxtLink :to="'/blog/' + blog.slug" target="_blank">
+                                        <NuxtLink class="processing-case-item-link" :to="'/blog/' + blog.slug" target="_blank">
                                             <div class="processing-case-item">
                                                 <div class="case-background green">
                                                     <div class="case-ipad">
@@ -142,8 +142,8 @@
                             </div>
                         </div>
 
-                        <!-- More 按钮 -->
-                        <div class="processing-cases-more-button" v-if="pageStates[categoryKeys[index]]?.hasMore">
+                        <!-- More 按钮  v-if="pageStates[categoryKeys[index]]?.hasMore"-->
+                        <div class="processing-cases-more-button">
                             <div class="more-button-container">
                                 <div class="more-button-wrapper" @click="loadMoreBlogs(index)" :class="{ 'loading': pageStates[categoryKeys[index]]?.loading }">
                                     <span class="more-button-text">
@@ -228,6 +228,10 @@ const fetchAllCategoryBlogs = async () => {
         pageStates.value.repair.hasMore = repairResult.hasMore
         pageStates.value.maintenance.hasMore = maintenanceResult.hasMore
         
+        console.log(installationResult)
+        console.log(repairResult)
+
+        console.log(maintenanceResult)
         return {
             installation: formatArrayDatesShort(installationResult.blogs),
             repair: formatArrayDatesShort(repairResult.blogs),
@@ -274,7 +278,7 @@ const loadMoreBlogs = async (categoryIndex) => {
 
 watch(vidoeRes, async (newPosts) => {
     if (newPosts) {
-        // console.log(newPosts)
+        console.log(newPosts)
         let data = newPosts.data[0].video
         videos.value = data
         useHead({
@@ -380,7 +384,7 @@ watch(vidoeRes, async (newPosts) => {
 
     .processing-cases-section {
         width: 100%;
-        padding: 16px 32px;
+        padding: 16px 16px;
         box-sizing: border-box;
         background: none;
         position: relative;
@@ -418,16 +422,13 @@ watch(vidoeRes, async (newPosts) => {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        justify-content: flex-start;
-        gap: 48px;
         overflow: visible;
     }
-
     .processing-case-item {
-        min-width: auto;
-        width: calc(50% - 24px);
-        flex: 0 0 calc(50% - 24px);
-        max-width: calc(50% - 24px);
+        // min-width: auto;
+        // width: calc(50% - 24px);
+        // flex: 0 0 calc(50% - 24px);
+        // max-width: calc(50% - 24px);
 
         .case-youtube-link {
             width: 100%;
@@ -441,6 +442,20 @@ watch(vidoeRes, async (newPosts) => {
                 height: auto;
             }
         }
+        .case-date-section{
+            .case-date-container{
+                display:block;
+                svg{
+                    width:15px;
+                    height:15px;
+                    vertical-align:middle;
+                }
+                .case-date{
+                    font-size:12px;
+                }
+            }
+        }
+        
     }
 
     .case-background {

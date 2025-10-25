@@ -9,10 +9,18 @@
                         <div class="contact-info">
                             <div class="contact-header" :class="getEasySolutionType == 3?'biger':''">
                                 <h2 v-if="getEasySolutionType == 1" class="contact-title">{{ contentDetail.get_easy_solution }}</h2>
-                                <h2 v-else class="contact-title">
-                                    <p>{{contentDetail.contact_text}} Dinosaw</p>
-                                    {{ contentDetail.get_easy_solution }}
-                                </h2>
+                                <template v-else>
+                                    <h1 v-if="isContact" class="contact-title">
+                                        <p>{{contentDetail.contact_text}} Dinosaw</p>
+                                        {{ contentDetail.get_easy_solution }}
+                                    </h1>
+                                    <h2 v-else class="contact-title">
+                                        <p>{{contentDetail.contact_text}} Dinosaw</p>
+                                        {{ contentDetail.get_easy_solution }}
+                                    </h2>
+                                    
+                                </template>
+                                
                                 <div class="contact-description">
                                     <div class="rich-text" v-html="contentDetail.get_easy_solution_description"></div>
                                 </div>
@@ -253,7 +261,7 @@
                         <!-- Contact Information -->
                         <div class="contact-info small">
                             <div class="contact-header">
-                                <h2 class="contact-title">{{ contentDetail.get_easy_solution }}</h2>
+                                <h2 class="contact-title">{{ contentDetail.need_technical_support_text }}</h2>
                                 <div class="contact-description">
                                     <div class="rich-text" v-html="contentDetail.get_easy_solution_description_1"></div>
                                 </div>
@@ -320,6 +328,10 @@ const props = defineProps({
   getEasySolutionType: {
     type: Number,
     default: 1
+  },
+  isContact:{
+    type: Boolean,
+    default: false
   }
 })
 
@@ -336,13 +348,13 @@ const form = ref({
 const isSubmitting = ref(false)
 
 // 获取产品数据
-const { data: topProductDetailRes, pending: topPending, error: topError } = await useApi('/product-categories?fields=sort,parent_category_value,category_name,menu_select_down_panel_is_show,column_attr_name,category_value')
+const { data: topProductDetailRes, pending: topPending, error: topError } = await useApi('/product-categories?filters[parent_category_value][$eq]=Products&fields=sort,parent_category_value,category_name,menu_select_down_panel_is_show,column_attr_name,category_value')
 
 // 监听产品数据变化
 watch(topProductDetailRes, (newPosts) => {
   if (newPosts) {
     let data = newPosts.data
-    // // console.log('Product',newPosts)
+    // console.log('Product',newPosts)
     // 根据 sort 字段从小到大排序
     if (Array.isArray(data)) {
       data = data.sort((a, b) => {
@@ -568,7 +580,7 @@ const showMessage = (type, message) => {
         align-items: flex-start;
 
         @media (max-width: 1440px) {
-            flex-direction: column;
+            flex-direction: column-reverse;
             gap: 60px;
         }
     }

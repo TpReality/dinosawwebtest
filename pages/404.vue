@@ -44,7 +44,11 @@
                 </div>
             </div>
         </div>
-
+        <h1 class="unfind-tip">
+            <div>The old page has been upgraded,</div>
+            <div>😎👍welcome to learn about innovative machines</div>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" focusable="false" color="var(--token-e0ce79e8-f023-49ad-9edf-bfcca13d71cf, rgb(49, 47, 47))" style="user-select: none; width: 30px; height: 30px; display: inline-block; fill: var(--token-e0ce79e8-f023-49ad-9edf-bfcca13d71cf, rgb(49, 47, 47)); flex-shrink: 0; cursor: auto;"><g color="var(--token-e0ce79e8-f023-49ad-9edf-bfcca13d71cf, rgb(49, 47, 47))" weight="bold"><polyline points="208 96 128 176 48 96" fill="none" stroke="var(--token-e0ce79e8-f023-49ad-9edf-bfcca13d71cf, rgb(49, 47, 47))" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></g></svg>
+        </h1>
         <!-- 第一个容器 - 对应Figma节点 19:11701 -->
         <div class="first-container">
             <!-- 轮播图容器 - 对应 19:11702 -->
@@ -687,7 +691,7 @@ watch(productDetailRes, (newPosts) => {
         )
 
         productDetail.value = data
-        console.log(newPosts)
+        // console.log(newPosts)
         useHead({
             title: data.meta_title,
             meta: [
@@ -732,7 +736,7 @@ watch(topProductDetailRes, (newPosts) => {
         //     })
         // }
         
-        console.log('topP',topProduct)
+        // console.log('topP',topProduct)
         // // console.log(wireSawMachineSectionUrl)
     }
 }, { immediate: true })
@@ -795,6 +799,17 @@ onMounted(() => {
             background:url(https://framerusercontent.com/images/4cNK7hR44yWDvsyolHiTPOzdfk.webp) no-repeat center center;
             background-size: 100% auto;
         }
+    }
+}
+.unfind-tip{
+    font-size:30px;
+    font-weight:700;
+    line-height:1.4em;
+    font-family: "Inter", "Inter Placeholder", sans-serif;
+    text-align:center;
+    svg{
+        width:40px;
+        margin:20px 0;
     }
 }
 

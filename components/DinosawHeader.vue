@@ -69,7 +69,7 @@
           <div class="dinosaw-head-bot flex">
               <div class="dinosaw-head-lm flex">
                 <div class="dinosaw-logo">
-                    <a href="/" target="_blank">
+                    <a href="/" target="_blank" alt="dinosaw logo">
                       <NuxtImg class="img" src="https://framerusercontent.com/images/Rgs09IZlnBALMtEN2nX5mwe26rw.webp?scale-down-to=512" />
                     </a>
                 </div>
@@ -533,6 +533,7 @@ const stopPoint = () => {
           top: 110px;
           left: 0;
           right: 0;
+          width:100%;
           background: white;
           box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
           z-index: 15;
@@ -695,6 +696,8 @@ const stopPoint = () => {
     // 媒体查询：当屏幕宽度小于1440px时
     @media (max-width: 1439px) {
       .dinosaw-head{
+        max-width:430px;
+        width:100%;
          .dinosaw-head-bot {
           padding-top:20px;
           .mobile-menu-btn {

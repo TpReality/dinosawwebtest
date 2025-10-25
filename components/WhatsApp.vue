@@ -27,10 +27,10 @@
               </div>
           </div>
           <div class="whats-button">
-              <a href="https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information">{{ contentDetail.chat_online_dialog_btn_whatapp_text}}</a>
+              <a target="_blank" href="https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information">{{ contentDetail.chat_online_dialog_btn_whatapp_text}}</a>
           </div>
           <div class="contact-button">
-            <a href="./contact" target="_blank">{{ contentDetail.chat_online_dialog_btn_contact_us_text }}</a>
+            <a href="/contact" target="_blank">{{ contentDetail.chat_online_dialog_btn_contact_us_text }}</a>
           </div>
       </div>
       <div 

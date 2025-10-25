@@ -2,7 +2,11 @@
 import { $fetch } from 'ofetch';
 
 export default defineNuxtConfig({
-  
+  runtimeConfig: {
+    public: {
+      gtmId: 'GTM-P9KQZ4XV'  // 改成你的实际 GTM ID
+    }
+  },
   // 开发模式优化
   // dev: process.env.NODE_ENV !== 'production',
   hooks: {
@@ -35,7 +39,7 @@ export default defineNuxtConfig({
 // console.log(blogs)
       for (const product of products.data) {
         // 添加具体的动态路由路径
-        ctx.routes.add(`/Pruducts/${product.url}`);
+        ctx.routes.add(`/Products/${product.url}`);
       }
     },
   },

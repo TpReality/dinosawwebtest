@@ -89,7 +89,7 @@
                         </h1>
                     </div>
                     <div class="description-section">
-                        <p class="description-text" v-html="projects.hero_description"></p>
+                        <div class="description-text" v-html="projects.hero_description"></div>
                     </div>
                 </div>
             </div>
@@ -122,7 +122,7 @@
                                 <div class="processing-cases-list">
                                     <!-- 案例1 -->
                                      <template v-for="(blog, j) in item.blogs" :key="j">
-                                        <NuxtLink :to="j == 2?'/Projects/' + blog.slug:'/blog/' + blog.slug" target="_blank">
+                                        <NuxtLink class="processing-case-item-link" :to="index == 2?'/Products/' + blog.url:'/blog/' + blog.slug" target="_blank">
                                             <div class="processing-case-item">
                                                 <div class="case-background green">
                                                     <div class="case-ipad">
@@ -137,7 +137,7 @@
                                                                     <div class="case-youtube-link">
                                                                         <div class="case-title-frame">
                                                                             <h3 class="case-title">
-                                                                                <span class="case-title-line">{{ blog.title }}</span>
+                                                                                <span class="case-title-line">{{index==2?blog.h1_page_inner_title: blog.title }}</span>
                                                                             </h3>
                                                                         </div>
                                                                     </div>
@@ -208,7 +208,7 @@ let processingCase = []
 
 watch(projectsRes, (newPosts) => {
     if (newPosts) {
-        // console.log(newPosts)
+        console.log(newPosts)
         let data = {}
         if(slug == 'marble-projects'){
             data = newPosts.data[0].marble_project
@@ -234,6 +234,7 @@ watch(projectsRes, (newPosts) => {
                 { id: 3, beforeTitle:"", afterTitle:data.most_popular_industry_cnc_machines_title, subTitle: data.most_popular_industry_cnc_machines_subtitle, text:"", blogs:formatArrayDatesShort(data.most_popular_industry_cnc_machines_products),url:"" }
             ]
         }
+
         projects.value = data
         useHead({
             title: data.meta_title,
@@ -297,7 +298,6 @@ onMounted(() => {
 
     .processing-cases-section {
         padding: 20px;
-        gap:15px;
     }
 
     .processing-cases-wrapper {
@@ -309,14 +309,6 @@ onMounted(() => {
         width: 100%;
         padding: 10px 20px;
         height: auto;
-    }
-
-    .processing-cases-list {
-        gap: 20px;
-    }
-
-    .processing-case-item {
-        min-width: 320px;
     }
 
     .case-background {
@@ -381,7 +373,7 @@ onMounted(() => {
 
     .processing-cases-section {
         width: 390px;
-        padding: 16px;
+        padding: 16px 0;
         box-sizing: border-box;
         background: none;
         position: relative;
@@ -419,15 +411,15 @@ onMounted(() => {
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: flex-start;
-        gap: 12px;
+        // gap: 12px;
         overflow: visible;
     }
 
     .processing-case-item {
-        min-width: auto;
-        width: calc(50% - 6px);
-        flex: 0 0 calc(50% - 6px);
-        max-width: calc(50% - 6px);
+        // min-width: auto;
+        // width: calc(50% - 6px);
+        // flex: 0 0 calc(50% - 6px);
+        // max-width: calc(50% - 6px);
 
         .case-youtube-link {
             width: 100%;

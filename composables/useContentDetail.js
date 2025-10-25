@@ -14,7 +14,7 @@ export const useContentDetail = () => {
         watch(contentDetailRes, (newData) => {
           if (newData && newData.data && newData.data[0]) {
             contentDetail.value = newData.data[0]
-            // console.log('Global contentDetail updated:', contentDetail.value)
+            console.log('Global contentDetail updated:', contentDetail.value)
             
             // 设置全局 SEO
             // useHead(() => ({
