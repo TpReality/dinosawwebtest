@@ -7,7 +7,6 @@ export const useApi = (url) => {
       server: true,
       retry: 2,
       retryDelay: 500,
-      key: url, // 添加缓存键
       headers: {
         Authorization: `Bearer ${authToken}`,
       },

@@ -1,45 +1,31 @@
-import { ref, watch, readonly, computed } from 'vue'
+import { readonly, computed } from 'vue'
 
-// 全局状态
-const contentDetail = ref({})
-let isInitialized = false
-
+// 让内容详情在 SSR 阶段就获取并序列化到 payload，同时用 useState 做全局缓存
 export const useContentDetail = () => {
-  // 如果还没有初始化，则进行初始化
-  if (!isInitialized) {
-    const initContentDetail = async () => {
-      try {
-        const { data: contentDetailRes } = await useApi('/public-page-infos?filters[get_a_free_quote_btn_text][$eq]=Get A Free Quote')
-        
-        watch(contentDetailRes, (newData) => {
-          if (newData && newData.data && newData.data[0]) {
-            contentDetail.value = newData.data[0]
-            // console.log('Global contentDetail updated:', contentDetail.value)
-            
-            // 设置全局 SEO
-            // useHead(() => ({
-            //   title: contentDetail.value.meta_title || contentDetail.value.h1_page_inner_title,
-            //   meta: [
-            //     {
-            //       name: 'description',
-            //       content: contentDetail.value.meta_description || contentDetail.value.product_overview || ''
-            //     }
-            //   ]
-            // }))
-          }
-        }, { immediate: true })
-        
-        isInitialized = true
-      } catch (error) {
-        console.error('Error fetching contentDetail:', error)
-      }
-    }
-    
-    initContentDetail()
+  const contentDetail = useState('contentDetail', () => ({}))
+
+  const initializeContentDetail = async () => {
+    // 已有缓存则直接返回，避免重复请求（客户端导航也不再请求）
+    if (Object.keys(contentDetail.value).length > 0) return contentDetail.value
+
+    const { data: res } = await useAsyncData(
+      () => 'content:detail',
+      () => $fetch('/public-page-infos?filters[get_a_free_quote_btn_text][$eq]=Get A Free Quote'),
+      { default: () => ({ data: [] }), allowEmpty: true }
+    )
+
+    // 确保结构安全：对象或数组首项
+    const value = Array.isArray(res.value?.data)
+      ? (res.value.data[0] ?? {})
+      : (res.value ?? {})
+
+    contentDetail.value = value
+    return contentDetail.value
   }
-  
+
   return {
-    contentDetail: readonly(contentDetail), // 返回只读版本，防止外部直接修改
-    isLoaded: computed(() => Object.keys(contentDetail.value).length > 0)
+    contentDetail: readonly(contentDetail),
+    isLoaded: computed(() => Object.keys(contentDetail.value).length > 0),
+    initializeContentDetail
   }
 }
