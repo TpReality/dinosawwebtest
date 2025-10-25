@@ -108,7 +108,7 @@
                             <!-- Action Buttons -->
                             <div class="action-buttons">
                                 <button class="btn-primary">
-                                    <NuxtLink to="/contact">
+                                    <NuxtLink to="/contact" target="_blank">
                                         <span>{{contentDetail.get_a_quote_text}}</span>
                                     </NuxtLink>
                                 </button>
@@ -728,7 +728,7 @@
                         <div class="solution-card">
                             <NuxtLink :to="'/Products/'+productDetail.link_1" target="_blank">
                                 <div class="solution-image">
-                                    <NuxtImg :src="productDetail.image_1_url" />
+                                    <NuxtImg :src="relatedFirstImages.link_1" />
                                 </div>
                             
                                 <div class="solution-content">
@@ -749,7 +749,7 @@
                        <div class="solution-card">
                             <NuxtLink :to="'/Products/'+productDetail.link_2" target="_blank">
                                 <div class="solution-image">
-                                   <NuxtImg :src="productDetail.image_2_url" />
+                                   <NuxtImg :src="relatedFirstImages.link_2" />
                                 </div>
                                 <div class="solution-content">
                                     <div class="solution-title">
@@ -769,7 +769,7 @@
                         <div class="solution-card">
                             <NuxtLink :to="'/Products/'+productDetail.link_3" target="_blank">
                                 <div class="solution-image">
-                                    <NuxtImg :src="productDetail.image_3_url" />
+                                    <NuxtImg :src="relatedFirstImages.link_3" />
                                 </div>
                                 <div class="solution-content">
                                     <div class="solution-title">
@@ -1021,6 +1021,33 @@ const { data: productDetailRes, pending, error } = await useApi('/products?filte
             emit('headdata-loaded', newData);
         }
     }, { immediate: true });
+
+// 依据产品的 link_1/link_2/link_3 拉取对应产品的首图
+const relatedFirstImages = ref({ link_1: '', link_2: '', link_3: '' })
+let relatedFetched = false
+watch(productDetail, async (pd) => {
+  if (!pd || relatedFetched) return
+  const links = [pd.link_1, pd.link_2, pd.link_3].filter(Boolean)
+  if (!links.length) { relatedFetched = true; return }
+  try {
+    const fetchOne = async (link) => {
+      const { data: res } = await useApi('/products?filters[url][$eq]='+link+'&fields=first_image_url')
+      const item = Array.isArray(res.value?.data) ? res.value.data[0] : null
+      return item?.first_image_url || ''
+    }
+    const results = await Promise.all(links.map(fetchOne))
+    // 写入到映射对象
+    if (pd.link_1) relatedFirstImages.value.link_1 = results[0] || ''
+    if (pd.link_2) relatedFirstImages.value.link_2 = results[1] || ''
+    if (pd.link_3) relatedFirstImages.value.link_3 = results[2] || ''
+  } catch (e) {
+    // 静默失败，避免影响页面渲染
+    console.warn('Fetch related product first images failed', e)
+  } finally {
+    relatedFetched = true
+  }
+}, { immediate: true })
+
  watch(error, (newError) => {
      throw createError({ statusCode: 404, statusMessage: '文章不存在' });
 })
@@ -1520,12 +1547,37 @@ onUnmounted(() => {
     z-index: 3;
     width: 100%;
     padding: 0 20px;
+    &:after{
+        content:"";
+        position:absolute;
+        right:0;
+        bottom:0;
+        width:317px;
+        height:156px;
+        background:url("https://framerusercontent.com/images/29EarsTVKsAno0P5LazZPoGx70.webp?width=2001&height=1002") no-repeat 150px center;
+        background-size:100% auto;
+        z-index:3;
+    }
+    &::before{
+        content:"";
+        position:absolute;
+        left:45%;
+        top:-100px;
+        width:594px;
+        height:313px;
+        background:url("https://framerusercontent.com/images/MMezvAMCYfTeJANhRlBEMIVUso.webp?width=2001&height=1002") no-repeat center center;
+        background-size:100% auto;
+        z-index:3;
+        
+    }
 }
 
 .container {
+    position: relative;
     max-width: 1260px;
     margin: 0 auto;
     padding: 0 40px 0;
+    z-index:4;
 }
 
 /* Main Content */
@@ -2045,7 +2097,7 @@ onUnmounted(() => {
 }
 
 .nav-item:first-child {
-    width: 294px;
+    width: 298px;
     height: 31.2px;
 }
 
@@ -2210,6 +2262,13 @@ onUnmounted(() => {
 }
 
 @media (max-width: 768px) {
+    .materials-carousel{
+        overflow-x: auto;
+        .carousel-controls{
+            display:none;
+        }
+
+    }
     .nav-items-row {
         gap: 12px;
     }
@@ -2456,10 +2515,10 @@ onUnmounted(() => {
 
     .carousel-container {
         /* 小屏幕：1个可视item + 左右padding */
-        max-width:auto;
+        max-width:none;
         /* 300px */
         padding: 10px;
-        overflow: hidden;
+        overflow: visible;
     }
 
     .carousel-track {
@@ -2964,7 +3023,6 @@ onUnmounted(() => {
     align-items: stretch;
     gap: 10px;
     width: 1176px;
-    height: 420.34px;
     background: #ffffff;
 }
 

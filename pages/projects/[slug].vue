@@ -164,6 +164,13 @@
                         </div>
 
                         <!-- More 按钮 -->
+                         <div class="processing-cases-more-button" @click="loadMore(item)" v-if="index == 0">
+                            <div class="more-button-container">
+                                <div class="more-button-wrapper">
+                                    <span class="more-button-text">{{index == 0? projects.load_more_text:projects.more_text}}</span>
+                                </div>
+                            </div>
+                        </div>
                         <div class="processing-cases-more-button" v-if="item.url">
                             <div class="more-button-container">
                                 <div class="more-button-wrapper">
@@ -176,6 +183,8 @@
                     </div>
                 </div>
             </div>
+
+            
         </div>
         <ContactType :contentDetail="contentDetail" />
         <WhatsApp :contentDetail="contentDetail" />
@@ -204,7 +213,7 @@ const { contentDetail, isLoaded } = useContentDetail()
 // await useApi('/product-categories?filters[category_value][$eq]=wire-saw-machine&populate=all')
 const projects = ref({})
 const { data: projectsRes, pending, error } = await useApi('/product-categories?filters[category_value][$eq]='+slug+'&populate=all')
-let processingCase = []
+const processingCase = ref([])
 
 watch(projectsRes, (newPosts) => {
     if (newPosts) {
@@ -212,7 +221,7 @@ watch(projectsRes, (newPosts) => {
         let data = {}
         if(slug == 'marble-projects'){
             data = newPosts.data[0].marble_project
-            processingCase = [
+            processingCase.value = [
                 { id: 1, beforeTitle: data.your_favorite_marble_projects_before_title, afterTitle:data.your_favorite_marble_projects_center_title, subTitle: data.your_favorite_marble_projects_after_title, text:"", blogs:formatArrayDatesShort(data.your_favorite_marble_projects_blogs),url:"" },
                 { id: 2, beforeTitle: "", afterTitle:data.after_sales_video_title, subTitle: data.after_sales_video_subtitle, text:data.after_sales_video_description, blogs:formatArrayDatesShort(data.after_sales_video_blogs), url:"/video"},
                 { id: 3, beforeTitle: "", afterTitle:data.most_popular_marble_machines_title, subTitle: data.most_popular_marble_machines_subtitle, text:"", blogs:formatArrayDatesShort(data.most_popular_marble_machines_products),url:"" }
@@ -220,7 +229,7 @@ watch(projectsRes, (newPosts) => {
         }
         if(slug == 'granite-projects'){
             data = newPosts.data[0].granite_project
-            processingCase = [
+            processingCase.value = [
                 { id: 1, beforeTitle: data.your_favorite_granite_projects_before_title, afterTitle:data.your_favorite_granite_projects_after_title, subTitle: data.your_favorite_granite_projects_center_title, text:"", blogs:formatArrayDatesShort(data.your_favorite_granite_projects_blogs),url:"" },
                 { id: 2, beforeTitle: "", afterTitle:data.after_sales_video_title, subTitle: data.after_sales_video_subtitle, text:data.after_sales_video_description, blogs:formatArrayDatesShort(data.after_sales_video_blogs), url:"/video"},
                 { id: 3, beforeTitle: "", afterTitle:data.most_popular_granite_machines_title, subTitle: data.most_popular_granite_machines_subtitle, text:"", blogs:formatArrayDatesShort(data.most_popular_granite_machines_products),url:"" }
@@ -228,7 +237,7 @@ watch(projectsRes, (newPosts) => {
         }
         if(slug == 'other-hard-materials-projects'){
             data = newPosts.data[0].other_hard_materials_project
-            processingCase = [
+            processingCase.value = [
                 { id: 1, beforeTitle: data.your_favorite_hard_material_project_before_title, afterTitle:data.your_favorite_hard_material_project_after_title, subTitle: data.your_favorite_hard_material_project_center_title, text:"", blogs:formatArrayDatesShort(data.your_favorite_hard_materials_projects_blogs),url:"" },
                 { id: 2, beforeTitle: "", afterTitle:data.after_sales_video_title, subTitle: data.after_sales_video_subtitle, text:data.after_sales_video_description, blogs:formatArrayDatesShort(data.after_sales_video_blogs), url:"/video"},
                 { id: 3, beforeTitle:"", afterTitle:data.most_popular_industry_cnc_machines_title, subTitle: data.most_popular_industry_cnc_machines_subtitle, text:"", blogs:formatArrayDatesShort(data.most_popular_industry_cnc_machines_products),url:"" }
@@ -254,6 +263,47 @@ watch(projectsRes, (newPosts) => {
 }, { immediate: true })
 
 
+
+// 加载更多博客（根据分页与分类动态筛选）
+const loadingMore = ref(false)
+const pageSize = ref(6)                // 全局默认每页条数
+const page = ref(2)                // 全局记录各分类已加载到第几页
+const hasMore = ref(true)
+
+const loadMore = async (blog) => {
+  try {
+    if(!hasMore.value){
+        return
+    }
+    loadingMore.value = true
+    const cat = encodeURIComponent(String(blog.blogs[0].category || '').trim())
+    if (!cat) { return [] }
+
+    const url = `/blogs?pagination[page]=${page.value}&pagination[pageSize]=${pageSize.value}&sort[0]=date:desc&filters[category][$eq]=${cat}`
+    const { data: res } = await useApi(url)
+    const list = Array.isArray(res.value?.data) ? res.value.data : []
+    list.forEach(val=>{
+        console.log(val)
+        val.date = formatDateShort(val.date)
+        processingCase.value[0].blogs.push(val)
+    })
+    
+    
+    // 成功后将该分类的页码自增，便于下次继续加载
+    if (list.length < pageSize.value) {
+        hasMore.value = false
+    }else{
+         page.value += 1
+    }
+
+    return list
+  } catch (e) {
+    console.warn('loadMore blogs failed', e)
+    return []
+  } finally {
+    loadingMore.value = false
+  }
+}
 
 // 组件挂载后开始打字机效果
 onMounted(() => {

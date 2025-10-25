@@ -189,7 +189,7 @@ watch(projectsDetailRes, (newPosts) => {
             
     { id: 1, beforeTitle: data.marble_processing_before_title, afterTitle:data.marble_processing_after_title, subTitle: data.marble_processing_subtitle, text: data.marble_processing_description,blogs: formatArrayDatesShort(data.marble_processing_blogs), url:data.marble_processing_url },
     { id: 2, beforeTitle: data.granite_process_before_title, afterTitle:data.granite_process_after_title, subTitle: data.granite_process_subtitle, text: data.granite_process_description, blogs:formatArrayDatesShort(data.granite_processing_blogs), url:data.granite_processing_url },
-    { id: 3, beforeTitle: data.other_hard_materials_title, afterTitle:"", subTitle: data.other_hard_materials_subtitle, text: data.other_hard_materials_description, blogs:[], url:data.other_hard_materials_url }
+    { id: 3, beforeTitle: data.other_hard_materials_title, afterTitle:"", subTitle: data.other_hard_materials_subtitle, text: data.other_hard_materials_description, blogs:formatArrayDatesShort(data.other_hard_materials_blogs), url:data.other_hard_materials_url }
 
         ]
         // console.log(processingCase)

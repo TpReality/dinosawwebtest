@@ -49,6 +49,7 @@
                     <!-- Action Buttons -->
                     <div class="hero-actions">
                         <div class="action-button learn-products">
+                            <NuxtLink to="/Products" target="_blank">
                             <div class="button-content">
                                 <div class="button-text-container">
                                     <span class="button-text">{{ aboutUs.learn_products_btn_text }}</span>
@@ -59,13 +60,16 @@
                                     </svg>
                                 </div>
                             </div>
+                            </NuxtLink>
                         </div>
                         <div class="action-button contact-us">
+                             <NuxtLink to="/contact" target="_blank">
                             <div class="button-content">
                                 <div class="button-text-container">
                                     <span class="button-text">{{ aboutUs.contact_us_btn_text }}</span>
                                 </div>
                             </div>
+                            </NuxtLink>
                         </div>
                     </div>
                 </div>

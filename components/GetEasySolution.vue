@@ -327,7 +327,7 @@ const props = defineProps({
   },
   getEasySolutionType: {
     type: Number,
-    default: 1
+    default: 0
   },
   isContact:{
     type: Boolean,

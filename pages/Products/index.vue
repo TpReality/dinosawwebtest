@@ -897,7 +897,7 @@ onMounted(() => {
             margin-top:10px;
             width: 100px;
             height:81px;
-            object-fit: cover;
+            object-fit: contain;
         }
 
         .text {

@@ -69,7 +69,7 @@ const isLayoutReady = computed(() => {
 });
 
 const topProduct = ref([])
-const { data: topProductDetailRes, topPending, topError } = await useApi('/product-categories?filters[parent_category_value][$eq]=Products&populate=all')
+const { data: topProductDetailRes, topPending, topError } = await useApi('/product-categories?filters[parent_category_value][$eq]=Products&populate[fields]=category_value,category_name')
 watch(topProductDetailRes, (newPosts) => {
     if (newPosts) {
         let data = newPosts.data

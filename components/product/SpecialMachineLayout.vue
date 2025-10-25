@@ -606,7 +606,7 @@
                                 <div class="processing-cases-list">
                                     <!-- 案例1 -->
                                     <template v-for="(blogs, j) in item.blogs" :key="j">
-                                        <NuxtLink class="processing-case-item-link" :to="blogs.category_link" target="_blank">
+                                        <NuxtLink class="processing-case-item-link" :to="'/blog/'+blogs.slug" target="_blank">
                                             <div class="processing-case-item">
                                                 <div class="case-background" :class="index != 2 ? 'yellow' : ''">
                                                     <div class="case-ipad">

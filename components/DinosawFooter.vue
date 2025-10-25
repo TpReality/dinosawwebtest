@@ -74,7 +74,7 @@
                       </a>
                     </li>
                     <li>
-                      <a class="flex" href="https://www.facebook.com/profile.php?id=61559861497239">
+                      <a class="flex" href="https://www.facebook.com/kylie.hong.896784">
                         <svg class="icon" viewBox="0 0 1024 1024" width="32" height="32"><path d="M748.4 95.5H275.6c-99.4 0-180.2 80.8-180.2 180.2v472.7c0 99.4 80.8 180.2 180.2 180.2h472.7c99.4 0 180.2-80.8 180.2-180.2V275.6c0-99.3-80.8-180.1-180.1-180.1zm120.1 652.9c0 66.3-53.9 120.2-120.2 120.2h-215V606.9H668c16.6 0 30-13.4 30-30s-13.4-30-30-30H533.4v-74.3c0-40.8 33.2-74 74-74h65.4c16.6 0 30-13.4 30-30s-13.4-30-30-30h-65.4c-73.9 0-134 60.1-134 134v74.3h-94.5c-16.6 0-30 13.4-30 30s13.4 30 30 30h94.5v261.6H275.6c-66.3 0-120.2-53.9-120.2-120.2V275.6c0-66.3 53.9-120.2 120.2-120.2h472.7c66.3 0 120.2 53.9 120.2 120.2v472.8z" fill="#2c2c2c"></path></svg>
                         <span>Face book</span>
                       </a>
@@ -86,7 +86,7 @@
                       </a>
                     </li>
                     <li>
-                      <a class="flex" href="https://www.instagram.com/stonemachinery_dinosaw/">
+                      <a class="flex" href="https://www.instagram.com/dinosawstonemachinery">
                         <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="32" height="32" focusable="false" color="rgb(0, 0, 0)" style="user-select: none; display: inline-block; fill: rgb(0, 0, 0); color: rgb(0, 0, 0); flex-shrink: 0;"><g color="rgb(0, 0, 0)" weight="light"><path d="M128,82a46,46,0,1,0,46,46A46.06,46.06,0,0,0,128,82Zm0,80a34,34,0,1,1,34-34A34,34,0,0,1,128,162ZM176,26H80A54.06,54.06,0,0,0,26,80v96a54.06,54.06,0,0,0,54,54h96a54.06,54.06,0,0,0,54-54V80A54.06,54.06,0,0,0,176,26Zm42,150a42,42,0,0,1-42,42H80a42,42,0,0,1-42-42V80A42,42,0,0,1,80,38h96a42,42,0,0,1,42,42ZM190,76a10,10,0,1,1-10-10A10,10,0,0,1,190,76Z"></path></g></svg>
                         <span>Instagram</span>
                       </a>

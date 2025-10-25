@@ -32,13 +32,13 @@ const handleHead = (headData) => {
     // console.log('Product data received from component:', headData);
     
     // 设置页面 meta 标签
-    if (headData && (headData.meta_title || headData.h1_page_inner_title)) {
+    if (headData && (headData.meta_title || headData.title)) {
         useHead(() => ({
-            title: headData.meta_title || headData.h1_page_inner_title,
+            title: headData.meta_title || headData.title,
             meta: [
                 {
                     name: 'description',
-                    content: headData.meta_description || headData.product_overview || ''
+                    content: headData.meta_description || headData.article_guide || ''
                 }
             ]
         }));

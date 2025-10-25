@@ -696,7 +696,6 @@ const stopPoint = () => {
     // 媒体查询：当屏幕宽度小于1440px时
     @media (max-width: 1439px) {
       .dinosaw-head{
-        max-width:430px;
         width:100%;
          .dinosaw-head-bot {
           padding-top:20px;
