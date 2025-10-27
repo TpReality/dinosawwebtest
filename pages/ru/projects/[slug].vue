@@ -397,11 +397,11 @@ onMounted(() => {
 
 @media (max-width: 1024px) {
     .projects-banner {
-        min-height: 453px;
+        height: 453px;
     }
 
     .banner-background {
-        top: -20px;
+        top: -50px;
         height: 450px;
         .background-image{
             height:150%;
@@ -538,8 +538,8 @@ onMounted(() => {
 @media (max-width: 768px) {
 
     .banner-background {
-        top: -40px;
-        height: 450px;
+        top: -30px;
+        height: 360px;
     }
 
     .content-wrapper {

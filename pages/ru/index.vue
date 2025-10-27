@@ -1209,22 +1209,6 @@ watch(indexRes, (newPosts) => {
                 {
                     name: 'description',
                     content: data.meta_description
-                },
-                {
-                    name:'og:type',
-                    content: 'website'
-                },
-                {
-                    name:'og:title',
-                    content: data.meta_title
-                },
-                {
-                    name:'og:description',
-                    content: data.meta_description
-                },
-                {
-                    name:'og:image',
-                    content: 'https://honghaieim.obs.cn-east-3.myhuaweicloud.com…72HfFUczwHIXRGBR7M7Wy3EXxU.png'
                 }
             ],
             script: [
@@ -5096,7 +5080,7 @@ const scrollBlogCards = (direction) => {
 
             .partner-logo {
                 width: 120px;
-                // height: 56px;
+                height: 56px;
             }
         }
     }
@@ -5597,6 +5581,10 @@ const scrollBlogCards = (direction) => {
             .partners-header h2 {
                 margin-top: 50px;
                 font-size: 24px;
+            }
+
+            .partners-logos {
+                display: none;
             }
         }
 

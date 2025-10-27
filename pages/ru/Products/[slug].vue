@@ -94,36 +94,16 @@ const handleHead = (headData) => {
     // console.log('Product data received from component:', headData);
     
     // 设置页面 meta 标签
-    let useHeadData = {
-        title: headData.meta_title || headData.h1_page_inner_title,
-        meta: [
-            {
-                name: 'description',
-                content: headData.meta_description || headData.product_overview || ''
-            }
-        ]
-    }
-    if(!isSpecialMachine.value){
-        let list = [{
-            name:'og:type',
-            content: 'website'
-        },
-        {
-            name:'og:title',
-            content: headData.meta_title
-        },
-        {
-            name:'og:description',
-            content: headData.meta_description
-        },
-        {
-            name:'og:image',
-            content: headData.first_image_url
-        }]
-        useHeadData.meta.push(...list)
-    }
     if (headData && (headData.meta_title || headData.h1_page_inner_title)) {
-        useHead(() => (useHeadData));
+        useHead(() => ({
+            title: headData.meta_title || headData.h1_page_inner_title,
+            meta: [
+                {
+                    name: 'description',
+                    content: headData.meta_description || headData.product_overview || ''
+                }
+            ]
+        }));
     }
 }
 

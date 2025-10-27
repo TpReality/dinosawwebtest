@@ -148,17 +148,15 @@
                             </div>
 
                             <!-- More 按钮 -->
-                             <NuxtLink  v-if="item.url" :to="item.url" target="_blank">
-                                <div class="processing-cases-more-button">
-                                    
-                                    <div class="more-button-container">
-                                        <div class="more-button-wrapper">
+                            <div class="processing-cases-more-button" v-if="blogs.url">
+                                <div class="more-button-container">
+                                    <div class="more-button-wrapper">
+                                        <NuxtLink :to="blog.url" target="_blank">
                                             <span class="more-button-text">{{ blogs.more_text }}</span>
-                                        </div>
+                                        </NuxtLink>
                                     </div>
-                                    
                                 </div>
-                            </NuxtLink>
+                            </div>
                         </div>
                     </div>
                 </div>

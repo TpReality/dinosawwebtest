@@ -3,7 +3,7 @@
         <div class="projects-banner">
             <div class="banner-background">
                 <div class="banner-image">
-                    <NuxtImg src="https://framerusercontent.com/images/CfZQsuUNaR78HVx3Yprs0X082s.jpg"
+                    <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/CfZQsuUNaR78HVx3Yprs0X082s.jpg"
                         alt="Projects Banner Background" class="background-image" />
                 </div>
             </div>
@@ -2052,6 +2052,7 @@ watch(error, (newError) => {
 }
 
 .content-wrapper {
+    width:100%;
     max-width: 1376px;
     margin: 0 auto;
     display: flex;

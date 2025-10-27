@@ -70,7 +70,7 @@
               <div class="dinosaw-head-lm flex">
                 <div class="dinosaw-logo">
                     <a href="/" target="_blank" alt="dinosaw logo">
-                      <NuxtImg class="img" src="https://framerusercontent.com/images/Rgs09IZlnBALMtEN2nX5mwe26rw.webp?scale-down-to=512" />
+                      <NuxtImg class="img" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/Rgs09IZlnBALMtEN2nX5mwe26rw.webp?scale-down-to=512" />
                     </a>
                 </div>
                 <!-- 移动端菜单按钮 -->

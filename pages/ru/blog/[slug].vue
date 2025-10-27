@@ -25,47 +25,23 @@
 // 获取路由参数
 const route = useRoute()
 const slug = route.params.slug
-// 判断是否为 news-events 或 industry-news
-const isNewsOrEvents = computed(() => {
-  return slug === 'news-events' || slug === 'industry-news'
-})
+
 const { contentDetail, isLoaded } = useContentDetail()
 // // console.log('contentDetail', contentDetail)
 const handleHead = (headData) => {
-    console.log('Product data received from component:', headData);
-    let useHeadData = {
-        title: headData.meta_title || headData.title,
-        meta: [
-            {
-                name: 'description',
-                content: headData.meta_description || headData.article_guide
-            }
-        ]
-    }
+    // console.log('Product data received from component:', headData);
     
-    if(!isNewsOrEvents.value){
-       let list = [{
-            name:'og:type',
-            content: 'website'
-        },
-        {
-            name:'og:title',
-            content: headData.title
-        },
-        {
-            name:'og:description',
-            content: headData.article_guide
-        },
-        {
-            name:'og:image',
-            content: headData.first_image_url
-        }]
-        
-        useHeadData.meta.push(...list)
-    }
     // 设置页面 meta 标签
     if (headData && (headData.meta_title || headData.title)) {
-        useHead(() => (useHeadData));
+        useHead(() => ({
+            title: headData.meta_title || headData.title,
+            meta: [
+                {
+                    name: 'description',
+                    content: headData.meta_description || headData.article_guide || ''
+                }
+            ]
+        }));
     }
 }
 
@@ -75,7 +51,10 @@ const { menuItems, initializeMenuData } = useMenuData()
 // 初始化菜单数据
 await initializeMenuData()
 
-
+// 判断是否为 news-events 或 industry-news
+const isNewsOrEvents = computed(() => {
+  return slug === 'news-events' || slug === 'industry-news'
+})
 
 </script>
 

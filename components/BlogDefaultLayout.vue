@@ -67,7 +67,7 @@
             </h1>
             
             <div class="hero-meta is-pc">
-              <NuxtImg src="https://framerusercontent.com/images/kb04PIvrLwFZGpVkwv4cn7XR54.png" />
+              <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/kb04PIvrLwFZGpVkwv4cn7XR54.png" />
               <span class="author-name">{{ blogDetail.author }}</span>
               <span class="meta-separator">·</span>
               <span class="publish-date">{{ formatDateEN(blogDetail.date) }}</span>
@@ -85,7 +85,7 @@
               />
             </div>
             <div class="hero-meta is-mobile">
-              <NuxtImg src="https://framerusercontent.com/images/kb04PIvrLwFZGpVkwv4cn7XR54.png" />
+              <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/kb04PIvrLwFZGpVkwv4cn7XR54.png" />
               <span class="author-name">{{ blogDetail.author }}</span>
               <span class="meta-separator">·</span>
               <span class="publish-date">{{ formatDateEN(blogDetail.date) }}</span>
@@ -168,7 +168,7 @@
             <div class="chat-profile-section">
               <div class="profile-container">
                 <div class="profile-avatar">
-                  <NuxtImg src="https://framerusercontent.com/images/PZaASQwcgVKtL1LRgszQtSdlJU.png" />
+                  <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/PZaASQwcgVKtL1LRgszQtSdlJU.png" />
                 </div>
                 <div class="profile-info">
                   <p class="profile-name">{{ contentDetail.chat_online_dialog_body_title }}</p>
@@ -556,7 +556,7 @@ watch(nextblogRes, (newPosts) => {
     opacity:0.2;
     width:78px;
     height:66px;
-    background:url(https://framerusercontent.com/images/UkLUnElDYcVwnnrmvgIyRJDNjI.webp) no-repeat;
+    background:url(https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/UkLUnElDYcVwnnrmvgIyRJDNjI.webp) no-repeat;
     background-size:100% auto;
   }
 }
@@ -986,7 +986,7 @@ watch(nextblogRes, (newPosts) => {
 .chat-background {
   position: relative;
   height: 123px;
-  background-image: url('https://framerusercontent.com/images/CMFVUQaDK9K6lMd5ekiLM6Po.webp');
+  background-image: url('https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/CMFVUQaDK9K6lMd5ekiLM6Po.webp');
   background-size: cover;
   background-position: center;
   display: flex;

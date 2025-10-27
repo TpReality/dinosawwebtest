@@ -73,24 +73,24 @@
                                 <div class="companies-logos">
                                     <div class="logo-row">
                                         <div class="company-logo logo-1">
-                                            <NuxtImg src="https://framerusercontent.com/images/9VBNkEzTsVqAIvrdaB9TM98Mm4.png" />
+                                            <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/9VBNkEzTsVqAIvrdaB9TM98Mm4.png" />
                                         </div>
                                         <div class="company-logo logo-2">
-                                            <NuxtImg src="https://framerusercontent.com/images/Dn8kbOm6roEzSQcWFSOWeQDoo.jpg" />
+                                            <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/Dn8kbOm6roEzSQcWFSOWeQDoo.jpg" />
                                         </div>
                                     </div>
                                     <div class="logo-row">
                                         <div class="company-logo logo-3">
-                                            <NuxtImg src="https://framerusercontent.com/images/9gfhjO5p4BndZRR1S6iyCOd0.png" />
+                                            <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/9gfhjO5p4BndZRR1S6iyCOd0.png" />
                                         </div>
                                         <div class="company-logo logo-4">
-                                            <NuxtImg src="https://framerusercontent.com/images/SRkkRttgodeVP1UDwBpzx3CXM.png" />
+                                            <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/SRkkRttgodeVP1UDwBpzx3CXM.png" />
                                         </div>
                                         <div class="company-logo logo-5">
-                                            <NuxtImg src="https://framerusercontent.com/images/f6JbMVOW0aC3lmb8RmX75F0hsjM.jpg" />
+                                            <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/f6JbMVOW0aC3lmb8RmX75F0hsjM.jpg" />
                                         </div>
                                         <div class="company-logo logo-6">
-                                            <NuxtImg src="https://framerusercontent.com/images/JhGd8K0tLprFzPwik4sXB8ICkrQ.jpg" />
+                                            <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/JhGd8K0tLprFzPwik4sXB8ICkrQ.jpg" />
                                         </div>
                                     </div>
                                 </div>
@@ -580,8 +580,9 @@ const showMessage = (type, message) => {
         align-items: flex-start;
 
         @media (max-width: 1440px) {
+            flex-direction: column;
             &.reverse{
-flex-direction: column-reverse;
+                flex-direction: column-reverse;
             }
             
             gap: 60px;
@@ -809,7 +810,7 @@ flex-direction: column-reverse;
                 top:0;
                 width:100%;
                 height:100%;
-                background:url("https://framerusercontent.com/images/SYeSFS3u4PFwsxPOJexfUKMfE.webp") no-repeat left top;
+                background:url("https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/SYeSFS3u4PFwsxPOJexfUKMfE.webp") no-repeat left top;
                 background-size:100% 100%;
                 z-index:1;
             }
