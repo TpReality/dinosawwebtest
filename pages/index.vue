@@ -1224,7 +1224,7 @@ watch(indexRes, (newPosts) => {
                 },
                 {
                     name:'og:image',
-                    content: 'https://honghaieim.obs.cn-east-3.myhuaweicloud.com…72HfFUczwHIXRGBR7M7Wy3EXxU.png'
+                    content: 'https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/72HfFUczwHIXRGBR7M7Wy3EXxU.png'
                 }
             ],
             script: [
