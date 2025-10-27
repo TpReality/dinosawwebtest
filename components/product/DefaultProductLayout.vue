@@ -2443,6 +2443,9 @@ onUnmounted(() => {
     /* Materials section mobile */
     .compatible-materials-section {
         padding: 60px 0;
+        .container {
+            padding: 20px 0;
+        }
     }
 
     .section-title {
@@ -2472,7 +2475,7 @@ onUnmounted(() => {
     }
 
     .material-card {
-        width:280px;
+        width:260px;
         padding: 15px 8px 10px;
         gap: 12px;
         iframe{
@@ -2594,7 +2597,7 @@ onUnmounted(() => {
     }
 
     .card-content {
-        padding: 0 12px 15px;
+        padding: 0 6px 15px;
         gap: 6px;
     }
 
