@@ -1249,7 +1249,7 @@ watch(indexRes, (newPosts) => {
                                 "image": [
                                     "https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/Rgs09IZlnBALMtEN2nX5mwe26rw.webp?scale-down-to=512"
                                 ],
-                                "email": "info@stylecnc.com",
+                                "email": "gma@dinosawmachine.com",
                                 "telePhone": "+86-19859013937",
                                 "url": "https://www.dinosawmachine.com",
                                 "paymentAccepted": ["cash", "check", "credit card", "invoice", "paypal"],
@@ -1263,10 +1263,10 @@ watch(indexRes, (newPosts) => {
                                     }
                                 ],
                                 "sameAs": [
-                                    "https://www.facebook.com/kylie.hong.896784/",
+                                    "https://www.facebook.com/kylie.hong.896784",
                                     "https://www.pinterest.com/dinosawmachine/",
                                     "https://www.instagram.com/dinosawstonemachinery/",
-                                    "https://www.youtube.com/channel/UCQO1ulyaGxbhk4X0ELy8r5g"
+                                    "https://www.youtube.com/@DinosawMachine"
                                 ],
                                 "geo": {
                                     "@type": "GeoCoordinates",
@@ -1279,8 +1279,8 @@ watch(indexRes, (newPosts) => {
                                 "@type": "Organization",
                                 "name": "DINOSAW",
                                 "url": "https://www.dinosawmachine.com/",
-                                "logo": "https://www.dinosawmachine.com//stylecnc-logo.png",
-                                "description": "Jinan Style Machinery Co., Ltd. (STYLECNC) is a world-leading CNC machine manufacturer, offering CNC routers, milling machines, laser machines, plasma cutters, lathes, edge banders, digital cutters."
+                                "logo": "https://honghaieim.obs.cn-east-3.myhuaweicloud.com/Dinosaw_logo_en_300x300_bcaed6a8f2.webp",
+                                "description": "Reliable stone machinery engineered for performance. DINOSAW provides a complete range of solutions, from CNC cutting and polishing machines to heavy-duty quarry equipment. Increase your productivity and achieve the perfect finish."
                             },
                             {
                                 "@type": "WebSite",

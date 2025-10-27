@@ -1649,7 +1649,7 @@ onUnmounted(() => {
 /* Product Description */
 .product-description {
     position: relative;
-    margin-bottom: 32px;
+    // margin-bottom: 32px;
 }
 
 .description-content {

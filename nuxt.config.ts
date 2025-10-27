@@ -4,7 +4,9 @@ import { $fetch } from 'ofetch';
 export default defineNuxtConfig({
   runtimeConfig: {
     public: {
-      gtmId: 'GTM-P9KQZ4XV'  // 改成你的实际 GTM ID
+      gtmId: 'GTM-P9KQZ4XV',  // 改成你的实际 GTM ID
+      apiBase: 'https://cms.stoneboss.vip/api',
+      apiToken: '8f80d6094edcd486411ddc90d4fa4f18ed87f9fe9edae7fe7cb423e3ce261b23ce76afdedfc3cf2e3689bd1b03e9f504cbded28e7645eed305db44f61e914053e9fb4b4999d30c743b67fe2a052bff812b6165825f1502f22f991ff41a44536c67a88f99ae0f525ee710ee010834ffddaa1501dc60c7da7dac18060f46612708'
     }
   },
   // 开发模式优化
@@ -91,6 +93,7 @@ export default defineNuxtConfig({
     '/projects': { prerender: true }, // projects预渲染
     '/support': { prerender: true }, // support预渲染'
     '/blog': { prerender: true }, // blog预渲染
+    '/sitemap.xml': { prerender: true },
     '/About-us': { prerender: true }, // About-us预渲染
     '/video': { prerender: true }, // video预渲染
     '/contact': { prerender: true }, // contact-us预渲染
