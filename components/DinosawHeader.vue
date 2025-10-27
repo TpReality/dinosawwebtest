@@ -544,6 +544,7 @@ const stopPoint = () => {
           &.mobile-menu-open {
             display: block;
             max-height: 550px;
+            overflow-y: auto;
           }
           
           .menu-item {

@@ -57,7 +57,7 @@ export default defineNuxtConfig({
         '/Products/wire-saw-machine',
         '/Products/diamond-tools',
         '/Products/circle-saw-machine',
-        '/Products/sintered-continuous-rim-blade',
+        '/Products/drilling-and-engraving-machine',
         '/Products/mining-and-quarry-machine',
         '/Products/grinding-and-polishing-machine',
         '/Products/profiling-machine',

@@ -302,11 +302,13 @@
                                         <span class="title-main">{{productDetail.application_scenario_title_1}}</span>
                                     </h3>
                                     <div class="case-description" v-html="productDetail.application_scenario_description_1"></div>
+                                    <NuxtLink to="https://api.whatsapp.com/send?phone=8619859013937&Hi Lizzy,I want to know more detail information" target="_blank"> 
                                     <div class="case-action">
                                         <button class="case-btn">
                                             <span>{{productDetail.button_text_1}}</span>
                                         </button>
                                     </div>
+                                    </NuxtLink>
                                     <div class="case-image">
                                         <NuxtImg :src="productDetail.application_scenario_background_1_url" />
                                     </div>
@@ -323,11 +325,14 @@
                                         <span class="title-main">{{productDetail.application_scenario_title_2}}</span>
                                     </h3>
                                     <div class="case-description" v-html="productDetail.application_scenario_description_2"></div>
-                                    <div class="case-action">
-                                        <button class="case-btn">
-                                            <span>{{productDetail.button_text_2}}</span>
-                                        </button>
-                                    </div>
+                                    <NuxtLink to="https://api.whatsapp.com/send?phone=8619859013937&Hi Lizzy,I want to know more detail information" target="_blank"> 
+                                        <div class="case-action">
+                                            <button class="case-btn">
+                                                <span>{{productDetail.button_text_2}}</span>
+                                            </button>
+                                        </div>
+                                    </NuxtLink>
+                                    
                                     <div class="case-image">
                                         <NuxtImg :src="productDetail.application_scenario_background_2_url" />
                                     </div>
@@ -344,11 +349,13 @@
                                         <span class="title-main">{{productDetail.application_scenario_title_3}}</span>
                                     </h3>
                                     <div class="case-description" v-html="productDetail.application_scenario_description_3"></div>
+                                    <NuxtLink to="https://api.whatsapp.com/send?phone=8619859013937&Hi Lizzy,I want to know more detail information" target="_blank"> 
                                     <div class="case-action">
                                         <button class="case-btn">
                                             <span>{{productDetail.button_text_3}}</span>
                                         </button>
                                     </div>
+                                    </NuxtLink>
                                     <div class="case-image">
                                         <NuxtImg :src="productDetail.application_scenario_background_3_url" />
                                     </div>

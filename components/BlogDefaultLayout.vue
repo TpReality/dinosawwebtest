@@ -107,7 +107,9 @@
           <div class="article-intro">
             <p class="intro-text">{{ blogDetail.article_guide }}</p>
           </div>
-
+          <div class="article-video" v-if="blogDetail.youtube_link">
+              <iframe width="100%" :src="'https://www.youtube.com/embed/'+blogDetail.youtube_link+'?iv_load_policy=3&rel=0&modestbranding=1&playsinline=1&autoplay=1'"  frameborder="0" allowfullscreen></iframe>
+          </div>
           <!-- 展会详情 -->
           <div class="blog-article-details" v-html="blogDetail.content"></div>
         </div>
@@ -269,6 +271,22 @@ const props = defineProps({
   }
 })
 
+const getLastPathSegment = (url)=>{
+  if (!url) return ''
+  try {
+    const u = new URL(url.trim())
+    const clean = u.pathname.replace(/^\/+|\/+$/g, '')
+    if (!clean) return ''
+    const parts = clean.split('/')
+    return parts[parts.length - 1]
+  } catch {
+    const s = String(url).trim().replace(/[#?].*$/, '').replace(/^\/+|\/+$/g, '')
+    if (!s) return ''
+    const parts = s.split('/')
+    return parts[parts.length - 1]
+  }
+}
+
 let blogDetail = ref({})
  const { data: blogDetailRes, pending, error } = await useApi('/blogs?filters[slug][$eq]='+props.slug)
 // // console.log('/blogs?filters[slug][$eq]='+props.slug)
@@ -282,7 +300,10 @@ watch(blogDetailRes, (newPosts) => {
 
       // console.log('blog',newPosts)
         let data = newPosts.data[0]
-
+        if(data.youtube_link){
+          data.youtube_link = getLastPathSegment(data.youtube_link)
+        }
+        
         blogDetail.value = data
         // 通知父组件数据已加载
         emit('headdata-loaded', data);
@@ -291,8 +312,6 @@ watch(blogDetailRes, (newPosts) => {
   
 
 }, { immediate: true })
-
-
 
 const blogList = ref([])
 const { data: blogListRes, blogListPending, blogListError } = await useApi('/blogs?pagination[page]=1&pagination[pageSize]=10&sort[0]=date:desc')
@@ -539,6 +558,15 @@ watch(nextblogRes, (newPosts) => {
 .main-content {
   background: white;
   padding: 0;
+}
+
+/* youtube 容器 */
+.article-video{
+  width: 100%;
+  iframe{
+    width: 100%;
+    height:450px;
+  }
 }
 
 /* 文章介绍 */

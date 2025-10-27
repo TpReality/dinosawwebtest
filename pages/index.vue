@@ -4800,6 +4800,7 @@ const scrollBlogCards = (direction) => {
 
         .partners-logos {
             width: 100%;
+            height:auto;
             max-width: 800px;
         }
     }
