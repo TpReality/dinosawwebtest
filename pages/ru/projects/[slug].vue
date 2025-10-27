@@ -397,7 +397,7 @@ onMounted(() => {
 
 @media (max-width: 1024px) {
     .projects-banner {
-        height: 453px;
+        min-height: 453px;
     }
 
     .banner-background {

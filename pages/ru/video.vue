@@ -347,7 +347,7 @@ watch(vidoeRes, async (newPosts) => {
 
 @media (max-width: 1024px) {
     .projects-banner {
-        height: 400px;
+        min-height: 400px;
     }
 
     .banner-background {

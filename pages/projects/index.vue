@@ -233,7 +233,7 @@ onMounted(() => {
 /* 响应式设计 */
 @media (max-width: 1440px) {
     .projects-banner {
-        height: 453px;
+        min-height: 453px;
     }
 
     .banner-background {
