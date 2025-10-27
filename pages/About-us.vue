@@ -638,20 +638,24 @@
                 </div>
                 <!-- Articles Grid -->
                 <div class="articles-grid">
-                    <div class="article-card" v-for="(blog, index) in aboutUs.similar_ideas_to_stimulate_your_creativity_blogs" :key="index">
-                        <div class="article-content">
-                            <div class="article-image">
-                                <div class="article-img">
-                                    <NuxtImg :src="blog.first_image_url" />
+                    <template v-for="(blog, index) in aboutUs.similar_ideas_to_stimulate_your_creativity_blogs" :key="index">
+                        <NuxtLink :to="'/blog/' + blog.slug" target="_blank" >
+                            <div class="article-card" >
+                                <div class="article-content">
+                                    <div class="article-image">
+                                        <div class="article-img">
+                                            <NuxtImg :src="blog.first_image_url" />
+                                        </div>
+                                    </div>
+                                    <div class="article-text">
+                                        <p class="article-title">
+                                            {{ blog.title }}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="article-text">
-                                <p class="article-title">
-                                    {{ blog.title }}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                        </NuxtLink>
+                    </template>
                 </div>
             </div>
         </div>

@@ -83,6 +83,7 @@ watch(topProductDetailRes, (newPosts) => {
                 return sortA - sortB
             })
         }
+        data = data.filter(item => item.menu_select_down_panel_is_show)
         
         topProduct.value = data
     }

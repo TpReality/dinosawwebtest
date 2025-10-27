@@ -1823,6 +1823,14 @@ onMounted(() => {
     }
 }
 
+@media (min-width: 1441px){
+    .processing-cases-list {
+        .processing-case-item-link:nth-child(4) {
+            display: none;
+        }
+    }
+}
+
 @media (max-width: 1440px) {
     .processing-cases-section {
         padding: 20px;

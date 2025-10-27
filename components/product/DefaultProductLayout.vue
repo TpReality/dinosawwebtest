@@ -466,7 +466,7 @@
                 </div>
 
                 <div class="benefits-features">
-                    <div class="feature-card">
+                    <div class="feature-card" :class="featIndex == 1?'current':''" @click="featSlideChange(1)">
                         <div class="feature-content">
                             <div class="feature-header">
                                 <h3>{{ productDetail.core_strengths_a }}</h3>
@@ -477,7 +477,7 @@
                         </div>
                     </div>
 
-                    <div class="feature-card">
+                    <div class="feature-card" :class="featIndex == 2?'current':''" @click="featSlideChange(2)">
                         <div class="feature-content">
                             <div class="feature-header">
                                 <h3>{{ productDetail.core_strengths_b }}</h3>
@@ -488,7 +488,7 @@
                         </div>
                     </div>
 
-                    <div class="feature-card">
+                    <div class="feature-card" :class="featIndex == 3?'current':''" @click="featSlideChange(3)">
                         <div class="feature-content">
                             <div class="feature-header">
                                 <h3>{{ productDetail.core_strengths_c }}</h3>
@@ -1053,7 +1053,7 @@ watch(productDetail, async (pd) => {
 })
 
 
-
+const featIndex = ref(1)
 
 const nextBenefitsSlide = () => {
     if (currentBenefitsSlide.value < benefitsSlides.value.length - 1) {
@@ -1069,6 +1069,14 @@ const prevBenefitsSlide = () => {
     }
 }
 
+const featSlideChange = (index) => {
+    const container = benefitsSlideshowTrack.value.parentElement
+    const containerWidth = container ? container.offsetWidth : 400
+    featIndex.value = index
+    const translateX = -(index-1) * containerWidth
+    benefitsSlideshowTrack.value.style.transform = `translateX(${translateX}px)`
+}
+
 const updateBenefitsSlideshowPosition = () => {
     if (benefitsSlideshowTrack.value) {
         // 获取实际容器宽度
@@ -1080,11 +1088,11 @@ const updateBenefitsSlideshowPosition = () => {
 
         // 响应式宽度设置
         if (window.innerWidth <= 480) {
-            actualSlideWidth = containerWidth - 20 // 小屏幕减去padding
+            actualSlideWidth = containerWidth // 小屏幕减去padding
         } else if (window.innerWidth <= 768) {
-            actualSlideWidth = containerWidth - 30
+            actualSlideWidth = containerWidth
         } else if (window.innerWidth <= 1200) {
-            actualSlideWidth = containerWidth - 40
+            actualSlideWidth = containerWidth
         } else {
             actualSlideWidth = containerWidth
         }
@@ -3457,13 +3465,15 @@ onUnmounted(() => {
     padding: 12px 0;
     cursor: pointer;
 
-    &:hover,
-    &:first-child {
+
+    &.current,
+    &:hover{
         .feature-header {
             margin-bottom: 16px;
             background-image: linear-gradient(90deg, var(--token-270e660b-3cdc-45ff-b4c0-3aba41912762, rgb(71, 82, 230)) 28.802411968247505%, rgb(62, 128, 238) 50.41794813486723%, var(--token-f3e71d39-60d3-470b-86c0-689dedddff26, rgb(36, 196, 255)) 100%);
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            transform:scale(1.01);
         }
     }
 }
@@ -4831,6 +4841,7 @@ onUnmounted(() => {
     }
 
     .solutions-track {
+        align-items:flex-start;
         padding: 0 16px;
         /* 恢复内边距 */
         gap: 16px;

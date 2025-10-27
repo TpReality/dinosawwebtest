@@ -77,9 +77,9 @@
         <!-- Processing Cases 部分 - 对应Figma 19:13136 -->
         <div class="processing-cases-section" v-for="(item, index) in processingCase" :key="index">
             <!-- 背景图片 -->
-            <div class="processing-cases-background" v-if="index != 1">
+            <!-- <div class="processing-cases-background" v-if="index != 1">
                 <div class="background-image"></div>
-            </div>
+            </div> -->
 
             <!-- 标题部分 -->
             <div class="processing-cases-title-section">
@@ -144,13 +144,13 @@
 
                         <!-- More 按钮 -->
                         <div class="processing-cases-more-button" v-if="item.url">
+                            <NuxtLink :to="item.url" target="_blank">
                             <div class="more-button-container">
                                 <div class="more-button-wrapper">
-                                    <NuxtLink :to="item.url">
                                     <span class="more-button-text">{{projectDetail.more_text}}</span>
-                                    </NuxtLink>
                                 </div>
                             </div>
+                            </NuxtLink>
                         </div>
                     </div>
                 </div>

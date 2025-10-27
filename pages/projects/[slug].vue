@@ -16,7 +16,7 @@
                             <div class="breadcrumb-link">
                                 <div class="breadcrumb-text">
                                     <div class="text-container">
-                                        <span class="breadcrumb-home"><NuxtLink to="/">{{ projects.home_text }}</NuxtLink></span>
+                                        <span class="breadcrumb-home"><NuxtLink to="/" target="_blank">{{ projects.home_text }}</NuxtLink></span>
                                     </div>
                                 </div>
                                 <div class="breadcrumb-text">
@@ -29,7 +29,7 @@
                                     <div class="dropdown-link">
                                         <div class="dropdown-container">
                                             <div class="dropdown-text-container">
-                                                <span class="breadcrumb-products"><NuxtLink to="/projects">{{ projects.products_btn_text }}</NuxtLink></span>
+                                                <span class="breadcrumb-products"><NuxtLink to="/projects" target="_blank">{{ projects.products_btn_text }}</NuxtLink></span>
                                             </div>
                                         </div>
                                         <div class="dropdown-icon-container">

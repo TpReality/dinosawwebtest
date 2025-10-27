@@ -224,7 +224,7 @@
         
         <div class="other-blogs-navigation">
           <!-- Previous Blogs 按钮 -->
-          <NuxtLink class="blog-nav-link previous-link">
+          <NuxtLink class="blog-nav-link previous-link" :to="preblog&&preblog.id?'/blog/'+preblog.slug:'/'" target="_blank">
             <div class="nav-icon-container">
               <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
                 <path d="M20 24L12 16L20 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -236,7 +236,7 @@
           </NuxtLink>
 
           <!-- Next Blogs 按钮 -->
-          <NuxtLink class="blog-nav-link next-link">
+          <NuxtLink class="blog-nav-link next-link" :to="nextblog&&nextblog.id?'/blog/'+nextblog.slug:'/'" target="_blank">
             <div class="nav-text-container">
               <p>{{ contentDetail.next_blogs_text }}</p>
             </div>
@@ -316,7 +316,7 @@ watch(productListRes, (newPosts) => {
     if (newPosts) {
         // console.log('plist',newPosts)
         let data = newPosts.data
-        
+        data = data.sort((a, b) => a.sort - b.sort)
         productList.value = data
     }
 
@@ -331,6 +331,32 @@ watch(menuItemsRes, (newPosts) => {
         menuItems.value = newPosts.data
     }
 }, { immediate: true })
+
+
+const preblog = ref({})
+const { data: preblogRes, preblogPending, preblogError } = await useApi('/blogs?pagination[page]=1&pagination[pageSize]=1&sort[0]=id:desc&filters[id][$lt]='+blogDetail.value.id)
+
+watch(preblogRes, (newPosts) => {
+    if (newPosts) {
+        // console.log('prelist',newPosts)
+        let data = newPosts.data[0]
+        preblog.value = data
+    }
+
+}, { immediate: true })
+
+const nextblog = ref({})
+const { data: nextblogRes, nextblogPending, nextblogError } = await useApi('/blogs?pagination[page]=1&pagination[pageSize]=1&sort[0]=id:asc&filters[id][$gt]='+blogDetail.value.id)
+
+watch(nextblogRes, (newPosts) => {
+    if (newPosts) {
+        // console.log('nextlist',newPosts)
+        let data = newPosts.data[0]
+        nextblog.value = data
+    }
+
+}, { immediate: true })
+
 
 </script>
 

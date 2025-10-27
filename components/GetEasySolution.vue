@@ -207,7 +207,7 @@
             </section>
         <section class="get-solution-section" v-if="getEasySolutionType == 2">
                 <div class="container">
-                    <div class="solution-content">
+                    <div class="solution-content reverse">
                         <!-- Left Side - Product Image -->
 
                         <!-- Right Side - Form and Contact Info -->
@@ -580,7 +580,10 @@ const showMessage = (type, message) => {
         align-items: flex-start;
 
         @media (max-width: 1440px) {
-            flex-direction: column-reverse;
+            &.reverse{
+flex-direction: column-reverse;
+            }
+            
             gap: 60px;
         }
     }
