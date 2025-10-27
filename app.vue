@@ -61,6 +61,7 @@ if (enableClarity) {
 // 全站通用 Meta（Yandex、Bing、Robots）
 useHead({
   meta: [
+    { name: 'viewport', content: 'width=device-width, initial-scale=1, minimum-scale=1.0' },
     { name: 'yandex-verification', content: '88b18b97270c4899' },
     { name: 'msvalidate.01', content: '14B67632D3503492BCE4B4C174F71E8F' },
     { name: 'robots', content: 'index, follow' }

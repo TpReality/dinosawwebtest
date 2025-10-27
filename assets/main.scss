@@ -991,6 +991,12 @@ figure {
     .case-overlay-image {
         height: 234px;
     }
+
+    .material-card {
+        iframe{
+            width:100%;
+        }
+    }
 }
 .default-product-layout{
     .card-content{
@@ -1022,6 +1028,7 @@ figure {
     }
     img{
         margin-top:30px;
+        height: auto;
     }
 }
 /* Dynamic Product Section */

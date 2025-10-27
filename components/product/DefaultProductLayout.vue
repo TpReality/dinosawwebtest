@@ -2472,8 +2472,12 @@ onUnmounted(() => {
     }
 
     .material-card {
+        width:280px;
         padding: 15px 8px 10px;
         gap: 12px;
+        iframe{
+            width:100%;
+        }
     }
 
     .card-title {
