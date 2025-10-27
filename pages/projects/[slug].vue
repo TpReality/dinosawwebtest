@@ -171,15 +171,17 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="processing-cases-more-button" v-if="item.url">
-                            <div class="more-button-container">
-                                <div class="more-button-wrapper">
-                                    <NuxtLink :to="item.url" target="_blank" class="more-button"> 
-                                        <span class="more-button-text">{{index == 0? projects.load_more_text:projects.more_text}}</span>
-                                    </NuxtLink>
+                        <NuxtLink :to="item.url" target="_blank" class="more-button" v-if="item.url"> 
+                            <div class="processing-cases-more-button">
+                                <div class="more-button-container">
+                                    <div class="more-button-wrapper">
+                                        
+                                            <span class="more-button-text">{{index == 0? projects.load_more_text:projects.more_text}}</span>
+                                        
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </NuxtLink>
                     </div>
                 </div>
             </div>

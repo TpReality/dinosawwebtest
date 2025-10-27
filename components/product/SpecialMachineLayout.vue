@@ -648,13 +648,15 @@
                         </div>
 
                         <!-- More 按钮 -->
-                        <div class="processing-cases-more-button">
-                            <div class="more-button-container">
-                                <div class="more-button-wrapper">
-                                    <span class="more-button-text">{{productDetail.more_text  }}</span>
+                        <NuxtLink :to="item.moreUrl" target="_blank">
+                            <div class="processing-cases-more-button">
+                                <div class="more-button-container">
+                                    <div class="more-button-wrapper">
+                                        <span class="more-button-text">{{productDetail.more_text  }}</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </NuxtLink>
                     </div>
                 </div>
             </div>
@@ -853,19 +855,22 @@ watch(productDetailRes, (newPosts) => {
                         id: 1, 
                         title: productDetail.value.wire_saw_machine_customer_cases_title, 
                         subTitle: productDetail.value.wire_saw_machine_customer_cases_subtitle, 
-                        blogs: formatArrayDatesShort(productDetail.value.wire_saw_machine_customer_cases_blogs)
+                        blogs: formatArrayDatesShort(productDetail.value.wire_saw_machine_customer_cases_blogs),
+                        moreUrl:"/projects"
                     },
                     { 
                         id: 2, 
                         title: productDetail.value.wire_saw_operation_videos_title, 
                         subTitle: productDetail.value.wire_saw_operation_videos_subtitle, 
-                        blogs: formatArrayDatesShort(productDetail.value.wire_saw_operation_videos_blogs)
+                        blogs: formatArrayDatesShort(productDetail.value.wire_saw_operation_videos_blogs),
+                        moreUrl:"/video"
                     },
                     { 
                         id: 3, 
                         title: productDetail.value.wire_saw_technology_news_title, 
                         subTitle: productDetail.value.wire_saw_technology_news_subtitle, 
-                        blogs: formatArrayDatesShort(productDetail.value.wire_saw_technology_news_blogs)
+                        blogs: formatArrayDatesShort(productDetail.value.wire_saw_technology_news_blogs),
+                        moreUrl:"/blog/industry-news"
                     }
                 ]
             break;
@@ -920,19 +925,22 @@ watch(productDetailRes, (newPosts) => {
                         id: 1, 
                         title: productDetail.value.stone_cutting_saw_success_stories_title, 
                         subTitle: productDetail.value.stone_cutting_saw_success_stories_subtitle, 
-                        blogs: formatArrayDatesShort(productDetail.value.stone_cutting_saw_success_stories_blogs)
+                        blogs: formatArrayDatesShort(productDetail.value.stone_cutting_saw_success_stories_blogs),
+                        moreUrl:"/projects"
                     },
                     { 
                         id: 2, 
                         title: productDetail.value.stone_cutting_machine_operation_guide_title, 
                         subTitle: productDetail.value.stone_cutting_machine_operation_guide_subtitle, 
-                        blogs: formatArrayDatesShort(productDetail.value.stone_cutting_machine_operation_guide_blogs)
+                        blogs: formatArrayDatesShort(productDetail.value.stone_cutting_machine_operation_guide_blogs),
+                        moreUrl:"/video"
                     },
                     { 
                         id: 3, 
                         title: productDetail.value.stone_cutting_machine_industry_title, 
                         subTitle: productDetail.value.stone_cutting_machine_industry_subtitle, 
-                        blogs: formatArrayDatesShort(productDetail.value.stone_cutting_machine_Industry_news_blogs)
+                        blogs: formatArrayDatesShort(productDetail.value.stone_cutting_machine_Industry_news_blogs),
+                        moreUrl:"/blog/industry-news"
                     }
                 ]
             break;
@@ -1022,19 +1030,22 @@ watch(productDetailRes, (newPosts) => {
                         id: 1, 
                         title: productDetail.value.diamond_tools_performance_cases_title, 
                         subTitle: productDetail.value.diamond_tools_performance_cases_subtitle, 
-                        blogs: formatArrayDatesShort(productDetail.value.diamond_tools_performance_cases_blogs)
+                        blogs: formatArrayDatesShort(productDetail.value.diamond_tools_performance_cases_blogs),
+                        moreUrl:"/projects"
                     },
                     { 
                         id: 2, 
                         title: productDetail.value.diamond_tools_usage_guide_title, 
                         subTitle: productDetail.value.diamond_tools_usage_guide_subtitle, 
-                        blogs: formatArrayDatesShort(productDetail.value.diamond_tools_usage_guide_blogs)
+                        blogs: formatArrayDatesShort(productDetail.value.diamond_tools_usage_guide_blogs),
+                        moreUrl:"/video"
                     },
                     { 
                         id: 3, 
                         title: productDetail.value.diamond_tools_technology_news_title, 
                         subTitle: productDetail.value.diamond_tools_technology_news_subtitle, 
-                        blogs: formatArrayDatesShort(productDetail.value.diamond_tools_technology_news_blogs)
+                        blogs: formatArrayDatesShort(productDetail.value.diamond_tools_technology_news_blogs),
+                        moreUrl:"/blog/industry-news"
                     }
                 ]
             break;
@@ -1068,19 +1079,22 @@ watch(productDetailRes, (newPosts) => {
                         id: 1, 
                         title: productDetail.value.quarry_equipment_success_stories_title, 
                         subTitle: productDetail.value.quarry_equipment_success_stories_subtitle, 
-                        blogs: formatArrayDatesShort(productDetail.value.quarrying_equipment_success_stories_blogs)
+                        blogs: formatArrayDatesShort(productDetail.value.quarrying_equipment_success_stories_blogs),
+                        moreUrl:"/projects"
                     },
                     { 
                         id: 2, 
                         title: productDetail.value.quarry_equipment_Train_videosn_title, 
                         subTitle: productDetail.value.quarry_equipment_Train_videosn_subtitle, 
-                        blogs: formatArrayDatesShort(productDetail.value.quarrying_equipment_training_videos_blogs)
+                        blogs: formatArrayDatesShort(productDetail.value.quarrying_equipment_training_videos_blogs),
+                        moreUrl:"/video"
                     },
                     { 
                         id: 3, 
                         title: productDetail.value.Quarry_industry_news_title, 
                         subTitle: productDetail.value.Quarry_industry_news_subtitle, 
-                        blogs: formatArrayDatesShort(productDetail.value.quarrying_industry_news_blogs)
+                        blogs: formatArrayDatesShort(productDetail.value.quarrying_industry_news_blogs),
+                        moreUrl:"/blog/industry-news"
                     }
                 ]
             break;
@@ -1125,19 +1139,22 @@ watch(productDetailRes, (newPosts) => {
                         id: 1, 
                         title: productDetail.value.engraving_cases_title, 
                         subTitle: productDetail.value.engraving_cases_subtitle, 
-                        blogs: formatArrayDatesShort(productDetail.value.drilling_engraving_cases_blogs)
+                        blogs: formatArrayDatesShort(productDetail.value.drilling_engraving_cases_blogs),
+                        moreUrl:"/projects"
                     },
                     { 
                         id: 2, 
                         title: productDetail.value.engraving_machine_tutorials_title, 
                         subTitle: productDetail.value.engraving_machine_tutorials_subtitle, 
-                        blogs: formatArrayDatesShort(productDetail.value.drilling_engraving_machine_tutorials_blogs)
+                        blogs: formatArrayDatesShort(productDetail.value.drilling_engraving_machine_tutorials_blogs),
+                        moreUrl:"/video"
                     },
                     { 
                         id: 3, 
                         title: productDetail.value.engraving_technology_news_title, 
                         subTitle: productDetail.value.engraving_technology_news_subtitle, 
-                        blogs: formatArrayDatesShort(productDetail.value.drilling_engraving_technology_news_blogs)
+                        blogs: formatArrayDatesShort(productDetail.value.drilling_engraving_technology_news_blogs),
+                        moreUrl:"/blog/industry-news"
                     }
                 ]
             break;
@@ -1182,19 +1199,22 @@ watch(productDetailRes, (newPosts) => {
                         id: 1, 
                         title: productDetail.value.polishing_machine_success_cases_title, 
                         subTitle: productDetail.value.polishing_machine_success_cases_subtitle, 
-                        blogs: formatArrayDatesShort(productDetail.value.polishing_machine_success_cases_blogs)
+                        blogs: formatArrayDatesShort(productDetail.value.polishing_machine_success_cases_blogs),
+                        moreUrl:"/projects"
                     },
                     { 
                         id: 2, 
                         title: productDetail.value.polishing_video_training_title, 
                         subTitle: productDetail.value.polishing_video_training_subtitle, 
-                        blogs: formatArrayDatesShort(productDetail.value.stone_polishing_video_training_blogs)
+                        blogs: formatArrayDatesShort(productDetail.value.stone_polishing_video_training_blogs),
+                        moreUrl:"/video"
                     },
                     { 
                         id: 3, 
                         title: productDetail.value.polishing_technology_news_title, 
                         subTitle: productDetail.value.polishing_technology_news_subtitle, 
-                        blogs: formatArrayDatesShort(productDetail.value.polishing_technology_news_blogs)
+                        blogs: formatArrayDatesShort(productDetail.value.polishing_technology_news_blogs),
+                        moreUrl:"/blog/industry-news"
                     }
                 ]
             break;
@@ -1227,19 +1247,22 @@ watch(productDetailRes, (newPosts) => {
                         id: 1, 
                         title: productDetail.value.profil_machine_project_cases_title, 
                         subTitle: productDetail.value.profil_machine_project_cases_subtitle, 
-                        blogs: formatArrayDatesShort(productDetail.value.profiling_machine_project_cases_blogs)
+                        blogs: formatArrayDatesShort(productDetail.value.profiling_machine_project_cases_blogs),
+                        moreUrl:"/projects"
                     },
                     { 
                         id: 2, 
                         title: productDetail.value.profil_machine_operation_guide_title, 
                         subTitle: productDetail.value.profil_machine_operation_guide_subtitle, 
-                        blogs: formatArrayDatesShort(productDetail.value.profiling_machine_operation_guide_blogs)
+                        blogs: formatArrayDatesShort(productDetail.value.profiling_machine_operation_guide_blogs),
+                        moreUrl:"/video"
                     },
                     { 
                         id: 3, 
                         title: productDetail.value.profil_technology_news_title, 
                         subTitle: productDetail.value.profil_technology_news_subtitle, 
-                        blogs: formatArrayDatesShort(productDetail.value.profiling_technology_news_blogs)
+                        blogs: formatArrayDatesShort(productDetail.value.profiling_technology_news_blogs),
+                        moreUrl:"/blog/industry-news"
                     }
                 ]
             break;
@@ -1284,19 +1307,22 @@ watch(productDetailRes, (newPosts) => {
                         id: 1, 
                         title: productDetail.value.industrial_equipment_success_cases_title, 
                         subTitle: productDetail.value.industrial_equipment_success_cases_subtitle, 
-                        blogs: formatArrayDatesShort(productDetail.value.industrial_equipment_success_cases_blogs)
+                        blogs: formatArrayDatesShort(productDetail.value.industrial_equipment_success_cases_blogs),
+                        moreUrl:"/projects"
                     },
                     { 
                         id: 2, 
                         title: productDetail.value.industrial_equipment_video_train_title, 
                         subTitle: productDetail.value.industrial_equipment_video_train_subtitle, 
-                        blogs: formatArrayDatesShort(productDetail.value.industrial_equipment_video_training_blogs)
+                        blogs: formatArrayDatesShort(productDetail.value.industrial_equipment_video_training_blogs),
+                        moreUrl:"/video"
                     },
                     { 
                         id: 3, 
                         title: productDetail.value.industrial_equipment_news_title, 
                         subTitle: productDetail.value.industrial_equipment_news_subtitle, 
-                        blogs: formatArrayDatesShort(productDetail.value.industrial_equipment_news_blogs)
+                        blogs: formatArrayDatesShort(productDetail.value.industrial_equipment_news_blogs),
+                        moreUrl:"/blog/industry-news"
                     }
                 ]
             break;

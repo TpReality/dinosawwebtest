@@ -172,10 +172,10 @@
             </div>
 
             <!-- More 按钮 -->
-            <div class="processing-cases-more-button">
+            <div class="processing-cases-more-button" @click="loadMore">
               <div class="more-button-container">
                 <div class="more-button-wrapper">
-                  <span class="more-button-text" @click="loadMore">{{ news.load_more_text }}</span>
+                  <span class="more-button-text">{{ news.load_more_text }}</span>
                 </div>
               </div>
             </div>

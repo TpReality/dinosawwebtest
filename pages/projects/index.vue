@@ -143,15 +143,17 @@
                         </div>
 
                         <!-- More 按钮 -->
-                        <div class="processing-cases-more-button" v-if="item.url">
-                            <NuxtLink :to="item.url" target="_blank">
+                         <NuxtLink :to="item.url" target="_blank" v-if="item.url">
+                        <div class="processing-cases-more-button">
+                            
                             <div class="more-button-container">
                                 <div class="more-button-wrapper">
                                     <span class="more-button-text">{{projectDetail.more_text}}</span>
                                 </div>
                             </div>
-                            </NuxtLink>
+                           
                         </div>
+                         </NuxtLink>
                     </div>
                 </div>
             </div>

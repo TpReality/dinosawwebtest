@@ -92,7 +92,7 @@
                         <div class="guide-text-blur"></div>
                         <div class="guide-text">
                             <h3>{{ stones.view_stone_lists_title}}</h3>
-                            <p>{{ stones.view_stone_lists_description }}</p>
+                            <div class="rich-text" v-html="stones.view_stone_lists_description"></div>
                         </div>
                     </div>
                 </div>
@@ -232,13 +232,13 @@
                         </div>
                         <div v-if="totalPages > 1" class="pagination">
                             <button @click="handlePageChange(currentPage - 1)">
-                                上一页
+                                 {{ contentDetail.pre_page }}
                             </button>
                             <button @click="handlePageChange(currentPage + 1)">
-                                下一页
+                                {{ contentDetail.next_page }}
                             </button>
                             <p>
-                                共<span>{{ totalPages }}</span>页
+                                {{ contentDetail.in_total }}<span>{{ totalPages }}</span>{{ contentDetail.page }}
                             </p>
                         </div>
                     </div>
@@ -261,7 +261,7 @@
                         src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/Gvfk53Mm3Aro3nRYf1sD677a4.png"
                         alt=""
                     />
-                    Get A Quote
+                    {{ contentDetail.get_a_quote_text }}
                 </a>
             </div>
         </div>
@@ -731,7 +731,7 @@ body {
 }
 
 .view-content {
-    font-size: 0;
+    // font-size: 0;
 
     img {
         display: inline-block;
@@ -839,6 +839,9 @@ body {
             padding: 10px 15px;
             box-sizing: border-box;
             z-index: 1;
+            .rich-text{
+                font-size:16px;
+            }
         }
 
         .guide-step {

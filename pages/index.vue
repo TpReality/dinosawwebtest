@@ -590,7 +590,7 @@
                                              
                                                 <h3 class="five-main-title">{{ indexDetail.flagship_tech_products[0].h1_page_inner_title }}</h3>
                                                 <p class="five-main-date" v-if="indexDetail.flagship_tech_products[0].date">{{ indexDetail.flagship_tech_products[0].date }}</p>
-                                                <div class="five-main-info" v-if="indexDetail.flagship_tech_products[0].subtitle">
+                                                <div class="five-main-info" v-if="indexDetail.flagship_roducts_2025">
                                                    <h3 class="five-subtitle">{{ indexDetail.flagship_roducts_2025 }}</h3>
                                                     <p class="five-description" v-if="indexDetail.flagship_products_2025_description">{{ indexDetail.flagship_products_2025_description }}</p>
                                                     <button class="buy-now-btn">{{indexDetail.buy_now_text}}</button>
@@ -1188,7 +1188,7 @@ const { data: indexRes, pending, error } = await useApi(`/home-pages?${populateQ
 
 watch(indexRes, (newPosts) => {
     if (newPosts) {
-        // console.log(newPosts)
+        console.log(newPosts)
         let data = newPosts.data[0]
         data.what_you_need_blogs.forEach(val=>{
             val.date = formatDateShort(val.date)

@@ -247,8 +247,9 @@
                 </div>
 
                 <!-- Discover More 按钮 -->
+                 <NuxtLink :to="productDetail[`machinable_materials_${item}_discover_more_url`]" target="_blank">
                 <div class="discover-more-section">
-                    <NuxtLink :to="productDetail[`machinable_materials_${item}_discover_more_url`]" target="_blank">
+                    
                     <div class="discover-more-button">
                         <div class="discover-more-container">
                             <div class="discover-more-wrapper">
@@ -256,8 +257,8 @@
                             </div>
                         </div>
                     </div>
-                    </NuxtLink>
                 </div>
+                </NuxtLink>
             </div>
         </template>
 <!-- </ClientOnly> -->
@@ -359,8 +360,8 @@
             </div>
 
             <!-- Discover More 按钮 -->
+             <NuxtLink :to="'/projects'" target="_blank">
             <div class="discover-more-section">
-                <NuxtLink :to="'/projects'" target="_blank">
                     <div class="discover-more-button">
                         <div class="discover-more-container">
                             <div class="discover-more-wrapper">
@@ -368,8 +369,8 @@
                             </div>
                         </div>
                     </div>
-                </NuxtLink>
             </div>
+            </NuxtLink>
         </div>
 
         <!-- Mining and Quarry Machine 部分 -->
@@ -449,18 +450,19 @@
                 </div>
             </div>
             <!-- Discover More 按钮 -->
-            <div class="discover-more-section">
-                <NuxtLink :to="'/video'" target="_blank">
-                <div class="discover-more-button">
-                    <div class="discover-more-container">
-                        <div class="discover-more-wrapper">
-                             
-                                <span class="discover-more-text">{{productDetail.more_text}}</span>
+             <NuxtLink :to="'/video'" target="_blank">
+                <div class="discover-more-section">
+                    
+                    <div class="discover-more-button">
+                        <div class="discover-more-container">
+                            <div class="discover-more-wrapper">
+                                
+                                    <span class="discover-more-text">{{productDetail.more_text}}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-                </NuxtLink>
-            </div>
+            </NuxtLink>
         </div>
 
         <!-- Other Industry Machine 部分 -->
@@ -542,8 +544,8 @@
             </div>
 
             <!-- Discover More 按钮 -->
+             <NuxtLink :to="'/blog/industry-news'" target="_blank">
             <div class="discover-more-section">
-                <NuxtLink :to="'/blog/industry-news'" target="_blank">
                 <div class="discover-more-button">
                     <div class="discover-more-container">
                         <div class="discover-more-wrapper">
@@ -551,8 +553,8 @@
                         </div>
                     </div>
                 </div>
-                </NuxtLink>
             </div>
+            </NuxtLink>
         </div>
         </div>
 
@@ -1669,6 +1671,9 @@ onMounted(() => {
     top: 0;
     left: 0;
     border-radius: 8px;
+    img{
+        max-height:100%;
+    }
 }
 
 .product-icon {
