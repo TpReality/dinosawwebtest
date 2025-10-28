@@ -86,7 +86,22 @@ export default defineNuxtConfig({
   },
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
+  app: {
+    head: {
+      link: [
+        { rel: 'preconnect', href: 'https://framerusercontent.com', crossorigin: '' },
+        { rel: 'dns-prefetch', href: 'https://framerusercontent.com' },
+        { rel: 'preconnect', href: 'https://cms.stoneboss.vip', crossorigin: '' },
+        { rel: 'dns-prefetch', href: 'https://cms.stoneboss.vip' }
+      ]
+    }
+  },
   modules: ['@nuxt/image'],
+  image: {
+    domains: ['framerusercontent.com', 'cms.stoneboss.vip', 'honghaieim.obs.cn-east-3.myhuaweicloud.com'],
+    formats: ['webp', 'avif'],
+    quality: 70
+  },
   routeRules: {
     '/': { prerender: true }, // 首页预渲染
     '/Products': { prerender: true }, // Products预渲染
@@ -99,6 +114,7 @@ export default defineNuxtConfig({
     '/contact': { prerender: true }, // contact-us预渲染
     '/stoneidentification': { prerender: true }, // stoneidentification预渲染
     '/ai': { prerender: true }, // ai预渲染
+    '/_nuxt/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
     '/api/**': {
       proxy: 'https://cms.stoneboss.vip/api/**', // 将所有 /api 请求代理到您的后端
       headers: { 'cache-control': 's-maxage=60' } // 添加缓存

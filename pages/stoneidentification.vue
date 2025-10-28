@@ -97,13 +97,13 @@
                     </div>
                 </div>
                 <div class="rel">
-                    <NuxtImg class="bg" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/4cNK7hR44yWDvsyolHiTPOzdfk.webp" />
+                    <NuxtImg loading="lazy" class="bg" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/4cNK7hR44yWDvsyolHiTPOzdfk.webp" />
                     <div class="stone-types">
                         <h2>{{ stones.what_kind_of_stone_is_this_title }}</h2>
                         <div class="stone-types-wrap">
                             <div class="stone-types-item">
                                 <div class="rel float">
-                                    <NuxtImg v-if="stones.what_kind_of_stone_is_this_left_top_image"
+                                    <NuxtImg loading="lazy" v-if="stones.what_kind_of_stone_is_this_left_top_image"
                                         :src="stones.what_kind_of_stone_is_this_left_top_image.url" />
                                 </div>
 
@@ -114,7 +114,7 @@
                             </div>
                             <div class="stone-types-item">
                                 <div class="rel float">
-                                    <NuxtImg v-if="stones.what_kind_of_stone_is_this_right_top_image"
+                                    <NuxtImg loading="lazy" v-if="stones.what_kind_of_stone_is_this_right_top_image"
                                         :src="stones.what_kind_of_stone_is_this_right_top_image.url" />
                                 </div>
 
@@ -127,7 +127,7 @@
                         <div class="stone-types-wrap">
                             <div class="stone-types-item">
                                 <div class="rel float">
-                                    <NuxtImg v-if="stones.what_kind_of_stone_is_this_left_bottom_image"
+                                    <NuxtImg loading="lazy" v-if="stones.what_kind_of_stone_is_this_left_bottom_image"
                                         :src="stones.what_kind_of_stone_is_this_left_bottom_image.url" />
                                 </div>
 
@@ -138,7 +138,7 @@
                             </div>
                             <div class="stone-types-item">
                                 <div class="rel float">
-                                    <NuxtImg v-if="stones.what_kind_of_stone_is_this_right_bottom_image"
+                                    <NuxtImg loading="lazy" v-if="stones.what_kind_of_stone_is_this_right_bottom_image"
                                         :src="stones.what_kind_of_stone_is_this_right_bottom_image.url" />
                                 </div>
 
@@ -165,37 +165,37 @@
                             <h2 class="h2">{{ stones.who_needs_dinosaw_stone_title }}</h2>
                             <div class="nine-pic-wrap">
                                 <div class="nine-pic">
-                                    <NuxtImg alt="Interior decoration stone walls"
+                                    <NuxtImg loading="lazy" alt="Interior decoration stone walls"
                                         :src="stones.who_needs_dinosaw_stone_labout_image_1.url" />
                                     <h3 class="h3">{{ stones.who_needs_dinosaw_stone_labout_title_1 }}</h3>
                                     <div class="rich-text" v-html="stones.who_needs_dinosaw_stone_labout__description_1"></div>
                                 </div>
                                 <div class="nine-pic">
-                                    <NuxtImg alt="Marble backdrop wall"
+                                    <NuxtImg loading="lazy" alt="Marble backdrop wall"
                                         :src="stones.who_needs_dinosaw_stone_labout_image_2.url" />
                                     <h3 class="h3">{{ stones.who_needs_dinosaw_stone_labout_title_2 }}</h3>
                                     <div class="rich-text" v-html="stones.who_needs_dinosaw_stone_labout__description_2"></div>
                                 </div>
                                 <div class="nine-pic">
-                                    <NuxtImg alt="Natural stone facades"
+                                    <NuxtImg loading="lazy" alt="Natural stone facades"
                                         :src="stones.who_needs_dinosaw_stone_labout_image_3.url" />
                                     <h3 class="h3">{{ stones.who_needs_dinosaw_stone_labout_title_3 }}</h3>
                                     <div class="rich-text" v-html="stones.who_needs_dinosaw_stone_labout__description_3"></div>
                                 </div>
                                 <div class="nine-pic">
-                                    <NuxtImg alt="Stone tombstones"
+                                    <NuxtImg loading="lazy" alt="Stone tombstones"
                                         :src="stones.who_needs_dinosaw_stone_labout_image_4.url" />
                                     <h3 class="h3">{{ stones.who_needs_dinosaw_stone_labout_title_4 }}</h3>
                                     <div class="rich-text" v-html="stones.who_needs_dinosaw_stone_labout__description_4"></div>
                                 </div>
                                 <div class="nine-pic">
-                                    <NuxtImg alt="Stone construction"
+                                    <NuxtImg loading="lazy" alt="Stone construction"
                                         :src="stones.who_needs_dinosaw_stone_labout_image_5.url" />
                                     <h3 class="h3">{{ stones.who_needs_dinosaw_stone_labout_title_5 }}</h3>
                                     <div class="rich-text" v-html="stones.who_needs_dinosaw_stone_labout__description_5"></div>
                                 </div>
                                 <div class="nine-pic">
-                                    <NuxtImg alt="Geology student"
+                                    <NuxtImg loading="lazy" alt="Geology student"
                                         :src="stones.who_needs_dinosaw_stone_labout_image_6.url" />
                                     <h3 class="h3">{{ stones.who_needs_dinosaw_stone_labout_title_6 }}</h3>
                                     <div class="rich-text" v-html="stones.who_needs_dinosaw_stone_labout__description_6"></div>
@@ -212,7 +212,7 @@
                     class="overlay"
                 ></div>
                 <div class="upload-image">
-                    <NuxtImg :src="uploadImg" />
+                    <NuxtImg loading="lazy" :src="uploadImg" />
                 </div>
                 <div class="stone-list-wrap">
                     <div v-if="isSearchLoading" class="search-loading">
@@ -226,7 +226,7 @@
                                 class="stone-item"
                                 @click="showSinglePic(stone)"
                             >
-                                <NuxtImg :src="stone.img_url" />
+                                <NuxtImg loading="lazy" :src="stone.img_url" />
                                 <p>{{ stone.fileName }}</p>
                             </div>
                         </div>
@@ -251,13 +251,14 @@
             ></div>
             <div class="image-box">
                 <div class="image-name">{{ selectedImg?.fileName }}</div>
-                <NuxtImg class="image" :src="selectedImg?.img_url" />
+                <NuxtImg loading="lazy" class="image" :src="selectedImg?.img_url" />
                 <a
                     class="singlepic-href"
                     :href="getWhatsAppUrl(selectedImg?.fileName)"
                     target="_blank"
                 >
                     <NuxtImg
+                     loading="lazy"
                         src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/Gvfk53Mm3Aro3nRYf1sD677a4.png"
                         alt=""
                     />

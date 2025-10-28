@@ -94,7 +94,7 @@
                             <div class="card-icon-section">
                                 <div class="card-icon-container">
                                     <div class="card-icon countries-icon">
-                                        <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/3WAqTA4czHSx7tLQYQumGPcHF0.webp"></NuxtImg>
+                                        <NuxtImg loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/3WAqTA4czHSx7tLQYQumGPcHF0.webp"></NuxtImg>
                                     </div>
                                 </div>
                             </div>
@@ -117,7 +117,7 @@
                             <div class="card-icon-section">
                                 <div class="card-icon-container">
                                     <div class="card-icon patents-icon">
-                                        <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/l3BnqZzkI0K3eR46cShkpQHWqw.webp"></NuxtImg>
+                                        <NuxtImg loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/l3BnqZzkI0K3eR46cShkpQHWqw.webp"></NuxtImg>
                                     </div>
                                 </div>
                             </div>
@@ -140,7 +140,7 @@
                             <div class="card-icon-section">
                                 <div class="card-icon-container">
                                     <div class="card-icon expertise-icon">
-                                        <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/6APWWoW36QHSZvUE58xYEN6x0o.webp"></NuxtImg>
+                                        <NuxtImg loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/6APWWoW36QHSZvUE58xYEN6x0o.webp"></NuxtImg>
                                     </div>
                                 </div>
                             </div>
@@ -195,7 +195,7 @@
                                 <div class="card-image-section">
                                     <div class="card-image-container">
                                         <div class="card-image high-tech-image">
-                                            <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/6yAYKKmXPLJzljFds9E3zgZEU.webp"></NuxtImg>
+                                            <NuxtImg loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/6yAYKKmXPLJzljFds9E3zgZEU.webp"></NuxtImg>
                                         </div>
                                     </div>
                                 </div>
@@ -216,7 +216,7 @@
                                 <div class="card-image-section">
                                     <div class="card-image-container">
                                         <div class="card-image specialized-image">
-                                            <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/8fLrXBgJrhsheTF9BW6HqmFeOc.webp"></NuxtImg>
+                                            <NuxtImg loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/8fLrXBgJrhsheTF9BW6HqmFeOc.webp"></NuxtImg>
                                         </div>
                                     </div>
                                 </div>
@@ -237,7 +237,7 @@
                                 <div class="card-image-section">
                                     <div class="card-image-container">
                                         <div class="card-image cnc-image">
-                                           <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/Q2vJCX0s2XnmOQPvFtelWgFtYNM.webp"></NuxtImg>
+                                           <NuxtImg loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/Q2vJCX0s2XnmOQPvFtelWgFtYNM.webp"></NuxtImg>
                                         </div>
                                     </div>
                                 </div>
@@ -261,7 +261,7 @@
                                 <div class="card-image-section">
                                     <div class="card-image-container">
                                         <div class="card-image ce-image">
-                                            <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/Yiho2Cb5dzAnUvfdxCniH50mk.webp"></NuxtImg>
+                                            <NuxtImg loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/Yiho2Cb5dzAnUvfdxCniH50mk.webp"></NuxtImg>
                                         </div>
                                     </div>
                                 </div>
@@ -282,7 +282,7 @@
                                 <div class="card-image-section">
                                     <div class="card-image-container">
                                         <div class="card-image patents-image">
-                                            <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/Ylr0CRgiSfaNfAW4kzkACAp8Sk8.webp"></NuxtImg>
+                                            <NuxtImg loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/Ylr0CRgiSfaNfAW4kzkACAp8Sk8.webp"></NuxtImg>
                                         </div>
                                     </div>
                                 </div>
@@ -303,7 +303,7 @@
                                 <div class="card-image-section">
                                     <div class="card-image-container">
                                         <div class="card-image iso-image">
-                                            <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/XnigRDrO1VBjbKJKRd8TCFSlc.webp"></NuxtImg>
+                                            <NuxtImg loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/XnigRDrO1VBjbKJKRd8TCFSlc.webp"></NuxtImg>
                                         </div>
                                     </div>
                                 </div>
@@ -472,42 +472,42 @@
                     <div class="client-card">
                         <div class="client-logo-container">
                             <div class="client-logo client-logo-1">
-                                <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/FpnleAPIN4IV2mdwRpgLUNOF6w.png" />
+                                <NuxtImg loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/FpnleAPIN4IV2mdwRpgLUNOF6w.png" />
                             </div>
                         </div>
                     </div>
                     <div class="client-card">
                         <div class="client-logo-container">
                             <div class="client-logo client-logo-2">
-                                <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/rInXR99BqGLsBVSIPaPJptiTDg.png" />
+                                <NuxtImg loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/rInXR99BqGLsBVSIPaPJptiTDg.png" />
                             </div>
                         </div>
                     </div>
                     <div class="client-card">
                         <div class="client-logo-container">
                             <div class="client-logo client-logo-3">
-                                <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/c70mHQa1rmYYq4W7A8C4llFHLg.png" />
+                                <NuxtImg loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/c70mHQa1rmYYq4W7A8C4llFHLg.png" />
                             </div>
                         </div>
                     </div>
                     <div class="client-card">
                         <div class="client-logo-container">
                             <div class="client-logo client-logo-4">
-                                <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/np5kOQAu61pepHdnoZ7YJErn3I.png" />
+                                <NuxtImg loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/np5kOQAu61pepHdnoZ7YJErn3I.png" />
                             </div>
                         </div>
                     </div>
                     <div class="client-card">
                         <div class="client-logo-container">
                             <div class="client-logo client-logo-5">
-                                <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/P5O06HfmGvkisFNWLPp8TYR4o4.png" />
+                                <NuxtImg loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/P5O06HfmGvkisFNWLPp8TYR4o4.png" />
                             </div>
                         </div>
                     </div>
                     <div class="client-card">
                         <div class="client-logo-container">
                             <div class="client-logo client-logo-6">
-                                <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/dXyve2roEON0UKlKgJTigYaqmY.png" />
+                                <NuxtImg loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/dXyve2roEON0UKlKgJTigYaqmY.png" />
                             </div>
                         </div>
                     </div>
@@ -564,7 +564,7 @@
                             <div class="content-image-section">
                                 <div class="content-image-container">
                                     <div class="content-image" :class="'content-image-' + activeTab">
-                                        <NuxtImg :src="currentContent.imageUrl" />
+                                        <NuxtImg loading="lazy" :src="currentContent.imageUrl" />
                                     </div>
                                 </div>
                             </div>
@@ -613,7 +613,7 @@
                                             <div class="product-image">
                                                 <div class="image-container">
                                                     <div class="product-img" v-if="product.head_image">
-                                                        <NuxtImg :src="product.head_image.url" />
+                                                        <NuxtImg loading="lazy" :src="product.head_image.url" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -644,7 +644,7 @@
                                 <div class="article-content">
                                     <div class="article-image">
                                         <div class="article-img">
-                                            <NuxtImg :src="blog.first_image_url" />
+                                            <NuxtImg loading="lazy" :src="blog.first_image_url" />
                                         </div>
                                     </div>
                                     <div class="article-text">

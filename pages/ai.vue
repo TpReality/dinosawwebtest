@@ -4,12 +4,11 @@
             <div class="chat-header">
                 <div class="icon-fanhui bar-back">
                     <div class="new-menu" @click="newConversationFn">
-                        <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/upload/appicon/coze-newconversation.png" />
+                        <NuxtImg loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/upload/appicon/coze-newconversation.png" />
                     </div>
                     <div class="history-menu" @click="isShowHistorySessions = true">
-                        <NuxtImg
+                        <NuxtImg loading="lazy"
                             src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/upload/appicon/coze-menu.png"
-                            alt="历史菜单"
                             class="history-menu-icon"
                         />
                     </div>
@@ -31,7 +30,7 @@
                         </div>
                     </div>
                     <div v-if="!isStartAI" class="empty-content">
-                        <NuxtImg
+                        <NuxtImg loading="lazy"
                             src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/upload/appicon/coze-logo.png"
                             alt="空内容"
                             class="empty-image"
@@ -50,7 +49,7 @@
                             :class="['message-item', message.type === 'user' ? 'message-user' : 'message-bot']"
                         >
                             <div v-if="message.type === 'bot'" class="normal-flex bot-name">
-                                <NuxtImg
+                                <NuxtImg loading="lazy"
                                     class="avatar bot-avatar"
                                     src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/upload/appicon/bot-avatar.png"
                                     alt="机器人头像"
@@ -61,7 +60,7 @@
                             </div>
                             <div class="message-bubble">
                                 <div v-if="message.image && message.image.length > 0" class="message-file">
-                                    <NuxtImg
+                                    <NuxtImg loading="lazy"
                                         v-for="(item, j) in message.image"
                                         :key="j"
                                         :src="item.path"
@@ -83,7 +82,7 @@
                                     已停止
                                 </div>
                                 <div v-if="message.type === 'bot' && index !== 0 && !message.isTyping" class="message-handle">
-                                    <NuxtImg
+                                    <NuxtImg loading="lazy"
                                         src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/upload/appicon/icon-copy-black.png"
                                         alt="复制"
                                         class="message-handle-icon"
@@ -143,7 +142,7 @@
                         <div class="handle-item">
                             <div v-if="device === 'mobile'" :class="['key-voice-btn', { isHide: inputMessage.trim() !== '' }]">
                                 <div v-if="!isSound" class="voice-btn" @click="switchSound()">
-                                    <NuxtImg
+                                    <NuxtImg loading="lazy"
                                         src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/upload/appicon/coze-voicebtn.png"
                                         alt="语音"
                                         class="icon"
@@ -151,7 +150,7 @@
                                 </div>
                                 <div v-else>
                                     <div class="keyboard-btn" @click="isSound = false">
-                                        <NuxtImg
+                                        <NuxtImg loading="lazy"
                                             src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/upload/appicon/coze-keyboard.png"
                                             alt="键盘"
                                             class="icon"
@@ -201,7 +200,7 @@
                                 @click="handleSendMessage"
                                 :disabled="!canSendMessage"
                             >
-                                <NuxtImg
+                                <NuxtImg loading="lazy"
                                     :src="canSendMessage 
                                         ? 'https://honghaieim.obs.cn-east-3.myhuaweicloud.com/upload/appicon/coze-send.png'
                                         : 'https://honghaieim.obs.cn-east-3.myhuaweicloud.com/upload/appicon/coze-send-disabled.png'"
@@ -220,7 +219,7 @@
                                 :key="index"
                                 class="preview-thumb"
                             >
-                                <NuxtImg
+                                <NuxtImg loading="lazy"
                                     :src="item.path"
                                     alt="预览"
                                     class="image"
@@ -243,7 +242,7 @@
                         <div class="recording-circle recording-circle-2"></div>
                         <div class="recording-circle recording-circle-3"></div>
                         <div class="recording-icon">
-                            <NuxtImg
+                            <NuxtImg loading="lazy"
                                 src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/upload/appicon/coze-voiceing.png"
                                 alt="录音中"
                             />
@@ -286,7 +285,7 @@
                                     {{ session.content }}
                                 </div>
                                 <div v-if="session.fileList.length > 0" class="image-wrap">
-                                    <NuxtImg
+                                    <NuxtImg loading="lazy"
                                         class="image"
                                         :src="session.fileList[0].path"
                                     />
