@@ -239,7 +239,7 @@
                             <div class="carousel-track" ref="carouselTrack">
                                 <!-- Item 1: Product Demo -->
                                 <template v-for="(material, index) in applicableMaterials" :key="index">
-                                    <div class="carousel-item" v-if="productDetail[material] && index != 0">
+                                    <div class="carousel-item" v-if="productDetail[material]">
                                         <div class="material-card">
                                             <div class="card-header">
                                                 <h3 class="card-title">{{ productDetail[material] }}</h3>
@@ -967,7 +967,7 @@ const goWhatsApp = (message) => {
 // 轮播相关状态
 const carouselTrack = ref(null)
 const currentSlide = ref(0)
-const totalSlides = 6
+const totalSlides = ref(6)
 const slideWidth = 452 // 420px + 32px gap
 const visibleSlides = ref(2.5) // 可视区域显示的slide数量，默认2.5个
 
@@ -1027,45 +1027,51 @@ const faqs = ref({
 })
 
 const { data: productDetailRes, pending, error } = await useApi('/products?filters[url][$eq]='+props.slug)
-    const productDetail = computed(() => {
-        if (productDetailRes.value && productDetailRes.value.data && productDetailRes.value.data.length > 0) {
-            const productData = productDetailRes.value.data[0]
+watch(productDetailRes, (newValue) => {
+    if (!process.client || shouldRenderProductDetail.value === false) return
 
-            benefitsSlides.value = [
-                { image: productData.core_advantage_illustration_a_url },
-                { image: productData.core_advantage_illustration_b_url },
-                { image: productData.core_advantage_illustration_c_url }
-            ]
-
-            applicableMaterials.value.forEach((materialKey) => {
-                const richContent = productData[`${materialKey}_rich`]
-                if (richContent) {
-                    materialRichText.value[materialKey] = enhanceRichTextHtml(richContent)
-                }
-            })
-
-            return productData;
+    if (Array.isArray(newValue?.data) && newValue.data.length > 0) {
+        const viewportWidth = window.innerWidth || document.documentElement.clientWidth || 0
+        if (viewportWidth <= MOBILE_WIDTH_BREAKPOINT) {
+            shouldRenderProductDetail.value = false
+            scheduleProductDetailMount()
         }
-        return null;
-    });
-
-    watch(productDetailRes, (newValue) => {
-        if (!process.client || shouldRenderProductDetail.value === false) return
-
-        if (Array.isArray(newValue?.data) && newValue.data.length > 0) {
-            const viewportWidth = window.innerWidth || document.documentElement.clientWidth || 0
-            if (viewportWidth <= MOBILE_WIDTH_BREAKPOINT) {
-                shouldRenderProductDetail.value = false
-                scheduleProductDetailMount()
+        let materialsNum = 0
+        let productData = newValue.data[0]
+        applicableMaterials.value.forEach((materialKey) => {
+            const richContent = productData[`${materialKey}_rich`]
+            if (richContent) {
+                materialRichText.value[materialKey] = enhanceRichTextHtml(richContent)
+                // materialRichText.value[materialKey] = lazyLoadIframes(materialRichText.value[materialKey])
             }
-        }
-    }, { immediate: true })
+            if(productData[materialKey]){
+                materialsNum++
+            }
+        })
+        // console.log('materialRichText',materialRichText)
+        totalSlides.value = materialsNum
+    }
+}, { immediate: true })
+const productDetail = computed(() => {
+    if (productDetailRes.value && productDetailRes.value.data && productDetailRes.value.data.length > 0) {
+        const productData = productDetailRes.value.data[0]
 
-    watch(productDetail, (newData) => {
-        if (newData) {
-            emit('headdata-loaded', newData)
-        }
-    }, { immediate: true });
+        benefitsSlides.value = [
+            { image: productData.core_advantage_illustration_a_url },
+            { image: productData.core_advantage_illustration_b_url },
+            { image: productData.core_advantage_illustration_c_url }
+        ]
+        
+        return productData;
+    }
+    return null;
+});
+
+watch(productDetail, (newData) => {
+    if (newData) {
+        emit('headdata-loaded', newData)
+    }
+}, { immediate: true });
 
 // 依据产品的 link_1/link_2/link_3 拉取对应产品的首图
 const relatedFirstImages = ref({ link_1: '', link_2: '', link_3: '' })
@@ -1304,17 +1310,17 @@ const updateIndicatorPosition = () => {
 const showNextBtn = computed(() => {
     // 当最后一个carousel-item完全进入可视区域时隐藏next-btn
     // 由于显示2.5个，最后一次滚动应该是到第4个slide位置（显示第4、5、6个item）
-    return currentSlide.value < totalSlides - Math.ceil(visibleSlides.value)
+    return currentSlide.value < totalSlides.value - Math.ceil(visibleSlides.value)
 })
 
 // 轮播控制函数
 const nextSlide = () => {
-    const maxSlide = totalSlides - Math.ceil(visibleSlides.value)
+    const maxSlide = totalSlides.value - Math.ceil(visibleSlides.value)
     if (currentSlide.value < maxSlide) {
         // 检查是否是最后一次滚动（显示最后一个完整item）
         if (currentSlide.value === maxSlide - 1) {
             // 最后一次滚动：让最后的内容块与右边对齐
-            currentSlide.value = totalSlides - visibleSlides.value
+            currentSlide.value = totalSlides.value - visibleSlides.value
         } else {
             // 正常滚动1个slide
             currentSlide.value++
@@ -1326,7 +1332,7 @@ const nextSlide = () => {
 const prevSlide = () => {
     if (currentSlide.value > 0) {
         // 检查当前位置是否接近最后位置
-        const maxSlide = totalSlides - visibleSlides.value
+        const maxSlide = totalSlides.value - visibleSlides.value
         if (Math.abs(currentSlide.value - maxSlide) < 0.1) {
             // 从最后位置回退到倒数第二位置
             currentSlide.value = Math.max(0, maxSlide - 1)
@@ -1361,7 +1367,7 @@ const updateCarouselPosition = () => {
         }
 
         // 计算最大可滚动距离，确保最后的内容块与右边对齐
-        const totalWidth = actualItemWidth * totalSlides + actualGap * (totalSlides - 1)
+        const totalWidth = actualItemWidth * totalSlides.value + actualGap * (totalSlides.value - 1)
         const maxTranslateX = totalWidth - containerWidth
 
         // 计算当前应该的偏移量

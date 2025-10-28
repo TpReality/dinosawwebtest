@@ -47,10 +47,12 @@ export default defineNuxtConfig({
     },
   },
   // 启用更快的构建
+  ssr: true,
   nitro: {
     // output: {
     //   publicDir: '.output/public-retry'  // 你也可以换成绝对路径
     // },
+    preset: 'cloudflare-pages',
     prerender: {
       concurrency: 5,
       // 告诉 Nitro 从 '/' 开始爬取
@@ -110,6 +112,14 @@ export default defineNuxtConfig({
   //   }
   // },
   routeRules: {
+    '/blog/**': { 
+      // max-age=1 确保浏览器不缓存，s-maxage=60 确保 CDN 缓存 60 秒。
+      headers: { 'cache-control': 'public, max-age=1, s-maxage=60, stale-while-revalidate=59' } 
+    },
+    
+    '/Products/**': { 
+      headers: { 'cache-control': 'public, max-age=1, s-maxage=60, stale-while-revalidate=59' } 
+    },
     '/': { prerender: true }, // 首页预渲染
     '/Products': { prerender: true }, // Products预渲染
     '/projects': { prerender: true }, // projects预渲染
