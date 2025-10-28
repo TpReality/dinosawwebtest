@@ -23,14 +23,14 @@ function getAttributeValue(tag: string, attributeName: string): string | null {
   return match ? (match[1] || match[2] || null) : null
 }
 
-const IMAGE_WIDTHS = [300, 600, 900, 1200] 
+const IMAGE_WIDTHS = [640, 1200] 
 
 function generateSrcset(originalSrc: string): string {
   // ********* 【注意】请根据您的图片服务/CDN修改这一部分 *********
   // 这里的示例假设图片服务支持 ?w={width} 的参数
   const [baseUrl] = originalSrc.split('?')
   const srcsetEntries = IMAGE_WIDTHS.map(width => {
-    const imageUrl = `${baseUrl}?w=${width}`
+    const imageUrl = `${baseUrl}`
     return `${imageUrl} ${width}w`
   })
   // *************************************************************

@@ -240,7 +240,7 @@
                         <div class="carousel-container">
                             <div class="carousel-track" ref="carouselTrack">
                                 <!-- Item 1: Product Demo -->
-                                <template v-for="(material, index) in applicableMaterials" :key="index">
+                                <template v-for="(material, index) in applicableMaterials" :key="index" v-if="index != 0">
                                     <div class="carousel-item" v-if="productDetail[material]">
                                         <div class="material-card">
                                             <div class="card-header">
