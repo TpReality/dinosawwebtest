@@ -246,7 +246,7 @@
                                             <div class="card-header">
                                                 <h3 class="card-title">{{ productDetail[material] }}</h3>
                                             </div>
-                                            <div class="card-content" v-html="productDetail[material+'_rich']"></div>
+                                            <div class="card-content" v-html="materialRichText[material]"></div>
                                         </div>
                                     </div>
                                 </template>
@@ -942,6 +942,7 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted, computed, nextTick, watch } from 'vue'
+import { enhanceRichTextHtml } from '~/utils/richText'
 
 const props = defineProps({
     slug: {
@@ -1021,6 +1022,7 @@ const benefitsSlideWidth = ref(400) // 响应式slide宽度
 const benefitsSlides = ref([])
 
 const applicableMaterials  = ref(["a_applicable_materials","b_applicable_materials","c_applicable_materials","d_applicable_materials","e_applicable_materials","f_applicable_materials"])
+const materialRichText = ref({})
 const faqs = ref({
     problems: ["problem_a", "problem_b", "problem_c", "problem_d", "problem_e", "problem_f", "problem_g", "problem_h", "problem_i", "problem_j"],
     answers: ["answer_a", "answer_b", "answer_c", "answer_d", "answer_e", "answer_f", "answer_g", "answer_h", "answer_i", "answer_j"]
@@ -1029,12 +1031,22 @@ const faqs = ref({
 const { data: productDetailRes, pending, error } = await useApi('/products?filters[url][$eq]='+props.slug)
     const productDetail = computed(() => {
         if (productDetailRes.value && productDetailRes.value.data && productDetailRes.value.data.length > 0) {
+            const productData = productDetailRes.value.data[0]
+
             benefitsSlides.value = [
-                { image: productDetailRes.value.data[0].core_advantage_illustration_a_url },
-                { image: productDetailRes.value.data[0].core_advantage_illustration_b_url },
-                { image: productDetailRes.value.data[0].core_advantage_illustration_c_url }
+                { image: productData.core_advantage_illustration_a_url },
+                { image: productData.core_advantage_illustration_b_url },
+                { image: productData.core_advantage_illustration_c_url }
             ]
-            return productDetailRes.value.data[0];
+
+            applicableMaterials.value.forEach((materialKey) => {
+                const richContent = productData[`${materialKey}_rich`]
+                if (richContent) {
+                    materialRichText.value[materialKey] = enhanceRichTextHtml(richContent)
+                }
+            })
+
+            return productData;
         }
         return null;
     });
