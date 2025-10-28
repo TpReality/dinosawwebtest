@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import { $fetch } from 'ofetch';
+import { createHash } from 'node:crypto'
 
 export default defineNuxtConfig({
   runtimeConfig: {
@@ -92,7 +93,9 @@ export default defineNuxtConfig({
         { rel: 'preconnect', href: 'https://framerusercontent.com', crossorigin: '' },
         { rel: 'dns-prefetch', href: 'https://framerusercontent.com' },
         { rel: 'preconnect', href: 'https://cms.stoneboss.vip', crossorigin: '' },
-        { rel: 'dns-prefetch', href: 'https://cms.stoneboss.vip' }
+        { rel: 'dns-prefetch', href: 'https://cms.stoneboss.vip' },
+        { rel: 'preconnect', href: 'https://honghaieim.obs.cn-east-3.myhuaweicloud.com', crossorigin: '' },
+        { rel: 'dns-prefetch', href: 'https://honghaieim.obs.cn-east-3.myhuaweicloud.com' },
       ]
     }
   },
@@ -100,7 +103,11 @@ export default defineNuxtConfig({
   image: {
     domains: ['framerusercontent.com', 'cms.stoneboss.vip', 'honghaieim.obs.cn-east-3.myhuaweicloud.com'],
     formats: ['webp', 'avif'],
-    quality: 70
+    quality: 70,
+    staticFilename: ({ src, format, width, quality }) => {
+      const hash = createHash('sha1').update([src, width, quality].join(':')).digest('hex')
+      return `_ipx/${quality ? `q_${quality}/` : ''}${hash}.${format || 'jpg'}`
+    }
   },
   routeRules: {
     '/': { prerender: true }, // 首页预渲染

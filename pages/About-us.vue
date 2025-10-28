@@ -809,7 +809,7 @@ watch(productsRes, (newPosts) => {
     flex-direction: column;
     align-items: center;
     z-index: 10;
-    background:url(https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/72HfFUczwHIXRGBR7M7Wy3EXxU.png?scale-down-to=2048) no-repeat center 180px;
+    background:url(https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/72HfFUczwHIXRGBR7M7Wy3EXxU.png) no-repeat center 180px;
     background-size:90% auto;
 }
 
@@ -1009,7 +1009,7 @@ watch(productsRes, (newPosts) => {
     .hero-content {
         top: 150px;
         padding: 0 20px 300px;
-        background:url('https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/72HfFUczwHIXRGBR7M7Wy3EXxU.png?scale-down-to=2048') no-repeat center 130px;
+        background:url('https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/72HfFUczwHIXRGBR7M7Wy3EXxU.png') no-repeat center 130px;
         background-size:auto 100%;
     }
 

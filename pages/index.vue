@@ -152,7 +152,7 @@
                                         <span>{{ product.tip }}</span>
                                     </div>
                                     <h3 v-html="product.title"></h3>
-                                    <NuxtImg loading="lazy" v-if="product.image&&product.image.url" :src="product.image.url" />
+                                    <NuxtImg loading="lazy" sizes="sm:100vw" v-if="product.image&&product.image.url" :src="product.image.url" />
                                     <p>{{ product.materials }}</p>
                                     <!-- 新增的圆形图片展示区域 -->
                                     <div class="features-section">
@@ -998,7 +998,7 @@
                                         <div class="stat-label">{{ indexDetail.what_our_customers_say_panel_1_advantage_description }}</div>
                                     </div>
                                     <div class="material-icon">
-                                        <NuxtImg loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/4lSnkyg8nN5Oax5Ygirc0zHLqIU.webp?scale-down-to=512" />
+                                        <NuxtImg loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/4lSnkyg8nN5Oax5Ygirc0zHLqIU.webp" />
                                     </div>
                                 </div>
 
@@ -1248,7 +1248,7 @@ watch(indexRes, (newPosts) => {
                                     "addressCountry": "CN"
                                 },
                                 "image": [
-                                    "https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/Rgs09IZlnBALMtEN2nX5mwe26rw.webp?scale-down-to=512"
+                                    "https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/Rgs09IZlnBALMtEN2nX5mwe26rw.webp"
                                 ],
                                 "email": "gma@dinosawmachine.com",
                                 "telePhone": "+86-19859013937",
