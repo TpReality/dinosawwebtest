@@ -293,21 +293,25 @@ let blogDetail = ref({})
 // // console.log('/blogs?filters[slug][$eq]='+props.slug)
 watch(error, (newError) => {
   // console.log(newError)
-     throw createError({ statusCode: 404, statusMessage: '文章不存在' });
+    //  throw createError({ statusCode: 404, statusMessage: '文章不存在' });
+     window.location.href = '/404'
 })
 watch(blogDetailRes, (newPosts) => {
   
     if (newPosts) {
 
-      // console.log('blog',newPosts)
+      console.log('blog',newPosts)
         let data = newPosts.data[0]
         if(data.youtube_link){
           data.youtube_link = getLastPathSegment(data.youtube_link)
         }
-        
         blogDetail.value = data
         // 通知父组件数据已加载
         emit('headdata-loaded', data);
+        
+        
+    }else{
+      window.location.href = '/404'
     }
 
   

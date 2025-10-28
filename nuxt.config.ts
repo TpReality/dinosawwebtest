@@ -99,7 +99,7 @@ export default defineNuxtConfig({
       ]
     }
   },
-  // modules: ['@nuxt/image'],
+  modules: ['@nuxt/image'],
   // image: {
   //   domains: ['framerusercontent.com', 'cms.stoneboss.vip', 'honghaieim.obs.cn-east-3.myhuaweicloud.com'],
   //   formats: ['webp', 'avif'],

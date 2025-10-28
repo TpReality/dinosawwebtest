@@ -152,7 +152,7 @@
                                         <span>{{ product.tip }}</span>
                                     </div>
                                     <h3 v-html="product.title"></h3>
-                                     <NuxtImg sizes="sm:100vw" loading="lazy" sizes="sm:100vw" v-if="product.image&&product.image.url" :src="product.image.url" />
+                                     <NuxtImg sizes="sm:100vw" loading="lazy" v-if="product.image&&product.image.url" :src="product.image.url" />
                                     <p>{{ product.materials }}</p>
                                     <!-- 新增的圆形图片展示区域 -->
                                     <div class="features-section">
@@ -356,7 +356,6 @@
                                 <div class="blog-card">
                                     <div class="blog-image">
                                          <NuxtImg sizes="sm:100vw" loading="lazy" :src="item.first_image_url"
-                                        sizes="sm:100vw md:50vw lg:800px"
                                         ></NuxtImg>
                                     </div>
                                     <div class="blog-content">

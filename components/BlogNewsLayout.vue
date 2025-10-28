@@ -241,7 +241,8 @@ watch(newsRes, (newPosts) => {
 
 }, { immediate: true })
 watch(error, (newError) => {
-     throw createError({ statusCode: 404, statusMessage: '文章不存在' });
+    //  throw createError({ statusCode: 404, statusMessage: '文章不存在' });
+    window.location.href = '/404'
 })
 
 const page = ref(1)

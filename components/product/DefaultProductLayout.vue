@@ -1062,13 +1062,15 @@ watch(productDetail, async (pd) => {
   } catch (e) {
     // 静默失败，避免影响页面渲染
     console.warn('Fetch related product first images failed', e)
+    window.location.href = '/404'
   } finally {
     relatedFetched = true
   }
 }, { immediate: true })
 
  watch(error, (newError) => {
-     throw createError({ statusCode: 404, statusMessage: '文章不存在' });
+    //  throw createError({ statusCode: 404, statusMessage: '文章不存在' });
+    window.location.href = '/404'
 })
 
 
