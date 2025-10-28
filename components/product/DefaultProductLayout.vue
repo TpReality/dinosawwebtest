@@ -225,7 +225,7 @@
             </div>
         </div>
          <!-- Compatible Materials & Products Section -->
-            <div id="compatible-materials-section" class="compatible-materials-section" v-if="shouldRenderProductDetail">
+            <div id="compatible-materials-section" class="compatible-materials-section">
                 <div class="container">
                     <!-- Section Header -->
                     <div class="section-header">
