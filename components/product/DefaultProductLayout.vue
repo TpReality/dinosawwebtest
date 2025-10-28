@@ -224,9 +224,7 @@
                 </div>
             </div>
         </div>
-
-        <div class="product-detail-wrap">
-        <!-- Compatible Materials & Products Section -->
+         <!-- Compatible Materials & Products Section -->
             <div id="compatible-materials-section" class="compatible-materials-section">
                 <div class="container">
                     <!-- Section Header -->
@@ -283,6 +281,8 @@
                     </div>
                 </div>
             </div>
+        <div class="product-detail-wrap" v-if="shouldRenderProductDetail">
+       
 
             <!-- Cases Carousel Section -->
             <div id="cases-section" class="cases-section">
@@ -979,12 +979,29 @@ const currentCaseSlide = ref(0)
 const totalCaseSlides = 3
 const caseSlideWidth = ref(1200) // 全宽设计，响应式变量
 
+const shouldRenderProductDetail = ref(true)
+const MOBILE_WIDTH_BREAKPOINT = 768
+const PRODUCT_DETAIL_MOUNT_DELAY = 1000
 
 // FAQ functionality
 const activeQuestion = ref(-1)
 
 const toggleQuestion = (index) => {
     activeQuestion.value = activeQuestion.value === index ? -1 : index
+}
+
+const scheduleProductDetailMount = () => {
+    if (shouldRenderProductDetail.value) return
+
+    const viewportWidth = window.innerWidth || document.documentElement.clientWidth || 0
+    if (viewportWidth > MOBILE_WIDTH_BREAKPOINT) {
+        shouldRenderProductDetail.value = true
+        return
+    }
+
+    setTimeout(() => {
+        shouldRenderProductDetail.value = true
+    }, PRODUCT_DETAIL_MOUNT_DELAY)
 }
 
 // Solutions carousel functionality
@@ -1034,6 +1051,17 @@ const { data: productDetailRes, pending, error } = await useApi('/products?filte
         return null;
     });
 
+    watch(productDetailRes, (newValue) => {
+        if (!process.client || shouldRenderProductDetail.value === false) return
+
+        if (Array.isArray(newValue?.data) && newValue.data.length > 0) {
+            const viewportWidth = window.innerWidth || document.documentElement.clientWidth || 0
+            if (viewportWidth <= MOBILE_WIDTH_BREAKPOINT) {
+                shouldRenderProductDetail.value = false
+                scheduleProductDetailMount()
+            }
+        }
+    }, { immediate: true })
 
     watch(productDetail, (newData) => {
         if (newData) {
