@@ -11,7 +11,7 @@
                         <div class="breadcrumb-link">
                             <div class="breadcrumb-text">
                                 <div class="text-container">
-                                    <span class="breadcrumb-home"><NuxtLink to="/">{{ aboutUs.home_text }}</NuxtLink></span>
+                                    <span class="breadcrumb-home"><NuxtLink to="/" target="_blank">{{ aboutUs.home_text }}</NuxtLink></span>
                                 </div>
                             </div>
                             <div class="breadcrumb-text">
