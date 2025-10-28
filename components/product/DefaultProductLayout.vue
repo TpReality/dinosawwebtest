@@ -105,7 +105,7 @@
                                 <NuxtImg :src="productDetail.first_image_url" />
                             </div>
                             <div class="product-iso-mobile">
-                                <NuxtImg src="https://framerusercontent.com/images/siUN2C698XXvwsiEYB2Ag4WhLE.svg"/>
+                                <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/siUN2C698XXvwsiEYB2Ag4WhLE.svg"/>
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 48.12 39.914" overflow="visible">
                                     <g>
                                         <path d="M 35.925 18.229 C 35.925 18.307 35.861 18.371 35.782 18.371 C 35.703 18.371 35.639 18.307 35.639 18.229 C 35.639 18.15 35.703 18.086 35.782 18.086 C 35.861 18.086 35.925 18.15 35.925 18.229" fill="rgb(46,38,36)"></path>
@@ -125,7 +125,7 @@
                                 <button class="btn-whatsapp">
                                     <div class="btn-content" @click="goWhatsApp(productDetail.h1_page_inner_title)">
                                         <div class="whatsapp-icon">
-                                            <NuxtImg src="https://framerusercontent.com/images/Gvfk53Mm3Aro3nRYf1sD677a4.png?width=100&height=100" />
+                                            <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/Gvfk53Mm3Aro3nRYf1sD677a4.png?width=100&height=100" />
                                         </div>
                                         <span>{{ contentDetail.whats_app_title }}</span>
                                     </div>
@@ -140,7 +140,7 @@
                                 <NuxtImg :src="productDetail.first_image_url" />
                             </div>
                             <div class="product-iso">
-                                <NuxtImg src="https://framerusercontent.com/images/siUN2C698XXvwsiEYB2Ag4WhLE.svg"/>
+                                <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/siUN2C698XXvwsiEYB2Ag4WhLE.svg"/>
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 48.12 39.914" overflow="visible">
                                     <g>
                                         <path d="M 35.925 18.229 C 35.925 18.307 35.861 18.371 35.782 18.371 C 35.703 18.371 35.639 18.307 35.639 18.229 C 35.639 18.15 35.703 18.086 35.782 18.086 C 35.861 18.086 35.925 18.15 35.925 18.229" fill="rgb(46,38,36)"></path>
@@ -310,7 +310,7 @@
                                     </div>
                                     </NuxtLink>
                                     <div class="case-image">
-                                        <NuxtImg :src="productDetail.application_scenario_background_1_url" />
+                                        <NuxtImg loading="lazy" :src="productDetail.application_scenario_background_1_url" />
                                     </div>
                                 </div>
                             </div>
@@ -334,7 +334,7 @@
                                     </NuxtLink>
                                     
                                     <div class="case-image">
-                                        <NuxtImg :src="productDetail.application_scenario_background_2_url" />
+                                        <NuxtImg loading="lazy" :src="productDetail.application_scenario_background_2_url" />
                                     </div>
                                 </div>
                             </div>
@@ -357,7 +357,7 @@
                                     </div>
                                     </NuxtLink>
                                     <div class="case-image">
-                                        <NuxtImg :src="productDetail.application_scenario_background_3_url" />
+                                        <NuxtImg loading="lazy" :src="productDetail.application_scenario_background_3_url" />
                                     </div>
                                 </div>
                             </div>
@@ -451,7 +451,7 @@
                         <!-- Image Display Area with horizontal scrolling -->
                         <div class="slideshow-track" ref="benefitsSlideshowTrack">
                             <div v-for="(slide, index) in benefitsSlides" :key="index" class="slide-item">
-                                <NuxtImg :src="slide.image" />
+                                <NuxtImg loading="lazy" :src="slide.image" />
                             </div>
                         </div>
 
@@ -535,7 +535,7 @@
             <div class="features-row">
                 <div class="feature-grid-card">
                     <div class="feature-icon">
-                        <NuxtImg :src="productDetail.image_a_url" />
+                        <NuxtImg loading="lazy" :src="productDetail.image_a_url" />
                     </div>
                     <div class="feature-info">
                         <h3>{{ productDetail.detailed_advantages_a }}</h3>
@@ -545,7 +545,7 @@
 
                 <div class="feature-grid-card">
                     <div class="feature-icon">
-                        <NuxtImg :src="productDetail.image_b_url" />
+                        <NuxtImg loading="lazy" :src="productDetail.image_b_url" />
                     </div>
                     <div class="feature-info">
                         <h3>{{ productDetail.detailed_advantages_b }}</h3>
@@ -555,7 +555,7 @@
 
                 <div class="feature-grid-card">
                     <div class="feature-icon">
-                        <NuxtImg :src="productDetail.image_c_url" />
+                        <NuxtImg loading="lazy" :src="productDetail.image_c_url" />
                     </div>
                     <div class="feature-info">
                         <h3>{{ productDetail.detailed_advantages_c }}</h3>
@@ -566,7 +566,7 @@
              <div class="features-row" v-if="productDetail.image_d_url || productDetail.image_e_url || productDetail.image_f_url">
                 <div class="feature-grid-card" v-if="productDetail.image_d_url">
                     <div class="feature-icon">
-                        <NuxtImg :src="productDetail.image_d_url" />
+                        <NuxtImg loading="lazy" :src="productDetail.image_d_url" />
                     </div>
                     <div class="feature-info">
                         <h3>{{ productDetail.detailed_advantages_d }}</h3>
@@ -576,7 +576,7 @@
 
                 <div class="feature-grid-card" v-if="productDetail.image_e_url">
                     <div class="feature-icon">
-                        <NuxtImg :src="productDetail.image_e_url" />
+                        <NuxtImg loading="lazy" :src="productDetail.image_e_url" />
                     </div>
                     <div class="feature-info">
                         <h3>{{ productDetail.detailed_advantages_e}}</h3>
@@ -586,7 +586,7 @@
 
                 <div class="feature-grid-card" v-if="productDetail.image_f_url">
                     <div class="feature-icon">
-                        <NuxtImg :src="productDetail.image_f_url" />
+                        <NuxtImg loading="lazy" :src="productDetail.image_f_url" />
                     </div>
                     <div class="feature-info">
                         <h3>{{ productDetail.detailed_advantages_f }}</h3>
@@ -640,7 +640,7 @@
                 <div class="certification-cards">
                     <div class="certification-card">
                         <div class="cert-icon">
-                            <NuxtImg src="https://framerusercontent.com/images/Yiho2Cb5dzAnUvfdxCniH50mk.webp" alt="CE Certification" />
+                            <NuxtImg loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/Yiho2Cb5dzAnUvfdxCniH50mk.webp" alt="CE Certification" />
                         </div>
                         <div class="cert-info">
                             <p>{{ contentDetail.product_detail_certifications_standards_panel_title_1 }}</p>
@@ -649,7 +649,7 @@
 
                     <div class="certification-card">
                         <div class="cert-icon">
-                            <NuxtImg src="https://framerusercontent.com/images/Ylr0CRgiSfaNfAW4kzkACAp8Sk8.webp" alt="Tech Patents" />
+                            <NuxtImg loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/Ylr0CRgiSfaNfAW4kzkACAp8Sk8.webp" alt="Tech Patents" />
                         </div>
                         <div class="cert-info">
                             <p>{{ contentDetail.product_detail_certifications_standards_panel_title_2 }}</p>
@@ -658,7 +658,7 @@
 
                     <div class="certification-card">
                         <div class="cert-icon">
-                            <NuxtImg src="https://framerusercontent.com/images/XnigRDrO1VBjbKJKRd8TCFSlc.webp" alt="ISO Certification" />
+                            <NuxtImg loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/XnigRDrO1VBjbKJKRd8TCFSlc.webp" alt="ISO Certification" />
                         </div>
                         <div class="cert-info">
                             <p>{{ contentDetail.product_detail_certifications_standards_panel_title_3 }}</p>
@@ -680,7 +680,7 @@
                 <div class="statistics-cards">
                     <div class="stat-card">
                         <div class="stat-icon">
-                            <NuxtImg src="https://framerusercontent.com/images/3WAqTA4czHSx7tLQYQumGPcHF0.webp" alt="Countries Served" />
+                            <NuxtImg loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/3WAqTA4czHSx7tLQYQumGPcHF0.webp" alt="Countries Served" />
                         </div>
                         <div class="stat-content">
                             <div class="stat-number">
@@ -694,7 +694,7 @@
 
                     <div class="stat-card">
                         <div class="stat-icon">
-                            <NuxtImg src="https://framerusercontent.com/images/6APWWoW36QHSZvUE58xYEN6x0o.webp" alt="Industry Expertise" />
+                            <NuxtImg loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/6APWWoW36QHSZvUE58xYEN6x0o.webp" alt="Industry Expertise" />
                         </div>
                         <div class="stat-content">
                             <div class="stat-number">
@@ -747,7 +747,7 @@
                         <div class="solution-card">
                             <NuxtLink :to="'/Products/'+productDetail.link_1" target="_blank">
                                 <div class="solution-image">
-                                    <NuxtImg :src="relatedFirstImages.link_1" />
+                                    <NuxtImg loading="lazy" :src="relatedFirstImages.link_1" />
                                 </div>
                             
                                 <div class="solution-content">
@@ -768,7 +768,7 @@
                        <div class="solution-card">
                             <NuxtLink :to="'/Products/'+productDetail.link_2" target="_blank">
                                 <div class="solution-image">
-                                   <NuxtImg :src="relatedFirstImages.link_2" />
+                                   <NuxtImg loading="lazy" :src="relatedFirstImages.link_2" />
                                 </div>
                                 <div class="solution-content">
                                     <div class="solution-title">
@@ -788,7 +788,7 @@
                         <div class="solution-card">
                             <NuxtLink :to="'/Products/'+productDetail.link_3" target="_blank">
                                 <div class="solution-image">
-                                    <NuxtImg :src="relatedFirstImages.link_3" />
+                                    <NuxtImg loading="lazy" :src="relatedFirstImages.link_3" />
                                 </div>
                                 <div class="solution-content">
                                     <div class="solution-title">
@@ -854,7 +854,7 @@
                                 </button>
                             </div>
                             <div class="card-image">
-                                <NuxtImg src="https://framerusercontent.com/images/4T3YsD9vEGtvInzGOTD62VoYaI.webp" />
+                                <NuxtImg loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/4T3YsD9vEGtvInzGOTD62VoYaI.webp" />
                                 <!-- <div class="placeholder-image">Contact Image</div> -->
                             </div>
                         </div>
@@ -871,7 +871,7 @@
                                 </div>
                             </div>
                             <div class="card-image">
-                                <NuxtImg src="https://framerusercontent.com/images/rsDnae29rDFkuTTfSnFohbMKFg.webp" />
+                                <NuxtImg loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/rsDnae29rDFkuTTfSnFohbMKFg.webp" />
                                 <button class="about-btn">
                                     <NuxtLink to="/About-us" target="_blank">
                                     <span>{{ contentDetail.about_dinosaw_btn_text }}</span>
@@ -1581,7 +1581,7 @@ onUnmounted(() => {
         bottom:0;
         width:317px;
         height:156px;
-        background:url("https://framerusercontent.com/images/29EarsTVKsAno0P5LazZPoGx70.webp?width=2001&height=1002") no-repeat 150px center;
+        background:url("https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/29EarsTVKsAno0P5LazZPoGx70.webp?width=2001&height=1002") no-repeat 150px center;
         background-size:100% auto;
         z-index:3;
     }
@@ -1592,7 +1592,7 @@ onUnmounted(() => {
         top:-100px;
         width:594px;
         height:313px;
-        background:url("https://framerusercontent.com/images/MMezvAMCYfTeJANhRlBEMIVUso.webp?width=2001&height=1002") no-repeat center center;
+        background:url("https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/MMezvAMCYfTeJANhRlBEMIVUso.webp?width=2001&height=1002") no-repeat center center;
         background-size:100% auto;
         z-index:3;
         

@@ -27,7 +27,7 @@ export const useContentDetail = () => {
       ? (res.value.data[0] ?? {})
       : (res.value ?? {})
 
-      console.log('contentDetail', contentDetail)
+      // console.log('contentDetail', contentDetail)
     contentDetail.value = value
     return contentDetail.value
   }

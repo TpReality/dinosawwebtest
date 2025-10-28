@@ -124,7 +124,7 @@
                 <NuxtLink :to="'/blog/'+item.slug" target="_blank" v-if="index<=5"> 
                 <article class="hot-read-item">
                   <div class="article-thumbnail-container">
-                    <NuxtImg :src="item.first_image_url"  class="article-thumbnail" />
+                    <NuxtImg loading="lazy" :src="item.first_image_url"  class="article-thumbnail" />
                   </div>
                   <div class="article-info">
                     <h4 class="article-title">{{ item.title }}</h4>
@@ -170,7 +170,7 @@
             <div class="chat-profile-section">
               <div class="profile-container">
                 <div class="profile-avatar">
-                  <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/PZaASQwcgVKtL1LRgszQtSdlJU.png" />
+                  <NuxtImg loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/PZaASQwcgVKtL1LRgszQtSdlJU.png" />
                 </div>
                 <div class="profile-info">
                   <p class="profile-name">{{ contentDetail.chat_online_dialog_body_title }}</p>
@@ -200,7 +200,7 @@
           <div class="idea-card" v-if="index >5">
             <NuxtLink :to="'/blog/'+item.slug" target="_blank" class="idea-link">
               <div class="idea-image">
-                <NuxtImg :src="item.first_image_url"  />
+                <NuxtImg loading="lazy" :src="item.first_image_url"  />
               </div>
               <div class="idea-content">
                 <p>{{ item.title }}</p>

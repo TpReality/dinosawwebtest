@@ -1189,7 +1189,7 @@ const { data: indexRes, pending, error } = await useApi(`/home-pages?${populateQ
 
 watch(indexRes, (newPosts) => {
     if (newPosts) {
-        console.log(newPosts)
+        // console.log(newPosts)
         let data = newPosts.data[0]
         data.what_you_need_blogs.forEach(val=>{
             val.date = formatDateShort(val.date)

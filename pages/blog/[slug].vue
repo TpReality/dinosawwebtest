@@ -32,7 +32,7 @@ const isNewsOrEvents = computed(() => {
 const { contentDetail, isLoaded } = useContentDetail()
 // // console.log('contentDetail', contentDetail)
 const handleHead = (headData) => {
-    console.log('Product data received from component:', headData);
+    // console.log('Product data received from component:', headData);
     let useHeadData = {
         title: headData.meta_title || headData.title,
         meta: [
