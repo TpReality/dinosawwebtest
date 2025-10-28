@@ -981,7 +981,7 @@ const caseSlideWidth = ref(1200) // 全宽设计，响应式变量
 
 const shouldRenderProductDetail = ref(true)
 const MOBILE_WIDTH_BREAKPOINT = 768
-const PRODUCT_DETAIL_MOUNT_DELAY = 1000
+const PRODUCT_DETAIL_MOUNT_DELAY = 750
 
 // FAQ functionality
 const activeQuestion = ref(-1)
