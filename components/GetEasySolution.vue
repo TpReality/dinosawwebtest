@@ -89,8 +89,9 @@
                                         <div class="company-logo logo-5">
                                             <NuxtImg sizes="sm:100vw" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/f6JbMVOW0aC3lmb8RmX75F0hsjM.jpg" />
                                         </div>
+                                        
                                         <div class="company-logo logo-6">
-                                            <NuxtImg sizes="sm:100vw" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/JhGd8K0tLprFzPwik4sXB8ICkrQ.jpg" />
+                                            <NuxtImg sizes="sm:100vw" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/FpnleAPIN4IV2mdwRpgLUNOF6w.png" />
                                         </div>
                                     </div>
                                 </div>
