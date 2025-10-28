@@ -225,709 +225,711 @@
             </div>
         </div>
 
+        <div class="product-detail-wrap" v-if="shouldRenderProductDetail">
         <!-- Compatible Materials & Products Section -->
-        <div id="compatible-materials-section" class="compatible-materials-section">
-            <div class="container">
-                <!-- Section Header -->
-                <div class="section-header">
-                    <h2 class="section-title">{{productDetail.material_main_title}}</h2>
-                    <p class="section-subtitle">{{productDetail.applicable_material_title_description}}</p>
-                </div>
+            <div id="compatible-materials-section" class="compatible-materials-section">
+                <div class="container">
+                    <!-- Section Header -->
+                    <div class="section-header">
+                        <h2 class="section-title">{{productDetail.material_main_title}}</h2>
+                        <p class="section-subtitle">{{productDetail.applicable_material_title_description}}</p>
+                    </div>
 
-                <!-- Materials Carousel -->
-                <div class="materials-carousel">
-                    <div class="carousel-container">
-                        <div class="carousel-track" ref="carouselTrack">
-                            <!-- Item 1: Product Demo -->
-                             <template v-for="(material, index) in applicableMaterials" :key="index">
-                                <div class="carousel-item" v-if="productDetail[material]">
-                                    <div class="material-card">
-                                        <div class="card-header">
-                                            <h3 class="card-title">{{ productDetail[material] }}</h3>
+                    <!-- Materials Carousel -->
+                    <div class="materials-carousel">
+                        <div class="carousel-container">
+                            <div class="carousel-track" ref="carouselTrack">
+                                <!-- Item 1: Product Demo -->
+                                <template v-for="(material, index) in applicableMaterials" :key="index">
+                                    <div class="carousel-item" v-if="productDetail[material]">
+                                        <div class="material-card">
+                                            <div class="card-header">
+                                                <h3 class="card-title">{{ productDetail[material] }}</h3>
+                                            </div>
+                                            <div class="card-content" v-html="productDetail[material+'_rich']"></div>
                                         </div>
-                                        <div class="card-content" v-html="productDetail[material+'_rich']"></div>
                                     </div>
-                                </div>
-                            </template>
-                        </div>
-
-                        
-                    </div>
-
-                    <!-- Carousel Navigation -->
-                        <div class="carousel-controls">
-                            <button class="carousel-btn prev-btn" :class="currentSlide > 0 ? 'is-show' : ''"
-                                @click="prevSlide">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </button>
-                            <button class="carousel-btn next-btn is-show" @click="nextSlide" v-show="showNextBtn">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </button>
-                        </div>
-                </div>
-
-                <!-- Consult Expert Button -->
-                <div class="expert-consultation">
-                    <button class="expert-btn">
-                        <NuxtLink to="https://api.whatsapp.com/send?phone=8619859013937&Hi Lizzy,I want to know more detail information" target="_blank">
-                            <span>{{contentDetail.product_detail_consult_dinosaw_material_expert_btn_text}}</span>
-                        </NuxtLink>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Cases Carousel Section -->
-        <div id="cases-section" class="cases-section">
-
-            <!-- Cases Content Container -->
-            <div class="cases-content-container">
-                <div class="cases-section-inner">
-                    <!-- Cases List/Carousel -->
-                    <div class="cases-list">
-                        <div class="cases-carousel-track" ref="casesCarouselTrack">
-                            <!-- Case Item 1: Architectural Projects -->
-                            <div class="case-item">
-                                <div class="case-content">
-                                    <h2 class="case-header">
-                                        <span class="case-category">{{ productDetail.cutting_materials_1 }}</span>
-                                    </h2>
-                                    <h3 class="title">
-                                        <span class="title-main">{{productDetail.application_scenario_title_1}}</span>
-                                    </h3>
-                                    <div class="case-description" v-html="productDetail.application_scenario_description_1"></div>
-                                    <NuxtLink to="https://api.whatsapp.com/send?phone=8619859013937&Hi Lizzy,I want to know more detail information" target="_blank"> 
-                                    <div class="case-action">
-                                        <button class="case-btn">
-                                            <span>{{productDetail.button_text_1}}</span>
-                                        </button>
-                                    </div>
-                                    </NuxtLink>
-                                    <div class="case-image">
-                                        <NuxtImg sizes="sm:100vw" loading="lazy" :src="productDetail.application_scenario_background_1_url" />
-                                    </div>
-                                </div>
+                                </template>
                             </div>
 
-                            <!-- Case Item 2: Industrial Projects -->
-                            <div class="case-item">
-                                <div class="case-content">
-                                    <h2 class="case-header">
-                                        <span class="case-category">{{ productDetail.cutting_materials_2 }}</span>
-                                    </h2>
-                                    <h3 class="title">
-                                        <span class="title-main">{{productDetail.application_scenario_title_2}}</span>
-                                    </h3>
-                                    <div class="case-description" v-html="productDetail.application_scenario_description_2"></div>
-                                    <NuxtLink to="https://api.whatsapp.com/send?phone=8619859013937&Hi Lizzy,I want to know more detail information" target="_blank"> 
-                                        <div class="case-action">
-                                            <button class="case-btn">
-                                                <span>{{productDetail.button_text_2}}</span>
-                                            </button>
-                                        </div>
-                                    </NuxtLink>
-                                    
-                                    <div class="case-image">
-                                        <NuxtImg sizes="sm:100vw" loading="lazy" :src="productDetail.application_scenario_background_2_url" />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Case Item 3: Custom Solutions -->
-                            <div class="case-item">
-                                <div class="case-content">
-                                    <h2 class="case-header">
-                                        <span class="case-category">{{ productDetail.cutting_materials_3 }}</span>
-                                    </h2>
-                                    <h3 class="title">
-                                        <span class="title-main">{{productDetail.application_scenario_title_3}}</span>
-                                    </h3>
-                                    <div class="case-description" v-html="productDetail.application_scenario_description_3"></div>
-                                    <NuxtLink to="https://api.whatsapp.com/send?phone=8619859013937&Hi Lizzy,I want to know more detail information" target="_blank"> 
-                                    <div class="case-action">
-                                        <button class="case-btn">
-                                            <span>{{productDetail.button_text_3}}</span>
-                                        </button>
-                                    </div>
-                                    </NuxtLink>
-                                    <div class="case-image">
-                                        <NuxtImg sizes="sm:100vw" loading="lazy" :src="productDetail.application_scenario_background_3_url" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Carousel Controls -->
-                    <div>
-                        <!-- Navigation Buttons -->
-                        <div class="cases-nav-buttons">
-                            <button class="cases-btn cases-btn-prev" @click="prevCaseSlide"
-                                :disabled="currentCaseSlide === 0">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </button>
-                            <button class="cases-btn cases-btn-next" @click="nextCaseSlide"
-                                :disabled="currentCaseSlide >= totalCaseSlides - 1">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </button>
+                            
                         </div>
 
-                        <!-- Pagination Dots -->
-                        <div class="cases-pagination">
-                            <button v-for="(slide, index) in totalCaseSlides" :key="index" class="cases-pagination-btn"
-                                :class="{ active: currentCaseSlide === index }" @click="goToCaseSlide(index)">
-                                <div class="pagination-dot"></div>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Specs Section -->
-        <div id="specs-section" class="specs-section">
-            <div class="specs-container">
-                <!-- Section Header -->
-                <div class="specs-header">
-                    <div class="specs-title-container">
-                        <h2 class="specs-title">
-                            <span class="title-gradient">{{ contentDetail.product_detail_specs_and_options_title }}</span>
-                        </h2>
-                    </div>
-                    <div class="specs-subtitle-container">
-                        <p class="specs-subtitle">
-                            <span>{{ contentDetail.product_detail_specs_and_options_subtitle }}</span>
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Specifications Table -->
-                <div class="specs-table-container">
-                    <div class="specs-table-wrapper">
-                        <figure class="specs-table-figure" v-html="productDetail.table" > </figure>
-                    </div>
-                </div>
-
-                <!-- Contact Button -->
-                <div class="expert-consultation">
-                    <button class="expert-btn">
-                        <NuxtLink to="https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information" target="_blank">
-                            <span>{{ contentDetail.product_detail_contact_dinosaw_technical_btn_text }}</span>
-                        </NuxtLink>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Core Benefits Section -->
-        <div id="core-benefits" class="core-benefits">
-            <div class="benefits-header">
-                <div class="benefits-tagline">
-                    <p>{{ productDetail.small_title }}</p>
-                </div>
-                <div class="benefits-title title">
-                    <h2>
-                        <span>{{ productDetail.big_title }}</span>
-                    </h2>
-                </div>
-            </div>
-            <div class="benefits-content">
-
-                <div class="benefits-slideshow">
-                    <!-- Slideshow with horizontal scrolling functionality -->
-                    <div class="slideshow-container">
-                        <!-- Image Display Area with horizontal scrolling -->
-                        <div class="slideshow-track" ref="benefitsSlideshowTrack">
-                            <div v-for="(slide, index) in benefitsSlides" :key="index" class="slide-item">
-                                <NuxtImg sizes="sm:100vw" loading="lazy" :src="slide.image" />
-                            </div>
-                        </div>
-
-                        <!-- Slideshow Controls -->
-                        <div class="slideshow-controls">
-                            <div class="nav-buttons">
-                                <button class="nav-btn prev-btn" aria-label="Previous" @click="prevBenefitsSlide"
-                                    :disabled="currentBenefitsSlide === 0">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <!-- Carousel Navigation -->
+                            <div class="carousel-controls">
+                                <button class="carousel-btn prev-btn" :class="currentSlide > 0 ? 'is-show' : ''"
+                                    @click="prevSlide">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                                         <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2"
                                             stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
                                 </button>
-                                <button class="nav-btn next-btn" aria-label="Next" @click="nextBenefitsSlide"
-                                    :disabled="currentBenefitsSlide >= benefitsSlides.length - 1">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <button class="carousel-btn next-btn is-show" @click="nextSlide" v-show="showNextBtn">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                                         <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2"
                                             stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
                                 </button>
                             </div>
-                            <div class="pagination-dots">
-                                <button v-for="(slide, index) in benefitsSlides" :key="index" class="dot-btn"
-                                    :class="{ active: currentBenefitsSlide === index }"
-                                    @click="goToBenefitsSlide(index)">
-                                    <div class="dot"></div>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="benefits-features">
-                    <div class="feature-card" :class="featIndex == 1?'current':''" @click="featSlideChange(1)">
-                        <div class="feature-content">
-                            <div class="feature-header">
-                                <h3>{{ productDetail.core_strengths_a }}</h3>
-                            </div>
-                            <div class="feature-description">
-                                <p>{{ productDetail.core_strengths_description_a }}</p>
-                            </div>
-                        </div>
                     </div>
 
-                    <div class="feature-card" :class="featIndex == 2?'current':''" @click="featSlideChange(2)">
-                        <div class="feature-content">
-                            <div class="feature-header">
-                                <h3>{{ productDetail.core_strengths_b }}</h3>
-                            </div>
-                            <div class="feature-description">
-                                <p>{{ productDetail.core_strengths_description_b }}</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="feature-card" :class="featIndex == 3?'current':''" @click="featSlideChange(3)">
-                        <div class="feature-content">
-                            <div class="feature-header">
-                                <h3>{{ productDetail.core_strengths_c }}</h3>
-                            </div>
-                            <div class="feature-description">
-                                <p>{{ productDetail.core_strengths_description_c }}</p>
-                            </div>
-                        </div>
-                    </div>
-
+                    <!-- Consult Expert Button -->
                     <div class="expert-consultation">
                         <button class="expert-btn">
-                            <NuxtLink to="https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information" target="_blank">
-                                <span>{{ contentDetail.product_detail_inqury_for_details_btn_text }}</span>
+                            <NuxtLink to="https://api.whatsapp.com/send?phone=8619859013937&Hi Lizzy,I want to know more detail information" target="_blank">
+                                <span>{{contentDetail.product_detail_consult_dinosaw_material_expert_btn_text}}</span>
                             </NuxtLink>
                         </button>
                     </div>
                 </div>
             </div>
-        </div>
 
+            <!-- Cases Carousel Section -->
+            <div id="cases-section" class="cases-section">
 
-        <!-- Advanced Features Grid -->
-        <div class="advanced-features-grid">
-            <div class="features-row">
-                <div class="feature-grid-card">
-                    <div class="feature-icon">
-                        <NuxtImg sizes="sm:100vw" loading="lazy" :src="productDetail.image_a_url" />
-                    </div>
-                    <div class="feature-info">
-                        <h3>{{ productDetail.detailed_advantages_a }}</h3>
-                        <p>{{ productDetail.advantage_introduction_a }}</p>
-                    </div>
-                </div>
-
-                <div class="feature-grid-card">
-                    <div class="feature-icon">
-                        <NuxtImg sizes="sm:100vw" loading="lazy" :src="productDetail.image_b_url" />
-                    </div>
-                    <div class="feature-info">
-                        <h3>{{ productDetail.detailed_advantages_b }}</h3>
-                        <p>{{ productDetail.advantage_introduction_b }}</p>
-                    </div>
-                </div>
-
-                <div class="feature-grid-card">
-                    <div class="feature-icon">
-                        <NuxtImg sizes="sm:100vw" loading="lazy" :src="productDetail.image_c_url" />
-                    </div>
-                    <div class="feature-info">
-                        <h3>{{ productDetail.detailed_advantages_c }}</h3>
-                        <p>{{ productDetail.advantage_introduction_c }}</p>
-                    </div>
-                </div>
-            </div>
-             <div class="features-row" v-if="productDetail.image_d_url || productDetail.image_e_url || productDetail.image_f_url">
-                <div class="feature-grid-card" v-if="productDetail.image_d_url">
-                    <div class="feature-icon">
-                        <NuxtImg sizes="sm:100vw" loading="lazy" :src="productDetail.image_d_url" />
-                    </div>
-                    <div class="feature-info">
-                        <h3>{{ productDetail.detailed_advantages_d }}</h3>
-                        <p>{{ productDetail.advantage_introduction_d }}</p>
-                    </div>
-                </div>
-
-                <div class="feature-grid-card" v-if="productDetail.image_e_url">
-                    <div class="feature-icon">
-                        <NuxtImg sizes="sm:100vw" loading="lazy" :src="productDetail.image_e_url" />
-                    </div>
-                    <div class="feature-info">
-                        <h3>{{ productDetail.detailed_advantages_e}}</h3>
-                        <p>{{ productDetail.advantage_introduction_e }}</p>
-                    </div>
-                </div>
-
-                <div class="feature-grid-card" v-if="productDetail.image_f_url">
-                    <div class="feature-icon">
-                        <NuxtImg sizes="sm:100vw" loading="lazy" :src="productDetail.image_f_url" />
-                    </div>
-                    <div class="feature-info">
-                        <h3>{{ productDetail.detailed_advantages_f }}</h3>
-                        <p>{{ productDetail.advantage_introduction_f }}</p>
-                    </div>
-                </div>
-            </div>
-
-            
-        </div>
-        <!-- FAQ Section -->
-        <div id="faq-section" class="faq-section">
-            <div class="faq-header">
-                <h2>FAQs</h2>
-                <p>{{ productDetail.faq_subtitle }}</p>
-            </div>
-
-            <div class="faq-container" v-if="!pending && productDetail" >
-                <template v-for="(problem, index) in faqs.problems" :key="index">
-                    <div class="faq-item"  v-if="productDetail[problem]">
-                        <div class="faq-question">
-                            <h3>{{ productDetail[problem] }}</h3>
-                        </div>
-                        <div class="faq-answer" v-html="productDetail[faqs.answers[index]]"> </div>
-                    </div>
-                </template>
-            </div>
-            <div class="expert-consultation">
-                <button class="expert-btn">
-                    <NuxtLink to="https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information" target="_blank">
-                    <span>{{contentDetail.product_detail_need_more_assistance_link_btn_text}}</span>
-                    </NuxtLink>
-                </button>
-            </div>
-        </div>
-
-        <!-- Certifications & Standards Section -->
-        <div id="certifications-section" class="certifications-section">
-            <div class="certifications-container">
-                <!-- Section Header -->
-                <div class="certifications-header">
-                    <p class="section-subtitle">{{contentDetail.product_detail_certifications_standards_title}}</p>
-                </div>
-
-                <!-- Main Title -->
-                <div class="certifications-title">
-                    <h2>{{productDetail.big_title}}</h2>
-                </div>
-
-                <!-- Certification Cards -->
-                <div class="certification-cards">
-                    <div class="certification-card">
-                        <div class="cert-icon">
-                            <NuxtImg sizes="sm:100vw" loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/Yiho2Cb5dzAnUvfdxCniH50mk.webp" alt="CE Certification" />
-                        </div>
-                        <div class="cert-info">
-                            <p>{{ contentDetail.product_detail_certifications_standards_panel_title_1 }}</p>
-                        </div>
-                    </div>
-
-                    <div class="certification-card">
-                        <div class="cert-icon">
-                            <NuxtImg sizes="sm:100vw" loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/Ylr0CRgiSfaNfAW4kzkACAp8Sk8.webp" alt="Tech Patents" />
-                        </div>
-                        <div class="cert-info">
-                            <p>{{ contentDetail.product_detail_certifications_standards_panel_title_2 }}</p>
-                        </div>
-                    </div>
-
-                    <div class="certification-card">
-                        <div class="cert-icon">
-                            <NuxtImg sizes="sm:100vw" loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/XnigRDrO1VBjbKJKRd8TCFSlc.webp" alt="ISO Certification" />
-                        </div>
-                        <div class="cert-info">
-                            <p>{{ contentDetail.product_detail_certifications_standards_panel_title_3 }}</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Description -->
-                <div class="certifications-description">
-                    <p>{{ contentDetail.product_detail_certifications_standards_description }}</p>
-                </div>
-
-                <!-- Expertise Section -->
-                <div class="expertise-title">
-                    <h3>{{contentDetail.expertise_applications_title}}</h3>
-                </div>
-
-                <!-- Statistics Cards -->
-                <div class="statistics-cards">
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <NuxtImg sizes="sm:100vw" loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/3WAqTA4czHSx7tLQYQumGPcHF0.webp" alt="Countries Served" />
-                        </div>
-                        <div class="stat-content">
-                            <div class="stat-number">
-                                <p>75+</p>
-                            </div>
-                            <div class="stat-label">
-                                <p>{{ contentDetail.expertise_applications_panel_label_1 }}</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <NuxtImg sizes="sm:100vw" loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/6APWWoW36QHSZvUE58xYEN6x0o.webp" alt="Industry Expertise" />
-                        </div>
-                        <div class="stat-content">
-                            <div class="stat-number">
-                                <p>20+</p>
-                            </div>
-                            <div class="stat-label">
-                                <p>{{ contentDetail.expertise_applications_panel_label_2 }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="application-description" v-html="contentDetail.expertise_applications_description"></div>
-                <!-- <div class="application-description">
-                    <p>DINOSAW delivers lifecycle quality traceability and technical support for machinery equipment and
-                        diamond tools, covering cutting, drilling, engraving, polishing, and processing requirements for
-                        precision machining across industries.</p>
-                </div>
-
-                <div class="industries-description">
-                    <p>Our products serve traditional industries (mining, stone processing, building materials),
-                        high-precision manufacturing (quartz glass, semiconductor), advanced materials (graphite, carbon
-                        fiber composites), and specialized applications (nuclear decommissioning, railway construction
-                        machinery).</p>
-                </div> -->
-            </div>
-        </div>
-
-        <!-- Complete Production Solutions Section -->
-        <div id="solutions-section" class="solutions-section">
-            <div class="solutions-container">
-                <!-- Section Header -->
-                <div class="solutions-header">
-                    <h2>{{contentDetail.complete_production_solutions_equipments_title}}</h2>
-                </div>
-
-                <!-- Section Description -->
-                <div class="solutions-description">
-                    <p>{{ contentDetail.complete_production_solutions_equipments_description }}</p>
-                </div>
-
-                <!-- Solutions Carousel -->
-                <div class="solutions-carousel">
-                    <!-- Gradient Overlays -->
-                    <div class="gradient-overlay left" :class="{ visible: currentSolution > 0 }"></div>
-                    <div class="gradient-overlay right" :class="{ visible: currentSolution < 2 }"></div>
-
-                    <div class="solutions-track" ref="solutionsCarouselTrack">
-                        <!-- Solution Card 1 -->
-                        <div class="solution-card">
-                            <NuxtLink :to="'/Products/'+productDetail.link_1" target="_blank">
-                                <div class="solution-image">
-                                    <NuxtImg sizes="sm:100vw" loading="lazy" :src="relatedFirstImages.link_1" />
-                                </div>
-                            
-                                <div class="solution-content">
-                                    <div class="solution-title">
-                                        <h3>{{productDetail.recommended_product_name_a}}</h3>
-                                    </div>
-                                    <div class="solution-description">
-                                        <p>{{ productDetail.recommended_description_a }}</p>
-                                    </div>
-                                    <div class="solution-cta">
-                                        <p><em>{{productDetail.button_text_a  }}</em></p>
+                <!-- Cases Content Container -->
+                <div class="cases-content-container">
+                    <div class="cases-section-inner">
+                        <!-- Cases List/Carousel -->
+                        <div class="cases-list">
+                            <div class="cases-carousel-track" ref="casesCarouselTrack">
+                                <!-- Case Item 1: Architectural Projects -->
+                                <div class="case-item">
+                                    <div class="case-content">
+                                        <h2 class="case-header">
+                                            <span class="case-category">{{ productDetail.cutting_materials_1 }}</span>
+                                        </h2>
+                                        <h3 class="title">
+                                            <span class="title-main">{{productDetail.application_scenario_title_1}}</span>
+                                        </h3>
+                                        <div class="case-description" v-html="productDetail.application_scenario_description_1"></div>
+                                        <NuxtLink to="https://api.whatsapp.com/send?phone=8619859013937&Hi Lizzy,I want to know more detail information" target="_blank"> 
+                                        <div class="case-action">
+                                            <button class="case-btn">
+                                                <span>{{productDetail.button_text_1}}</span>
+                                            </button>
+                                        </div>
+                                        </NuxtLink>
+                                        <div class="case-image">
+                                            <NuxtImg sizes="sm:100vw" loading="lazy" :src="productDetail.application_scenario_background_1_url" />
+                                        </div>
                                     </div>
                                 </div>
+
+                                <!-- Case Item 2: Industrial Projects -->
+                                <div class="case-item">
+                                    <div class="case-content">
+                                        <h2 class="case-header">
+                                            <span class="case-category">{{ productDetail.cutting_materials_2 }}</span>
+                                        </h2>
+                                        <h3 class="title">
+                                            <span class="title-main">{{productDetail.application_scenario_title_2}}</span>
+                                        </h3>
+                                        <div class="case-description" v-html="productDetail.application_scenario_description_2"></div>
+                                        <NuxtLink to="https://api.whatsapp.com/send?phone=8619859013937&Hi Lizzy,I want to know more detail information" target="_blank"> 
+                                            <div class="case-action">
+                                                <button class="case-btn">
+                                                    <span>{{productDetail.button_text_2}}</span>
+                                                </button>
+                                            </div>
+                                        </NuxtLink>
+                                        
+                                        <div class="case-image">
+                                            <NuxtImg sizes="sm:100vw" loading="lazy" :src="productDetail.application_scenario_background_2_url" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Case Item 3: Custom Solutions -->
+                                <div class="case-item">
+                                    <div class="case-content">
+                                        <h2 class="case-header">
+                                            <span class="case-category">{{ productDetail.cutting_materials_3 }}</span>
+                                        </h2>
+                                        <h3 class="title">
+                                            <span class="title-main">{{productDetail.application_scenario_title_3}}</span>
+                                        </h3>
+                                        <div class="case-description" v-html="productDetail.application_scenario_description_3"></div>
+                                        <NuxtLink to="https://api.whatsapp.com/send?phone=8619859013937&Hi Lizzy,I want to know more detail information" target="_blank"> 
+                                        <div class="case-action">
+                                            <button class="case-btn">
+                                                <span>{{productDetail.button_text_3}}</span>
+                                            </button>
+                                        </div>
+                                        </NuxtLink>
+                                        <div class="case-image">
+                                            <NuxtImg sizes="sm:100vw" loading="lazy" :src="productDetail.application_scenario_background_3_url" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Carousel Controls -->
+                        <div>
+                            <!-- Navigation Buttons -->
+                            <div class="cases-nav-buttons">
+                                <button class="cases-btn cases-btn-prev" @click="prevCaseSlide"
+                                    :disabled="currentCaseSlide === 0">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                                <button class="cases-btn cases-btn-next" @click="nextCaseSlide"
+                                    :disabled="currentCaseSlide >= totalCaseSlides - 1">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <!-- Pagination Dots -->
+                            <div class="cases-pagination">
+                                <button v-for="(slide, index) in totalCaseSlides" :key="index" class="cases-pagination-btn"
+                                    :class="{ active: currentCaseSlide === index }" @click="goToCaseSlide(index)">
+                                    <div class="pagination-dot"></div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Specs Section -->
+            <div id="specs-section" class="specs-section">
+                <div class="specs-container">
+                    <!-- Section Header -->
+                    <div class="specs-header">
+                        <div class="specs-title-container">
+                            <h2 class="specs-title">
+                                <span class="title-gradient">{{ contentDetail.product_detail_specs_and_options_title }}</span>
+                            </h2>
+                        </div>
+                        <div class="specs-subtitle-container">
+                            <p class="specs-subtitle">
+                                <span>{{ contentDetail.product_detail_specs_and_options_subtitle }}</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Specifications Table -->
+                    <div class="specs-table-container">
+                        <div class="specs-table-wrapper">
+                            <figure class="specs-table-figure" v-html="productDetail.table" > </figure>
+                        </div>
+                    </div>
+
+                    <!-- Contact Button -->
+                    <div class="expert-consultation">
+                        <button class="expert-btn">
+                            <NuxtLink to="https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information" target="_blank">
+                                <span>{{ contentDetail.product_detail_contact_dinosaw_technical_btn_text }}</span>
                             </NuxtLink>
-                        </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
 
-                        <!-- Solution Card 2 -->
-                       <div class="solution-card">
-                            <NuxtLink :to="'/Products/'+productDetail.link_2" target="_blank">
-                                <div class="solution-image">
-                                   <NuxtImg sizes="sm:100vw" loading="lazy" :src="relatedFirstImages.link_2" />
-                                </div>
-                                <div class="solution-content">
-                                    <div class="solution-title">
-                                        <h3>{{productDetail.recommended_product_name_b}}</h3>
-                                    </div>
-                                    <div class="solution-description">
-                                        <p>{{ productDetail.recommended_description_b }}</p>
-                                    </div>
-                                    <div class="solution-cta">
-                                        <p><em>{{productDetail.button_text_b  }}</em></p>
-                                    </div>
-                                </div>
-                            </NuxtLink>
-                        </div>
+            <!-- Core Benefits Section -->
+            <div id="core-benefits" class="core-benefits">
+                <div class="benefits-header">
+                    <div class="benefits-tagline">
+                        <p>{{ productDetail.small_title }}</p>
+                    </div>
+                    <div class="benefits-title title">
+                        <h2>
+                            <span>{{ productDetail.big_title }}</span>
+                        </h2>
+                    </div>
+                </div>
+                <div class="benefits-content">
 
-                        <!-- Solution Card 3 -->
-                        <div class="solution-card">
-                            <NuxtLink :to="'/Products/'+productDetail.link_3" target="_blank">
-                                <div class="solution-image">
-                                    <NuxtImg sizes="sm:100vw" loading="lazy" :src="relatedFirstImages.link_3" />
+                    <div class="benefits-slideshow">
+                        <!-- Slideshow with horizontal scrolling functionality -->
+                        <div class="slideshow-container">
+                            <!-- Image Display Area with horizontal scrolling -->
+                            <div class="slideshow-track" ref="benefitsSlideshowTrack">
+                                <div v-for="(slide, index) in benefitsSlides" :key="index" class="slide-item">
+                                    <NuxtImg sizes="sm:100vw" loading="lazy" :src="slide.image" />
                                 </div>
-                                <div class="solution-content">
-                                    <div class="solution-title">
-                                        <h3>{{productDetail.recommended_product_name_c}}</h3>
-                                    </div>
-                                    <div class="solution-description">
-                                        <p>{{ productDetail.recommended_description_c }}</p>
-                                    </div>
-                                    <div class="solution-cta">
-                                        <p><em>{{productDetail.button_text_c  }}</em></p>
-                                    </div>
+                            </div>
+
+                            <!-- Slideshow Controls -->
+                            <div class="slideshow-controls">
+                                <div class="nav-buttons">
+                                    <button class="nav-btn prev-btn" aria-label="Previous" @click="prevBenefitsSlide"
+                                        :disabled="currentBenefitsSlide === 0">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </button>
+                                    <button class="nav-btn next-btn" aria-label="Next" @click="nextBenefitsSlide"
+                                        :disabled="currentBenefitsSlide >= benefitsSlides.length - 1">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </button>
                                 </div>
-                            </NuxtLink>
+                                <div class="pagination-dots">
+                                    <button v-for="(slide, index) in benefitsSlides" :key="index" class="dot-btn"
+                                        :class="{ active: currentBenefitsSlide === index }"
+                                        @click="goToBenefitsSlide(index)">
+                                        <div class="dot"></div>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Carousel Navigation -->
-                    <div class="solutions-navigation">
-                        <div class="solutions-dots">
-                            <span v-for="(item, index) in 3" :key="index" class="solution-dot"
-                                :class="{ active: currentSolution === index }" @click="goToSolution(index)"></span>
+                    <div class="benefits-features">
+                        <div class="feature-card" :class="featIndex == 1?'current':''" @click="featSlideChange(1)">
+                            <div class="feature-content">
+                                <div class="feature-header">
+                                    <h3>{{ productDetail.core_strengths_a }}</h3>
+                                </div>
+                                <div class="feature-description">
+                                    <p>{{ productDetail.core_strengths_description_a }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="feature-card" :class="featIndex == 2?'current':''" @click="featSlideChange(2)">
+                            <div class="feature-content">
+                                <div class="feature-header">
+                                    <h3>{{ productDetail.core_strengths_b }}</h3>
+                                </div>
+                                <div class="feature-description">
+                                    <p>{{ productDetail.core_strengths_description_b }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="feature-card" :class="featIndex == 3?'current':''" @click="featSlideChange(3)">
+                            <div class="feature-content">
+                                <div class="feature-header">
+                                    <h3>{{ productDetail.core_strengths_c }}</h3>
+                                </div>
+                                <div class="feature-description">
+                                    <p>{{ productDetail.core_strengths_description_c }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="expert-consultation">
+                            <button class="expert-btn">
+                                <NuxtLink to="https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information" target="_blank">
+                                    <span>{{ contentDetail.product_detail_inqury_for_details_btn_text }}</span>
+                                </NuxtLink>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Advanced Features Grid -->
+            <div class="advanced-features-grid">
+                <div class="features-row">
+                    <div class="feature-grid-card">
+                        <div class="feature-icon">
+                            <NuxtImg sizes="sm:100vw" loading="lazy" :src="productDetail.image_a_url" />
+                        </div>
+                        <div class="feature-info">
+                            <h3>{{ productDetail.detailed_advantages_a }}</h3>
+                            <p>{{ productDetail.advantage_introduction_a }}</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-grid-card">
+                        <div class="feature-icon">
+                            <NuxtImg sizes="sm:100vw" loading="lazy" :src="productDetail.image_b_url" />
+                        </div>
+                        <div class="feature-info">
+                            <h3>{{ productDetail.detailed_advantages_b }}</h3>
+                            <p>{{ productDetail.advantage_introduction_b }}</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-grid-card">
+                        <div class="feature-icon">
+                            <NuxtImg sizes="sm:100vw" loading="lazy" :src="productDetail.image_c_url" />
+                        </div>
+                        <div class="feature-info">
+                            <h3>{{ productDetail.detailed_advantages_c }}</h3>
+                            <p>{{ productDetail.advantage_introduction_c }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="features-row" v-if="productDetail.image_d_url || productDetail.image_e_url || productDetail.image_f_url">
+                    <div class="feature-grid-card" v-if="productDetail.image_d_url">
+                        <div class="feature-icon">
+                            <NuxtImg sizes="sm:100vw" loading="lazy" :src="productDetail.image_d_url" />
+                        </div>
+                        <div class="feature-info">
+                            <h3>{{ productDetail.detailed_advantages_d }}</h3>
+                            <p>{{ productDetail.advantage_introduction_d }}</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-grid-card" v-if="productDetail.image_e_url">
+                        <div class="feature-icon">
+                            <NuxtImg sizes="sm:100vw" loading="lazy" :src="productDetail.image_e_url" />
+                        </div>
+                        <div class="feature-info">
+                            <h3>{{ productDetail.detailed_advantages_e}}</h3>
+                            <p>{{ productDetail.advantage_introduction_e }}</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-grid-card" v-if="productDetail.image_f_url">
+                        <div class="feature-icon">
+                            <NuxtImg sizes="sm:100vw" loading="lazy" :src="productDetail.image_f_url" />
+                        </div>
+                        <div class="feature-info">
+                            <h3>{{ productDetail.detailed_advantages_f }}</h3>
+                            <p>{{ productDetail.advantage_introduction_f }}</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Custom Solution Button -->
+                
+            </div>
+            <!-- FAQ Section -->
+            <div id="faq-section" class="faq-section">
+                <div class="faq-header">
+                    <h2>FAQs</h2>
+                    <p>{{ productDetail.faq_subtitle }}</p>
+                </div>
+
+                <div class="faq-container" v-if="!pending && productDetail" >
+                    <template v-for="(problem, index) in faqs.problems" :key="index">
+                        <div class="faq-item"  v-if="productDetail[problem]">
+                            <div class="faq-question">
+                                <h3>{{ productDetail[problem] }}</h3>
+                            </div>
+                            <div class="faq-answer" v-html="productDetail[faqs.answers[index]]"> </div>
+                        </div>
+                    </template>
+                </div>
                 <div class="expert-consultation">
                     <button class="expert-btn">
                         <NuxtLink to="https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information" target="_blank">
-                            <span>{{ contentDetail.get_a_custom_solution_text }}</span>
+                        <span>{{contentDetail.product_detail_need_more_assistance_link_btn_text}}</span>
                         </NuxtLink>
                     </button>
                 </div>
             </div>
-        </div>
 
-        <!-- Contact and About Section -->
-        <div class="contact-about-section">
-            <div class="contact-about-container">
-                <div class="section-header">
-                    <div class="header-content">
-                        <h2>{{ productDetail.cta_main_title }}</h2>
+            <!-- Certifications & Standards Section -->
+            <div id="certifications-section" class="certifications-section">
+                <div class="certifications-container">
+                    <!-- Section Header -->
+                    <div class="certifications-header">
+                        <p class="section-subtitle">{{contentDetail.product_detail_certifications_standards_title}}</p>
                     </div>
-                    <div class="header-description">
-                        <p>{{ productDetail.cta_subtitle }}</p>
-                    </div>
-                </div>
 
-                <div class="contact-cards">
-                    <div class="contact-card">
-                        <div class="card-content">
-                            <div class="card-text">
-                                <div class="card-title">
-                                    <h3>{{ contentDetail.contact_dinosaw_title }}</h3>
-                                </div>
-                                <div class="card-description">
-                                    <p>{{contentDetail.contact_dinosaw_description}}</p>
-                                </div>
-                                <button class="contact-btn">
-                                    <NuxtLink to="https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information" target="_blank">
-                                    <span>{{ contentDetail.get_a_quote_text }}</span>
-                                    </NuxtLink>
-                                </button>
+                    <!-- Main Title -->
+                    <div class="certifications-title">
+                        <h2>{{productDetail.big_title}}</h2>
+                    </div>
+
+                    <!-- Certification Cards -->
+                    <div class="certification-cards">
+                        <div class="certification-card">
+                            <div class="cert-icon">
+                                <NuxtImg sizes="sm:100vw" loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/Yiho2Cb5dzAnUvfdxCniH50mk.webp" alt="CE Certification" />
                             </div>
-                            <div class="card-image">
-                                <NuxtImg sizes="sm:100vw" loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/4T3YsD9vEGtvInzGOTD62VoYaI.webp" />
-                                <!-- <div class="placeholder-image">Contact Image</div> -->
+                            <div class="cert-info">
+                                <p>{{ contentDetail.product_detail_certifications_standards_panel_title_1 }}</p>
+                            </div>
+                        </div>
+
+                        <div class="certification-card">
+                            <div class="cert-icon">
+                                <NuxtImg sizes="sm:100vw" loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/Ylr0CRgiSfaNfAW4kzkACAp8Sk8.webp" alt="Tech Patents" />
+                            </div>
+                            <div class="cert-info">
+                                <p>{{ contentDetail.product_detail_certifications_standards_panel_title_2 }}</p>
+                            </div>
+                        </div>
+
+                        <div class="certification-card">
+                            <div class="cert-icon">
+                                <NuxtImg sizes="sm:100vw" loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/XnigRDrO1VBjbKJKRd8TCFSlc.webp" alt="ISO Certification" />
+                            </div>
+                            <div class="cert-info">
+                                <p>{{ contentDetail.product_detail_certifications_standards_panel_title_3 }}</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="about-card">
-                        <div class="card-content">
-                            <div class="card-text">
-                                <div class="card-title">
-                                    <h3>{{ productDetail.title }}</h3>
+                    <!-- Description -->
+                    <div class="certifications-description">
+                        <p>{{ contentDetail.product_detail_certifications_standards_description }}</p>
+                    </div>
+
+                    <!-- Expertise Section -->
+                    <div class="expertise-title">
+                        <h3>{{contentDetail.expertise_applications_title}}</h3>
+                    </div>
+
+                    <!-- Statistics Cards -->
+                    <div class="statistics-cards">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <NuxtImg sizes="sm:100vw" loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/3WAqTA4czHSx7tLQYQumGPcHF0.webp" alt="Countries Served" />
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-number">
+                                    <p>75+</p>
                                 </div>
-                                <div class="card-description">
-                                    <p>{{ contentDetail.trustworthy_wire_saw_machine_manufacturer_description }}</p>
+                                <div class="stat-label">
+                                    <p>{{ contentDetail.expertise_applications_panel_label_1 }}</p>
                                 </div>
                             </div>
-                            <div class="card-image">
-                                <NuxtImg sizes="sm:100vw" loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/rsDnae29rDFkuTTfSnFohbMKFg.webp" />
-                                <button class="about-btn">
-                                    <NuxtLink to="/About-us" target="_blank">
-                                    <span>{{ contentDetail.about_dinosaw_btn_text }}</span>
-                                    </NuxtLink>
-                                </button>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <NuxtImg sizes="sm:100vw" loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/6APWWoW36QHSZvUE58xYEN6x0o.webp" alt="Industry Expertise" />
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-number">
+                                    <p>20+</p>
+                                </div>
+                                <div class="stat-label">
+                                    <p>{{ contentDetail.expertise_applications_panel_label_2 }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="application-description" v-html="contentDetail.expertise_applications_description"></div>
+                    <!-- <div class="application-description">
+                        <p>DINOSAW delivers lifecycle quality traceability and technical support for machinery equipment and
+                            diamond tools, covering cutting, drilling, engraving, polishing, and processing requirements for
+                            precision machining across industries.</p>
+                    </div>
+
+                    <div class="industries-description">
+                        <p>Our products serve traditional industries (mining, stone processing, building materials),
+                            high-precision manufacturing (quartz glass, semiconductor), advanced materials (graphite, carbon
+                            fiber composites), and specialized applications (nuclear decommissioning, railway construction
+                            machinery).</p>
+                    </div> -->
+                </div>
+            </div>
+
+            <!-- Complete Production Solutions Section -->
+            <div id="solutions-section" class="solutions-section">
+                <div class="solutions-container">
+                    <!-- Section Header -->
+                    <div class="solutions-header">
+                        <h2>{{contentDetail.complete_production_solutions_equipments_title}}</h2>
+                    </div>
+
+                    <!-- Section Description -->
+                    <div class="solutions-description">
+                        <p>{{ contentDetail.complete_production_solutions_equipments_description }}</p>
+                    </div>
+
+                    <!-- Solutions Carousel -->
+                    <div class="solutions-carousel">
+                        <!-- Gradient Overlays -->
+                        <div class="gradient-overlay left" :class="{ visible: currentSolution > 0 }"></div>
+                        <div class="gradient-overlay right" :class="{ visible: currentSolution < 2 }"></div>
+
+                        <div class="solutions-track" ref="solutionsCarouselTrack">
+                            <!-- Solution Card 1 -->
+                            <div class="solution-card">
+                                <NuxtLink :to="'/Products/'+productDetail.link_1" target="_blank">
+                                    <div class="solution-image">
+                                        <NuxtImg sizes="sm:100vw" loading="lazy" :src="relatedFirstImages.link_1" />
+                                    </div>
+                                
+                                    <div class="solution-content">
+                                        <div class="solution-title">
+                                            <h3>{{productDetail.recommended_product_name_a}}</h3>
+                                        </div>
+                                        <div class="solution-description">
+                                            <p>{{ productDetail.recommended_description_a }}</p>
+                                        </div>
+                                        <div class="solution-cta">
+                                            <p><em>{{productDetail.button_text_a  }}</em></p>
+                                        </div>
+                                    </div>
+                                </NuxtLink>
+                            </div>
+
+                            <!-- Solution Card 2 -->
+                        <div class="solution-card">
+                                <NuxtLink :to="'/Products/'+productDetail.link_2" target="_blank">
+                                    <div class="solution-image">
+                                    <NuxtImg sizes="sm:100vw" loading="lazy" :src="relatedFirstImages.link_2" />
+                                    </div>
+                                    <div class="solution-content">
+                                        <div class="solution-title">
+                                            <h3>{{productDetail.recommended_product_name_b}}</h3>
+                                        </div>
+                                        <div class="solution-description">
+                                            <p>{{ productDetail.recommended_description_b }}</p>
+                                        </div>
+                                        <div class="solution-cta">
+                                            <p><em>{{productDetail.button_text_b  }}</em></p>
+                                        </div>
+                                    </div>
+                                </NuxtLink>
+                            </div>
+
+                            <!-- Solution Card 3 -->
+                            <div class="solution-card">
+                                <NuxtLink :to="'/Products/'+productDetail.link_3" target="_blank">
+                                    <div class="solution-image">
+                                        <NuxtImg sizes="sm:100vw" loading="lazy" :src="relatedFirstImages.link_3" />
+                                    </div>
+                                    <div class="solution-content">
+                                        <div class="solution-title">
+                                            <h3>{{productDetail.recommended_product_name_c}}</h3>
+                                        </div>
+                                        <div class="solution-description">
+                                            <p>{{ productDetail.recommended_description_c }}</p>
+                                        </div>
+                                        <div class="solution-cta">
+                                            <p><em>{{productDetail.button_text_c  }}</em></p>
+                                        </div>
+                                    </div>
+                                </NuxtLink>
+                            </div>
+                        </div>
+
+                        <!-- Carousel Navigation -->
+                        <div class="solutions-navigation">
+                            <div class="solutions-dots">
+                                <span v-for="(item, index) in 3" :key="index" class="solution-dot"
+                                    :class="{ active: currentSolution === index }" @click="goToSolution(index)"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Custom Solution Button -->
+                    <div class="expert-consultation">
+                        <button class="expert-btn">
+                            <NuxtLink to="https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information" target="_blank">
+                                <span>{{ contentDetail.get_a_custom_solution_text }}</span>
+                            </NuxtLink>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact and About Section -->
+            <div class="contact-about-section">
+                <div class="contact-about-container">
+                    <div class="section-header">
+                        <div class="header-content">
+                            <h2>{{ productDetail.cta_main_title }}</h2>
+                        </div>
+                        <div class="header-description">
+                            <p>{{ productDetail.cta_subtitle }}</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-cards">
+                        <div class="contact-card">
+                            <div class="card-content">
+                                <div class="card-text">
+                                    <div class="card-title">
+                                        <h3>{{ contentDetail.contact_dinosaw_title }}</h3>
+                                    </div>
+                                    <div class="card-description">
+                                        <p>{{contentDetail.contact_dinosaw_description}}</p>
+                                    </div>
+                                    <button class="contact-btn">
+                                        <NuxtLink to="https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information" target="_blank">
+                                        <span>{{ contentDetail.get_a_quote_text }}</span>
+                                        </NuxtLink>
+                                    </button>
+                                </div>
+                                <div class="card-image">
+                                    <NuxtImg sizes="sm:100vw" loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/4T3YsD9vEGtvInzGOTD62VoYaI.webp" />
+                                    <!-- <div class="placeholder-image">Contact Image</div> -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="about-card">
+                            <div class="card-content">
+                                <div class="card-text">
+                                    <div class="card-title">
+                                        <h3>{{ productDetail.title }}</h3>
+                                    </div>
+                                    <div class="card-description">
+                                        <p>{{ contentDetail.trustworthy_wire_saw_machine_manufacturer_description }}</p>
+                                    </div>
+                                </div>
+                                <div class="card-image">
+                                    <NuxtImg sizes="sm:100vw" loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/rsDnae29rDFkuTTfSnFohbMKFg.webp" />
+                                    <button class="about-btn">
+                                        <NuxtLink to="/About-us" target="_blank">
+                                        <span>{{ contentDetail.about_dinosaw_btn_text }}</span>
+                                        </NuxtLink>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
 
-        <!-- Other Machines or Tools Navigation Section -->
-        <div class="other-machines-section">
-            <div class="other-machines-container">
-                <!-- Section Header -->
-                <div class="other-machines-header">
-                    <div class="section-title-container">
-                        <h2 class="other-machines-title">{{ contentDetail.product_detail_other_machines_or_tools_text }}</h2>
-                    </div>
-                    <div class="section-subtitle-container">
-                        <p class="other-machines-subtitle">{{ contentDetail.product_detail_are_you_looking_for_more_new_text }}
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Navigation Links -->
-                <div class="machines-navigation">
-                    <div class="nav-link-container">
-                        <NuxtLink :to="'/Products/'+productDetail.link_1" class="nav-link prev-link" target="_blank">
-                            <div class="nav-icon-container">
-                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                                    <path d="M20 24L12 16L20 8" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </div>
-                            <div class="nav-content">
-                                <p class="nav-text">{{ contentDetail.product_detail_previous_machines_or_tools_btn_text }}</p>
-                            </div>
-                            <div class="nav-after"></div>
-                        </NuxtLink>
+            <!-- Other Machines or Tools Navigation Section -->
+            <div class="other-machines-section">
+                <div class="other-machines-container">
+                    <!-- Section Header -->
+                    <div class="other-machines-header">
+                        <div class="section-title-container">
+                            <h2 class="other-machines-title">{{ contentDetail.product_detail_other_machines_or_tools_text }}</h2>
+                        </div>
+                        <div class="section-subtitle-container">
+                            <p class="other-machines-subtitle">{{ contentDetail.product_detail_are_you_looking_for_more_new_text }}
+                            </p>
+                        </div>
                     </div>
 
-                    <div class="nav-link-container">
-                        <NuxtLink :to="'/Products/'+productDetail.link_3" class="nav-link next-link" target="_blank">
-                            <div class="nav-content">
-                                <p class="nav-text">{{contentDetail.product_detail_next_machines_or_tools_btn_text}}</p>
-                            </div>
-                            <div class="nav-icon-container">
-                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                                    <path d="M12 8L20 16L12 24" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </div>
-                        </NuxtLink>
+                    <!-- Navigation Links -->
+                    <div class="machines-navigation">
+                        <div class="nav-link-container">
+                            <NuxtLink :to="'/Products/'+productDetail.link_1" class="nav-link prev-link" target="_blank">
+                                <div class="nav-icon-container">
+                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                                        <path d="M20 24L12 16L20 8" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                                <div class="nav-content">
+                                    <p class="nav-text">{{ contentDetail.product_detail_previous_machines_or_tools_btn_text }}</p>
+                                </div>
+                                <div class="nav-after"></div>
+                            </NuxtLink>
+                        </div>
+
+                        <div class="nav-link-container">
+                            <NuxtLink :to="'/Products/'+productDetail.link_3" class="nav-link next-link" target="_blank">
+                                <div class="nav-content">
+                                    <p class="nav-text">{{contentDetail.product_detail_next_machines_or_tools_btn_text}}</p>
+                                </div>
+                                <div class="nav-icon-container">
+                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                                        <path d="M12 8L20 16L12 24" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                            </NuxtLink>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -939,7 +941,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, computed, nextTick } from 'vue'
+import { ref, onMounted, onUnmounted, computed, nextTick, watch } from 'vue'
 
 const props = defineProps({
     slug: {
@@ -976,11 +978,29 @@ const currentCaseSlide = ref(0)
 const totalCaseSlides = 3
 const caseSlideWidth = ref(1200) // 全宽设计，响应式变量
 
+const shouldRenderProductDetail = ref(true)
+const MOBILE_WIDTH_BREAKPOINT = 768
+const PRODUCT_DETAIL_MOUNT_DELAY = 500
+
 // FAQ functionality
 const activeQuestion = ref(-1)
 
 const toggleQuestion = (index) => {
     activeQuestion.value = activeQuestion.value === index ? -1 : index
+}
+
+const scheduleProductDetailMount = () => {
+    if (shouldRenderProductDetail.value) return
+
+    const viewportWidth = window.innerWidth || document.documentElement.clientWidth || 0
+    if (viewportWidth > MOBILE_WIDTH_BREAKPOINT) {
+        shouldRenderProductDetail.value = true
+        return
+    }
+
+    setTimeout(() => {
+        shouldRenderProductDetail.value = true
+    }, PRODUCT_DETAIL_MOUNT_DELAY)
 }
 
 // Solutions carousel functionality
@@ -1008,36 +1028,32 @@ const faqs = ref({
 
 const { data: productDetailRes, pending, error } = await useApi('/products?filters[url][$eq]='+props.slug)
     const productDetail = computed(() => {
-        // 检查 productDetailRes.value 是否存在
-       
- if (productDetailRes.value && productDetailRes.value.data && productDetailRes.value.data.length > 0) {
-            // 返回你需要的具体数据对象
+        if (productDetailRes.value && productDetailRes.value.data && productDetailRes.value.data.length > 0) {
             benefitsSlides.value = [
-                {
-                    image: productDetailRes.value.data[0].core_advantage_illustration_a_url,
-                },
-                {
-                    image: productDetailRes.value.data[0].core_advantage_illustration_b_url,
-                },
-                {
-                    image: productDetailRes.value.data[0].core_advantage_illustration_c_url,
-                }
+                { image: productDetailRes.value.data[0].core_advantage_illustration_a_url },
+                { image: productDetailRes.value.data[0].core_advantage_illustration_b_url },
+                { image: productDetailRes.value.data[0].core_advantage_illustration_c_url }
             ]
-            // console.log('productDetailRes',productDetailRes.value)
             return productDetailRes.value.data[0];
         }
-        // console.log('productDetailRes.value:', productDetailRes.value);
-        // 否则返回 null 或一个空对象，方便判断
-        return null; 
-       
-       
+        return null;
     });
-        // 监听 productDetail 变化并通知父组件
+
+    watch(productDetailRes, (newValue) => {
+        if (!process.client || shouldRenderProductDetail.value === false) return
+
+        if (Array.isArray(newValue?.data) && newValue.data.length > 0) {
+            const viewportWidth = window.innerWidth || document.documentElement.clientWidth || 0
+            if (viewportWidth <= MOBILE_WIDTH_BREAKPOINT) {
+                shouldRenderProductDetail.value = false
+                scheduleProductDetailMount()
+            }
+        }
+    }, { immediate: true })
+
     watch(productDetail, (newData) => {
         if (newData) {
-            // console.log('Product data loaded in DefaultProductLayout:', newData);
-            // 通知父组件数据已加载
-            emit('headdata-loaded', newData);
+            emit('headdata-loaded', newData)
         }
     }, { immediate: true });
 
@@ -1055,12 +1071,10 @@ watch(productDetail, async (pd) => {
       return item?.first_image_url || ''
     }
     const results = await Promise.all(links.map(fetchOne))
-    // 写入到映射对象
     if (pd.link_1) relatedFirstImages.value.link_1 = results[0] || ''
     if (pd.link_2) relatedFirstImages.value.link_2 = results[1] || ''
     if (pd.link_3) relatedFirstImages.value.link_3 = results[2] || ''
   } catch (e) {
-    // 静默失败，避免影响页面渲染
     console.warn('Fetch related product first images failed', e)
     window.location.href = '/404'
   } finally {
