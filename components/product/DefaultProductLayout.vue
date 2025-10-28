@@ -224,7 +224,63 @@
                 </div>
             </div>
         </div>
-        <div class="product-detail-wrap" v-if="shouldRenderProductDetail">
+         <!-- Compatible Materials & Products Section -->
+            <div id="compatible-materials-section" class="compatible-materials-section" v-if="shouldRenderProductDetail">
+                <div class="container">
+                    <!-- Section Header -->
+                    <div class="section-header">
+                        <h2 class="section-title">{{productDetail.material_main_title}}</h2>
+                        <p class="section-subtitle">{{productDetail.applicable_material_title_description}}</p>
+                    </div>
+
+                    <!-- Materials Carousel -->
+                    <div class="materials-carousel">
+                        <div class="carousel-container">
+                            <div class="carousel-track" ref="carouselTrack">
+                                <!-- Item 1: Product Demo -->
+                                <template v-for="(material, index) in applicableMaterials" :key="index">
+                                    <div class="carousel-item" v-if="productDetail[material] && index != 0">
+                                        <div class="material-card">
+                                            <div class="card-header">
+                                                <h3 class="card-title">{{ productDetail[material] }}</h3>
+                                            </div>
+                                            <div class="card-content" v-html="materialRichText[material]"></div>
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+
+                            
+                        </div>
+
+                        <!-- Carousel Navigation -->
+                            <div class="carousel-controls">
+                                <button class="carousel-btn prev-btn" :class="currentSlide > 0 ? 'is-show' : ''"
+                                    @click="prevSlide">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                                <button class="carousel-btn next-btn is-show" @click="nextSlide" v-show="showNextBtn">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                            </div>
+                    </div>
+
+                    <!-- Consult Expert Button -->
+                    <div class="expert-consultation">
+                        <button class="expert-btn">
+                            <NuxtLink to="https://api.whatsapp.com/send?phone=8619859013937&Hi Lizzy,I want to know more detail information" target="_blank">
+                                <span>{{contentDetail.product_detail_consult_dinosaw_material_expert_btn_text}}</span>
+                            </NuxtLink>
+                        </button>
+                    </div>
+                </div>
+            </div>
        
 
             <!-- Cases Carousel Section -->
@@ -876,7 +932,6 @@
                     </div>
                 </div>
             </div>
-        </div>
     </div>
 
 
