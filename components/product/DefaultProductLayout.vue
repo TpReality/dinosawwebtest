@@ -225,7 +225,7 @@
             </div>
         </div>
          <!-- Compatible Materials & Products Section -->
-            <div id="compatible-materials-section" class="compatible-materials-section">
+            <div id="compatible-materials-section" class="compatible-materials-section" v-if="shouldRenderProductDetail">
                 <div class="container">
                     <!-- Section Header -->
                     <div class="section-header">
@@ -1027,51 +1027,41 @@ const faqs = ref({
 })
 
 const { data: productDetailRes, pending, error } = await useApi('/products?filters[url][$eq]='+props.slug)
-watch(productDetailRes, (newValue) => {
-    if (!process.client || shouldRenderProductDetail.value === false) return
+    const productDetail = computed(() => {
+        if (productDetailRes.value && productDetailRes.value.data && productDetailRes.value.data.length > 0) {
+            const productData = productDetailRes.value.data[0]
 
-    if (Array.isArray(newValue?.data) && newValue.data.length > 0) {
-        const viewportWidth = window.innerWidth || document.documentElement.clientWidth || 0
-        if (viewportWidth <= MOBILE_WIDTH_BREAKPOINT) {
-            shouldRenderProductDetail.value = false
-            scheduleProductDetailMount()
+            benefitsSlides.value = [
+                { image: productData.core_advantage_illustration_a_url },
+                { image: productData.core_advantage_illustration_b_url },
+                { image: productData.core_advantage_illustration_c_url }
+            ]
+
+            let materialsNum = 0
+            applicableMaterials.value.forEach((materialKey) => {
+                const richContent = productData[`${materialKey}_rich`]
+                if (richContent) {
+                    materialRichText.value[materialKey] = enhanceRichTextHtml(richContent)
+                    // materialRichText.value[materialKey] = lazyLoadIframes(materialRichText.value[materialKey])
+                }
+                if(productData[materialKey]){
+                    materialsNum++
+                }
+            })
+            totalSlides.value = materialsNum
+            // console.log('materialRichText',materialRichText)
+            return productData;
         }
-        let materialsNum = 0
-        let productData = newValue.data[0]
-        applicableMaterials.value.forEach((materialKey) => {
-            const richContent = productData[`${materialKey}_rich`]
-            if (richContent) {
-                materialRichText.value[materialKey] = enhanceRichTextHtml(richContent)
-                // materialRichText.value[materialKey] = lazyLoadIframes(materialRichText.value[materialKey])
-            }
-            if(productData[materialKey]){
-                materialsNum++
-            }
-        })
-        // console.log('materialRichText',materialRichText)
-        totalSlides.value = materialsNum
-    }
-}, { immediate: true })
-const productDetail = computed(() => {
-    if (productDetailRes.value && productDetailRes.value.data && productDetailRes.value.data.length > 0) {
-        const productData = productDetailRes.value.data[0]
+        return null;
+    });
 
-        benefitsSlides.value = [
-            { image: productData.core_advantage_illustration_a_url },
-            { image: productData.core_advantage_illustration_b_url },
-            { image: productData.core_advantage_illustration_c_url }
-        ]
-        
-        return productData;
-    }
-    return null;
-});
 
-watch(productDetail, (newData) => {
-    if (newData) {
-        emit('headdata-loaded', newData)
-    }
-}, { immediate: true });
+
+    watch(productDetail, (newData) => {
+        if (newData) {
+            emit('headdata-loaded', newData)
+        }
+    }, { immediate: true });
 
 // 依据产品的 link_1/link_2/link_3 拉取对应产品的首图
 const relatedFirstImages = ref({ link_1: '', link_2: '', link_3: '' })

@@ -408,6 +408,117 @@
                             </template>
                         </div>
                     </div>
+                    <div v-else-if="item.productList.length === 8">
+                        <div class="layout-five">
+                            <div class="five-left">
+                                
+                                <div class="five-main-image">
+                                    <NuxtLink :to="'/Products/'+item.productList[0].url" target="_blank"><NuxtImg sizes="sm:100vw" loading="lazy" :src="item.productList[0].first_image_url" /></NuxtLink>
+                                </div>
+                                <NuxtLink :to="'/Products/'+item.productList[0].url" target="_blank">
+                                <div class="five-main-content">
+                                    <h3 class="five-main-title">{{ item.productList[0].h1_page_inner_title }}</h3>
+                                    <p class="five-main-date" v-if="item.productList[0].date">{{ item.productList[0].date }}</p>
+                                    <div class="five-main-info" v-if="productDetail.flagship_products_2025_text">
+                                        <h3 class="five-subtitle">{{ productDetail.flagship_products_2025_text }}</h3>
+                                        <p class="five-description" v-if="productDetail.flagship_products_2025_description">{{ productDetail.flagship_products_2025_description }}</p>
+                                        <button class="buy-now-btn">{{productDetail.buy_now_text}}</button>
+                                    </div>
+                                </div>
+                                </NuxtLink>
+                            </div>
+                            <div class="five-right">
+                                <div 
+                                    v-for="(product, index) in item.productList.slice(1,5)" 
+                                    :key="index + 1"
+                                    class="five-grid-item"
+                                >
+                                    <div class="five-grid-image">
+                                        <NuxtLink :to="'/Products/'+product.url" target="_blank">
+                                            <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" />
+                                        </NuxtLink>
+                                    </div>
+                                    <h3 class="five-grid-title">
+                                        <NuxtLink :to="'/Products/'+product.url" target="_blank">{{ product.h1_page_inner_title }}</NuxtLink>
+                                    </h3>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="layout-double">
+                            <template v-for="(product, index) in item.productList.slice(5,7)" 
+                                :key="index">
+                            <NuxtLink :to="'/Products/'+product.url" target="_blank">
+                            <div 
+                                
+                                class="double-item"
+                                :class="product.layout || 'vertical'"
+                            >
+                                <!-- 垂直布局：上面图片，下面标题 -->
+                                <template v-if="!product.layout || product.layout === 'vertical'">
+                                    <div class="double-image">
+                                        <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" :alt="product.h1_page_inner_title" />
+                                    </div>
+                                    <div class="double-content">
+                                        <h3 class="double-title">{{ product.h1_page_inner_title }}</h3>
+                                    </div>
+                                </template>
+                                
+                                <!-- 水平布局：左侧图片，右侧信息 - 按照Figma节点 7:11368 -->
+                                <template v-else-if="product.layout === 'horizontal'">
+                                    <div class="horizontal-container">
+                                        <div class="horizontal-link">
+                                            <div class="horizontal-image">
+                                                <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" :alt="product.h1_page_inner_title" />
+                                            </div>
+                                            <div class="horizontal-content">
+                                                <div class="horizontal-text-section">
+                                                    <div class="horizontal-title-wrapper">
+                                                        <h3 class="horizontal-title">{{ product.h1_page_inner_title }}</h3>
+                                                    </div>
+                                                    <div class="horizontal-date-wrapper" v-if="product.date">
+                                                        <p class="horizontal-date">{{ product.date }}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="horizontal-button" v-if="product.buttonText">
+                                                    <div class="horizontal-button-content">
+                                                        <span class="button-text">{{ product.buttonText }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+                            </NuxtLink>
+                            </template>
+                        </div>
+                        <div class="layout-single">
+                        <NuxtLink :to="'/Products/'+item.productList[8].url" target="_blank">
+                        <div class="single-container">
+                            <div class="single-link">
+                                <div class="single-image">
+                                    <NuxtImg sizes="sm:100vw" loading="lazy" :src="item.productList[8].first_image_url" />
+                                </div>
+                                <div class="single-content">
+                                    <div class="single-text-section">
+                                        <div class="single-title-wrapper">
+                                            <h3 class="single-title">{{ item.productList[8].h1_page_inner_title }}</h3>
+                                        </div>
+                                        <div class="single-date-wrapper" v-if="item.productList[8].date">
+                                            <p class="single-date">{{ item.productList[8].date }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="single-button" v-if="productDetail.buy_now_text">
+                                        <div class="single-button-content">
+                                            <span class="button-text">{{ productDetail.buy_now_text }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </NuxtLink>
+                    </div>
+                    </div>
                     <div v-else-if="item.productList.length === 14">
                         <div class="layout-five">
                             <div class="five-left">
