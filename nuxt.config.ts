@@ -99,16 +99,16 @@ export default defineNuxtConfig({
       ]
     }
   },
-  modules: ['@nuxt/image'],
-  image: {
-    domains: ['framerusercontent.com', 'cms.stoneboss.vip', 'honghaieim.obs.cn-east-3.myhuaweicloud.com'],
-    formats: ['webp', 'avif'],
-    quality: 70,
-    staticFilename: ({ src, format, width, quality }) => {
-      const hash = createHash('sha1').update([src, width, quality].join(':')).digest('hex')
-      return `_ipx/${quality ? `q_${quality}/` : ''}${hash}.${format || 'jpg'}`
-    }
-  },
+  // modules: ['@nuxt/image'],
+  // image: {
+  //   domains: ['framerusercontent.com', 'cms.stoneboss.vip', 'honghaieim.obs.cn-east-3.myhuaweicloud.com'],
+  //   formats: ['webp', 'avif'],
+  //   quality: 70,
+  //   staticFilename: ({ src, format, width, quality }) => {
+  //     const hash = createHash('sha1').update([src, width, quality].join(':')).digest('hex')
+  //     return `_ipx/${quality ? `q_${quality}/` : ''}${hash}.${format || 'jpg'}`
+  //   }
+  // },
   routeRules: {
     '/': { prerender: true }, // 首页预渲染
     '/Products': { prerender: true }, // Products预渲染

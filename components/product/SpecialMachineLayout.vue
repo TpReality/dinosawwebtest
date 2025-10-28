@@ -3,7 +3,7 @@
         <div class="projects-banner">
             <div class="banner-background">
                 <div class="banner-image">
-                    <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/CfZQsuUNaR78HVx3Yprs0X082s.jpg"
+                    <NuxtImg sizes="sm:100vw" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/CfZQsuUNaR78HVx3Yprs0X082s.jpg"
                         alt="Projects Banner Background" class="background-image" />
                 </div>
             </div>
@@ -97,7 +97,7 @@
                         <template v-for="(item, index) in productDetail.hero_circle_background_images"  :key="index">
                             <div class="material-item">
                                 <div class="material-icon">
-                                    <NuxtImg loading="lazy" :src="item.banner_img.url" />
+                                    <NuxtImg sizes="sm:100vw" loading="lazy" :src="item.banner_img.url" />
                                 </div>
                                 <span class="material-name">{{ item.banner_text}}</span>
                             </div>
@@ -130,7 +130,7 @@
                         <div class="single-container">
                             <div class="single-link">
                                 <div class="single-image">
-                                    <NuxtImg loading="lazy" :src="item.productList[0].first_image_url" />
+                                    <NuxtImg sizes="sm:100vw" loading="lazy" :src="item.productList[0].first_image_url" />
                                 </div>
                                 <div class="single-content">
                                     <div class="single-text-section">
@@ -165,7 +165,7 @@
                             <!-- 垂直布局：上面图片，下面标题 -->
                             <template v-if="!product.layout || product.layout === 'vertical'">
                                 <div class="double-image">
-                                    <NuxtImg loading="lazy" :src="product.first_image_url" :alt="product.h1_page_inner_title" />
+                                    <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" :alt="product.h1_page_inner_title" />
                                 </div>
                                 <div class="double-content">
                                     <h3 class="double-title">{{ product.h1_page_inner_title }}</h3>
@@ -177,7 +177,7 @@
                                 <div class="horizontal-container">
                                     <div class="horizontal-link">
                                         <div class="horizontal-image">
-                                            <NuxtImg loading="lazy" :src="product.first_image_url" :alt="product.h1_page_inner_title" />
+                                            <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" :alt="product.h1_page_inner_title" />
                                         </div>
                                         <div class="horizontal-content">
                                             <div class="horizontal-text-section">
@@ -212,7 +212,7 @@
                             class="quad-item"
                         >
                             <div class="quad-image">
-                                <NuxtImg loading="lazy" :src="product.first_image_url" />
+                                <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" />
                             </div>
                             <div class="quad-content">
                                 <h3 class="quad-title">{{ product.h1_page_inner_title }}</h3>
@@ -228,7 +228,7 @@
                         <div class="five-left">
                              
                             <div class="five-main-image">
-                                <NuxtLink :to="'/Products/'+item.productList[0].url" target="_blank"><NuxtImg loading="lazy" :src="item.productList[0].first_image_url" /></NuxtLink>
+                                <NuxtLink :to="'/Products/'+item.productList[0].url" target="_blank"><NuxtImg sizes="sm:100vw" loading="lazy" :src="item.productList[0].first_image_url" /></NuxtLink>
                             </div>
                             <NuxtLink :to="'/Products/'+item.productList[0].url" target="_blank">
                             <div class="five-main-content">
@@ -250,7 +250,7 @@
                             >
                                 <div class="five-grid-image">
                                     <NuxtLink :to="'/Products/'+product.url" target="_blank">
-                                        <NuxtImg loading="lazy" :src="product.first_image_url" />
+                                        <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" />
                                     </NuxtLink>
                                 </div>
                                 <h3 class="five-grid-title">
@@ -265,7 +265,7 @@
                         <div class="five-left">
                              
                             <div class="five-main-image">
-                                <NuxtLink :to="'/Products/'+item.productList[0].url" target="_blank"><NuxtImg loading="lazy" :src="item.productList[0].first_image_url" /></NuxtLink>
+                                <NuxtLink :to="'/Products/'+item.productList[0].url" target="_blank"><NuxtImg sizes="sm:100vw" loading="lazy" :src="item.productList[0].first_image_url" /></NuxtLink>
                             </div>
                             <NuxtLink :to="'/Products/'+item.productList[0].url" target="_blank">
                             <div class="five-main-content">
@@ -287,7 +287,7 @@
                             >
                                 <div class="five-grid-image">
                                     <NuxtLink :to="'/Products/'+product.url" target="_blank">
-                                        <NuxtImg loading="lazy" :src="product.first_image_url" />
+                                        <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" />
                                     </NuxtLink>
                                 </div>
                                 <h3 class="five-grid-title">
@@ -301,7 +301,7 @@
                         <div class="single-container">
                             <div class="single-link">
                                 <div class="single-image">
-                                    <NuxtImg loading="lazy" :src="item.productList[5].first_image_url" />
+                                    <NuxtImg sizes="sm:100vw" loading="lazy" :src="item.productList[5].first_image_url" />
                                 </div>
                                 <div class="single-content">
                                     <div class="single-text-section">
@@ -328,7 +328,7 @@
                             <div class="five-left">
                                 
                                 <div class="five-main-image">
-                                    <NuxtLink :to="'/Products/'+item.productList[0].url" target="_blank"><NuxtImg loading="lazy" :src="item.productList[0].first_image_url" /></NuxtLink>
+                                    <NuxtLink :to="'/Products/'+item.productList[0].url" target="_blank"><NuxtImg sizes="sm:100vw" loading="lazy" :src="item.productList[0].first_image_url" /></NuxtLink>
                                 </div>
                                 <NuxtLink :to="'/Products/'+item.productList[0].url" target="_blank">
                                 <div class="five-main-content">
@@ -350,7 +350,7 @@
                                 >
                                     <div class="five-grid-image">
                                         <NuxtLink :to="'/Products/'+product.url" target="_blank">
-                                            <NuxtImg loading="lazy" :src="product.first_image_url" />
+                                            <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" />
                                         </NuxtLink>
                                     </div>
                                     <h3 class="five-grid-title">
@@ -371,7 +371,7 @@
                                 <!-- 垂直布局：上面图片，下面标题 -->
                                 <template v-if="!product.layout || product.layout === 'vertical'">
                                     <div class="double-image">
-                                        <NuxtImg loading="lazy" :src="product.first_image_url" :alt="product.h1_page_inner_title" />
+                                        <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" :alt="product.h1_page_inner_title" />
                                     </div>
                                     <div class="double-content">
                                         <h3 class="double-title">{{ product.h1_page_inner_title }}</h3>
@@ -383,7 +383,7 @@
                                     <div class="horizontal-container">
                                         <div class="horizontal-link">
                                             <div class="horizontal-image">
-                                                <NuxtImg loading="lazy" :src="product.first_image_url" :alt="product.h1_page_inner_title" />
+                                                <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" :alt="product.h1_page_inner_title" />
                                             </div>
                                             <div class="horizontal-content">
                                                 <div class="horizontal-text-section">
@@ -413,7 +413,7 @@
                             <div class="five-left">
                                 
                                 <div class="five-main-image">
-                                    <NuxtLink :to="'/Products/'+item.productList[0].url" target="_blank"><NuxtImg loading="lazy" :src="item.productList[0].first_image_url" /></NuxtLink>
+                                    <NuxtLink :to="'/Products/'+item.productList[0].url" target="_blank"><NuxtImg sizes="sm:100vw" loading="lazy" :src="item.productList[0].first_image_url" /></NuxtLink>
                                 </div>
                                 <NuxtLink :to="'/Products/'+item.productList[0].url" target="_blank">
                                 <div class="five-main-content">
@@ -435,7 +435,7 @@
                                 >
                                     <div class="five-grid-image">
                                         <NuxtLink :to="'/Products/'+product.url" target="_blank">
-                                            <NuxtImg loading="lazy" :src="product.first_image_url" />
+                                            <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" />
                                         </NuxtLink>
                                     </div>
                                     <h3 class="five-grid-title">
@@ -456,7 +456,7 @@
                                 <!-- 垂直布局：上面图片，下面标题 -->
                                 <template v-if="!product.layout || product.layout === 'vertical'">
                                     <div class="double-image">
-                                        <NuxtImg loading="lazy" :src="product.first_image_url" :alt="product.h1_page_inner_title" />
+                                        <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" :alt="product.h1_page_inner_title" />
                                     </div>
                                     <div class="double-content">
                                         <h3 class="double-title">{{ product.h1_page_inner_title }}</h3>
@@ -468,7 +468,7 @@
                                     <div class="horizontal-container">
                                         <div class="horizontal-link">
                                             <div class="horizontal-image">
-                                                <NuxtImg loading="lazy" :src="product.first_image_url" :alt="product.h1_page_inner_title" />
+                                                <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" :alt="product.h1_page_inner_title" />
                                             </div>
                                             <div class="horizontal-content">
                                                 <div class="horizontal-text-section">
@@ -496,7 +496,7 @@
                             <div class="five-left">
                                 
                                 <div class="five-main-image">
-                                    <NuxtLink :to="'/Products/'+item.productList[7].url" target="_blank"><NuxtImg loading="lazy" :src="item.productList[7].first_image_url" /></NuxtLink>
+                                    <NuxtLink :to="'/Products/'+item.productList[7].url" target="_blank"><NuxtImg sizes="sm:100vw" loading="lazy" :src="item.productList[7].first_image_url" /></NuxtLink>
                                 </div>
                                 <NuxtLink :to="'/Products/'+item.productList[7].url" target="_blank">
                                 <div class="five-main-content">
@@ -518,7 +518,7 @@
                                 >
                                     <div class="five-grid-image">
                                         <NuxtLink :to="'/Products/'+product.url" target="_blank">
-                                            <NuxtImg loading="lazy" :src="product.first_image_url" />
+                                            <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" />
                                         </NuxtLink>
                                     </div>
                                     <h3 class="five-grid-title">
@@ -539,7 +539,7 @@
                                 <!-- 垂直布局：上面图片，下面标题 -->
                                 <template v-if="!product.layout || product.layout === 'vertical'">
                                     <div class="double-image">
-                                        <NuxtImg loading="lazy" :src="product.first_image_url" :alt="product.h1_page_inner_title" />
+                                        <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" :alt="product.h1_page_inner_title" />
                                     </div>
                                     <div class="double-content">
                                         <h3 class="double-title">{{ product.h1_page_inner_title }}</h3>
@@ -551,7 +551,7 @@
                                     <div class="horizontal-container">
                                         <div class="horizontal-link">
                                             <div class="horizontal-image">
-                                                <NuxtImg loading="lazy" :src="product.first_image_url" :alt="product.h1_page_inner_title" />
+                                                <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" :alt="product.h1_page_inner_title" />
                                             </div>
                                             <div class="horizontal-content">
                                                 <div class="horizontal-text-section">
@@ -612,7 +612,7 @@
                                                     <div class="case-ipad">
                                                         <div class="case-image-container">
                                                             <div class="case-main-image cement-case">
-                                                                <NuxtImg loading="lazy" :src="blogs.first_image_url" />
+                                                                <NuxtImg sizes="sm:100vw" loading="lazy" :src="blogs.first_image_url" />
                                                             </div>
                                                         </div>
                                                         <div class="case-content-container">
@@ -675,7 +675,7 @@
                         </div>
                     </div>
                     <div class="guide-image-section">
-                        <NuxtImg loading="lazy"
+                        <NuxtImg sizes="sm:100vw" loading="lazy"
                             :src="productDetail.select_machine_guide_background_image.url" 
                             class="guide-image"
                         />
@@ -683,7 +683,7 @@
                 </div>
                 
                 <div class="guide-content" v-html="productDetail.select_machine_guide_description"></div>
-                 <NuxtImg loading="lazy" 
+                 <NuxtImg sizes="sm:100vw" loading="lazy" 
                     class="guide-image-mobile"
                     :src="productDetail.select_machine_guide_background_image.url" 
                 />

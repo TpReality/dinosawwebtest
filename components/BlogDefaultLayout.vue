@@ -67,7 +67,7 @@
             </h1>
             
             <div class="hero-meta is-pc">
-              <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/kb04PIvrLwFZGpVkwv4cn7XR54.png" />
+              <NuxtImg sizes="sm:100vw" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/kb04PIvrLwFZGpVkwv4cn7XR54.png" />
               <span class="author-name">{{ blogDetail.author }}</span>
               <span class="meta-separator">·</span>
               <span class="publish-date">{{ formatDateEN(blogDetail.date) }}</span>
@@ -80,12 +80,13 @@
           <div class="hero-right">
             <div class="hero-image-container">
               <NuxtImg 
+                sizes="sm:100vw"
                 :src="blogDetail.first_image_url"
                 class="hero-image" 
               />
             </div>
             <div class="hero-meta is-mobile">
-              <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/kb04PIvrLwFZGpVkwv4cn7XR54.png" />
+              <NuxtImg sizes="sm:100vw" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/kb04PIvrLwFZGpVkwv4cn7XR54.png" />
               <span class="author-name">{{ blogDetail.author }}</span>
               <span class="meta-separator">·</span>
               <span class="publish-date">{{ formatDateEN(blogDetail.date) }}</span>
@@ -124,7 +125,7 @@
                 <NuxtLink :to="'/blog/'+item.slug" target="_blank" v-if="index<=5"> 
                 <article class="hot-read-item">
                   <div class="article-thumbnail-container">
-                    <NuxtImg loading="lazy" :src="item.first_image_url"  class="article-thumbnail" />
+                    <NuxtImg sizes="sm:100vw" loading="lazy" :src="item.first_image_url"  class="article-thumbnail" />
                   </div>
                   <div class="article-info">
                     <h4 class="article-title">{{ item.title }}</h4>
@@ -170,7 +171,7 @@
             <div class="chat-profile-section">
               <div class="profile-container">
                 <div class="profile-avatar">
-                  <NuxtImg loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/PZaASQwcgVKtL1LRgszQtSdlJU.png" />
+                  <NuxtImg sizes="sm:100vw" loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/PZaASQwcgVKtL1LRgszQtSdlJU.png" />
                 </div>
                 <div class="profile-info">
                   <p class="profile-name">{{ contentDetail.chat_online_dialog_body_title }}</p>
@@ -200,7 +201,7 @@
           <div class="idea-card" v-if="index >5">
             <NuxtLink :to="'/blog/'+item.slug" target="_blank" class="idea-link">
               <div class="idea-image">
-                <NuxtImg loading="lazy" :src="item.first_image_url"  />
+                <NuxtImg sizes="sm:100vw" loading="lazy" :src="item.first_image_url"  />
               </div>
               <div class="idea-content">
                 <p>{{ item.title }}</p>

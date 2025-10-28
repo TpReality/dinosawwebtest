@@ -70,7 +70,7 @@
               <div class="dinosaw-head-lm flex">
                 <div class="dinosaw-logo">
                     <a href="/" target="_blank" alt="dinosaw logo">
-                      <NuxtImg class="img" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/Rgs09IZlnBALMtEN2nX5mwe26rw.webp" />
+                      <NuxtImg sizes="sm:100vw" class="img" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/Rgs09IZlnBALMtEN2nX5mwe26rw.webp" />
                     </a>
                 </div>
                 <!-- 移动端菜单按钮 -->
@@ -138,8 +138,6 @@
 </template>
 
 <script setup>
-import { NuxtImg } from '#components'
-
 
 const props = defineProps({
   contentDetail: {

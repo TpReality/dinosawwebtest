@@ -64,7 +64,7 @@
                             <SwiperSlide v-for="(image, i) in topProduct" :key="i">
                                 <div class="carousel-group">
                                     <NuxtLink :to="'/Products/'+image.category_value" target="_blank"> 
-                                        <NuxtImg v-if="image.head_image" :src="image.head_image.url" />
+                                         <NuxtImg sizes="sm:100vw" v-if="image.head_image" :src="image.head_image.url" />
                                         <p class="text">{{ image.category_name }}</p>
                                     </NuxtLink>
                                     
@@ -144,7 +144,7 @@
                                                         <div class="material-image-mask">
                                                             <div class="material-image-container">
                                                                 <div class="material-image granite-image">
-                                                                    <NuxtImg loading="lazy" v-if="product.banner_img" :src="product.banner_img.url" />
+                                                                     <NuxtImg sizes="sm:100vw" loading="lazy" v-if="product.banner_img" :src="product.banner_img.url" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -185,7 +185,7 @@
                                                     <div class="carousel-item-container">
                                                         <div class="carousel-item-wrapper">
                                                             <div class="carousel-item-image">
-                                                                <NuxtImg
+                                                                 <NuxtImg sizes="sm:100vw"
                                                                  loading="lazy"
                                                                 v-if="carousel.banner_img"
                                                                     :src="carousel.banner_img.url">
@@ -230,7 +230,7 @@
                                         <div class="product-link">
                                             <div class="product-icon-container">
                                                 <div class="product-icon-wrapper">
-                                                    <NuxtImg loading="lazy" :src="product.first_image_url" />
+                                                     <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" />
                                                 </div>
                                             </div>
                                             <div class="product-title-section">
@@ -320,7 +320,7 @@
                                                     <div class="case-ipad">
                                                         <div class="case-image-container">
                                                             <div class="case-main-image cement-case">
-                                                                <NuxtImg loading="lazy" :src="blog.first_image_url" />
+                                                                 <NuxtImg sizes="sm:100vw" loading="lazy" :src="blog.first_image_url" />
                                                             </div>
                                                         </div>
                                                         <div class="case-content-container">
@@ -413,7 +413,7 @@
                                                     <div class="case-ipad">
                                                         <div class="case-image-container">
                                                             <div class="case-main-image cement-case">
-                                                                <NuxtImg loading="lazy" :src="blog.first_image_url" />
+                                                                 <NuxtImg sizes="sm:100vw" loading="lazy" :src="blog.first_image_url" />
                                                             </div>
                                                         </div>
                                                         <div class="case-content-container">
@@ -506,7 +506,7 @@
                                                     <div class="case-ipad">
                                                         <div class="case-image-container">
                                                             <div class="case-main-image cement-case">
-                                                                <NuxtImg loading="lazy" :src="blog.first_image_url" />
+                                                                 <NuxtImg sizes="sm:100vw" loading="lazy" :src="blog.first_image_url" />
                                                             </div>
                                                         </div>
                                                         <div class="case-content-container">
@@ -574,7 +574,7 @@
                             <div class="expert-guide-image-section">
                                 <div class="expert-guide-image-container">
                                     <div class="expert-guide-image">
-                                        <NuxtImg loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/7p45OXHfHH4pRmHd3kl2v7DaA.webp" />
+                                         <NuxtImg sizes="sm:100vw" loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/7p45OXHfHH4pRmHd3kl2v7DaA.webp" />
                                     </div>
                                 </div>
                             </div>

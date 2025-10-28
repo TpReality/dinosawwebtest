@@ -4,7 +4,7 @@
         <div class="projects-banner">
             <div class="banner-background">
                 <div class="banner-image">
-                    <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/1IQhbMthgQhIHvbOCcL313GnGU.webp"
+                     <NuxtImg sizes="sm:100vw" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/1IQhbMthgQhIHvbOCcL313GnGU.webp"
                         alt="Projects Banner Background" class="background-image" />
                 </div>
             </div>
@@ -112,7 +112,7 @@
                                                         <div class="case-ipad">
                                                             <div class="case-image-container">
                                                                 <div class="case-main-image cement-case">
-                                                                    <NuxtImg loading="lazy" :src="blog.first_image_url"/>
+                                                                     <NuxtImg sizes="sm:100vw" loading="lazy" :src="blog.first_image_url"/>
                                                                 </div>
                                                             </div>
                                                             <div class="case-content-container">
@@ -312,7 +312,7 @@ watch(blogRes, (newPosts) => {
     margin: 0;
 }
 .processing-cases-section-first{
-    background: url(https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/4cNK7hR44yWDvsyolHiTPOzdfk.webp?width=554&height=750) no-repeat;
+    background: url(https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/4cNK7hR44yWDvsyolHiTPOzdfk.webp) no-repeat;
     background-size:100% 100%;
 }
 

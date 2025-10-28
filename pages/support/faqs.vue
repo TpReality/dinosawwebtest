@@ -4,7 +4,7 @@
         <div class="projects-banner">
             <div class="banner-background">
                 <div class="banner-image">
-                    <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/1IQhbMthgQhIHvbOCcL313GnGU.webp"
+                     <NuxtImg sizes="sm:100vw" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/1IQhbMthgQhIHvbOCcL313GnGU.webp"
                         alt="Projects Banner Background" class="background-image" />
                 </div>
             </div>

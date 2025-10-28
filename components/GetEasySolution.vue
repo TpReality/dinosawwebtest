@@ -73,24 +73,24 @@
                                 <div class="companies-logos">
                                     <div class="logo-row">
                                         <div class="company-logo logo-1">
-                                            <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/9VBNkEzTsVqAIvrdaB9TM98Mm4.png" />
+                                            <NuxtImg sizes="sm:100vw" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/9VBNkEzTsVqAIvrdaB9TM98Mm4.png" />
                                         </div>
                                         <div class="company-logo logo-2">
-                                            <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/Dn8kbOm6roEzSQcWFSOWeQDoo.jpg" />
+                                            <NuxtImg sizes="sm:100vw" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/Dn8kbOm6roEzSQcWFSOWeQDoo.jpg" />
                                         </div>
                                     </div>
                                     <div class="logo-row">
                                         <div class="company-logo logo-3">
-                                            <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/9gfhjO5p4BndZRR1S6iyCOd0.png" />
+                                            <NuxtImg sizes="sm:100vw" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/9gfhjO5p4BndZRR1S6iyCOd0.png" />
                                         </div>
                                         <div class="company-logo logo-4">
-                                            <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/SRkkRttgodeVP1UDwBpzx3CXM.png" />
+                                            <NuxtImg sizes="sm:100vw" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/SRkkRttgodeVP1UDwBpzx3CXM.png" />
                                         </div>
                                         <div class="company-logo logo-5">
-                                            <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/f6JbMVOW0aC3lmb8RmX75F0hsjM.jpg" />
+                                            <NuxtImg sizes="sm:100vw" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/f6JbMVOW0aC3lmb8RmX75F0hsjM.jpg" />
                                         </div>
                                         <div class="company-logo logo-6">
-                                            <NuxtImg src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/JhGd8K0tLprFzPwik4sXB8ICkrQ.jpg" />
+                                            <NuxtImg sizes="sm:100vw" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/JhGd8K0tLprFzPwik4sXB8ICkrQ.jpg" />
                                         </div>
                                     </div>
                                 </div>

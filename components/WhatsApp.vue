@@ -7,7 +7,7 @@
       >
           <div class="whats-head">
               <div class="img-wrap">
-                <NuxtImg loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/CMFVUQaDK9K6lMd5ekiLM6Po.webp" />
+                <NuxtImg sizes="sm:100vw" loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/CMFVUQaDK9K6lMd5ekiLM6Po.webp" />
               </div>
               <div class="close" @click.stop="hidePanel">
                 <svg display="block" role="presentation" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M 12.5 0 L 0 0" fill="transparent" height="1px" id="M5t9QOTlE" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="var(--1335ju, 1.5)" stroke="var(--18mrqx2, rgb(0, 0, 0))" transform="translate(5.75 12.25)" width="12.5px"></path></svg>
@@ -19,7 +19,7 @@
           </div>
           <div class="whats-content">
               <div class="img-wrap">
-                <NuxtImg loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/PZaASQwcgVKtL1LRgszQtSdlJU.png" />
+                <NuxtImg sizes="sm:100vw" loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/PZaASQwcgVKtL1LRgszQtSdlJU.png" />
               </div>
               <div class="text">
                   <div class="name">{{ contentDetail.chat_online_dialog_body_title }}</div>

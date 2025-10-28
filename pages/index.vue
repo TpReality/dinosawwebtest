@@ -10,7 +10,7 @@
                     </h1>
                     <div v-html="indexDetail.hero_description"></div>
                     <div class="banner-single">
-                        <NuxtImg v-if="indexDetail.head_banner_images?.[0]?.banner_img?.url" :src="indexDetail.head_banner_images[0].banner_img.url" />
+                         <NuxtImg sizes="sm:100vw" v-if="indexDetail.head_banner_images?.[0]?.banner_img?.url" :src="indexDetail.head_banner_images[0].banner_img.url" />
                     </div>
                     <!-- Figma设计的按钮容器 -->
                     <div class="banner-buttons">
@@ -30,7 +30,7 @@
 
                 <!-- Banner Machine Image for 1024px-1440px -->
                 <!-- <div class="banner-machine">
-                    <NuxtImg loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/KnYaIReg337YAFK7SgqU9lfzMKU.webp" alt="Dinosaw CNC Wire Saw Machine" />
+                     <NuxtImg sizes="sm:100vw" loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/KnYaIReg337YAFK7SgqU9lfzMKU.webp" alt="Dinosaw CNC Wire Saw Machine" />
                 </div> -->
 
                 <div class="banner-swiper">
@@ -42,7 +42,7 @@
                             disableOnInteraction: false
                         }" :speed="5000">
                         <SwiperSlide v-for="image in indexDetail.head_banner_images" :key="image.id">
-                            <NuxtImg v-if="image.banner_img?.url" :src="image.banner_img.url" />
+                             <NuxtImg sizes="sm:100vw" v-if="image.banner_img?.url" :src="image.banner_img.url" />
                         </SwiperSlide>
                     </Swiper>
                 </div>
@@ -88,7 +88,7 @@
                                         <span>{{ product.tip }}</span>
                                     </div>
                                     <h3 v-html="product.title"></h3>
-                                    <NuxtImg loading="lazy" v-if="product.image&&product.image.url" :src="product.image.url" />
+                                     <NuxtImg sizes="sm:100vw" loading="lazy" v-if="product.image&&product.image.url" :src="product.image.url" />
                                     <p>{{ product.materials }}</p>
                                     <!-- 新增的圆形图片展示区域 -->
                                     <div class="features-section">
@@ -96,7 +96,7 @@
                                             <template v-for="(item, j) in product.columnList[product.circleName]" :key="j">
                                                 <div class="feature-item" v-if="j < 4">
                                                     <div class="feature-image" v-if="item.banner_img">
-                                                        <NuxtImg loading="lazy" :src="item.banner_img.url"
+                                                         <NuxtImg sizes="sm:100vw" loading="lazy" :src="item.banner_img.url"
                                                             />
                                                     </div>
                                                     <div class="feature-label">{{ item.banner_text }}</div>
@@ -152,7 +152,7 @@
                                         <span>{{ product.tip }}</span>
                                     </div>
                                     <h3 v-html="product.title"></h3>
-                                    <NuxtImg loading="lazy" sizes="sm:100vw" v-if="product.image&&product.image.url" :src="product.image.url" />
+                                     <NuxtImg sizes="sm:100vw" loading="lazy" sizes="sm:100vw" v-if="product.image&&product.image.url" :src="product.image.url" />
                                     <p>{{ product.materials }}</p>
                                     <!-- 新增的圆形图片展示区域 -->
                                     <div class="features-section">
@@ -160,7 +160,7 @@
                                             <template v-for="(item, j) in product.columnList[product.circleName]" :key="j">
                                                 <div class="feature-item" v-if="j < 4">
                                                     <div class="feature-image" v-if="item.banner_img">
-                                                        <NuxtImg loading="lazy" :src="item.banner_img.url"
+                                                         <NuxtImg sizes="sm:100vw" loading="lazy" :src="item.banner_img.url"
                                                             />
                                                     </div>
                                                     <div class="feature-label">{{ item.banner_text }}</div>
@@ -208,7 +208,7 @@
                             <SwiperSlide v-for="(num) in 4" :key="num">
                                 <div class="capability-slide">
                                     <div class="capability-image">
-                                        <NuxtImg
+                                         <NuxtImg sizes="sm:100vw"
                                          loading="lazy"
                                             v-if="indexDetail[`our_capabilities_presence_banner_${num}_image`]?.url"
                                             :src="indexDetail[`our_capabilities_presence_banner_${num}_image`].url" />
@@ -224,13 +224,13 @@
                                         <div class="achievement-items">
                                             <div class="achievement-item">
                                                 <div class="achievement-icon">
-                                                    <NuxtImg loading="lazy" v-if="num == 1"
+                                                     <NuxtImg sizes="sm:100vw" loading="lazy" v-if="num == 1"
                                                         src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/xoGVNejjgAGaSlUX1bMECmG31io.webp" />
-                                                    <NuxtImg loading="lazy" v-if="num == 2"
+                                                     <NuxtImg sizes="sm:100vw" loading="lazy" v-if="num == 2"
                                                         src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/QDBUwmDJVuYtV8yYKwuDhyFZm4.webp" />
-                                                    <NuxtImg loading="lazy" v-if="num == 3"
+                                                     <NuxtImg sizes="sm:100vw" loading="lazy" v-if="num == 3"
                                                         src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/a0VTve0ozqUp4ydiH2LhbXxpFk.webp" />
-                                                    <NuxtImg loading="lazy" v-if="num == 4"
+                                                     <NuxtImg sizes="sm:100vw" loading="lazy" v-if="num == 4"
                                                         src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/iLqxZDIinbYNiaH60YjXleFrM.webp" />
                                                 </div>
                                                 <div class="achievement-text" v-if="num != 4">
@@ -251,13 +251,13 @@
 
                                             <div class="achievement-item">
                                                 <div class="achievement-icon">
-                                                    <NuxtImg loading="lazy" v-if="num == 1"
+                                                     <NuxtImg sizes="sm:100vw" loading="lazy" v-if="num == 1"
                                                         src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/qpNN6TQEZVtVKhOUiWz4VlquVKk.webp" />
-                                                    <NuxtImg loading="lazy" v-if="num == 2"
+                                                     <NuxtImg sizes="sm:100vw" loading="lazy" v-if="num == 2"
                                                         src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/iLqxZDIinbYNiaH60YjXleFrM.webp" />
-                                                    <NuxtImg loading="lazy" v-if="num == 3"
+                                                     <NuxtImg sizes="sm:100vw" loading="lazy" v-if="num == 3"
                                                         src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/Vy8HBxy08u8QLJK2Ba8RMv8zzI0.webp" />
-                                                    <NuxtImg loading="lazy" v-if="num == 4"
+                                                     <NuxtImg sizes="sm:100vw" loading="lazy" v-if="num == 4"
                                                         src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/MVf2W9AQ98rRTyUfKjyE6nkxNxs.webp" />
                                                 </div>
                                                 <div class="achievement-text" v-if="num != 4">
@@ -278,13 +278,13 @@
 
                                             <div class="achievement-item">
                                                 <div class="achievement-icon">
-                                                    <NuxtImg loading="lazy" v-if="num == 1"
+                                                     <NuxtImg sizes="sm:100vw" loading="lazy" v-if="num == 1"
                                                         src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/F5tURIf7d7cBnIxEUvSc86BA1k.webp" />
-                                                    <NuxtImg loading="lazy" v-if="num == 2"
+                                                     <NuxtImg sizes="sm:100vw" loading="lazy" v-if="num == 2"
                                                         src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/F5tURIf7d7cBnIxEUvSc86BA1k.webp" />
-                                                    <NuxtImg loading="lazy" v-if="num == 3"
+                                                     <NuxtImg sizes="sm:100vw" loading="lazy" v-if="num == 3"
                                                         src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/xoGVNejjgAGaSlUX1bMECmG31io.webp" />
-                                                    <NuxtImg loading="lazy" v-if="num == 4"
+                                                     <NuxtImg sizes="sm:100vw" loading="lazy" v-if="num == 4"
                                                         src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/qpNN6TQEZVtVKhOUiWz4VlquVKk.webp" />
                                                 </div>
                                                 <div class="achievement-text" v-if="num != 4">
@@ -355,7 +355,7 @@
                                 <NuxtLink :to="'/blog/'+item.slug" target="_blank">
                                 <div class="blog-card">
                                     <div class="blog-image">
-                                        <NuxtImg loading="lazy" :src="item.first_image_url"
+                                         <NuxtImg sizes="sm:100vw" loading="lazy" :src="item.first_image_url"
                                         sizes="sm:100vw md:50vw lg:800px"
                                         ></NuxtImg>
                                     </div>
@@ -407,7 +407,7 @@
                                     </div>
                                 </div>
                                 <div class="step-background">
-                                    <NuxtImg loading="lazy" v-if="indexDetail.your_guide_to_choos_pannel_image_1?.url" :src="indexDetail.your_guide_to_choos_pannel_image_1.url" />
+                                     <NuxtImg sizes="sm:100vw" loading="lazy" v-if="indexDetail.your_guide_to_choos_pannel_image_1?.url" :src="indexDetail.your_guide_to_choos_pannel_image_1.url" />
                                 </div>
                             </div>
                         </NuxtLink>
@@ -423,7 +423,7 @@
                                     </div>
                                 </div>
                                 <div class="step-background">
-                                    <NuxtImg loading="lazy" v-if="indexDetail.your_guide_to_choos_pannel_image_2?.url" :src="indexDetail.your_guide_to_choos_pannel_image_2.url" />
+                                     <NuxtImg sizes="sm:100vw" loading="lazy" v-if="indexDetail.your_guide_to_choos_pannel_image_2?.url" :src="indexDetail.your_guide_to_choos_pannel_image_2.url" />
                                 </div>
                             </div>
                         </NuxtLink>
@@ -438,7 +438,7 @@
                                     </div>
                                 </div>
                                 <div class="step-background">
-                                    <NuxtImg loading="lazy" v-if="indexDetail.your_guide_to_choos_pannel_image_3?.url" :src="indexDetail.your_guide_to_choos_pannel_image_3.url" />
+                                     <NuxtImg sizes="sm:100vw" loading="lazy" v-if="indexDetail.your_guide_to_choos_pannel_image_3?.url" :src="indexDetail.your_guide_to_choos_pannel_image_3.url" />
                                 </div>
                             </div>
                         </NuxtLink>
@@ -453,7 +453,7 @@
                                     </div>
                                 </div>
                                 <div class="step-background">
-                                    <NuxtImg loading="lazy" v-if="indexDetail.your_guide_to_choos_pannel_image_4?.url" :src="indexDetail.your_guide_to_choos_pannel_image_4.url" />
+                                     <NuxtImg sizes="sm:100vw" loading="lazy" v-if="indexDetail.your_guide_to_choos_pannel_image_4?.url" :src="indexDetail.your_guide_to_choos_pannel_image_4.url" />
                                 </div>
                             </div>
                         </NuxtLink>
@@ -490,7 +490,7 @@
                                         <div class="single-container">
                                             <div class="single-link">
                                                 <div class="single-image">
-                                                    <NuxtImg loading="lazy" :src="indexDetail.flagship_tech_products[0].first_image_url" />
+                                                     <NuxtImg sizes="sm:100vw" loading="lazy" :src="indexDetail.flagship_tech_products[0].first_image_url" />
                                                 </div>
                                                 <div class="single-content">
                                                     <div class="single-text-section">
@@ -525,7 +525,7 @@
                                             <!-- 垂直布局：上面图片，下面标题 -->
                                             <template v-if="!product.layout || product.layout === 'vertical'">
                                                 <div class="double-image">
-                                                    <NuxtLink :to="'/Products/'+product.url" target="_blank"><NuxtImg loading="lazy" :src="product.first_image_url" /></NuxtLink>
+                                                    <NuxtLink :to="'/Products/'+product.url" target="_blank"> <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" /></NuxtLink>
                                                 </div>
                                                 <div class="double-content">
                                                     <NuxtLink :to="'/Products/'+product.url" target="_blank"><h3 class="double-title">{{ product.h1_page_inner_title }}</h3></NuxtLink>
@@ -537,7 +537,7 @@
                                                 <div class="horizontal-container">
                                                     <div class="horizontal-link">
                                                         <div class="horizontal-image">
-                                                            <NuxtLink :to="'/Products/'+product.url" target="_blank"><NuxtImg loading="lazy" :src="product.first_image_url" /></NuxtLink>
+                                                            <NuxtLink :to="'/Products/'+product.url" target="_blank"> <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" /></NuxtLink>
                                                         </div>
                                                         <div class="horizontal-content">
                                                             <div class="horizontal-text-section">
@@ -569,7 +569,7 @@
                                     >
                                         
                                             <div class="quad-image">
-                                                <NuxtLink :to="'/Products/'+product.url" target="_blank"><NuxtImg loading="lazy" :src="product.first_image_url" /></NuxtLink>
+                                                <NuxtLink :to="'/Products/'+product.url" target="_blank"> <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" /></NuxtLink>
                                             </div>
                                             <div class="quad-content">
                                                 <NuxtLink :to="'/Products/'+product.url" target="_blank"><h3 class="quad-title">{{ product.h1_page_inner_title }}</h3></NuxtLink>
@@ -584,7 +584,7 @@
                                     <div class="five-left">
                                         
                                         <div class="five-main-image">
-                                            <NuxtLink :to="'/Products/'+indexDetail.flagship_tech_products[0].url" target="_blank"><NuxtImg loading="lazy" :src="indexDetail.flagship_tech_products[0].first_image_url" /></NuxtLink>
+                                            <NuxtLink :to="'/Products/'+indexDetail.flagship_tech_products[0].url" target="_blank"> <NuxtImg sizes="sm:100vw" loading="lazy" :src="indexDetail.flagship_tech_products[0].first_image_url" /></NuxtLink>
                                         </div>
                                         <NuxtLink :to="'/Products/'+indexDetail.flagship_tech_products[0].url" target="_blank">
                                         <div class="five-main-content">
@@ -609,7 +609,7 @@
                                             
                                                 <div class="five-grid-image">
                                                     <NuxtLink :to="'/Products/'+product.url" target="_blank">
-                                                        <NuxtImg loading="lazy" :src="product.first_image_url" />
+                                                         <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" />
                                                     </NuxtLink>
                                                 </div>
                                                 <h3 class="five-grid-title">
@@ -640,7 +640,7 @@
                                         <div class="single-container">
                                             <div class="single-link">
                                                 <div class="single-image">
-                                                    <NuxtImg loading="lazy" :src="indexDetail.mature_products_products[0].first_image_url" />
+                                                     <NuxtImg sizes="sm:100vw" loading="lazy" :src="indexDetail.mature_products_products[0].first_image_url" />
                                                 </div>
                                                 <div class="single-content">
                                                     <div class="single-text-section">
@@ -675,7 +675,7 @@
                                             <!-- 垂直布局：上面图片，下面标题 -->
                                             <template v-if="!product.layout || product.layout === 'vertical'">
                                                 <div class="double-image">
-                                                    <NuxtLink :to="'/Products/'+product.url" target="_blank"><NuxtImg loading="lazy" :src="product.first_image_url" /></NuxtLink>
+                                                    <NuxtLink :to="'/Products/'+product.url" target="_blank"> <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" /></NuxtLink>
                                                 </div>
                                                 <div class="double-content">
                                                     <NuxtLink :to="'/Products/'+product.url" target="_blank"><h3 class="double-title">{{ product.h1_page_inner_title }}</h3></NuxtLink>
@@ -687,7 +687,7 @@
                                                 <div class="horizontal-container">
                                                     <div class="horizontal-link">
                                                         <div class="horizontal-image">
-                                                            <NuxtLink :to="'/Products/'+product.url" target="_blank"><NuxtImg loading="lazy" :src="product.first_image_url" /></NuxtLink>
+                                                            <NuxtLink :to="'/Products/'+product.url" target="_blank"> <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" /></NuxtLink>
                                                         </div>
                                                         <div class="horizontal-content">
                                                             <div class="horizontal-text-section">
@@ -719,7 +719,7 @@
                                     >
                                         
                                             <div class="quad-image">
-                                                <NuxtLink :to="'/Products/'+product.url" target="_blank"><NuxtImg loading="lazy" :src="product.first_image_url" /></NuxtLink>
+                                                <NuxtLink :to="'/Products/'+product.url" target="_blank"> <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" /></NuxtLink>
                                             </div>
                                             <div class="quad-content">
                                                 <NuxtLink :to="'/Products/'+product.url" target="_blank"><h3 class="quad-title">{{ product.h1_page_inner_title }}</h3></NuxtLink>
@@ -734,7 +734,7 @@
                                     <div class="five-left">
                                         
                                         <div class="five-main-image">
-                                            <NuxtLink :to="'/Products/'+indexDetail.mature_products_products[0].url" target="_blank"><NuxtImg loading="lazy" :src="indexDetail.mature_products_products[0].first_image_url" /></NuxtLink>
+                                            <NuxtLink :to="'/Products/'+indexDetail.mature_products_products[0].url" target="_blank"> <NuxtImg sizes="sm:100vw" loading="lazy" :src="indexDetail.mature_products_products[0].first_image_url" /></NuxtLink>
                                         </div>
                                         <div class="five-main-content">
                                              <NuxtLink :to="'/Products/'+indexDetail.mature_products_products[0].url" target="_blank">
@@ -759,7 +759,7 @@
                                             
                                                 <div class="five-grid-image">
                                                     <NuxtLink :to="'/Products/'+product.url" target="_blank">
-                                                        <NuxtImg loading="lazy" :src="product.first_image_url" />
+                                                         <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" />
                                                     </NuxtLink>
                                                 </div>
                                                 <h3 class="five-grid-title">
@@ -790,7 +790,7 @@
                                         <div class="single-container">
                                             <div class="single-link">
                                                 <div class="single-image">
-                                                    <NuxtImg loading="lazy" :src="indexDetail.smart_value_products[0].first_image_url" />
+                                                     <NuxtImg sizes="sm:100vw" loading="lazy" :src="indexDetail.smart_value_products[0].first_image_url" />
                                                 </div>
                                                 <div class="single-content">
                                                     <div class="single-text-section">
@@ -826,7 +826,7 @@
                                             <!-- 垂直布局：上面图片，下面标题 -->
                                             <template v-if="!product.layout || product.layout === 'vertical'">
                                                 <div class="double-image">
-                                                    <NuxtImg loading="lazy" :src="product.first_image_url" />
+                                                     <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" />
                                                 </div>
                                                 <div class="double-content">
                                                     <h3 class="double-title">{{ product.h1_page_inner_title }}</h3>
@@ -838,7 +838,7 @@
                                                 <div class="horizontal-container">
                                                     <div class="horizontal-link">
                                                         <div class="horizontal-image">
-                                                            <NuxtImg loading="lazy" :src="product.first_image_url" />
+                                                             <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" />
                                                         </div>
                                                         <div class="horizontal-content">
                                                             <div class="horizontal-text-section">
@@ -874,7 +874,7 @@
                                             >
                                                 
                                                     <div class="quad-image">
-                                                        <NuxtImg loading="lazy" :src="product.first_image_url" />
+                                                         <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" />
                                                     </div>
                                                     <div class="quad-content">
                                                         <h3 class="quad-title">{{ product.h1_page_inner_title }}</h3>
@@ -891,7 +891,7 @@
                                     <div class="five-left">
                                         
                                         <div class="five-main-image">
-                                            <NuxtLink :to="'/Products/'+indexDetail.smart_value_products[0].url" target="_blank"><NuxtImg loading="lazy" :src="indexDetail.smart_value_products[0].first_image_url" /></NuxtLink>
+                                            <NuxtLink :to="'/Products/'+indexDetail.smart_value_products[0].url" target="_blank"> <NuxtImg sizes="sm:100vw" loading="lazy" :src="indexDetail.smart_value_products[0].first_image_url" /></NuxtLink>
                                         </div>
                                         <div class="five-main-content">
                                              <NuxtLink :to="'/Products/'+indexDetail.smart_value_products[0].url" target="_blank">
@@ -915,7 +915,7 @@
                                             
                                                 <div class="five-grid-image">
                                                     <NuxtLink :to="'/Products/'+product.url" target="_blank">
-                                                        <NuxtImg loading="lazy" :src="product.first_image_url" />
+                                                         <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" />
                                                     </NuxtLink>
                                                 </div>
                                                 <h3 class="five-grid-title">
@@ -975,14 +975,14 @@
                             <div class="testimonial-header">
                                 <div class="customer-info">
                                     <div class="customer-avatar">
-                                        <NuxtImg loading="lazy" v-if="indexDetail.what_our_customers_say_panel_1_head_pic" :src="indexDetail.what_our_customers_say_panel_1_head_pic.url" />
+                                         <NuxtImg sizes="sm:100vw" loading="lazy" v-if="indexDetail.what_our_customers_say_panel_1_head_pic" :src="indexDetail.what_our_customers_say_panel_1_head_pic.url" />
                                         <!-- Placeholder for customer image -->
                                     </div>
                                     <div class="customer-details">
                                         <div class="customer-name-section">
                                             <h4>{{ indexDetail.what_our_customers_say_panel_1_user_name }}</h4>
                                             <div class="company-flag">
-                                                 <NuxtImg loading="lazy" v-if="indexDetail.what_our_customers_say_panel_1_country_icon" :src="indexDetail.what_our_customers_say_panel_1_country_icon.url" />
+                                                  <NuxtImg sizes="sm:100vw" loading="lazy" v-if="indexDetail.what_our_customers_say_panel_1_country_icon" :src="indexDetail.what_our_customers_say_panel_1_country_icon.url" />
                                             </div>
                                         </div>
                                         <p class="customer-title">{{ indexDetail.what_our_customers_say_panel_1_position }}</p>
@@ -998,7 +998,7 @@
                                         <div class="stat-label">{{ indexDetail.what_our_customers_say_panel_1_advantage_description }}</div>
                                     </div>
                                     <div class="material-icon">
-                                        <NuxtImg loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/4lSnkyg8nN5Oax5Ygirc0zHLqIU.webp" />
+                                         <NuxtImg sizes="sm:100vw" loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/4lSnkyg8nN5Oax5Ygirc0zHLqIU.webp" />
                                     </div>
                                 </div>
 
@@ -1011,14 +1011,14 @@
                             <div class="testimonial-header">
                                 <div class="customer-info">
                                     <div class="customer-avatar">
-                                        <NuxtImg loading="lazy" v-if="indexDetail.what_our_customers_say_panel_2_head_pic" :src="indexDetail.what_our_customers_say_panel_2_head_pic.url" />
+                                         <NuxtImg sizes="sm:100vw" loading="lazy" v-if="indexDetail.what_our_customers_say_panel_2_head_pic" :src="indexDetail.what_our_customers_say_panel_2_head_pic.url" />
                                         <!-- Placeholder for customer image -->
                                     </div>
                                     <div class="customer-details">
                                         <div class="customer-name-section">
                                             <h4>{{ indexDetail.what_our_customers_say_panel_2_user_name }}</h4>
                                             <div class="company-flag">
-                                                 <NuxtImg loading="lazy" v-if="indexDetail.what_our_customers_say_panel_2_country_icon" :src="indexDetail.what_our_customers_say_panel_2_country_icon.url" />
+                                                  <NuxtImg sizes="sm:100vw" loading="lazy" v-if="indexDetail.what_our_customers_say_panel_2_country_icon" :src="indexDetail.what_our_customers_say_panel_2_country_icon.url" />
                                             </div>
                                         </div>
                                         <p class="customer-title">{{ indexDetail.what_our_customers_say_panel_2_position }}</p>
@@ -1034,7 +1034,7 @@
                                         <div class="stat-label">{{ indexDetail.what_our_customers_say_panel_2_advantage_description }}</div>
                                     </div>
                                     <div class="material-icon">
-                                        <NuxtImg loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/n2yDCQkYZTICvRg5HV7GhrbTM.webp" />
+                                         <NuxtImg sizes="sm:100vw" loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/n2yDCQkYZTICvRg5HV7GhrbTM.webp" />
                                     </div>
                                 </div>
 
@@ -1047,13 +1047,13 @@
                             <div class="testimonial-header">
                                 <div class="customer-info">
                                     <div class="customer-avatar">
-                                         <NuxtImg loading="lazy" v-if="indexDetail.what_our_customers_say_panel_3_head_pic" :src="indexDetail.what_our_customers_say_panel_3_head_pic.url" />
+                                          <NuxtImg sizes="sm:100vw" loading="lazy" v-if="indexDetail.what_our_customers_say_panel_3_head_pic" :src="indexDetail.what_our_customers_say_panel_3_head_pic.url" />
                                     </div>
                                     <div class="customer-details">
                                         <div class="customer-name-section">
                                             <h4>{{ indexDetail.what_our_customers_say_panel_3_user_name }}</h4>
                                             <div class="company-flag">
-                                                 <NuxtImg loading="lazy" v-if="indexDetail.what_our_customers_say_panel_3_country_icon" :src="indexDetail.what_our_customers_say_panel_3_country_icon.url" />
+                                                  <NuxtImg sizes="sm:100vw" loading="lazy" v-if="indexDetail.what_our_customers_say_panel_3_country_icon" :src="indexDetail.what_our_customers_say_panel_3_country_icon.url" />
                                             </div>
                                         </div>
                                         <p class="customer-title">{{ indexDetail.what_our_customers_say_panel_3_position }}</p>
@@ -1069,7 +1069,7 @@
                                         <div class="stat-label">{{ indexDetail.what_our_customers_say_panel_3_advantage_description }}</div>
                                     </div>
                                     <div class="material-icon-side">
-                                        <NuxtImg loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/RrPj6zcL1pUWUtZuRN7dx7fU0jg.webp" />
+                                         <NuxtImg sizes="sm:100vw" loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/RrPj6zcL1pUWUtZuRN7dx7fU0jg.webp" />
                                     </div>
                                 </div>
 
@@ -1091,42 +1091,42 @@
                                 <!-- 中核集团 logo placeholder -->
                                 <div class="logo-placeholder"
                                     style="width: 110px; height: 51px; background: #fff; border-radius: 4px;">
-                                    <NuxtImg loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/FpnleAPIN4IV2mdwRpgLUNOF6w.png"/>
+                                     <NuxtImg sizes="sm:100vw" loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/FpnleAPIN4IV2mdwRpgLUNOF6w.png"/>
                                 </div>
                             </div>
                             <div class="partner-logo">
                                 <!-- 中科院 logo placeholder -->
                                 <div class="logo-placeholder"
                                     style="width: 110px; height: 51px; background: #fff; border-radius: 4px;">
-                                <NuxtImg loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/rInXR99BqGLsBVSIPaPJptiTDg.png"/>
+                                 <NuxtImg sizes="sm:100vw" loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/rInXR99BqGLsBVSIPaPJptiTDg.png"/>
                             </div>
                             </div>
                             <div class="partner-logo">
                                 <!-- 中国铁建 logo placeholder -->
                                 <div class="logo-placeholder"
                                     style="width: 110px; height: 51px; background: #fff; border-radius: 4px;">
-                                    <NuxtImg loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/c70mHQa1rmYYq4W7A8C4llFHLg.png"/>
+                                     <NuxtImg sizes="sm:100vw" loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/c70mHQa1rmYYq4W7A8C4llFHLg.png"/>
                                 </div>
                             </div>
                             <div class="partner-logo">
                                 <!-- 紫金矿业 logo placeholder -->
                                 <div class="logo-placeholder"
                                     style="width: 110px; height: 51px; background: #fff; border-radius: 4px;">
-                                    <NuxtImg loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/np5kOQAu61pepHdnoZ7YJErn3I.png"/>
+                                     <NuxtImg sizes="sm:100vw" loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/np5kOQAu61pepHdnoZ7YJErn3I.png"/>
                                 </div>
                             </div>
                             <div class="partner-logo">
                                 <!-- 太平洋石英 logo placeholder -->
                                 <div class="logo-placeholder"
                                     style="width: 110px; height: 51px; background: #fff; border-radius: 4px;">
-                                    <NuxtImg loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/P5O06HfmGvkisFNWLPp8TYR4o4.png"/>
+                                     <NuxtImg sizes="sm:100vw" loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/P5O06HfmGvkisFNWLPp8TYR4o4.png"/>
                                 </div>
                             </div>
                             <div class="partner-logo">
                                 <!-- 圣戈班 logo placeholder -->
                                 <div class="logo-placeholder"
                                     style="width: 110px; height: 51px; background: #fff; border-radius: 4px;">
-                                    <NuxtImg loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/dXyve2roEON0UKlKgJTigYaqmY.png"/>
+                                     <NuxtImg sizes="sm:100vw" loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/dXyve2roEON0UKlKgJTigYaqmY.png"/>
                                 </div>
                             </div>
                         </div>
