@@ -19,15 +19,6 @@ const locales = [
 ];
 const localeCodes = locales.filter(l => l.code !== defaultLocale).map(l => l.code);
 
-type SitemapUrl = {
-  loc: string;
-  lastmod?: string | Date; // 使用 `?` 表示这个属性是可选的
-  // 你还可以添加其他 sitemap 属性
-  // changefreq?: 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never';
-  // priority?: number;
-}
-
-
 export default defineNuxtConfig({
   
   // +++ 新增: 为 sitemap 提供网站的根 URL +++
