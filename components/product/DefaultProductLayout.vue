@@ -156,7 +156,7 @@
         </div>
 
         <!-- Quick Navigation Section -->
-        <div ref="quickNavSection" class="quick-navigation-section" :class="{ 'sticky': isQuickNavSticky, locale.value }">
+        <div ref="quickNavSection" class="quick-navigation-section" :class="{ 'sticky': isQuickNavSticky }">
             <div class="quick-nav-container">
                 <div class="nav-items-wrapper">
                     <div class="nav-items-row">
@@ -2153,6 +2153,7 @@ onUnmounted(() => {
     gap: 24px;
     width: 827px;
     height: 24px;
+    justify-content:space-between;
 }
 
 .nav-item {
@@ -2161,75 +2162,9 @@ onUnmounted(() => {
     justify-content: stretch;
     align-items: stretch;
     gap: 10px;
+    height: 31.2px;
     text-align:center;
     cursor: pointer;
-}
-
-.nav-item:first-child {
-    width: 298px;
-    height: 31.2px;
-}
-
-.nav-item:nth-child(2) {
-    width: 45px;
-    height: 31.2px;
-}
-
-.nav-item:nth-child(3) {
-    width: 47px;
-    height: 31.2px;
-}
-
-.nav-item:nth-child(4) {
-    width: 140px;
-    height: 31.2px;
-}
-
-.nav-item:nth-child(5) {
-    width: 39px;
-    height: 31.2px;
-}
-
-.nav-item:nth-child(6) {
-    width: 95px;
-    height: 31.2px;
-}
-
-.nav-item:nth-child(7) {
-    width: 73px;
-    height: 31.2px;
-}
-.quick-navigation-section.zh{
-    .nav-items-row{
-        justify-content:space-between;
-    }
-    .nav-item:first-child {
-        width: auto;
-    }
-
-    .nav-item:nth-child(2) {
-        width: auto;
-    }
-
-    .nav-item:nth-child(3) {
-        width: auto;
-    }
-
-    .nav-item:nth-child(4) {
-        width: auto;
-    }
-
-    .nav-item:nth-child(5) {
-        width: auto;
-    }
-
-    .nav-item:nth-child(6) {
-        width: auto;
-    }
-
-    .nav-item:nth-child(7) {
-        width: auto;
-    }
 }
 
 .nav-link {
@@ -2269,6 +2204,7 @@ onUnmounted(() => {
     margin: 0;
     position: relative;
     top: -1px;
+    white-space:nowrap;
 }
 
 .nav-active-indicator {
