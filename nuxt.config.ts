@@ -150,7 +150,7 @@ export default defineNuxtConfig({
           : [],
       };
       return acc;
-    }, {} as any),
+    }, {}),
 
     // 为所有 sitemaps 提供动态 URL
     // 这个函数只会运行一次，其结果会被缓存和过滤，效率很高
@@ -174,12 +174,13 @@ export default defineNuxtConfig({
 
         // 为每个产品和每种语言生成 URL
         products.data.forEach(product => {
+         
             dynamicRoutes.push({ loc: `/Products/${product.url}`, lastmod: product.updatedAt }); // 默认语言
             localeCodes.forEach(code => {
                 dynamicRoutes.push({ loc: `/${code}/Products/${product.url}`, lastmod: product.updatedAt });
             });
         });
-
+ console.log(dynamicRoutes)
         return dynamicRoutes;
     }
   },
