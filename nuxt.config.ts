@@ -29,12 +29,7 @@ type SitemapUrl = {
 
 
 export default defineNuxtConfig({
-  build: {
-    // 优化构建内存使用
-    parallel: false,
-    cache: false,
-    optimizeCSS: false
-  },
+  
   // +++ 新增: 为 sitemap 提供网站的根 URL +++
   site: {
     url: 'https://www.dinosawmachine.com', // 请确保这是你网站的正确域名
@@ -155,7 +150,7 @@ export default defineNuxtConfig({
     // 为所有 sitemaps 提供动态 URL
     // 这个函数只会运行一次，其结果会被缓存和过滤，效率很高
     async urls() {
-        const authToken = "8f80d6094edcd486411ddc90d4fa4f18ed87f9fe9edae7fe7cb423e3ce261b23ce76afdedfc3cf2e3689bd1b03e9f504cbded28e7645eed3_YOUR_TOKEN_HERE";
+        const authToken = "8f80d6094edcd486411ddc90d4fa4f18ed87f9fe9edae7fe7cb423e3ce261b23ce76afdedfc3cf2e3689bd1b03e9f504cbded28e7645eed305db44f61e914053e9fb4b4999d30c743b67fe2a052bff812b6165825f1502f22f991ff41a44536c67a88f99ae0f525ee710ee010834ffddaa1501dc60c7da7dac18060f46612708";
         const baseURL = 'https://cms.stoneboss.vip/api';
          const dynamicRoutes: SitemapUrl[] = [];
 
@@ -180,7 +175,7 @@ export default defineNuxtConfig({
                 dynamicRoutes.push({ loc: `/${code}/Products/${product.url}`, lastmod: product.updatedAt });
             });
         });
- console.log(dynamicRoutes)
+//  console.log(dynamicRoutes)
         return dynamicRoutes;
     }
   },
