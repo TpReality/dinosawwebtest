@@ -70,7 +70,7 @@ export default defineNuxtConfig({
 
   nitro: {
     prerender: {
-      concurrency: 3,
+      concurrency: 10,
       crawlLinks: false,
       failOnError: false,
       routes: (() => {
