@@ -76,9 +76,7 @@ export default defineNuxtConfig({
           '/Products/mining-and-quarry-machine', '/Products/grinding-and-polishing-machine', '/Products/profiling-machine', '/Products/other-industrial-machine',
           '/projects/marble-projects', '/projects/granite-projects', '/projects/other-hard-materials-projects', '/support/user-manual',
           '/support/faqs', '/blog/news-events', '/blog/industry-news',
-          '/sitemap.xml',
-          '/zh/sitemap.xml',
-          '/ru/sitemap.xml',
+          '/sitemap.xml'
         ];
         const out = [...paths];
         for (const code of localeCodes) {
@@ -116,6 +114,9 @@ export default defineNuxtConfig({
     '/ru/**': { prerender: true }, '/de/**': { prerender: true }, '/ar/**': { prerender: true }, '/vi/**': { prerender: true },
     '/fr/**': { prerender: true }, '/pl/**': { prerender: true },
     '/api/**': { proxy: 'https://cms.stoneboss.vip/api/**', headers: { 'cache-control': 's-maxage=60' } },
+    '/sitemap.xml': { prerender: true }, 
+    '/zh/sitemap.xml': { prerender: true }, 
+    '/ru/sitemap.xml': { prerender: true },
   },
 
   i18n: {
