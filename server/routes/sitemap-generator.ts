@@ -87,35 +87,47 @@ export async function generateSitemapXml(currentLocaleCode: string): Promise<str
     const urlsXml = allRoutes
         .map(data => {
             // 获取当前语言的正确 URL 路径
-            // 默认语言 (en) 不带前缀，其他语言带前缀
             const isDefaultLocale = currentLocaleCode === defaultLocale;
             const locPath = isDefaultLocale ? data.loc : `/${currentLocaleCode}${data.loc}`;
-
-            // <loc> 标签
-            let urlXml = `  <url>\n    <loc>${base}${locPath}</loc>\n`;
             
-            // <lastmod>, <changefreq>, <priority> 标签
-            urlXml += `    <lastmod>${data.lastmod}</lastmod>\n`;
-            urlXml += `    <changefreq>${data.changefreq}</changefreq>\n`;
-            urlXml += `    <priority>${data.priority}</priority>\n`;
+            // 确保 lastmod 格式正确 (YYYY-MM-DD)
+            const lastmodDate = data.lastmod.split('T')[0];
 
-            // <xhtml:link> 标签 (hreflang)
+            let urlXml = '  <url>\n';
+            
+            // 2.1. <loc> 标签
+            urlXml += `    <loc>${base}${locPath}</loc>\n`;
+            
+            // 2.2. <lastmod>, <changefreq>, <priority> 标签
+            urlXml += `    <lastmod>${lastmodDate}</lastmod>\n`;
+            urlXml += `    <changefreq>${data.changefreq}</changefreq>\n`;
+            urlXml += `    <priority>${data.priority}</priority>\n`;
+
+            // 2.3. <xhtml:link> 标签 (hreflang)
             locales.forEach(locale => {
                  // 构建替代链接的完整 URL
                  const altPath = locale.code === defaultLocale ? data.loc : `/${locale.code}${data.loc}`;
                  const altHref = `${base}${altPath}`;
-                 // hreflang 属性：默认语言使用 'x-default'
-                 const langCode = locale.code === defaultLocale ? 'x-default' : locale.code; 
                  
-                 urlXml += `    <xhtml:link rel="alternate" hreflang="${langCode}" href="${altHref}"/>\n`;
+                 // hreflang 属性：所有语言的 hreflang 都需要被包含。
+                 // 默认语言 (en) 对应于 hreflang="en"
+                 // 应该为默认语言再添加一个 hreflang="x-default" 标签（可选，但推荐）
+                 
+                 // 1. 添加该语言本身的 hreflang 标签
+                 urlXml += `    <xhtml:link rel="alternate" hreflang="${locale.code}" href="${altHref}"/>\n`;
             });
+            
+            // **重要优化：添加 x-default 标签** (通常指向默认语言的 URL)
+            // 获取默认语言的 URL
+            const defaultUrl = `${base}${allRoutes.find(r => r.loc === data.loc)?.loc || data.loc}`;
+            urlXml += `    <xhtml:link rel="alternate" hreflang="x-default" href="${defaultUrl}"/>\n`;
 
-            urlXml += '  </url>';
+            urlXml += '  </url>';
             return urlXml;
         })
         .join('\n');
 
-    // XML 头部和命名空间
+    // 3. XML 头部和命名空间 (确保包含 xhtml 命名空间)
     const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urlsXml}\n</urlset>`;
 
     return xml;
