@@ -75,7 +75,10 @@ export default defineNuxtConfig({
           '/Products/wire-saw-machine', '/Products/diamond-tools', '/Products/circle-saw-machine', '/Products/drilling-and-engraving-machine',
           '/Products/mining-and-quarry-machine', '/Products/grinding-and-polishing-machine', '/Products/profiling-machine', '/Products/other-industrial-machine',
           '/projects/marble-projects', '/projects/granite-projects', '/projects/other-hard-materials-projects', '/support/user-manual',
-          '/support/faqs', '/blog/news-events', '/blog/industry-news'
+          '/support/faqs', '/blog/news-events', '/blog/industry-news',
+          '/sitemap.xml',
+          '/zh/sitemap.xml',
+          '/ru/sitemap.xml',
         ];
         const out = [...paths];
         for (const code of localeCodes) {
@@ -98,8 +101,7 @@ export default defineNuxtConfig({
   // --- 修改: modules 数组 ---
   modules: [
     '@nuxt/image', 
-    '@nuxtjs/i18n', 
-    '@nuxtjs/sitemap' // +++ 新增 sitemap 模块 +++
+    '@nuxtjs/i18n'
   ],
 
    
@@ -129,57 +131,6 @@ export default defineNuxtConfig({
     }
   },
 
-  // +++ 新增: sitemap 模块的完整配置 +++
-  sitemap: {
-    // 手动定义多个 sitemaps，为每个语言生成一个
-    sitemaps: locales.reduce((acc, locale) => {
-      const pathPrefix = locale.code === defaultLocale ? '/' : `/${locale.code}/`;
-      const fileName = locale.code === defaultLocale ? 'sitemap.xml' : `${locale.code}/sitemap.xml`;
-
-      acc[locale.code] = {
-        fileName: fileName,
-        // 包含此语言的所有 URL
-        include: [`${pathPrefix}**`],
-        // 如果是默认语言, 则排除所有其他语言的 URL
-        exclude: locale.code === defaultLocale 
-          ? localeCodes.map(code => `/${code}/**`)
-          : [],
-      };
-      return acc;
-    }, {}),
-
-    // 为所有 sitemaps 提供动态 URL
-    // 这个函数只会运行一次，其结果会被缓存和过滤，效率很高
-    async urls() {
-        const authToken = "8f80d6094edcd486411ddc90d4fa4f18ed87f9fe9edae7fe7cb423e3ce261b23ce76afdedfc3cf2e3689bd1b03e9f504cbded28e7645eed305db44f61e914053e9fb4b4999d30c743b67fe2a052bff812b6165825f1502f22f991ff41a44536c67a88f99ae0f525ee710ee010834ffddaa1501dc60c7da7dac18060f46612708";
-        const baseURL = 'https://cms.stoneboss.vip/api';
-         const dynamicRoutes: SitemapUrl[] = [];
-
-        const [blogs, products] = await Promise.all([
-            $fetch('/blogs?pagination[pageSize]=100000', { baseURL, headers: { Authorization: `Bearer ${authToken}` } }),
-            $fetch('/products?pagination[pageSize]=100000', { baseURL, headers: { Authorization: `Bearer ${authToken}` } })
-        ]);
-
-        // 为每篇文章和每种语言生成 URL
-        blogs.data.forEach(blog => {
-            dynamicRoutes.push({ loc: `/blog/${blog.slug}`, lastmod: blog.updatedAt }); // 默认语言
-            localeCodes.forEach(code => {
-                dynamicRoutes.push({ loc: `/${code}/blog/${blog.slug}`, lastmod: blog.updatedAt });
-            });
-        });
-
-        // 为每个产品和每种语言生成 URL
-        products.data.forEach(product => {
-         
-            dynamicRoutes.push({ loc: `/Products/${product.url}`, lastmod: product.updatedAt }); // 默认语言
-            localeCodes.forEach(code => {
-                dynamicRoutes.push({ loc: `/${code}/Products/${product.url}`, lastmod: product.updatedAt });
-            });
-        });
-//  console.log(dynamicRoutes)
-        return dynamicRoutes;
-    }
-  },
   
   css: [
     '~/assets/main.scss'
