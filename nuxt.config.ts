@@ -7,7 +7,7 @@ const defaultLocale = 'en';
 const locales = [
   { code: 'en', iso: 'en-US', name: 'English' },
   { code: 'zh', iso: 'zh-CN', name: '中文' },
-  { code: 'ru', iso: 'ru-RU', name: 'Русский' },
+  // { code: 'ru', iso: 'ru-RU', name: 'Русский' },
   // { code: 'tr', iso: 'tr-TR', name: 'Türkçe' },
   // { code: 'pt', iso: 'pt-BR', name: 'Português' },
   // { code: 'es', iso: 'es-ES', name: 'Español' },
