@@ -11,11 +11,11 @@ const locales = [
   { code: 'pt', iso: 'pt-BR', name: 'Português' },
   { code: 'es', iso: 'es-ES', name: 'Español' },
   { code: 'ru', iso: 'ru-RU', name: 'Русский' },
-  { code: 'de', iso: 'de-DE', name: 'Deutsch' },
-  { code: 'ar', iso: 'ar-AR', name: 'العربية' },
-  { code: 'vi', iso: 'vi-VN', name: 'Tiếng Việt' },
-  { code: 'fr', iso: 'fr-FR', name: 'Français' },
-  { code: 'pl', iso: 'pl-PL', name: 'Polski' },
+  // { code: 'de', iso: 'de-DE', name: 'Deutsch' },
+  // { code: 'ar', iso: 'ar-AR', name: 'العربية' },
+  // { code: 'vi', iso: 'vi-VN', name: 'Tiếng Việt' },
+  // { code: 'fr', iso: 'fr-FR', name: 'Français' },
+  // { code: 'pl', iso: 'pl-PL', name: 'Polski' },
 ];
 const localeCodes = locales.filter(l => l.code !== defaultLocale).map(l => l.code);
 
