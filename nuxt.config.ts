@@ -65,6 +65,13 @@ export default defineNuxtConfig({
 
   nitro: {
     preset: 'cloudflare_pages',
+    publicAssets: [
+      {
+        baseURL: '/',
+        dir: 'public', // 假设您的 _routes.json 放在 public/ 目录下
+        // 这里的配置是 Nuxt 默认行为，确保静态文件被复制
+      }
+    ],
     prerender: {
       concurrency: 10,
       crawlLinks: false,
@@ -114,6 +121,9 @@ export default defineNuxtConfig({
     '/ru/**': { prerender: true }, '/de/**': { prerender: true }, '/ar/**': { prerender: true }, '/vi/**': { prerender: true },
     '/fr/**': { prerender: true }, '/pl/**': { prerender: true },
     '/api/**': { proxy: 'https://cms.stoneboss.vip/api/**', headers: { 'cache-control': 's-maxage=60' } },
+    '/sitemap.xml': { prerender: true }, 
+    '/zh/sitemap.xml': { prerender: true }, 
+    '/ru/sitemap.xml': { prerender: true },
   },
 
   i18n: {

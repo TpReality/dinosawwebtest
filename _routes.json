@@ -1,0 +1,16 @@
+// 文件名: _routes.json
+{
+  "version": 1,
+  "include": [
+    "/*" // 保持此规则，让 Functions 处理所有请求（包括您的 SSR 页面和 /sitemap.xml）
+  ],
+  "exclude": [
+    // 使用通配符排除所有 Nuxt 静态资源，解决您的 1000+ 静态文件问题
+    "/_nuxt/*",
+    // 排除您的 public 目录中的所有文件（如果它们不在 /_nuxt 下）
+    "/images/*",
+    "/assets/*", 
+    "/favicon.ico",
+    "/robots.txt"
+  ]
+}
