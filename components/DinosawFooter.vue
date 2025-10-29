@@ -72,7 +72,7 @@
               <div class="item follow-us">
                   <div class="border"></div>
                   <h3>
-                      <NuxtLink :to="localePath('/Products')" target="_blank">Follow Us On</NuxtLink>
+                      <NuxtLink :to="localePath('/Products')" target="_blank">{{contentDetail.follow_us_on_title}}</NuxtLink>
                   </h3>
                   <ul class="ul">
                     <li>
