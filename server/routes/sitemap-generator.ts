@@ -115,7 +115,7 @@ export async function generateSitemapXml(currentLocaleCode: string): Promise<str
         // 注意：这里没有多余的空格
         urlXml += `<xhtml:link rel="alternate" hreflang="${locale.code}" href="${altHref}"/>\n`;
       });
-
+      const defaultUrl = `${base}${allRoutes.find(r => r.loc === data.loc)?.loc || data.loc}`;
       // **添加 x-default 标签** const defaultUrl = `${base}${allRoutes.find(r => r.loc === data.loc)?.loc || data.loc}`;
       urlXml += `<xhtml:link rel="alternate" hreflang="x-default" href="${defaultUrl}"/>\n`;
 
@@ -125,7 +125,8 @@ export async function generateSitemapXml(currentLocaleCode: string): Promise<str
     .join('\n'); // 使用 \n 连接每个 <url> 块
 
   // 3. XML 头部和命名空间 (确保包含 xhtml 命名空间)
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urlsXml}\n</urlset>`;
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urlsXml}\n</urlset>`;
+              
 
   return xml;
 }
