@@ -274,7 +274,7 @@
                     <!-- Consult Expert Button -->
                     <div class="expert-consultation">
                         <button class="expert-btn">
-                            <NuxtLink to="https://api.whatsapp.com/send?phone=8619859013937&Hi Lizzy,I want to know more detail information" target="_blank">
+                            <NuxtLink :to="'https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information'+fullUrlString" target="_blank">
                                 <span>{{contentDetail.product_detail_consult_dinosaw_material_expert_btn_text}}</span>
                             </NuxtLink>
                         </button>
@@ -302,7 +302,7 @@
                                             <span class="title-main">{{productDetail.application_scenario_title_1}}</span>
                                         </h3>
                                         <div class="case-description" v-html="productDetail.application_scenario_description_1"></div>
-                                        <NuxtLink to="https://api.whatsapp.com/send?phone=8619859013937&Hi Lizzy,I want to know more detail information" target="_blank"> 
+                                        <NuxtLink :to="'https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information'+fullUrlString" target="_blank"> 
                                         <div class="case-action">
                                             <button class="case-btn">
                                                 <span>{{productDetail.button_text_1}}</span>
@@ -325,7 +325,7 @@
                                             <span class="title-main">{{productDetail.application_scenario_title_2}}</span>
                                         </h3>
                                         <div class="case-description" v-html="productDetail.application_scenario_description_2"></div>
-                                        <NuxtLink to="https://api.whatsapp.com/send?phone=8619859013937&Hi Lizzy,I want to know more detail information" target="_blank"> 
+                                        <NuxtLink :to="'https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information'+fullUrlString" target="_blank"> 
                                             <div class="case-action">
                                                 <button class="case-btn">
                                                     <span>{{productDetail.button_text_2}}</span>
@@ -349,7 +349,7 @@
                                             <span class="title-main">{{productDetail.application_scenario_title_3}}</span>
                                         </h3>
                                         <div class="case-description" v-html="productDetail.application_scenario_description_3"></div>
-                                        <NuxtLink to="https://api.whatsapp.com/send?phone=8619859013937&Hi Lizzy,I want to know more detail information" target="_blank"> 
+                                        <NuxtLink :to="'https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information'+fullUrlString" target="_blank"> 
                                         <div class="case-action">
                                             <button class="case-btn">
                                                 <span>{{productDetail.button_text_3}}</span>
@@ -423,7 +423,7 @@
                     <!-- Contact Button -->
                     <div class="expert-consultation">
                         <button class="expert-btn">
-                            <NuxtLink to="https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information" target="_blank">
+                            <NuxtLink :to="'https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information'+fullUrlString" target="_blank">
                                 <span>{{ contentDetail.product_detail_contact_dinosaw_technical_btn_text }}</span>
                             </NuxtLink>
                         </button>
@@ -520,7 +520,7 @@
 
                         <div class="expert-consultation">
                             <button class="expert-btn">
-                                <NuxtLink to="https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information" target="_blank">
+                                <NuxtLink :to="'https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information'+fullUrlString" target="_blank">
                                     <span>{{ contentDetail.product_detail_inqury_for_details_btn_text }}</span>
                                 </NuxtLink>
                             </button>
@@ -616,7 +616,7 @@
                 </div>
                 <div class="expert-consultation">
                     <button class="expert-btn">
-                        <NuxtLink to="https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information" target="_blank">
+                        <NuxtLink :to="'https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information'+fullUrlString" target="_blank">
                         <span>{{contentDetail.product_detail_need_more_assistance_link_btn_text}}</span>
                         </NuxtLink>
                     </button>
@@ -817,7 +817,7 @@
                     <!-- Custom Solution Button -->
                     <div class="expert-consultation">
                         <button class="expert-btn">
-                            <NuxtLink to="https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information" target="_blank">
+                            <NuxtLink :to="'https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information'+fullUrlString" target="_blank">
                                 <span>{{ contentDetail.get_a_custom_solution_text }}</span>
                             </NuxtLink>
                         </button>
@@ -848,7 +848,7 @@
                                         <p>{{contentDetail.contact_dinosaw_description}}</p>
                                     </div>
                                     <button class="contact-btn">
-                                        <NuxtLink to="https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information" target="_blank">
+                                        <NuxtLink :to="'https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information'+fullUrlString" target="_blank">
                                         <span>{{ contentDetail.get_a_quote_text }}</span>
                                         </NuxtLink>
                                     </button>
@@ -940,11 +940,13 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted, computed, nextTick, watch } from 'vue'
+import { useRequestURL } from '#app';
 import { enhanceRichTextHtml } from '~/utils/richText'
 import { useLocalePath } from '#i18n'
 import { useI18n } from 'vue-i18n'
 const localePath = useLocalePath()
 const { locale } = useI18n()
+const fullUrlString = useRequestURL().href;
 
 const props = defineProps({
     slug: {

@@ -40,15 +40,15 @@ const isOptionsVisible = ref(false)
 const allLocales = [
   { code: 'en', name: 'English', flag: 'en-us' },
   { code: 'zh', name: '中文', flag: 'zh-cn' },
-  { code: 'tr', name: 'Türkçe', flag: 'tr' },
-  { code: 'pt', name: 'Português', flag: 'pt' },
-  { code: 'es', name: 'Español', flag: 'es' },
   { code: 'ru', name: 'Русский', flag: 'ru' },
-  { code: 'de', name: 'Deutsch', flag: 'de' },
-  { code: 'ar', name: 'العربية', flag: 'ar' },
-  { code: 'vi', name: 'Tiếng Việt', flag: 'vi' },
-  { code: 'fr', name: 'Français', flag: 'fr' },
-  { code: 'pl', name: 'Polski', flag: 'pl' },
+  // { code: 'tr', name: 'Türkçe', flag: 'tr' },
+  // { code: 'pt', name: 'Português', flag: 'pt' },
+  // { code: 'es', name: 'Español', flag: 'es' },
+  // { code: 'de', name: 'Deutsch', flag: 'de' },
+  // { code: 'ar', name: 'العربية', flag: 'ar' },
+  // { code: 'vi', name: 'Tiếng Việt', flag: 'vi' },
+  // { code: 'fr', name: 'Français', flag: 'fr' },
+  // { code: 'pl', name: 'Polski', flag: 'pl' },
 ];
 
 // 筛选出在 `locales` 中实际配置的语言

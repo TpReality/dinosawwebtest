@@ -41,7 +41,7 @@ export const useContentDetail = () => {
     return contentDetail.value
   }
 
-  initializeContentDetail()
+  // initializeContentDetail()
 
   return {
     contentDetail: readonly(contentDetail),

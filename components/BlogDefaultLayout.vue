@@ -198,7 +198,7 @@
               </div>
               <div class="chat-actions">
                 <NuxtLink class="whatsapp-chat-btn"
-                  to="https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information">{{
+                  :to="'https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information'+fullUrlString">{{
                     contentDetail.chat_online_dialog_btn_whatapp_text}}</NuxtLink>
                 <NuxtLink :to="localePath('/contact')" class="contact-us-btn" target="_blank">{{
                   contentDetail.chat_online_dialog_btn_contact_us_text
@@ -283,14 +283,14 @@
 </template>
 
 <script setup>
+import { useRequestURL } from '#app';
 import { formatDateEN } from '~/utils/dateUtils';
 import { useI18n } from 'vue-i18n'
 import { useLocalePath } from '#i18n'
 const { locale, locales,defaultLocale } = useI18n()
 
 const localePath = useLocalePath()
-const route = useRoute()
-// console.log(route)
+const fullUrlString = useRequestURL().href;
 // Props
 const emit = defineEmits(['headdata-loaded']);
 const props = defineProps({

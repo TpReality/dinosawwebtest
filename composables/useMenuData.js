@@ -87,7 +87,7 @@ export const useMenuData = () => {
     // 保留原有逻辑（尽量安全地读取首项）
     const first = raw[0] || {}
     categoryDetail.value = first?.wire_saw_machine || {}
-// console.log(useMenuData)
+// console.log(menuItems)
     return menuItems.value
   }
 
