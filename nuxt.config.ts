@@ -33,7 +33,7 @@ export default defineNuxtConfig({
   site: {
     url: 'https://www.dinosawmachine.com', // 请确保这是你网站的正确域名
   },
-
+  ssr:true,
   runtimeConfig: {
     public: {
       gtmId: 'GTM-P9KQZ4XV',
