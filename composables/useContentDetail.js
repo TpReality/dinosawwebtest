@@ -6,20 +6,20 @@ export const useContentDetail = () => {
    const { locale } = useI18n()
   const initializeContentDetail = async () => {
     // 已有缓存则直接返回，避免重复请求（客户端导航也不再请求）
-    if (Object.keys(contentDetail.value).length > 0) return contentDetail.value
+    // if (Object.keys(contentDetail.value).length > 0) return contentDetail.value
 
     const config = useRuntimeConfig()
-    let url = '/public-page-infos?filters[get_a_free_quote_btn_text][$eq]=Get A Free Quote'
+    let url = '/public-page-infos?'
     const baseUrl = config.public.apiBase || 'https://cms.stoneboss.vip/api'
     const authToken = "8f80d6094edcd486411ddc90d4fa4f18ed87f9fe9edae7fe7cb423e3ce261b23ce76afdedfc3cf2e3689bd1b03e9f504cbded28e7645eed305db44f61e914053e9fb4b4999d30c743b67fe2a052bff812b6165825f1502f22f991ff41a44536c67a88f99ae0f525ee710ee010834ffddaa1501dc60c7da7dac18060f46612708"
-    // if(locale.value === 'zh'){
-    //     url += '&locale=zh-Hans'
-    // }else{
-    //     url += locale.value == 'en'?'':"&locale="+locale.value
-    // }
-
+    if(locale.value === 'zh'){
+        url += 'locale=zh-Hans'
+    }else{
+        url += locale.value == 'en'?'':"locale="+locale.value
+    }
+// console.log(url)
     const { data: res } = await useAsyncData(
-      () => 'content:detail',
+      // () => 'content:detail',
       () => $fetch(url,
         { 
           baseURL: baseUrl,

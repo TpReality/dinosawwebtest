@@ -37,7 +37,7 @@
                      <div class="breadcrumb-outer">
                         <div class="bg">
                             <p v-for="(item) in topProduct" :key="item.id">
-                                <a :href="'/Products/'+item.category_value" target="_blank">{{ item.category_name }}</a>
+                                <NuxtLink :to="localePath('/Products/'+item.category_value)" target="_blank">{{ item.category_name }}</NuxtLink>
                             </p>
                         </div>
                     </div>

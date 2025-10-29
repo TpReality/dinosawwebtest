@@ -317,8 +317,9 @@ figure {
     .content-wrapper {
         width: 100%;
         max-width: 1114px;
-        height: 397px;
+        min-height: 397px;
         position: relative;
+        padding-bottom:30px;
     }
     .projects-badge {
     position: absolute;

@@ -1,2 +1,15 @@
-User-Agent: *
+User-agent: *
 Disallow:
+
+# 列出所有语言的站点地图
+Sitemap: https://www.dinosawmachine.com/sitemap.xml
+Sitemap: https://www.dinosawmachine.com/zh/sitemap.xml
+Sitemap: https://www.dinosawmachine.com/tr/sitemap.xml
+Sitemap: https://www.dinosawmachine.com/pt/sitemap.xml
+Sitemap: https://www.dinosawmachine.com/es/sitemap.xml
+Sitemap: https://www.dinosawmachine.com/ru/sitemap.xml
+Sitemap: https://www.dinosawmachine.com/de/sitemap.xml
+Sitemap: https://www.dinosawmachine.com/ar/sitemap.xml
+Sitemap: https://www.dinosawmachine.com/vi/sitemap.xml
+Sitemap: https://www.dinosawmachine.com/fr/sitemap.xml
+Sitemap: https://www.dinosawmachine.com/pl/sitemap.xml

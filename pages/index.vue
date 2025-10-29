@@ -442,7 +442,7 @@
                             </div>
                         </NuxtLink>
                         <!-- Step 4: Enjoy Full Support -->
-                        <NuxtLink to="/video" target="_blank">
+                        <NuxtLink :to="localePath('/video')" target="_blank">
                             <div class="step-card">
                                 <div class="step-overlay">
                                     <div class="step-content">
@@ -485,7 +485,7 @@
                             <div class="dynamic-product-section" v-if="indexDetail.flagship_tech_products && indexDetail.flagship_tech_products.length">
                                 <!-- 1张图片布局：左侧图片，右侧信息 - 按照Figma节点 10:15239 -->
                                 <div v-if="indexDetail.flagship_tech_products.length === 1" class="layout-single">
-                                    <NuxtLink :to="'/Products/'+indexDetail.flagship_tech_products[0].url">
+                                    <NuxtLink :to="localePath('/Products/'+indexDetail.flagship_tech_products[0].url)">
                                         <div class="single-container">
                                             <div class="single-link">
                                                 <div class="single-image">
@@ -583,9 +583,9 @@
                                     <div class="five-left">
                                         
                                         <div class="five-main-image">
-                                            <NuxtLink :to="'/Products/'+indexDetail.flagship_tech_products[0].url" target="_blank"> <NuxtImg sizes="sm:100vw" loading="lazy" :src="indexDetail.flagship_tech_products[0].first_image_url" /></NuxtLink>
+                                            <NuxtLink :to="localePath('/Products/'+indexDetail.flagship_tech_products[0].url)" target="_blank"> <NuxtImg sizes="sm:100vw" loading="lazy" :src="indexDetail.flagship_tech_products[0].first_image_url" /></NuxtLink>
                                         </div>
-                                        <NuxtLink :to="'/Products/'+indexDetail.flagship_tech_products[0].url" target="_blank">
+                                        <NuxtLink :to="localePath('/Products/'+indexDetail.flagship_tech_products[0].url)" target="_blank">
                                         <div class="five-main-content">
                                              
                                                 <h3 class="five-main-title">{{ indexDetail.flagship_tech_products[0].h1_page_inner_title }}</h3>

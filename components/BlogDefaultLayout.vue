@@ -333,7 +333,7 @@ watch(blogDetailRes, (newPosts) => {
 
   if (newPosts) {
 
-    console.log('blog',newPosts)
+    // console.log('blog',newPosts)
     let data = newPosts.data[0]
     if (data.youtube_link) {
       data.youtube_link = getLastPathSegment(data.youtube_link)

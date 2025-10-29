@@ -56,7 +56,8 @@ const machineTypes = [
     'profiling-machine',
     'other-machine',
     'diamond-tools',
-    'other-industrial-machine'
+    'other-industrial-machine',
+    'nuclear-decommissioning-equipment'
 ];
 // 检查当前slug是否在机器类型列表中
 const isSpecialMachine = computed(() => {

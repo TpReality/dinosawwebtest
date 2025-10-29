@@ -774,7 +774,7 @@
         </div>
         
         <!-- Comprehensive Guide Section -->
-        <div class="comprehensive-guide-section">
+        <div class="comprehensive-guide-section" v-if="productDetail.select_machine_guide_background_image">
             <div class="guide-container">
                 <!-- Header Section -->
                 <div class="guide-header">
@@ -914,6 +914,12 @@ switch(props.slug){
         &populate[diamond_tool][populate][diamond_tools_performance_cases_blogs][fields]
         &populate[diamond_tool][populate][diamond_tools_usage_guide_blogs][fields]
         &populate[diamond_tool][populate][select_machine_guide_background_image][fields]
+        `; 
+        
+    break;
+    case 'nuclear-decommissioning-equipment':
+        url +=`[nuclear_decommissioning_equipment][populate][cnc_wire_saw_for_nuclear_decommissioning_products][fields]=first_image_url,h1_page_inner_title,url, date
+        &populate[nuclear_decommissioning_equipment][populate][cnc_wire_saw_for_nuclear_decommissioning_head_circly_images][populate][banner_img][fields]
         `; 
         
     break;
@@ -1438,6 +1444,26 @@ watch(productDetailRes, (newPosts) => {
                         moreUrl:"/blog/industry-news"
                     }
                 ]
+            break;
+            case 'nuclear_decommissioning_equipment':
+                productDetail.value.hero_main_description = productDetail.value.cnc_wire_saw_for_nuclear_decommissioning_description
+                productDetail.value.hero_circle_background_images = productDetail.value.cnc_wire_saw_for_nuclear_decommissioning_head_circly_images
+                     if (productDetail.value.cnc_wire_saw_for_nuclear_decommissioning_products) {
+                    productDetail.value.cnc_wire_saw_for_nuclear_decommissioning_products = formatArrayDatesLong(
+                        productDetail.value.cnc_wire_saw_for_nuclear_decommissioning_products
+                    )
+                }
+// console.log('productDetail', productDetail.value)
+                dynamicContent.value = [
+                    { 
+                        id: 1, 
+                        title: productDetail.value.hero_main_title, 
+                        description: productDetail.value.hero_description, 
+                        productList: productDetail.value.cnc_wire_saw_for_nuclear_decommissioning_products
+                    },
+                ]
+
+                processingCase.value = []
             break;
         }
 
