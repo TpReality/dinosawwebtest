@@ -75,8 +75,7 @@ export default defineNuxtConfig({
           '/Products/wire-saw-machine', '/Products/diamond-tools', '/Products/circle-saw-machine', '/Products/drilling-and-engraving-machine',
           '/Products/mining-and-quarry-machine', '/Products/grinding-and-polishing-machine', '/Products/profiling-machine', '/Products/other-industrial-machine',
           '/projects/marble-projects', '/projects/granite-projects', '/projects/other-hard-materials-projects', '/support/user-manual',
-          '/support/faqs', '/blog/news-events', '/blog/industry-news',
-          '/sitemap.xml'
+          '/support/faqs', '/blog/news-events', '/blog/industry-news'
         ];
         const out = [...paths];
         for (const code of localeCodes) {
