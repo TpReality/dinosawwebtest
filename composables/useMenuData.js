@@ -70,9 +70,10 @@ export const useMenuData = () => {
     }else{
         url += locale.value == 'en'?'':"&locale="+locale.value
     }
-    
+    const asyncKey = `menu-data-${locale.value}`; // 动态 Key
     const { data: res } = await useAsyncData(
       // () => 'menu:list',
+      asyncKey,
       () => $fetch(url, {
         baseURL: baseUrl,
         headers: authToken ? { Authorization: `Bearer ${authToken}` } : undefined

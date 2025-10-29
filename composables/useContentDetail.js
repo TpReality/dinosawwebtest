@@ -17,9 +17,11 @@ export const useContentDetail = () => {
     }else{
         url += locale.value == 'en'?'':"locale="+locale.value
     }
+    const asyncKey = `content-data-${locale.value}`; // 动态 Key
 // console.log(url)
     const { data: res } = await useAsyncData(
       // () => 'content:detail',
+      asyncKey,
       () => $fetch(url,
         { 
           baseURL: baseUrl,
