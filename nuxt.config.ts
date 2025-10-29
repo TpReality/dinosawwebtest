@@ -11,11 +11,11 @@ const locales = [
   { code: 'pt', iso: 'pt-BR', name: 'Português' },
   { code: 'es', iso: 'es-ES', name: 'Español' },
   { code: 'ru', iso: 'ru-RU', name: 'Русский' },
-  // { code: 'de', iso: 'de-DE', name: 'Deutsch' },
-  // { code: 'ar', iso: 'ar-AR', name: 'العربية' },
-  // { code: 'vi', iso: 'vi-VN', name: 'Tiếng Việt' },
-  // { code: 'fr', iso: 'fr-FR', name: 'Français' },
-  // { code: 'pl', iso: 'pl-PL', name: 'Polski' },
+  { code: 'de', iso: 'de-DE', name: 'Deutsch' },
+  { code: 'ar', iso: 'ar-AR', name: 'العربية' },
+  { code: 'vi', iso: 'vi-VN', name: 'Tiếng Việt' },
+  { code: 'fr', iso: 'fr-FR', name: 'Français' },
+  { code: 'pl', iso: 'pl-PL', name: 'Polski' },
 ];
 const localeCodes = locales.filter(l => l.code !== defaultLocale).map(l => l.code);
 
@@ -29,6 +29,12 @@ type SitemapUrl = {
 
 
 export default defineNuxtConfig({
+  build: {
+    // 优化构建内存使用
+    parallel: false,
+    cache: false,
+    optimizeCSS: false
+  },
   // +++ 新增: 为 sitemap 提供网站的根 URL +++
   site: {
     url: 'https://www.dinosawmachine.com', // 请确保这是你网站的正确域名
@@ -100,6 +106,8 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n', 
     '@nuxtjs/sitemap' // +++ 新增 sitemap 模块 +++
   ],
+
+   
   
   routeRules: {
     '/blog/**': { headers: { 'cache-control': 'public, max-age=1, s-maxage=60, stale-while-revalidate=59' } },

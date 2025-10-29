@@ -156,7 +156,7 @@
         </div>
 
         <!-- Quick Navigation Section -->
-        <div ref="quickNavSection" class="quick-navigation-section" :class="{ 'sticky': isQuickNavSticky }">
+        <div ref="quickNavSection" class="quick-navigation-section" :class="{ 'sticky': isQuickNavSticky, locale.value }">
             <div class="quick-nav-container">
                 <div class="nav-items-wrapper">
                     <div class="nav-items-row">
@@ -942,7 +942,9 @@
 import { ref, onMounted, onUnmounted, computed, nextTick, watch } from 'vue'
 import { enhanceRichTextHtml } from '~/utils/richText'
 import { useLocalePath } from '#i18n'
+import { useI18n } from 'vue-i18n'
 const localePath = useLocalePath()
+const { locale } = useI18n()
 
 const props = defineProps({
     slug: {
@@ -2159,6 +2161,8 @@ onUnmounted(() => {
     justify-content: stretch;
     align-items: stretch;
     gap: 10px;
+    text-align:center;
+    cursor: pointer;
 }
 
 .nav-item:first-child {
@@ -2195,6 +2199,38 @@ onUnmounted(() => {
     width: 73px;
     height: 31.2px;
 }
+.quick-navigation-section.zh{
+    .nav-items-row{
+        justify-content:space-between;
+    }
+    .nav-item:first-child {
+        width: auto;
+    }
+
+    .nav-item:nth-child(2) {
+        width: auto;
+    }
+
+    .nav-item:nth-child(3) {
+        width: auto;
+    }
+
+    .nav-item:nth-child(4) {
+        width: auto;
+    }
+
+    .nav-item:nth-child(5) {
+        width: auto;
+    }
+
+    .nav-item:nth-child(6) {
+        width: auto;
+    }
+
+    .nav-item:nth-child(7) {
+        width: auto;
+    }
+}
 
 .nav-link {
     display: flex;
@@ -2228,7 +2264,7 @@ onUnmounted(() => {
     font-weight: 400;
     font-size: 16px;
     line-height: 1.1875em;
-    text-align: left;
+    text-align: center;
     color: #000000;
     margin: 0;
     position: relative;
