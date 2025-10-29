@@ -290,7 +290,7 @@ const { locale, locales,defaultLocale } = useI18n()
 
 const localePath = useLocalePath()
 const route = useRoute()
-console.log(route)
+// console.log(route)
 // Props
 const emit = defineEmits(['headdata-loaded']);
 const props = defineProps({
