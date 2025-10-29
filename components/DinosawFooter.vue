@@ -9,62 +9,70 @@
               <div class="item">
                   <div class="border"></div>
                   <h3>
-                      <a :href="menuItems[0].link" target="_blank">{{ menuItems[0].title }}</a>
+                      <NuxtLink :to="localePath(menuItems[0].link)" target="_blank">{{ menuItems[0].title }}</NuxtLink>
                   </h3>
                   <ul class="ul">
-                    <li v-for="(item,i) in menuItems[0].children" :key="i"><a :href="menuItems[0].link+item.link" target="_blank">{{ item.text }}</a></li>
+                    <li v-for="(item,i) in menuItems[0].children" :key="i">
+                      <NuxtLink :to="localePath(menuItems[0].link+item.link)" target="_blank">{{ item.text }}</NuxtLink>
+                    </li>
                   </ul>
               </div>
               <div class="item">
                   <div class="border"></div>
                   <h3>
-                      <a :href="menuItems[1].link" target="_blank">{{ menuItems[1].title }}</a>
+                      <NuxtLink :to="localePath(menuItems[1].link)" target="_blank">{{ menuItems[1].title }}</NuxtLink>
                   </h3>
                   <ul class="ul">
-                    <li v-for="(item,i) in menuItems[1].children" :key="i"><a :href="menuItems[1].link+item.link" target="_blank">{{ item.text }}</a></li>
+                    <li v-for="(item,i) in menuItems[1].children" :key="i">
+                      <NuxtLink :to="localePath(menuItems[1].link+item.link)" target="_blank">{{ item.text }}</NuxtLink>
+                    </li>
                   </ul>
                   <div class="border"></div>
                   <h3>
-                      <a :href="menuItems[3].link" target="_blank">{{ menuItems[3].title }}</a>
+                      <NuxtLink :to="localePath(menuItems[3].link)" target="_blank">{{ menuItems[3].title }}</NuxtLink>
                   </h3>
                   <ul class="ul">
-                    <li v-for="(item,i) in menuItems[3].children" :key="i"><a :href="menuItems[3].link+item.link" target="_blank">{{ item.text }}</a></li>
+                    <li v-for="(item,i) in menuItems[3].children" :key="i">
+                      <NuxtLink :to="localePath(menuItems[3].link+item.link)" target="_blank">{{ item.text }}</NuxtLink>
+                    </li>
                   </ul>
                   <div class="border"></div>
                   <h3>
-                      <a :href="menuItems[4].link" target="_blank">{{ menuItems[4].linkText }}</a>
+                      <NuxtLink :to="localePath(menuItems[4].link)" target="_blank">{{ menuItems[4].linkText }}</NuxtLink>
                   </h3>
                   <ul class="ul">
-                    <li><a :href="menuItems[4].link" target="_blank">{{ menuItems[4].linkText }}</a></li>
+                    <li><NuxtLink :to="localePath(menuItems[4].link)" target="_blank">{{ menuItems[4].linkText }}</NuxtLink></li>
                   </ul>
               </div>
               <div class="item">
                   <div class="border"></div>
                   <h3>
-                      <a :href="menuItems[5].link" target="_blank">{{ menuItems[5].linkText }}</a>
+                      <NuxtLink :to="localePath(menuItems[5].link)" target="_blank">{{ menuItems[5].linkText }}</NuxtLink>
                   </h3>
                   <ul class="ul">
-                    <li><a :href="menuItems[5].link" target="_blank">{{ menuItems[5].linkText }}</a></li>
+                    <li><NuxtLink :to="localePath(menuItems[5].link)" target="_blank">{{ menuItems[5].linkText }}</NuxtLink></li>
                   </ul>
                   <div class="border"></div>
                   <h3>
-                      <a :href="menuItems[2].link" target="_blank">{{ menuItems[2].title }}</a>
+                      <NuxtLink :to="localePath(menuItems[2].link)" target="_blank">{{ menuItems[2].title }}</NuxtLink>
                   </h3>
                   <ul class="ul">
-                    <li v-for="(item,i) in menuItems[2].children" :key="i"><a :href="menuItems[2].link+item.link" target="_blank">{{ item.text }}</a></li>
+                    <li v-for="(item,i) in menuItems[2].children" :key="i">
+                      <NuxtLink :to="localePath(menuItems[2].link+item.link)" target="_blank">{{ item.text }}</NuxtLink>
+                    </li>
                   </ul>
                   <div class="border"></div>
                   <h3>
-                      <a :href="menuItems[6].link" target="_blank">{{ menuItems[6].linkText }}</a>
+                      <NuxtLink :to="localePath(menuItems[6].link)" target="_blank">{{ menuItems[6].linkText }}</NuxtLink>
                   </h3>
                   <ul class="ul">
-                    <li><a :href="menuItems[6].link" target="_blank">{{ menuItems[6].linkText }}</a></li>
+                    <li><NuxtLink :to="localePath(menuItems[6].link)" target="_blank">{{ menuItems[6].linkText }}</NuxtLink></li>
                   </ul>
               </div>
               <div class="item follow-us">
                   <div class="border"></div>
                   <h3>
-                      <a href="https://www.dinosawmachine.com/Products" target="_blank">Follow Us On</a>
+                      <NuxtLink :to="localePath('/Products')" target="_blank">Follow Us On</NuxtLink>
                   </h3>
                   <ul class="ul">
                     <li>
@@ -105,6 +113,9 @@
 </template>
 
 <script setup>
+
+import { useLocalePath } from '#i18n'
+const localePath = useLocalePath()
 
 const props = defineProps({
   contentDetail: {

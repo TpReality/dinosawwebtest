@@ -15,7 +15,7 @@
                             <div class="breadcrumb-link">
                                 <div class="breadcrumb-text">
                                     <div class="text-container" v-if="productDetail.home_text">
-                                        <NuxtLink to="/" target="_blank"><span class="breadcrumb-home">{{ productDetail.home_text }}</span></NuxtLink>
+                                        <NuxtLink :to="localePath('/')" target="_blank"><span class="breadcrumb-home">{{ productDetail.home_text }}</span></NuxtLink>
                                     </div>
                                 </div>
                                 <div class="breadcrumb-text">
@@ -29,7 +29,7 @@
                                     <div class="dropdown-link">
                                         <div class="dropdown-container">
                                             <div class="dropdown-text-container">
-                                                <NuxtLink to="/Products" target="_blank">
+                                                <NuxtLink :to="localePath('/Products')" target="_blank">
                                                     <span class="breadcrumb-products">{{ productDetail.products_btn_text }}</span>
                                                 </NuxtLink>
                                             </div>
@@ -42,7 +42,7 @@
                                 <div class="breadcrumb-outer">
                                     <div class="bg">
                                         <p v-for="(item) in topProduct" :key="item.id">
-                                            <a :href="'/Products/'+item.category_value" target="_blank">{{ item.category_name }}</a>
+                                            <NuxtLink :to="localePath('/Products/'+item.category_value)" target="_blank">{{ item.category_name }}</NuxtLink>
                                         </p>
                                     </div>
                                 </div>
@@ -126,7 +126,7 @@
                 <div class="dynamic-product-section" v-if="item.productList && item.productList.length">
                     <!-- 1张图片布局：左侧图片，右侧信息 - 按照Figma节点 10:15239 -->
                     <div v-if="item.productList.length === 1" class="layout-single">
-                        <NuxtLink :to="'/Products/'+item.productList[0].url" target="_blank">
+                        <NuxtLink :to="localePath('/Products/'+item.productList[0].url)" target="_blank">
                         <div class="single-container">
                             <div class="single-link">
                                 <div class="single-image">
@@ -156,7 +156,7 @@
                     <div v-else-if="item.productList.length === 2" class="layout-double">
                         <template v-for="(product, index) in item.productList" 
                             :key="index">
-                        <NuxtLink :to="'/Products/'+product.url" target="_blank">
+                        <NuxtLink :to="localePath('/Products/'+product.url)" target="_blank">
                         <div 
                             
                             class="double-item"
@@ -206,7 +206,7 @@
                     <div v-else-if="item.productList.length === 4" class="layout-quad">
                         <template v-for="(product, index) in item.productList" 
                             :key="index">
-                            <NuxtLink :to="'/Products/'+product.url" target="_blank">
+                            <NuxtLink :to="localePath('/Products/'+product.url)" target="_blank">
                         <div 
                            
                             class="quad-item"
@@ -228,9 +228,9 @@
                         <div class="five-left">
                              
                             <div class="five-main-image">
-                                <NuxtLink :to="'/Products/'+item.productList[0].url" target="_blank"><NuxtImg sizes="sm:100vw" loading="lazy" :src="item.productList[0].first_image_url" /></NuxtLink>
+                                <NuxtLink :to="localePath('/Products/'+item.productList[0].url)" target="_blank"><NuxtImg sizes="sm:100vw" loading="lazy" :src="item.productList[0].first_image_url" /></NuxtLink>
                             </div>
-                            <NuxtLink :to="'/Products/'+item.productList[0].url" target="_blank">
+                            <NuxtLink :to="localePath('/Products/'+item.productList[0].url)" target="_blank">
                             <div class="five-main-content">
                                 <h3 class="five-main-title">{{ item.productList[0].h1_page_inner_title }}</h3>
                                 <p class="five-main-date" v-if="item.productList[0].date">{{ item.productList[0].date }}</p>
@@ -249,12 +249,12 @@
                                 class="five-grid-item"
                             >
                                 <div class="five-grid-image">
-                                    <NuxtLink :to="'/Products/'+product.url" target="_blank">
+                                    <NuxtLink :to="localePath('/Products/'+product.url)" target="_blank">
                                         <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" />
                                     </NuxtLink>
                                 </div>
                                 <h3 class="five-grid-title">
-                                    <NuxtLink :to="'/Products/'+product.url" target="_blank">{{ product.h1_page_inner_title }}</NuxtLink>
+                                    <NuxtLink :to="localePath('/Products/'+product.url)" target="_blank">{{ product.h1_page_inner_title }}</NuxtLink>
                                 </h3>
                             </div>
                         </div>
@@ -265,9 +265,9 @@
                         <div class="five-left">
                              
                             <div class="five-main-image">
-                                <NuxtLink :to="'/Products/'+item.productList[0].url" target="_blank"><NuxtImg sizes="sm:100vw" loading="lazy" :src="item.productList[0].first_image_url" /></NuxtLink>
+                                <NuxtLink :to="localePath('/Products/'+item.productList[0].url)" target="_blank"><NuxtImg sizes="sm:100vw" loading="lazy" :src="item.productList[0].first_image_url" /></NuxtLink>
                             </div>
-                            <NuxtLink :to="'/Products/'+item.productList[0].url" target="_blank">
+                            <NuxtLink :to="localePath('/Products/'+item.productList[0].url)" target="_blank">
                             <div class="five-main-content">
                                 <h3 class="five-main-title">{{ item.productList[0].h1_page_inner_title }}</h3>
                                 <p class="five-main-date" v-if="item.productList[0].date">{{ item.productList[0].date }}</p>
@@ -286,18 +286,18 @@
                                 class="five-grid-item"
                             >
                                 <div class="five-grid-image">
-                                    <NuxtLink :to="'/Products/'+product.url" target="_blank">
+                                    <NuxtLink :to="localePath('/Products/'+product.url)" target="_blank">
                                         <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" />
                                     </NuxtLink>
                                 </div>
                                 <h3 class="five-grid-title">
-                                    <NuxtLink :to="'/Products/'+product.url" target="_blank">{{ product.h1_page_inner_title }}</NuxtLink>
+                                    <NuxtLink :to="localePath('/Products/'+product.url)" target="_blank">{{ product.h1_page_inner_title }}</NuxtLink>
                                 </h3>
                             </div>
                         </div>
                         </div>
                         <div class="layout-single">
-                        <NuxtLink :to="'/Products/'+item.productList[5].url" target="_blank">
+                        <NuxtLink :to="localePath('/Products/'+item.productList[5].url)" target="_blank">
                         <div class="single-container">
                             <div class="single-link">
                                 <div class="single-image">
@@ -328,9 +328,9 @@
                             <div class="five-left">
                                 
                                 <div class="five-main-image">
-                                    <NuxtLink :to="'/Products/'+item.productList[0].url" target="_blank"><NuxtImg sizes="sm:100vw" loading="lazy" :src="item.productList[0].first_image_url" /></NuxtLink>
+                                    <NuxtLink :to="localePath('/Products/'+item.productList[0].url)" target="_blank"><NuxtImg sizes="sm:100vw" loading="lazy" :src="item.productList[0].first_image_url" /></NuxtLink>
                                 </div>
-                                <NuxtLink :to="'/Products/'+item.productList[0].url" target="_blank">
+                                <NuxtLink :to="localePath('/Products/'+item.productList[0].url)" target="_blank">
                                 <div class="five-main-content">
                                     <h3 class="five-main-title">{{ item.productList[0].h1_page_inner_title }}</h3>
                                     <p class="five-main-date" v-if="item.productList[0].date">{{ item.productList[0].date }}</p>
@@ -349,12 +349,12 @@
                                     class="five-grid-item"
                                 >
                                     <div class="five-grid-image">
-                                        <NuxtLink :to="'/Products/'+product.url" target="_blank">
+                                        <NuxtLink :to="localePath('/Products/'+product.url)" target="_blank">
                                             <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" />
                                         </NuxtLink>
                                     </div>
                                     <h3 class="five-grid-title">
-                                        <NuxtLink :to="'/Products/'+product.url" target="_blank">{{ product.h1_page_inner_title }}</NuxtLink>
+                                        <NuxtLink :to="localePath('/Products/'+product.url)" target="_blank">{{ product.h1_page_inner_title }}</NuxtLink>
                                     </h3>
                                 </div>
                             </div>
@@ -362,7 +362,7 @@
                             <div class="layout-double">
                             <template v-for="(product, index) in item.productList.slice(5,7)" 
                                 :key="index">
-                            <NuxtLink :to="'/Products/'+product.url" target="_blank">
+                            <NuxtLink :to="localePath('/Products/'+product.url)" target="_blank">
                             <div 
                                 
                                 class="double-item"
@@ -413,9 +413,9 @@
                             <div class="five-left">
                                 
                                 <div class="five-main-image">
-                                    <NuxtLink :to="'/Products/'+item.productList[0].url" target="_blank"><NuxtImg sizes="sm:100vw" loading="lazy" :src="item.productList[0].first_image_url" /></NuxtLink>
+                                    <NuxtLink :to="localePath('/Products/'+item.productList[0].url)" target="_blank"><NuxtImg sizes="sm:100vw" loading="lazy" :src="item.productList[0].first_image_url" /></NuxtLink>
                                 </div>
-                                <NuxtLink :to="'/Products/'+item.productList[0].url" target="_blank">
+                                <NuxtLink :to="localePath('/Products/'+item.productList[0].url)" target="_blank">
                                 <div class="five-main-content">
                                     <h3 class="five-main-title">{{ item.productList[0].h1_page_inner_title }}</h3>
                                     <p class="five-main-date" v-if="item.productList[0].date">{{ item.productList[0].date }}</p>
@@ -434,12 +434,12 @@
                                     class="five-grid-item"
                                 >
                                     <div class="five-grid-image">
-                                        <NuxtLink :to="'/Products/'+product.url" target="_blank">
+                                        <NuxtLink :to="localePath('/Products/'+product.url)" target="_blank">
                                             <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" />
                                         </NuxtLink>
                                     </div>
                                     <h3 class="five-grid-title">
-                                        <NuxtLink :to="'/Products/'+product.url" target="_blank">{{ product.h1_page_inner_title }}</NuxtLink>
+                                        <NuxtLink :to="localePath('/Products/'+product.url)" target="_blank">{{ product.h1_page_inner_title }}</NuxtLink>
                                     </h3>
                                 </div>
                             </div>
@@ -447,7 +447,7 @@
                             <div class="layout-double">
                             <template v-for="(product, index) in item.productList.slice(5,7)" 
                                 :key="index">
-                            <NuxtLink :to="'/Products/'+product.url" target="_blank">
+                            <NuxtLink :to="localePath('/Products/'+product.url)" target="_blank">
                             <div 
                                 
                                 class="double-item"
@@ -493,7 +493,7 @@
                             </template>
                         </div>
                         <div class="layout-single">
-                        <NuxtLink :to="'/Products/'+item.productList[8].url" target="_blank">
+                        <NuxtLink :to="localePath('/Products/'+item.productList[8].url)" target="_blank">
                         <div class="single-container">
                             <div class="single-link">
                                 <div class="single-image">
@@ -524,9 +524,9 @@
                             <div class="five-left">
                                 
                                 <div class="five-main-image">
-                                    <NuxtLink :to="'/Products/'+item.productList[0].url" target="_blank"><NuxtImg sizes="sm:100vw" loading="lazy" :src="item.productList[0].first_image_url" /></NuxtLink>
+                                    <NuxtLink :to="localePath('/Products/'+item.productList[0].url)" target="_blank"><NuxtImg sizes="sm:100vw" loading="lazy" :src="item.productList[0].first_image_url" /></NuxtLink>
                                 </div>
-                                <NuxtLink :to="'/Products/'+item.productList[0].url" target="_blank">
+                                <NuxtLink :to="localePath('/Products/'+item.productList[0].url)" target="_blank">
                                 <div class="five-main-content">
                                     <h3 class="five-main-title">{{ item.productList[0].h1_page_inner_title }}</h3>
                                     <p class="five-main-date" v-if="item.productList[0].date">{{ item.productList[0].date }}</p>
@@ -545,12 +545,12 @@
                                     class="five-grid-item"
                                 >
                                     <div class="five-grid-image">
-                                        <NuxtLink :to="'/Products/'+product.url" target="_blank">
+                                        <NuxtLink :to="localePath('/Products/'+product.url)" target="_blank">
                                             <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" />
                                         </NuxtLink>
                                     </div>
                                     <h3 class="five-grid-title">
-                                        <NuxtLink :to="'/Products/'+product.url" target="_blank">{{ product.h1_page_inner_title }}</NuxtLink>
+                                        <NuxtLink :to="localePath('/Products/'+product.url)" target="_blank">{{ product.h1_page_inner_title }}</NuxtLink>
                                     </h3>
                                 </div>
                             </div>
@@ -558,7 +558,7 @@
                         <div class="layout-double">
                             <template v-for="(product, index) in item.productList.slice(5,7)" 
                                 :key="index">
-                            <NuxtLink :to="'/Products/'+product.url" target="_blank">
+                            <NuxtLink :to="localePath('/Products/'+product.url)" target="_blank">
                             <div 
                                 
                                 class="double-item"
@@ -607,9 +607,9 @@
                             <div class="five-left">
                                 
                                 <div class="five-main-image">
-                                    <NuxtLink :to="'/Products/'+item.productList[7].url" target="_blank"><NuxtImg sizes="sm:100vw" loading="lazy" :src="item.productList[7].first_image_url" /></NuxtLink>
+                                    <NuxtLink :to="localePath('/Products/'+item.productList[7].url)" target="_blank"><NuxtImg sizes="sm:100vw" loading="lazy" :src="item.productList[7].first_image_url" /></NuxtLink>
                                 </div>
-                                <NuxtLink :to="'/Products/'+item.productList[7].url" target="_blank">
+                                <NuxtLink :to="localePath('/Products/'+item.productList[7].url)" target="_blank">
                                 <div class="five-main-content">
                                     <h3 class="five-main-title">{{ item.productList[7].h1_page_inner_title }}</h3>
                                     <p class="five-main-date" v-if="item.productList[7].date">{{ item.productList[7].date }}</p>
@@ -628,12 +628,12 @@
                                     class="five-grid-item"
                                 >
                                     <div class="five-grid-image">
-                                        <NuxtLink :to="'/Products/'+product.url" target="_blank">
+                                        <NuxtLink :to="localePath('/Products/'+product.url)" target="_blank">
                                             <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" />
                                         </NuxtLink>
                                     </div>
                                     <h3 class="five-grid-title">
-                                        <NuxtLink :to="'/Products/'+product.url" target="_blank">{{ product.h1_page_inner_title }}</NuxtLink>
+                                        <NuxtLink :to="localePath('/Products/'+product.url)" target="_blank">{{ product.h1_page_inner_title }}</NuxtLink>
                                     </h3>
                                 </div>
                             </div>
@@ -641,7 +641,7 @@
                             <div class="layout-double">
                             <template v-for="(product, index) in item.productList.slice(12,14)" 
                                 :key="index">
-                            <NuxtLink :to="'/Products/'+product.url" target="_blank">
+                            <NuxtLink :to="localePath('/Products/'+product.url)" target="_blank">
                             <div 
                                 
                                 class="double-item"
@@ -717,7 +717,7 @@
                                 <div class="processing-cases-list">
                                     <!-- 案例1 -->
                                     <template v-for="(blogs, j) in item.blogs" :key="j">
-                                        <NuxtLink class="processing-case-item-link" :to="'/blog/'+blogs.slug" target="_blank">
+                                        <NuxtLink class="processing-case-item-link" :to="localePath('/blog/'+blogs.slug)" target="_blank">
                                             <div class="processing-case-item">
                                                 <div class="case-background" :class="index != 2 ? 'yellow' : ''">
                                                     <div class="case-ipad">
@@ -759,7 +759,7 @@
                         </div>
 
                         <!-- More 按钮 -->
-                        <NuxtLink :to="item.moreUrl" target="_blank">
+                        <NuxtLink :to="localePath(item.moreUrl)" target="_blank">
                             <div class="processing-cases-more-button">
                                 <div class="more-button-container">
                                     <div class="more-button-wrapper">
@@ -804,6 +804,8 @@
 </template>
 
 <script setup>
+import { useLocalePath } from '#i18n'
+const localePath = useLocalePath()
 
 const props = defineProps({
     slug: {

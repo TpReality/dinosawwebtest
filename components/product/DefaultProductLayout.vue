@@ -20,7 +20,7 @@
                             <div class="breadcrumb-link">
                                 <div class="breadcrumb-text">
                                     <div class="text-container">
-                                        <NuxtLink to="/" target="_blank"><span class="breadcrumb-home">{{contentDetail.home_text }}</span></NuxtLink>
+                                        <NuxtLink :to="localePath('/')" target="_blank"><span class="breadcrumb-home">{{contentDetail.home_text }}</span></NuxtLink>
                                     </div>
                                 </div>
                                 <div class="breadcrumb-text">
@@ -34,7 +34,7 @@
                                     <div class="dropdown-link">
                                         <div class="dropdown-container">
                                             <div class="dropdown-text-container">
-                                                <NuxtLink to="/Products" target="_blank">
+                                                <NuxtLink :to="localePath('/Products')" target="_blank">
                                                     <span class="breadcrumb-products">{{contentDetail.product_detail_menu_text}}</span>
                                                 </NuxtLink>
                                             </div>
@@ -55,7 +55,7 @@
                                 <div class="breadcrumb-outer">
                                     <div class="bg">
                                         <p v-for="(item) in topProduct" :key="item.id">
-                                            <a :href="'/Products/'+item.category_value" target="_blank">{{ item.category_name }}</a>
+                                            <NuxtLink :to="localePath('/Products/'+item.category_value)" target="_blank">{{ item.category_name }}</NuxtLink>
                                         </p>
                                     </div>
                                 </div>
@@ -68,7 +68,7 @@
                                 </div>
                                 <div class="breadcrumb-text">
                                     <div class="text-container">
-                                        <NuxtLink :to="productDetail.category_link?'/Products/'+productDetail.category_link:'/'" target="_blank">
+                                        <NuxtLink :to="localePath(productDetail.category_link?'/Products/'+productDetail.category_link:'/')" target="_blank">
                                             <span> {{ productDetail.category }}</span>
                                         </NuxtLink>
                                     </div>
@@ -118,7 +118,7 @@
                             <!-- Action Buttons -->
                             <div class="action-buttons">
                                 <button class="btn-primary">
-                                    <NuxtLink to="/contact" target="_blank">
+                                    <NuxtLink :to="localePath('/contact')" target="_blank">
                                         <span>{{contentDetail.get_a_quote_text}}</span>
                                     </NuxtLink>
                                 </button>
@@ -161,59 +161,59 @@
                 <div class="nav-items-wrapper">
                     <div class="nav-items-row">
                         <div class="nav-item">
-                            <a class="nav-link" @click="scrollToSection('compatible-materials-section')">
+                            <span class="nav-link" @click="scrollToSection('compatible-materials-section')">
                                 <div class="nav-link-content">
                                     <p class="nav-link-text">{{ contentDetail.product_detail_application_materail_tab_1 }}</p>
                                 </div>
-                            </a>
+                            </span>
                         </div>
 
                         <div class="nav-item">
-                            <a class="nav-link" @click="scrollToSection('cases-section')">
+                            <span class="nav-link" @click="scrollToSection('cases-section')">
                                 <div class="nav-link-content">
                                     <p class="nav-link-text">{{ contentDetail.product_detail_application_materail_tab_2 }}</p>
                                 </div>
-                            </a>
+                            </span>
                         </div>
 
                         <div class="nav-item">
-                            <a class="nav-link" @click="scrollToSection('specs-section')">
+                            <span class="nav-link" @click="scrollToSection('specs-section')">
                                 <div class="nav-link-content">
                                     <p class="nav-link-text">{{ contentDetail.product_detail_application_materail_tab_3 }}</p>
                                 </div>
-                            </a>
+                            </span>
                         </div>
 
                         <div class="nav-item">
-                            <a class="nav-link" @click="scrollToSection('core-benefits')">
+                            <span class="nav-link" @click="scrollToSection('core-benefits')">
                                 <div class="nav-link-content">
                                     <p class="nav-link-text">{{ contentDetail.product_detail_application_materail_tab_4 }}</p>
                                 </div>
-                            </a>
+                            </span>
                         </div>
 
                         <div class="nav-item">
-                            <a class="nav-link" @click="scrollToSection('faq-section')">
+                            <span class="nav-link" @click="scrollToSection('faq-section')">
                                 <div class="nav-link-content">
                                     <p class="nav-link-text">{{ contentDetail.product_detail_application_materail_tab_5 }}</p>
                                 </div>
-                            </a>
+                            </span>
                         </div>
 
                         <div class="nav-item">
-                            <a class="nav-link" @click="scrollToSection('certifications-section')">
+                            <span class="nav-link" @click="scrollToSection('certifications-section')">
                                 <div class="nav-link-content">
                                     <p class="nav-link-text">{{ contentDetail.product_detail_application_materail_tab_6 }}</p>
                                 </div>
-                            </a>
+                            </span>
                         </div>
 
                         <div class="nav-item">
-                            <a class="nav-link" @click="scrollToSection('solutions-section')">
+                            <span class="nav-link" @click="scrollToSection('solutions-section')">
                                 <div class="nav-link-content">
                                     <p class="nav-link-text">{{ contentDetail.product_detail_application_materail_tab_7 }}</p>
                                 </div>
-                            </a>
+                            </span>
                         </div>
                     </div>
 
@@ -745,7 +745,7 @@
                         <div class="solutions-track" ref="solutionsCarouselTrack">
                             <!-- Solution Card 1 -->
                             <div class="solution-card">
-                                <NuxtLink :to="'/Products/'+productDetail.link_1" target="_blank">
+                                <NuxtLink :to="localePath('/Products/'+productDetail.link_1)" target="_blank">
                                     <div class="solution-image">
                                         <NuxtImg sizes="sm:100vw" loading="lazy" :src="relatedFirstImages.link_1" />
                                     </div>
@@ -766,7 +766,7 @@
 
                             <!-- Solution Card 2 -->
                         <div class="solution-card">
-                                <NuxtLink :to="'/Products/'+productDetail.link_2" target="_blank">
+                                <NuxtLink :to="localePath('/Products/'+productDetail.link_2)" target="_blank">
                                     <div class="solution-image">
                                     <NuxtImg sizes="sm:100vw" loading="lazy" :src="relatedFirstImages.link_2" />
                                     </div>
@@ -786,7 +786,7 @@
 
                             <!-- Solution Card 3 -->
                             <div class="solution-card">
-                                <NuxtLink :to="'/Products/'+productDetail.link_3" target="_blank">
+                                <NuxtLink :to="localePath('/Products/'+productDetail.link_3)" target="_blank">
                                     <div class="solution-image">
                                         <NuxtImg sizes="sm:100vw" loading="lazy" :src="relatedFirstImages.link_3" />
                                     </div>
@@ -873,7 +873,7 @@
                                 <div class="card-image">
                                     <NuxtImg sizes="sm:100vw" loading="lazy" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/rsDnae29rDFkuTTfSnFohbMKFg.webp" />
                                     <button class="about-btn">
-                                        <NuxtLink to="/About-us" target="_blank">
+                                        <NuxtLink :to="localePath('/About-us')" target="_blank">
                                         <span>{{ contentDetail.about_dinosaw_btn_text }}</span>
                                         </NuxtLink>
                                     </button>
@@ -902,7 +902,7 @@
                     <!-- Navigation Links -->
                     <div class="machines-navigation">
                         <div class="nav-link-container">
-                            <NuxtLink :to="'/Products/'+productDetail.link_1" class="nav-link prev-link" target="_blank">
+                            <NuxtLink :to="localePath('/Products/'+productDetail.link_1)" class="nav-link prev-link" target="_blank">
                                 <div class="nav-icon-container">
                                     <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
                                         <path d="M20 24L12 16L20 8" stroke="currentColor" stroke-width="2"
@@ -917,7 +917,7 @@
                         </div>
 
                         <div class="nav-link-container">
-                            <NuxtLink :to="'/Products/'+productDetail.link_3" class="nav-link next-link" target="_blank">
+                            <NuxtLink :to="localePath('/Products/'+productDetail.link_3)" class="nav-link next-link" target="_blank">
                                 <div class="nav-content">
                                     <p class="nav-text">{{contentDetail.product_detail_next_machines_or_tools_btn_text}}</p>
                                 </div>
@@ -941,6 +941,8 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed, nextTick, watch } from 'vue'
 import { enhanceRichTextHtml } from '~/utils/richText'
+import { useLocalePath } from '#i18n'
+const localePath = useLocalePath()
 
 const props = defineProps({
     slug: {
@@ -2502,6 +2504,7 @@ onUnmounted(() => {
         gap: 12px;
         iframe{
             width:100%;
+            min-height:200px;
         }
     }
 
@@ -5431,7 +5434,7 @@ onUnmounted(() => {
 }
 
 .other-machines-container {
-    width: 1920px;
+    width: 100%;
     height: 400px;
     display: flex;
     flex-direction: column;

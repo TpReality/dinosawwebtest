@@ -15,6 +15,7 @@
       :contentDetail="contentDetail"
       @headdata-loaded="handleHead"
     />
+    <Lang :contentDetail="contentDetail" />
     <ContactType :contentDetail="contentDetail" />
         <WhatsApp :contentDetail="contentDetail" />
         <DinosawFooter :menuItems="menuItems" :contentDetail="contentDetail" />

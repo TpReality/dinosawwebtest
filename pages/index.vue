@@ -2,7 +2,7 @@
     <div class="main">
         <DinosawHeader :menuItems="menuItems" :contentDetail="contentDetail" />
         <div>
-            <div class="index-banner">
+            <div class="index-banner">111
                 <div class="banner-text">
                     <h1>
                         <span class="title">{{ indexDetail.hero_main_before_title }}</span> {{
@@ -15,14 +15,14 @@
                     <!-- Figma设计的按钮容器 -->
                     <div class="banner-buttons">
                         <div class="button-primary">
-                            <a href="/Products" target="_blank" class="btn-learn-more">
+                            <NuxtLink :to="localePath('/Products')" target="_blank" class="btn-learn-more">
                                 <span>{{ indexDetail.learn_more_products_btn_text }}</span>
-                            </a>
+                            </NuxtLink>
                         </div>
                         <div class="button-secondary">
-                            <a href="/About-us" target="_blank" class="btn-meet-us">
+                            <NuxtLink :to="localePath('/About-us')" target="_blank" class="btn-meet-us">
                                 <span>{{ indexDetail.meet_us_btn_text }}</span>
-                            </a>
+                            </NuxtLink>
                         </div>
                     </div>
 
@@ -48,7 +48,7 @@
                 </div>
 
             </div>
-            <nuxtLink v-if="indexDetail.show_activity_text" :to="indexDetail.show_activity_url" target="_blank">
+            <nuxtLink v-if="indexDetail.show_activity_text"  :to="localePath(indexDetail.show_activity_url)" target="_blank">
                 <div class="banner-activety" :style="indexDetail.show_activity_image?.url?'background:url('+indexDetail.show_activity_image.url+') no-repeat center center; background-size:100% auto':''">
                     <div v-html="indexDetail.show_activity_text"></div>
                 </div>
@@ -71,7 +71,7 @@
                             
                             <div class="products-grid">
                                 <div v-for="product in group" :key="product.id" class="product-card">
-                                    <NuxtLink :to="product.link" target="_blank">
+                                    <NuxtLink :to="localePath(product.link)" target="_blank">
                                     <div class="tip" :class="product.tip?'':'visible-hidden'">
                                         <svg width="20" height="20" viewBox="0 0 22 22" id="svg11753066115">
                                             <g>
@@ -104,7 +104,7 @@
                                             </template>
                                         </div>
                                     </div>
-                                    <a class="product-button">{{indexDetail.discover_more_btn_text}}</a>
+                                    <span class="product-button">{{indexDetail.discover_more_btn_text}}</span>
                                     </NuxtLink>
                                 </div>
                             </div>
@@ -135,7 +135,7 @@
                                             
                     <template v-for="(product, index) in productsList" :key="index">
                         <div class="product-card">
-                                    <NuxtLink :to="product.link" target="_blank">
+                                    <NuxtLink :to="localePath(product.link)" target="_blank">
                                     <div class="tip" :class="product.tip?'':'visible-hidden'">
                                         <svg width="20" height="20" viewBox="0 0 22 22" id="svg11753066115">
                                             <g>
@@ -168,7 +168,7 @@
                                             </template>
                                         </div>
                                     </div>
-                                    <a class="product-button">{{indexDetail.discover_more_btn_text}}</a>
+                                    <span class="product-button">{{indexDetail.discover_more_btn_text}}</span>
                                     </NuxtLink>
                                 </div>
                     </template>
@@ -306,12 +306,12 @@
 
                                         <!-- Action Buttons -->
                                         <div class="achievement-actions">
-                                            <a :href="indexDetail[`our_capabilities_presence_banner_${num}_left_btn_url`]" class="btn-primary" target="_blank">{{
+                                            <NuxtLink :to="localePath(indexDetail[`our_capabilities_presence_banner_${num}_left_btn_url`])" class="btn-primary" target="_blank">{{
                                                 indexDetail[`our_capabilities_presence_banner_${num}_left_btn_text`]
-                                                }}</a>
-                                            <a :href="indexDetail[`our_capabilities_presence_banner_${num}_right_btn_url`]" class="btn-secondary" target="_blank">
+                                                }}</NuxtLink>
+                                            <NuxtLink :to="localePath(indexDetail[`our_capabilities_presence_banner_${num}_right_btn_url`])" class="btn-secondary" target="_blank">
                                                 {{ indexDetail[`our_capabilities_presence_banner_${num}_right_btn_text`] }}
-                                            </a>
+                                            </NuxtLink>
                                         </div>
                                     </div>
                                 </div>
@@ -352,7 +352,7 @@
                         <div class="blog-cards-grid" ref="blogCardsGrid">
                             <!-- Blog Card 1 -->
                             <template  v-for="(item, i) in indexDetail.what_you_need_blogs" :key="i">
-                                <NuxtLink :to="'/blog/'+item.slug" target="_blank">
+                                <NuxtLink :to="localePath('/blog/'+item.slug)" target="_blank">
                                 <div class="blog-card">
                                     <div class="blog-image">
                                          <NuxtImg sizes="sm:100vw" loading="lazy" :src="item.first_image_url"
@@ -396,7 +396,7 @@
 
                     <div class="guide-steps">
                         <!-- Step 1: See Best Practice Cases -->
-                        <NuxtLink to="/projects" target="_blank">
+                        <NuxtLink :to="localePath('/projects')" target="_blank">
                             <div class="step-card">
                                 <div class="step-overlay">
                                     <div class="step-content">
@@ -412,7 +412,7 @@
                         </NuxtLink>
 
                         <!-- Step 2: Dive Into the Details -->
-                        <NuxtLink to="/Products" target="_blank">
+                        <NuxtLink :to="localePath('/Products')" target="_blank">
                             <div class="step-card">
                                 <div class="step-overlay">
                                     <div class="step-content">
@@ -427,7 +427,7 @@
                             </div>
                         </NuxtLink>
                         <!-- Step 3: Get A Free Quote -->
-                         <NuxtLink to="/contact" target="_blank">
+                         <NuxtLink :to="localePath('/contact')" target="_blank">
                             <div class="step-card">
                                 <div class="step-overlay">
                                     <div class="step-content">
@@ -524,10 +524,10 @@
                                             <!-- 垂直布局：上面图片，下面标题 -->
                                             <template v-if="!product.layout || product.layout === 'vertical'">
                                                 <div class="double-image">
-                                                    <NuxtLink :to="'/Products/'+product.url" target="_blank"> <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" /></NuxtLink>
+                                                    <NuxtLink :to="localePath('/Products/'+product.url)" target="_blank"> <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" /></NuxtLink>
                                                 </div>
                                                 <div class="double-content">
-                                                    <NuxtLink :to="'/Products/'+product.url" target="_blank"><h3 class="double-title">{{ product.h1_page_inner_title }}</h3></NuxtLink>
+                                                    <NuxtLink :to="localePath('/Products/'+product.url)" target="_blank"><h3 class="double-title">{{ product.h1_page_inner_title }}</h3></NuxtLink>
                                                 </div>
                                             </template>
                                             
@@ -536,12 +536,12 @@
                                                 <div class="horizontal-container">
                                                     <div class="horizontal-link">
                                                         <div class="horizontal-image">
-                                                            <NuxtLink :to="'/Products/'+product.url" target="_blank"> <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" /></NuxtLink>
+                                                            <NuxtLink :to="localePath('/Products/'+product.url)" target="_blank"> <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" /></NuxtLink>
                                                         </div>
                                                         <div class="horizontal-content">
                                                             <div class="horizontal-text-section">
                                                                 <div class="horizontal-title-wrapper">
-                                                                    <NuxtLink :to="'/Products/'+product.url" target="_blank"><h3 class="horizontal-title">{{ product.h1_page_inner_title }}</h3></NuxtLink>
+                                                                    <NuxtLink :to="localePath('/Products/'+product.url)" target="_blank"><h3 class="horizontal-title">{{ product.h1_page_inner_title }}</h3></NuxtLink>
                                                                 </div>
                                                                 <div class="horizontal-date-wrapper" v-if="product.date">
                                                                     <p class="horizontal-date">{{ product.date }}</p>
@@ -568,10 +568,10 @@
                                     >
                                         
                                             <div class="quad-image">
-                                                <NuxtLink :to="'/Products/'+product.url" target="_blank"> <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" /></NuxtLink>
+                                                <NuxtLink :to="localePath('/Products/'+product.url)" target="_blank"> <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" /></NuxtLink>
                                             </div>
                                             <div class="quad-content">
-                                                <NuxtLink :to="'/Products/'+product.url" target="_blank"><h3 class="quad-title">{{ product.h1_page_inner_title }}</h3></NuxtLink>
+                                                <NuxtLink :to="localePath('/Products/'+product.url)" target="_blank"><h3 class="quad-title">{{ product.h1_page_inner_title }}</h3></NuxtLink>
                                             </div>
                                         
                                     </div>
@@ -607,12 +607,12 @@
                                         >
                                             
                                                 <div class="five-grid-image">
-                                                    <NuxtLink :to="'/Products/'+product.url" target="_blank">
+                                                    <NuxtLink :to="localePath('/Products/'+product.url)" target="_blank">
                                                          <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" />
                                                     </NuxtLink>
                                                 </div>
                                                 <h3 class="five-grid-title">
-                                                    <NuxtLink :to="'/Products/'+product.url" target="_blank">{{ product.h1_page_inner_title }}</NuxtLink>
+                                                    <NuxtLink :to="localePath('/Products/'+product.url)" target="_blank">{{ product.h1_page_inner_title }}</NuxtLink>
                                                 </h3>
                                             
                                         </div>
@@ -635,7 +635,7 @@
                             <div class="dynamic-product-section" v-if="indexDetail.mature_products_products && indexDetail.mature_products_products.length">
                                 <!-- 1张图片布局：左侧图片，右侧信息 - 按照Figma节点 10:15239 -->
                                 <div v-if="indexDetail.mature_products_products.length === 1" class="layout-single">
-                                    <NuxtLink :to="'/Products/'+indexDetail.mature_products_products[0].url">
+                                    <NuxtLink :to="localePath('/Products/'+indexDetail.mature_products_products[0].url)">
                                         <div class="single-container">
                                             <div class="single-link">
                                                 <div class="single-image">
@@ -674,10 +674,10 @@
                                             <!-- 垂直布局：上面图片，下面标题 -->
                                             <template v-if="!product.layout || product.layout === 'vertical'">
                                                 <div class="double-image">
-                                                    <NuxtLink :to="'/Products/'+product.url" target="_blank"> <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" /></NuxtLink>
+                                                    <NuxtLink :to="localePath('/Products/'+product.url)" target="_blank"> <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" /></NuxtLink>
                                                 </div>
                                                 <div class="double-content">
-                                                    <NuxtLink :to="'/Products/'+product.url" target="_blank"><h3 class="double-title">{{ product.h1_page_inner_title }}</h3></NuxtLink>
+                                                    <NuxtLink :to="localePath('/Products/'+product.url)" target="_blank"><h3 class="double-title">{{ product.h1_page_inner_title }}</h3></NuxtLink>
                                                 </div>
                                             </template>
                                             
@@ -686,12 +686,12 @@
                                                 <div class="horizontal-container">
                                                     <div class="horizontal-link">
                                                         <div class="horizontal-image">
-                                                            <NuxtLink :to="'/Products/'+product.url" target="_blank"> <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" /></NuxtLink>
+                                                            <NuxtLink :to="localePath('/Products/'+product.url)" target="_blank"> <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" /></NuxtLink>
                                                         </div>
                                                         <div class="horizontal-content">
                                                             <div class="horizontal-text-section">
                                                                 <div class="horizontal-title-wrapper">
-                                                                    <NuxtLink :to="'/Products/'+product.url" target="_blank"><h3 class="horizontal-title">{{ product.h1_page_inner_title }}</h3></NuxtLink>
+                                                                    <NuxtLink :to="localePath('/Products/'+product.url)" target="_blank"><h3 class="horizontal-title">{{ product.h1_page_inner_title }}</h3></NuxtLink>
                                                                 </div>
                                                                 <div class="horizontal-date-wrapper" v-if="product.date">
                                                                     <p class="horizontal-date">{{ product.date }}</p>
@@ -718,10 +718,10 @@
                                     >
                                         
                                             <div class="quad-image">
-                                                <NuxtLink :to="'/Products/'+product.url" target="_blank"> <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" /></NuxtLink>
+                                                <NuxtLink :to="localePath('/Products/'+product.url)" target="_blank"> <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" /></NuxtLink>
                                             </div>
                                             <div class="quad-content">
-                                                <NuxtLink :to="'/Products/'+product.url" target="_blank"><h3 class="quad-title">{{ product.h1_page_inner_title }}</h3></NuxtLink>
+                                                <NuxtLink :to="localePath('/Products/'+product.url)" target="_blank"><h3 class="quad-title">{{ product.h1_page_inner_title }}</h3></NuxtLink>
                                             </div>
                                         
                                     </div>
@@ -733,10 +733,10 @@
                                     <div class="five-left">
                                         
                                         <div class="five-main-image">
-                                            <NuxtLink :to="'/Products/'+indexDetail.mature_products_products[0].url" target="_blank"> <NuxtImg sizes="sm:100vw" loading="lazy" :src="indexDetail.mature_products_products[0].first_image_url" /></NuxtLink>
+                                            <NuxtLink :to="localePath('/Products/'+indexDetail.mature_products_products[0].url)" target="_blank"> <NuxtImg sizes="sm:100vw" loading="lazy" :src="indexDetail.mature_products_products[0].first_image_url" /></NuxtLink>
                                         </div>
                                         <div class="five-main-content">
-                                             <NuxtLink :to="'/Products/'+indexDetail.mature_products_products[0].url" target="_blank">
+                                             <NuxtLink :to="localePath('/Products/'+indexDetail.mature_products_products[0].url)" target="_blank">
                                                 <h3 class="five-main-title">{{ indexDetail.mature_products_products[0].h1_page_inner_title }}</h3>
                                                 <p class="five-main-date" v-if="indexDetail.mature_products_products[0].date">{{ indexDetail.mature_products_products[0].date }}</p>
                                                 <div class="five-main-info" v-if="indexDetail.flagship_roducts_2025">
@@ -757,12 +757,12 @@
                                         >
                                             
                                                 <div class="five-grid-image">
-                                                    <NuxtLink :to="'/Products/'+product.url" target="_blank">
+                                                    <NuxtLink :to="localePath('/Products/'+product.url)" target="_blank">
                                                          <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" />
                                                     </NuxtLink>
                                                 </div>
                                                 <h3 class="five-grid-title">
-                                                    <NuxtLink :to="'/Products/'+product.url" target="_blank">{{ product.h1_page_inner_title }}</NuxtLink>
+                                                    <NuxtLink :to="localePath('/Products/'+product.url)" target="_blank">{{ product.h1_page_inner_title }}</NuxtLink>
                                                 </h3>
                                             
                                         </div>
@@ -785,7 +785,7 @@
                             <div class="dynamic-product-section" v-if="indexDetail.smart_value_products && indexDetail.smart_value_products.length">
                                 <!-- 1张图片布局：左侧图片，右侧信息 - 按照Figma节点 10:15239 -->
                                 <div v-if="indexDetail.smart_value_products.length === 1" class="layout-single">
-                                    <NuxtLink :to="'/Products/'+indexDetail.smart_value_products[0].url">
+                                    <NuxtLink :to="localePath('/Products/'+indexDetail.smart_value_products[0].url)">
                                         <div class="single-container">
                                             <div class="single-link">
                                                 <div class="single-image">
@@ -815,7 +815,7 @@
                                 <div v-else-if="indexDetail.smart_value_products.length === 2" class="layout-double">
                                     <template v-for="(product, index) in indexDetail.smart_value_products" 
                                         :key="index">
-                                        <NuxtLink :to="'/Products/'+product.url" target="_blank">
+                                        <NuxtLink :to="localePath('/Products/'+product.url)" target="_blank">
                                     <div 
                                         
                                         class="double-item"
@@ -866,7 +866,7 @@
                                 <div v-else-if="indexDetail.smart_value_products.length === 4" class="layout-quad">
                                     <template v-for="(product, index) in indexDetail.smart_value_products" 
                                         :key="index">
-                                        <NuxtLink :to="'/Products/'+product.url" target="_blank">
+                                        <NuxtLink :to="localePath('/Products/'+product.url)" target="_blank">
                                             <div 
                                                 
                                                 class="quad-item"
@@ -890,10 +890,10 @@
                                     <div class="five-left">
                                         
                                         <div class="five-main-image">
-                                            <NuxtLink :to="'/Products/'+indexDetail.smart_value_products[0].url" target="_blank"> <NuxtImg sizes="sm:100vw" loading="lazy" :src="indexDetail.smart_value_products[0].first_image_url" /></NuxtLink>
+                                            <NuxtLink :to="localePath('/Products/'+indexDetail.smart_value_products[0].url)" target="_blank"> <NuxtImg sizes="sm:100vw" loading="lazy" :src="indexDetail.smart_value_products[0].first_image_url" /></NuxtLink>
                                         </div>
                                         <div class="five-main-content">
-                                             <NuxtLink :to="'/Products/'+indexDetail.smart_value_products[0].url" target="_blank">
+                                             <NuxtLink :to="localePath('/Products/'+indexDetail.smart_value_products[0].url)" target="_blank">
                                                 <h3 class="five-main-title">{{ indexDetail.smart_value_products[0].h1_page_inner_title }}</h3>
                                                 <p class="five-main-date" v-if="indexDetail.smart_value_products[0].date">{{ indexDetail.smart_value_products[0].date }}</p>
                                                 <div class="five-main-info" v-if="indexDetail.flagship_roducts_2025">
@@ -913,12 +913,12 @@
                                         >
                                             
                                                 <div class="five-grid-image">
-                                                    <NuxtLink :to="'/Products/'+product.url" target="_blank">
+                                                    <NuxtLink :to="localePath('/Products/'+product.url)" target="_blank">
                                                          <NuxtImg sizes="sm:100vw" loading="lazy" :src="product.first_image_url" />
                                                     </NuxtLink>
                                                 </div>
                                                 <h3 class="five-grid-title">
-                                                    <NuxtLink :to="'/Products/'+product.url" target="_blank">{{ product.h1_page_inner_title }}</NuxtLink>
+                                                    <NuxtLink :to="localePath('/Products/'+product.url)" target="_blank">{{ product.h1_page_inner_title }}</NuxtLink>
                                                 </h3>
                                             
                                         </div>
@@ -947,7 +947,7 @@
                                 <div class="cta-button">
                                     <div class="cta-container">
                                         <div class="cta-content">
-                                            <NuxtLink to="/contact" target="_blank">
+                                            <NuxtLink :to="localePath('/contact')" target="_blank">
                                                 <span class="cta-text">{{ indexDetail.get_a_auote_btn_text }}</span>
                                             </NuxtLink>
                                         </div>
@@ -1133,7 +1133,7 @@
                 </section>
             </section>
         </div>
-
+        <Lang :contentDetail="contentDetail" />
         <ContactType :contentDetail="contentDetail" />
         <WhatsApp :contentDetail="contentDetail" />
         <DinosawFooter :menuItems="menuItems" :contentDetail="contentDetail" />
@@ -1149,6 +1149,8 @@ import 'swiper/css'
 import 'swiper/css/free-mode' // ✅ 引入 free-mode 的样式
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
+import { useLocalePath } from '#i18n'
+const localePath = useLocalePath()
 
 // 使用全局 contentDetail
 const { contentDetail, isLoaded } = useContentDetail()

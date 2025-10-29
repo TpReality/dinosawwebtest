@@ -1,0 +1,17 @@
+[
+  {
+    "id": "task-1",
+    "content": "调整脚本以提供本地化跳转工具函数",
+    "status": "in_progress"
+  },
+  {
+    "id": "task-2",
+    "content": "替换模板中的内部链接为NuxtLink并统一switchLocalePath",
+    "status": "not_started"
+  },
+  {
+    "id": "task-3",
+    "content": "为动态URL链接增加内外链区分逻辑",
+    "status": "not_started"
+  }
+]

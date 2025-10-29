@@ -2,14 +2,13 @@
     <div class="main">
         <!-- 导航栏 -->
         <DinosawHeader :menuItems="menuItems" :contentDetail="contentDetail"/>
-
         <!-- 面包屑导航 - 对应Figma节点 19:13863 -->
         <div class="breadcrumb-container">
             <div class="breadcrumb-wrapper">
                 <div class="breadcrumb-link">
                     <div class="breadcrumb-text">
                         <div class="text-container">
-                            <NuxtLink to="/" target="_blank"><span class="breadcrumb-home">{{ productDetail.home_text }}</span></NuxtLink>
+                            <NuxtLink :to="localePath('/')" target="_blank"><span class="breadcrumb-home">{{ productDetail.home_text }}</span></NuxtLink>
                         </div>
                     </div>
                     <div class="breadcrumb-text">
@@ -23,7 +22,7 @@
                         <div class="dropdown-link">
                             <div class="dropdown-container">
                                 <div class="dropdown-text-container">
-                                    <NuxtLink to="/Products" target="_blank">
+                                    <NuxtLink :to="localePath('/Products')" target="_blank">
                                         <span class="breadcrumb-products">{{ productDetail.products_btn_text }}</span>
                                     </NuxtLink>
                                 </div>
@@ -37,7 +36,7 @@
                      <div class="breadcrumb-outer">
                         <div class="bg">
                             <p v-for="(item) in topProduct" :key="item.id">
-                                <a :href="'/Products/'+item.category_value" target="_blank">{{ item.category_name }}</a>
+                                <NuxtLink :to="localePath('/Products/'+item.category_value)" target="_blank">{{ item.category_name }}</NuxtLink>
                             </p>
                         </div>
                     </div>
@@ -63,7 +62,7 @@
                             :breakpoints="swiperBreakpoints">
                             <SwiperSlide v-for="(image, i) in topProduct" :key="i">
                                 <div class="carousel-group">
-                                    <NuxtLink :to="'/Products/'+image.category_value" target="_blank"> 
+                                    <NuxtLink :to="localePath('/Products/'+image.category_value)" target="_blank"> 
                                          <NuxtImg sizes="sm:100vw" v-if="image.head_image" :src="image.head_image.url" />
                                         <p class="text">{{ image.category_name }}</p>
                                     </NuxtLink>
@@ -223,7 +222,7 @@
                 <div class="products-showcase">
                     <div class="products-container">
                         <template v-for="(product, j) in productDetail[`machinable_materials_${item}_products`]" :key="j">
-                            <NuxtLink :to="'/Products/'+product.url" target="_blank">
+                            <NuxtLink :to="localePath('/Products/'+product.url)" target="_blank">
                             <div class="product-card">
                                 <div class="product-card-container">
                                     <div class="product-info-section">
@@ -248,7 +247,7 @@
                 </div>
 
                 <!-- Discover More 按钮 -->
-                 <NuxtLink :to="productDetail[`machinable_materials_${item}_discover_more_url`]" target="_blank">
+                 <NuxtLink :to="localePath(productDetail[`machinable_materials_${item}_discover_more_url`])" target="_blank">
                 <div class="discover-more-section">
                     
                     <div class="discover-more-button">
@@ -314,7 +313,7 @@
                                 <div class="processing-cases-list">
                                     <!-- 案例1 -->
                                      <template v-for="(blog, j) in productDetail.the_most_popular_related_process_cases_blogs" :key="j">
-                                        <NuxtLink class="processing-case-item-link" :to="'/blog/' + blog.slug" target="_blank">
+                                        <NuxtLink class="processing-case-item-link" :to="localePath('/blog/' + blog.slug)" target="_blank">
                                             <div class="processing-case-item">
                                                 <div class="case-background green">
                                                     <div class="case-ipad">
@@ -361,7 +360,7 @@
             </div>
 
             <!-- Discover More 按钮 -->
-             <NuxtLink :to="'/projects'" target="_blank">
+             <NuxtLink :to="localePath('/projects')" target="_blank">
             <div class="discover-more-section">
                     <div class="discover-more-button">
                         <div class="discover-more-container">
@@ -407,7 +406,7 @@
                                 <div class="processing-cases-list">
                                     <!-- 案例1 -->
                                      <template v-for="(blog, j) in productDetail.the_practical_videos_on_blogs" :key="j">
-                                        <NuxtLink class="processing-case-item-link" :to="'/blog/' + blog.slug" target="_blank">
+                                        <NuxtLink class="processing-case-item-link" :to="localePath('/blog/' + blog.slug)" target="_blank">
                                             <div class="processing-case-item">
                                                 <div class="case-background green">
                                                     <div class="case-ipad">
@@ -451,7 +450,7 @@
                 </div>
             </div>
             <!-- Discover More 按钮 -->
-             <NuxtLink :to="'/video'" target="_blank">
+             <NuxtLink :to="localePath('/video')" target="_blank">
                 <div class="discover-more-section">
                     
                     <div class="discover-more-button">
@@ -500,7 +499,7 @@
                                 <div class="processing-cases-list">
                                     <!-- 案例1 -->
                                      <template v-for="(blog, j) in productDetail.worth_reading_articles_on_blogs" :key="j">
-                                        <NuxtLink class="processing-case-item-link" :to="'/blog/' + blog.slug" target="_blank">
+                                        <NuxtLink class="processing-case-item-link" :to="localePath('/blog/' + blog.slug)" target="_blank">
                                             <div class="processing-case-item">
                                                 <div class="case-background green">
                                                     <div class="case-ipad">
@@ -545,7 +544,7 @@
             </div>
 
             <!-- Discover More 按钮 -->
-             <NuxtLink :to="'/blog/industry-news'" target="_blank">
+             <NuxtLink :to="localePath('/blog/industry-news')" target="_blank">
             <div class="discover-more-section">
                 <div class="discover-more-button">
                     <div class="discover-more-container">
@@ -588,6 +587,7 @@
             </div>
         </div>
 
+        <Lang :contentDetail="contentDetail" />
         <ContactType :contentDetail="contentDetail" />
         <WhatsApp :contentDetail="contentDetail" />
         <DinosawFooter :menuItems="menuItems" :contentDetail="contentDetail" />
@@ -599,6 +599,8 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Navigation } from 'swiper'
 import 'swiper/css'
 import 'swiper/css/free-mode' // ✅ 引入 free-mode 的样式
+import { useLocalePath } from '#i18n'
+const localePath = useLocalePath()
 
 // 使用菜单数据composable
 const { menuItems, initializeMenuData } = useMenuData()

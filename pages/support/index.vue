@@ -7,7 +7,7 @@
                 <div class="breadcrumb-link">
                     <div class="breadcrumb-text">
                         <div class="text-container">
-                            <span class="breadcrumb-home"><NuxtLink to="/" target="_blank">{{ support.home_text }}</NuxtLink></span>
+                            <span class="breadcrumb-home"><NuxtLink :to="localePath('/')" target="_blank">{{ support.home_text }}</NuxtLink></span>
                         </div>
                     </div>
                     <div class="breadcrumb-text">
@@ -22,7 +22,7 @@
                         <div class="dropdown-link">
                             <div class="dropdown-container">
                                 <div class="dropdown-text-container">
-                                    <span class="breadcrumb-products"><NuxtLink to="/support" target="_blank">{{ support.products_btn_text }}</NuxtLink></span>
+                                    <span class="breadcrumb-products"><NuxtLink :to="localePath('/support')" target="_blank">{{ support.products_btn_text }}</NuxtLink></span>
                                 </div>
                             </div>
                             <div class="dropdown-icon-container">
@@ -34,7 +34,7 @@
                         <div class="bg" v-if="Array.isArray(safeChildren) && safeChildren.length">
   <template v-for="(menu, i) in safeChildren" :key="i">
     <p v-if="menu && typeof menu.link === 'string' && menu.link.length">
-      <a :href="menu?.link ? ('/support' + menu.link) : undefined" target="_blank">{{ menu?.text || '' }}</a>
+      <NuxtLink :to="menu?.link ? localePath('/support' + menu.link) : localePath('/')" target="_blank">{{ menu?.text || '' }}</NuxtLink>
     </p>
   </template>
 </div>
@@ -167,6 +167,7 @@
                 </div>
             </div>
         </div>
+        <Lang :contentDetail="contentDetail" />
         <ContactType :contentDetail="contentDetail" />
         <WhatsApp :contentDetail="contentDetail" />
         <DinosawFooter :menuItems="menuItems" :contentDetail="contentDetail" />
@@ -174,7 +175,8 @@
 </template>
 
 <script setup>
-
+import { useLocalePath } from '#i18n'
+const localePath = useLocalePath()
 // 使用菜单数据composable
 const { menuItems, initializeMenuData } = useMenuData()
 const curMenuItems = computed(() => menuItems.value.filter(item => item.title === 'Support'))

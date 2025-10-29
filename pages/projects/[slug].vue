@@ -16,7 +16,7 @@
                             <div class="breadcrumb-link">
                                 <div class="breadcrumb-text">
                                     <div class="text-container">
-                                        <span class="breadcrumb-home"><NuxtLink to="/" target="_blank">{{ projects.home_text }}</NuxtLink></span>
+                                        <span class="breadcrumb-home"><NuxtLink :to="localePath('/')" target="_blank">{{ projects.home_text }}</NuxtLink></span>
                                     </div>
                                 </div>
                                 <div class="breadcrumb-text">
@@ -29,7 +29,7 @@
                                     <div class="dropdown-link">
                                         <div class="dropdown-container">
                                             <div class="dropdown-text-container">
-                                                <span class="breadcrumb-products"><NuxtLink to="/projects" target="_blank">{{ projects.products_btn_text }}</NuxtLink></span>
+                                                <span class="breadcrumb-products"><NuxtLink :to="localePath('/projects')" target="_blank">{{ projects.products_btn_text }}</NuxtLink></span>
                                             </div>
                                         </div>
                                         <div class="dropdown-icon-container">
@@ -40,7 +40,7 @@
                                 <div class="breadcrumb-outer">
                                     <div class="bg" v-if="curMenuItems?.length && Array.isArray(curMenuItems[0]?.children)">
                                         <p v-for="(menu, i) in curMenuItems[0].children" :key="i">
-                                            <a :href="'/projects'+menu.link" target="_blank" >{{ menu.text }}</a>
+                                            <NuxtLink :to="localePath('/projects'+menu.link)" target="_blank" >{{ menu.text }}</NuxtLink>
                                         </p>
                                     </div>
                                 </div>
@@ -122,7 +122,7 @@
                                 <div class="processing-cases-list">
                                     <!-- 案例1 -->
                                      <template v-for="(blog, j) in item.blogs" :key="j">
-                                        <NuxtLink class="processing-case-item-link" :to="index == 2?'/Products/' + blog.url:'/blog/' + blog.slug" target="_blank">
+                                        <NuxtLink class="processing-case-item-link" :to="index == 2?localePath('/Products/' + blog.url):localePath('/blog/' + blog.slug)" target="_blank">
                                             <div class="processing-case-item">
                                                 <div class="case-background green">
                                                     <div class="case-ipad">
@@ -171,7 +171,7 @@
                                 </div>
                             </div>
                         </div>
-                        <NuxtLink :to="item.url" target="_blank" class="more-button" v-if="item.url"> 
+                        <NuxtLink :to="localePath(item.url)" target="_blank" class="more-button" v-if="item.url"> 
                             <div class="processing-cases-more-button">
                                 <div class="more-button-container">
                                     <div class="more-button-wrapper">
@@ -188,6 +188,7 @@
 
             
         </div>
+        <Lang :contentDetail="contentDetail" />
         <ContactType :contentDetail="contentDetail" />
         <WhatsApp :contentDetail="contentDetail" />
         <DinosawFooter :menuItems="menuItems" :contentDetail="contentDetail" />
@@ -198,6 +199,8 @@
 import { ref, onMounted, computed } from 'vue'
 // 导入日期格式化工具函数
 import {formatArrayDatesShort } from '~/utils/dateFormatter'
+import { useLocalePath } from '#i18n'
+const localePath = useLocalePath()
 // 获取路由参数
 const route = useRoute()
 const slug = route.params.slug

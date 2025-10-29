@@ -1,4 +1,5 @@
 // 菜单数据处理的 composable（SSR 顶层预取 + 全局缓存）
+import { useI18n } from 'vue-i18n'
 export const useMenuData = () => {
   const menuItems = useState('menuData', () => ([]))
   const categoryDetail = useState('categoryDetail', () => ({}))
@@ -58,14 +59,20 @@ export const useMenuData = () => {
   const initializeMenuData = async () => {
     // 已有缓存则直接返回，避免重复请求
     if (menuItems.value.length > 0) return menuItems.value
-
+    const { locale } = useI18n()
+    let url = '/product-categories?fields=sort,parent_category_value,category_name,menu_select_down_panel_is_show,category_value'
     const config = useRuntimeConfig()
     const baseUrl = config.public.apiBase || 'https://cms.stoneboss.vip/api'
     const authToken = "8f80d6094edcd486411ddc90d4fa4f18ed87f9fe9edae7fe7cb423e3ce261b23ce76afdedfc3cf2e3689bd1b03e9f504cbded28e7645eed305db44f61e914053e9fb4b4999d30c743b67fe2a052bff812b6165825f1502f22f991ff41a44536c67a88f99ae0f525ee710ee010834ffddaa1501dc60c7da7dac18060f46612708"
-
+    // if(locale.value === 'zh'){
+    //     url += '&locale=zh-Hans'
+    // }else{
+    //     url += locale.value == 'en'?'':"&locale="+locale.value
+    // }
+    
     const { data: res } = await useAsyncData(
       () => 'menu:list',
-      () => $fetch('/product-categories?fields=sort,parent_category_value,category_name,menu_select_down_panel_is_show,category_value', {
+      () => $fetch(url, {
         baseURL: baseUrl,
         headers: authToken ? { Authorization: `Bearer ${authToken}` } : undefined
       }),

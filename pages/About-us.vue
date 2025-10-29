@@ -11,7 +11,7 @@
                         <div class="breadcrumb-link">
                             <div class="breadcrumb-text">
                                 <div class="text-container">
-                                    <span class="breadcrumb-home"><NuxtLink to="/" target="_blank">{{ aboutUs.home_text }}</NuxtLink></span>
+                                    <span class="breadcrumb-home"><NuxtLink :to="localePath('/')" target="_blank">{{ aboutUs.home_text }}</NuxtLink></span>
                                 </div>
                             </div>
                             <div class="breadcrumb-text">
@@ -49,7 +49,7 @@
                     <!-- Action Buttons -->
                     <div class="hero-actions">
                         <div class="action-button learn-products">
-                            <NuxtLink to="/Products" target="_blank">
+                            <NuxtLink :to="localePath('/Products')" target="_blank">
                             <div class="button-content">
                                 <div class="button-text-container">
                                     <span class="button-text">{{ aboutUs.learn_products_btn_text }}</span>
@@ -63,7 +63,7 @@
                             </NuxtLink>
                         </div>
                         <div class="action-button contact-us">
-                             <NuxtLink to="/contact" target="_blank">
+                             <NuxtLink :to="localePath('/contact')" target="_blank">
                             <div class="button-content">
                                 <div class="button-text-container">
                                     <span class="button-text">{{ aboutUs.contact_us_btn_text }}</span>
@@ -601,7 +601,7 @@
                         
                         <div class="products-row">
                             <template v-for="(product, j) in group" :key="j">
-                                <NuxtLink :to="'/Products/' + product.category_value" target="_blank">
+                                <NuxtLink :to="localePath('/Products/' + product.category_value)" target="_blank">
                                     <div class="product-card">
                                         <div class="product-content">
                                             <div class="product-header">
@@ -639,7 +639,7 @@
                 <!-- Articles Grid -->
                 <div class="articles-grid">
                     <template v-for="(blog, index) in aboutUs.similar_ideas_to_stimulate_your_creativity_blogs" :key="index">
-                        <NuxtLink :to="'/blog/' + blog.slug" target="_blank" >
+                        <NuxtLink :to="localePath('/blog/' + blog.slug)" target="_blank" >
                             <div class="article-card" >
                                 <div class="article-content">
                                     <div class="article-image">
@@ -660,6 +660,7 @@
             </div>
         </div>
 
+        <Lang :contentDetail="contentDetail" />
         <ContactType :contentDetail="contentDetail" />
         <WhatsApp :contentDetail="contentDetail" />
         <DinosawFooter :menuItems="menuItems" :contentDetail="contentDetail" />
@@ -668,7 +669,8 @@
 
 <script setup>
 import { ref, onMounted, watch, computed } from 'vue'
-
+import { useLocalePath } from '#i18n'
+const localePath = useLocalePath()
 // 使用菜单数据composable
 const { menuItems, initializeMenuData } = useMenuData()
 
@@ -802,7 +804,7 @@ watch(productsRes, (newPosts) => {
 
 /* Content Container */
 .hero-content {
-    width: 1920px;
+    width: 100%;
     padding:100px 0 450px;
     margin: 0 auto;
     display: flex;

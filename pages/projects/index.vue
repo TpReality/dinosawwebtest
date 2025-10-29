@@ -16,7 +16,7 @@
                             <div class="breadcrumb-link">
                                 <div class="breadcrumb-text">
                                     <div class="text-container">
-                                        <span class="breadcrumb-home"><NuxtLink to="/" target="_blank">{{ projectDetail.home_text }}</NuxtLink></span>
+                                        <span class="breadcrumb-home"><NuxtLink :to="localePath('/')" target="_blank">{{ projectDetail.home_text }}</NuxtLink></span>
                                     </div>
                                 </div>
                                 <div class="breadcrumb-text">
@@ -41,7 +41,7 @@
                                 <div class="breadcrumb-outer">
                                     <div class="bg" v-if="curMenuItems?.length && Array.isArray(curMenuItems[0]?.children)">
                                         <p v-for="(menu, i) in curMenuItems[0].children" :key="i">
-                                            <a :href="'/projects'+menu.link" target="_blank" >{{ menu.text }}</a>
+                                            <NuxtLink :to="localePath('/projects'+menu.link)" target="_blank" >{{ menu.text }}</NuxtLink>
                                         </p>
                                     </div>
                                 </div>
@@ -101,7 +101,7 @@
                                     <!-- 案例1 -->
                                      
                                      <template v-for="(blog, i) in item.blogs" :key="j">
-                                        <NuxtLink class="processing-case-item-link" :to="'/blog/' + blog.slug" target="_blank">
+                                        <NuxtLink class="processing-case-item-link" :to="localePath('/blog/' + blog.slug)" target="_blank">
                                             <div class="processing-case-item">
                                                 <div class="case-background green">
                                                     <div class="case-ipad">
@@ -143,7 +143,7 @@
                         </div>
 
                         <!-- More 按钮 -->
-                         <NuxtLink :to="item.url" target="_blank" v-if="item.url">
+                         <NuxtLink :to="localePath(item.url)" target="_blank" v-if="item.url">
                         <div class="processing-cases-more-button">
                             
                             <div class="more-button-container">
@@ -158,6 +158,7 @@
                 </div>
             </div>
         </div>
+        <Lang :contentDetail="contentDetail" />
         <ContactType :contentDetail="contentDetail" />
         <WhatsApp :contentDetail="contentDetail" />
         <DinosawFooter :menuItems="menuItems" :contentDetail="contentDetail" />
@@ -168,6 +169,8 @@
 import { ref, onMounted, computed } from 'vue'
 // 导入日期格式化工具函数
 import {formatArrayDatesShort } from '~/utils/dateFormatter'
+import { useLocalePath } from '#i18n'
+const localePath = useLocalePath()
 // 使用菜单数据composable
 const { menuItems, initializeMenuData } = useMenuData()
 const curMenuItems = computed(() => menuItems.value.filter(item => item.title === 'Projects'))

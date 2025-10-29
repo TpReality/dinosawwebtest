@@ -16,7 +16,7 @@
               <div class="breadcrumb-link">
                 <div class="breadcrumb-text">
                   <div class="text-container">
-                    <span class="breadcrumb-home"><NuxtLink to="/" target="_blank">{{ news.home_text }}</NuxtLink></span>
+                    <span class="breadcrumb-home"><NuxtLink :to="localePath('/')" target="_blank">{{ news.home_text }}</NuxtLink></span>
                   </div>
                 </div>
                 <div class="breadcrumb-text">
@@ -29,7 +29,7 @@
                   <div class="dropdown-link">
                     <div class="dropdown-container">
                       <div class="dropdown-text-container">
-                        <span class="breadcrumb-products"><NuxtLink to="/blog" target="_blank">{{ news.products_btn_text }}</NuxtLink></span>
+                        <span class="breadcrumb-products"><NuxtLink :to="localePath('/blog')" target="_blank">{{ news.products_btn_text }}</NuxtLink></span>
                       </div>
                     </div>
                     <div class="dropdown-icon-container">
@@ -40,7 +40,7 @@
                 <div class="breadcrumb-outer">
                         <div class="bg">
                             <p v-for="(menu, i) in menuItems" :key="i">
-                                <a :href="'/blog/'+menu.category_value" target="_blank">{{ menu.category_name }}</a>
+                                <NuxtLink :to="localePath('/blog/'+menu.category_value)" target="_blank">{{ menu.category_name }}</NuxtLink>
                             </p>
                         </div>
                       </div>
@@ -127,7 +127,7 @@
                 <div class="processing-cases-list">
                   <!-- 动态渲染案例项 -->
                   <template v-for="(caseItem, caseIndex) in blogList" :key="caseIndex">
-                    <NuxtLink :to="'/blog/'+caseItem.slug" target="_blank">
+                    <NuxtLink :to="localePath('/blog/'+caseItem.slug)" target="_blank">
                       <div class="processing-case-item">
                         <div class="case-background">
                           <div class="case-ipad">
@@ -187,7 +187,8 @@
 </template>
 
 <script setup>
-
+import { useLocalePath } from '#i18n'
+const localePath = useLocalePath()
 // Props
 const props = defineProps({
    slug: {
@@ -290,6 +291,11 @@ const loadMore = async () => {
         }else{
           moreUrl +='&filters[category][$eq]=Company News'
         }
+        // if(locale.value === 'zh'){
+        //     moreUrl += '&locale=zh-Hans'
+        // }else{
+        //     moreUrl += locale.value == 'en'?'':"&locale="+locale.value
+        // }
         const moreData = await $fetch(moreUrl, {
             headers: {
                 Authorization: `Bearer ${authToken}`,

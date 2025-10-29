@@ -26,7 +26,7 @@
         <div v-else class="loading-container">
             <div class="loading-spinner"></div>
         </div>
-        
+        <Lang :contentDetail="contentDetail" />
         <ContactType :contentDetail="contentDetail" />
         <WhatsApp :contentDetail="contentDetail" />
         <DinosawFooter :menuItems="menuItems" :contentDetail="contentDetail" />

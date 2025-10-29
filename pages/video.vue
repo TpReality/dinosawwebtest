@@ -17,7 +17,7 @@
                                 <div class="breadcrumb-text">
                                     <div class="text-container">
                                         <span class="breadcrumb-home">
-                                            <NuxtLink to="/" target="_blank">{{ videos.home_text }}</NuxtLink>
+                                            <NuxtLink :to="localePath('/')" target="_blank">{{ videos.home_text }}</NuxtLink>
                                         </span>
                                     </div>
                                 </div>
@@ -101,7 +101,7 @@
                                 <div class="processing-cases-list">
                                     <!-- 案例1 -->
                                      <template v-for="(blog, j) in item.blogs" :key="j">
-                                        <NuxtLink class="processing-case-item-link" :to="'/blog/' + blog.slug" target="_blank">
+                                        <NuxtLink class="processing-case-item-link" :to="localePath('/blog/' + blog.slug)" target="_blank">
                                             <div class="processing-case-item">
                                                 <div class="case-background green">
                                                     <div class="case-ipad">
@@ -156,6 +156,8 @@
                 </div>
             </div>
         </div>
+
+        <Lang :contentDetail="contentDetail" />
         <ContactType :contentDetail="contentDetail" />
         <WhatsApp :contentDetail="contentDetail" />
         <DinosawFooter :menuItems="menuItems" :contentDetail="contentDetail" />
@@ -166,7 +168,8 @@
 import { ref, onMounted, watch } from 'vue'
 // 导入日期格式化工具函数
 import {formatArrayDatesShort } from '~/utils/dateFormatter'
-
+import { useLocalePath } from '#i18n'
+const localePath = useLocalePath()
 // 使用菜单数据composable
 const { menuItems, initializeMenuData } = useMenuData()
 

@@ -16,7 +16,7 @@
                             <div class="breadcrumb-link">
                                 <div class="breadcrumb-text">
                                     <div class="text-container">
-                                        <span class="breadcrumb-home"><a href="/" target="_blank">{{ blogs.home_text }}</a></span>
+                                        <span class="breadcrumb-home"><NuxtLink :to="localePath('/')" target="_blank">{{ blogs.home_text }}</NuxtLink></span>
                                     </div>
                                 </div>
                                 <div class="breadcrumb-text">
@@ -30,7 +30,7 @@
                                     <div class="dropdown-link">
                                         <div class="dropdown-container">
                                             <div class="dropdown-text-container">
-                                                <span class="breadcrumb-products"><a href="/blog" target="_blank">{{ blogs.products_btn_text }}</a></span>
+                                                <span class="breadcrumb-products"><NuxtLink :to="localePath('/blog')" target="_blank">{{ blogs.products_btn_text }}</NuxtLink></span>
                                             </div>
                                         </div>
                                         <div class="dropdown-icon-container">
@@ -41,7 +41,7 @@
                                 <div class="breadcrumb-outer">
                                     <div class="bg" v-if="curMenuItems?.length && Array.isArray(curMenuItems[0]?.children)">
                                         <p v-for="(menu, i) in curMenuItems[0].children" :key="i">
-                                            <a :href="'/blog'+menu.link" target="_blank" >{{ menu.text }}</a>
+                                            <NuxtLink :to="localePath('/blog'+menu.link)" target="_blank" >{{ menu.text }}</NuxtLink>
                                         </p>
                                     </div>
                                 </div>
@@ -106,7 +106,7 @@
                                     <div class="processing-cases-list">
                                         <!-- 案例1 -->
                                         <template v-for="(blog, j) in item.blogs" :key="j">
-                                            <NuxtLink :to="index==2?'/Products/'+blog.url:'/blog/'+blog.slug" target="_blank">
+                                            <NuxtLink :to="index==2?localePath('/Products/'+blog.url):localePath('/blog/'+blog.slug)" target="_blank">
                                                 <div class="processing-case-item">
                                                     <div class="case-background" :class="item.className">
                                                         <div class="case-ipad">
@@ -148,7 +148,7 @@
                             </div>
 
                             <!-- More 按钮 -->
-                             <NuxtLink  v-if="item.url" :to="item.url" target="_blank">
+                             <NuxtLink  v-if="item.url" :to="localePath(item.url)" target="_blank">
                                 <div class="processing-cases-more-button">
                                     
                                     <div class="more-button-container">
@@ -164,6 +164,7 @@
                 </div>
             </div>
         </div>
+        <Lang :contentDetail="contentDetail" />
         <ContactType :contentDetail="contentDetail" />
         <WhatsApp :contentDetail="contentDetail" />
         <DinosawFooter :menuItems="menuItems" :contentDetail="contentDetail" />
@@ -173,6 +174,8 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 import {formatArrayDatesShort } from '~/utils/dateFormatter'
+import { useLocalePath } from '#i18n'
+const localePath = useLocalePath()
 // 使用菜单数据composable
 const { menuItems, initializeMenuData } = useMenuData()
 const curMenuItems = computed(() => menuItems.value.filter(item => item.title === 'Blogs'))

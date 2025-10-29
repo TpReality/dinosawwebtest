@@ -7,7 +7,7 @@
                 <div class="breadcrumb-link">
                     <div class="breadcrumb-text">
                         <div class="text-container">
-                            <span class="breadcrumb-home"><NuxtLink to="/" target="_blank">{{ contentDetail.home_text }}</NuxtLink></span>
+                            <span class="breadcrumb-home"><NuxtLink :to="localePath('/')" target="_blank">{{ contentDetail.home_text }}</NuxtLink></span>
                         </div>
                     </div>
                     <div class="breadcrumb-text">
@@ -85,6 +85,7 @@
                 </div>
             </div>
         </div>
+        <Lang :contentDetail="contentDetail" />
         <ContactType :contentDetail="contentDetail" />
         <WhatsApp :contentDetail="contentDetail" />
         <DinosawFooter :menuItems="menuItems" :contentDetail="contentDetail" />
@@ -93,7 +94,8 @@
 
 <script setup>
 import { ref, onMounted, computed } from 'vue'
-
+import { useLocalePath } from '#i18n'
+const localePath = useLocalePath()
 // 使用菜单数据composable
 const { menuItems, initializeMenuData } = useMenuData()
 

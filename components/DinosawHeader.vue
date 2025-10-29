@@ -62,16 +62,16 @@
                       </svg>
                     </a>
                   </div>
-                  <a class="mobile-quote-btn" href="/contact" target="_blank">{{ contentDetail.get_a_quote_text }}</a>
+                  <NuxtLink class="mobile-quote-btn" :to="localePath('/contact')" target="_blank">{{ contentDetail.get_a_quote_text }}</NuxtLink>
                 </div>
               </div>
           </div>
           <div class="dinosaw-head-bot flex">
               <div class="dinosaw-head-lm flex">
                 <div class="dinosaw-logo">
-                    <a href="/" target="_blank" alt="dinosaw logo">
+                    <NuxtLink :to="localePath('/')" target="_blank" alt="dinosaw logo">
                       <NuxtImg sizes="sm:100vw" class="img" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/Rgs09IZlnBALMtEN2nX5mwe26rw.webp" />
-                    </a>
+                    </NuxtLink>
                 </div>
                 <!-- 移动端菜单按钮 -->
                 <div class="mobile-menu-btn" @click="toggleMobileMenu">
@@ -91,8 +91,8 @@
                 <div class="mobile-menu" :class="{ 'mobile-menu-open': isMobileMenuOpen }" v-if="menuItems && menuItems.length > 0">
                   <div class="menu-item" v-for="(item, index) in menuItems" :key="index">
                     <div class="menu-item-header" @click="toggleSubMenu(index)">
-                      <span @click.stop="stopPoint()" v-if="item.title"> <a :href="item.link" target="_blank">{{ item.title }}</a></span>
-                      <a v-else :href="item.link" target="_blank">{{ item.linkText }}</a>
+                      <span @click.stop="stopPoint()" v-if="item.title"> <NuxtLink :to="localePath(item.link)" target="_blank">{{ item.title }}</NuxtLink></span>
+                      <NuxtLink v-else :to="localePath(item.link)" target="_blank">{{ item.linkText }}</NuxtLink>
                       <svg v-if="item.children" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" focusable="false" :class="{ 'rotated': activeSubMenus[index] }">
                         <g color="var(--token-e0ce79e8-f023-49ad-9edf-bfcca13d71cf, rgb(49, 47, 47))" weight="bold">
                           <polyline points="208 96 128 176 48 96" fill="none" stroke="var(--token-e0ce79e8-f023-49ad-9edf-bfcca13d71cf, rgb(49, 47, 47))" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline>
@@ -102,7 +102,7 @@
                     <div v-if="item.children" class="submenu" :class="{ 'submenu-open': activeSubMenus[index] }">
                       <template v-for="(child, childIndex) in item.children" :key="childIndex">
                         <p v-if="child.isShow">
-                          <a :href="item.link+child.link" target="_blank">{{ child.text }}</a>
+                          <NuxtLink :to="localePath(item.link+child.link)" target="_blank">{{ child.text }}</NuxtLink>
                         </p>
                       </template>
                     </div>
@@ -112,7 +112,7 @@
                     <div class="menu-item" v-for="(item, index) in menuItems" :key="index">
                       <!-- 有子菜单的项目 -->
                       <div v-if="item.children" class="flex">
-                          <span><a :href="item.link" target="_blank">{{ item.title }}</a></span>
+                          <span><NuxtLink :to="localePath(item.link)" target="_blank">{{ item.title }}</NuxtLink></span>
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" focusable="false" color="var(--token-e0ce79e8-f023-49ad-9edf-bfcca13d71cf, rgb(49, 47, 47))" style="user-select: none; width: 16px; height: 16px; display: inline-block; fill: var(--token-e0ce79e8-f023-49ad-9edf-bfcca13d71cf, rgb(49, 47, 47)); flex-shrink: 0; cursor: auto;"><g color="var(--token-e0ce79e8-f023-49ad-9edf-bfcca13d71cf, rgb(49, 47, 47))" weight="bold"><polyline points="208 96 128 176 48 96" fill="none" stroke="var(--token-e0ce79e8-f023-49ad-9edf-bfcca13d71cf, rgb(49, 47, 47))" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline></g></svg>
                       </div>
                       <!-- 子菜单下拉内容 -->
@@ -120,25 +120,26 @@
                         
                           <template v-for="(child, childIndex) in item.children" :key="childIndex">
                             <p v-if="child.isShow">
-                                <a :href="item.link+child.link" target="_blank">{{ child.text }}</a>
+                                <NuxtLink :to="localePath(item.link+child.link)" target="_blank">{{ child.text }}</NuxtLink>
                             </p>
                           </template>
                       </div>
                       <!-- 没有子菜单的项目 -->
                       <div v-else>
-                          <a :href="item.link" target="_blank">{{ item.linkText }}</a>
+                          <NuxtLink :to="localePath(item.link)" target="_blank">{{ item.linkText }}</NuxtLink>
                       </div>
                     </div>
                 </div>
               </div>
-              <a class="freequote" href="/contact" target="_blank">{{ props.contentDetail.get_a_free_quote_btn_text }}</a>
+              <NuxtLink class="freequote" :to="localePath('/contact')" target="_blank">{{ props.contentDetail.get_a_free_quote_btn_text }}</NuxtLink>
           </div>
       </div>
   </header>
 </template>
 
 <script setup>
-
+import { useLocalePath } from '#i18n'
+const localePath = useLocalePath()
 const props = defineProps({
   contentDetail: {
       type: Object,

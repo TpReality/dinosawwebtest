@@ -15,44 +15,32 @@
         <svg class="icon" viewBox="0 0 1024 1024" width="32" height="32"><path d="M940.8 202.9H83.6c-10.9 0-19.7 8.8-19.7 19.7v578.8c0 10.9 8.8 19.7 19.7 19.7h857.2c10.9 0 19.7-8.8 19.7-19.7V222.6c0-10.9-8.8-19.7-19.7-19.7zm-31.2 21.9-305.1 305c-52.9-45.5-131.8-45.5-184.7 0l-305-305h794.8zM516.8 617.3c-2.8 1.7-6.4 1.7-9.2 0l-72-72c44.2-36.8 109-36.8 153.2 0l-72 72zm421.8 181.9H85.7V225.8c.9 1.5 1.9 2.9 3.2 4.2l409.3 409.3c4 4 9.5 6.1 15.2 5.7 4.9-.3 9.6-2.6 13.1-6.1l409-409c1.3-1.3 2.3-2.7 3.2-4.2v573.5z"></path></svg>
           <p>{{ contentDetail.email_text }}</p>
       </a>
-      <a href="/contact" target="_blank">
+      <NuxtLink :to="localePath('/contact')" target="_blank">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 26 26" width="28" height="28">
           <path d="M 7 17.868 L 16.917 17.868 C 17.239 17.868 17.5 17.606 17.5 17.284 C 17.5 16.962 17.239 16.701 16.917 16.701 L 7 16.701 C 6.678 16.701 6.417 16.962 6.417 17.284 C 6.417 17.606 6.678 17.868 7 17.868 Z M 7 10.284 L 11.083 10.284 C 11.405 10.284 11.667 10.023 11.667 9.701 C 11.667 9.379 11.405 9.118 11.083 9.118 L 7 9.118 C 6.678 9.118 6.417 9.379 6.417 9.701 C 6.417 10.023 6.678 10.284 7 10.284 Z M 12.419 14.414 C 12.647 14.64 13.014 14.64 13.242 14.414 L 25.492 2.164 C 25.69 1.933 25.677 1.588 25.461 1.372 C 25.246 1.157 24.901 1.143 24.669 1.342 L 12.419 13.592 C 12.193 13.819 12.193 14.187 12.419 14.414 Z" fill="rgb(0, 0, 0)"></path>
           <path d="M 24.868 9.368 C 24.713 9.368 24.564 9.43 24.455 9.539 C 24.346 9.649 24.284 9.797 24.284 9.952 L 24.284 23.917 C 24.327 24.335 24.179 24.751 23.881 25.048 C 23.584 25.345 23.168 25.493 22.75 25.451 L 5.25 25.451 C 4.288 25.451 3.284 24.868 3.284 23.923 L 3.284 4.083 C 3.369 3.035 4.202 2.203 5.25 2.118 L 16.806 2.118 C 17.128 2.118 17.389 1.856 17.389 1.534 C 17.389 1.212 17.128 0.951 16.806 0.951 L 5.25 0.951 C 3.557 1.038 2.205 2.391 2.118 4.083 L 2.118 23.917 C 2.118 25.527 3.646 26.618 5.256 26.618 L 22.75 26.618 C 23.478 26.659 24.189 26.387 24.705 25.872 C 25.22 25.356 25.492 24.645 25.451 23.917 L 25.451 9.952 C 25.451 9.797 25.389 9.649 25.28 9.539 C 25.171 9.43 25.022 9.368 24.868 9.368 Z" fill="rgb(0, 0, 0)"></path>
         </svg>
           <p>{{contentDetail.contact_text}}</p>
-        </a>
+        </NuxtLink>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'ContactType',
-  data(){
-    return {
-      
-    }
-  },
+<script setup>
+import { useLocalePath } from '#i18n'
+const localePath = useLocalePath()
 
-  props:{
-     contentDetail:{
-            type:Object,
-            default:()=>{}
-      }
-  },
-
-  computed: {
-    chatNowWords() {
-      if (!this.contentDetail.chat_now_text) return [];
-      return this.contentDetail.chat_now_text.split(' ').filter(word => word.trim() !== '');
-    }
-  },
-
-  methods:{
-    
+const props = defineProps({
+  contentDetail: {
+      type: Object,
+      default: () => {}
   }
-}
+})
+const chatNowWords = computed((()=>{
+      if (!props.contentDetail.chat_now_text) return [];
+      return props.contentDetail.chat_now_text.split(' ').filter(word => word.trim() !== '');
+}))
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
