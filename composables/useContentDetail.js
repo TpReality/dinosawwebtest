@@ -3,7 +3,7 @@ import { useI18n } from 'vue-i18n'
 // 让内容详情在 SSR 阶段就获取并序列化到 payload，同时用 useState 做全局缓存
 export const useContentDetail = () => {
   const contentDetail = useState('contentDetail', () => ({}))
-   const { locale } = useI18n()
+  const { locale } = useI18n()
   const initializeContentDetail = async () => {
     // 已有缓存则直接返回，避免重复请求（客户端导航也不再请求）
     // if (Object.keys(contentDetail.value).length > 0) return contentDetail.value

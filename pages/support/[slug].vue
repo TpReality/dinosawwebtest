@@ -206,7 +206,10 @@ const curMenuItems = computed(() => menuItems.value.filter(item => item.title ==
 // 初始化菜单数据
 await initializeMenuData()
 // 使用全局 contentDetail
-const { contentDetail, isLoaded } = useContentDetail()
+const { contentDetail, isLoaded, initializeContentDetail } = useContentDetail();
+
+// 在服务端和客户端首次加载时都执行数据获取
+await initializeContentDetail();
 const support = ref({})
 const { data: supportRes, pending, error } = await useApi('/product-categories?filters[category_value][$eq]=user-manual&populate=all')
 let processingCase = ref([])

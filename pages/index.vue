@@ -1153,7 +1153,10 @@ import { useLocalePath } from '#i18n'
 const localePath = useLocalePath()
 
 // 使用全局 contentDetail
-const { contentDetail, isLoaded } = useContentDetail()
+const { contentDetail, isLoaded, initializeContentDetail } = useContentDetail();
+
+// 在服务端和客户端首次加载时都执行数据获取
+await initializeContentDetail();
 
 // 使用菜单数据composable
 const { menuItems, initializeMenuData } = useMenuData()

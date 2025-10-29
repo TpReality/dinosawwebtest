@@ -30,8 +30,10 @@ const slug = route.params.slug
 const isNewsOrEvents = computed(() => {
   return slug === 'news-events' || slug === 'industry-news'
 })
-const { contentDetail, isLoaded } = useContentDetail()
-// // console.log('contentDetail', contentDetail)
+const { contentDetail, isLoaded, initializeContentDetail } = useContentDetail();
+
+// 在服务端和客户端首次加载时都执行数据获取
+await initializeContentDetail();
 const handleHead = (headData) => {
     // console.log('Product data received from component:', headData);
     let useHeadData = {

@@ -365,7 +365,10 @@ const curMenuItems = computed(() => menuItems.value.filter(item => item.title ==
 await initializeMenuData()
 
 // 使用全局 contentDetail
-const { contentDetail, isLoaded } = useContentDetail()
+const { contentDetail, isLoaded, initializeContentDetail } = useContentDetail();
+
+// 在服务端和客户端首次加载时都执行数据获取
+await initializeContentDetail();
 
 // 使用 useFetch 获取数据
 const { data: faqsRes, pending, error } = await useApi('/product-categories?filters[category_value][$eq]=faqs&populate=all')
