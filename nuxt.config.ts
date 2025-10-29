@@ -19,11 +19,19 @@ const locales = [
 ];
 const localeCodes = locales.filter(l => l.code !== defaultLocale).map(l => l.code);
 
+type SitemapUrl = {
+  loc: string;
+  lastmod?: string | Date; // 使用 `?` 表示这个属性是可选的
+  // 你还可以添加其他 sitemap 属性
+  // changefreq?: 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never';
+  // priority?: number;
+}
+
 
 export default defineNuxtConfig({
   // +++ 新增: 为 sitemap 提供网站的根 URL +++
   site: {
-    url: 'https://cms.stoneboss.vip', // 请确保这是你网站的正确域名
+    url: 'https://www.dinosawmachine.com', // 请确保这是你网站的正确域名
   },
 
   runtimeConfig: {
@@ -134,14 +142,14 @@ export default defineNuxtConfig({
           : [],
       };
       return acc;
-    }, {}),
+    }, {} as any),
 
     // 为所有 sitemaps 提供动态 URL
     // 这个函数只会运行一次，其结果会被缓存和过滤，效率很高
     async urls() {
         const authToken = "8f80d6094edcd486411ddc90d4fa4f18ed87f9fe9edae7fe7cb423e3ce261b23ce76afdedfc3cf2e3689bd1b03e9f504cbded28e7645eed3_YOUR_TOKEN_HERE";
         const baseURL = 'https://cms.stoneboss.vip/api';
-        const dynamicRoutes = [];
+         const dynamicRoutes: SitemapUrl[] = [];
 
         const [blogs, products] = await Promise.all([
             $fetch('/blogs?pagination[pageSize]=100000', { baseURL, headers: { Authorization: `Bearer ${authToken}` } }),
