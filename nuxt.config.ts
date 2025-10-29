@@ -7,7 +7,7 @@ const defaultLocale = 'en';
 const locales = [
   { code: 'en', iso: 'en-US', name: 'English' },
   { code: 'zh', iso: 'zh-CN', name: '中文' },
-  // { code: 'ru', iso: 'ru-RU', name: 'Русский' },
+  { code: 'ru', iso: 'ru-RU', name: 'Русский' },
   // { code: 'tr', iso: 'tr-TR', name: 'Türkçe' },
   // { code: 'pt', iso: 'pt-BR', name: 'Português' },
   // { code: 'es', iso: 'es-ES', name: 'Español' },
@@ -113,9 +113,6 @@ export default defineNuxtConfig({
     '/ru/**': { prerender: true }, '/de/**': { prerender: true }, '/ar/**': { prerender: true }, '/vi/**': { prerender: true },
     '/fr/**': { prerender: true }, '/pl/**': { prerender: true },
     '/api/**': { proxy: 'https://cms.stoneboss.vip/api/**', headers: { 'cache-control': 's-maxage=60' } },
-    '/sitemap.xml': { prerender: true }, 
-    '/zh/sitemap.xml': { prerender: true }, 
-    '/ru/sitemap.xml': { prerender: true },
   },
 
   i18n: {
