@@ -106,15 +106,15 @@ export async function generateSitemapXml(currentLocaleCode: string): Promise<str
       urlXml += `<priority>${data.priority}</priority>\n`;
 
       // 2.3. <xhtml:link> 标签 (hreflang)
-      // locales.forEach(locale => {
-      //   // 构建替代链接的完整 URL
-      //   const altPath = locale.code === defaultLocale ? data.loc : `/${locale.code}${data.loc}`;
-      //   const altHref = `${base}${altPath}`;
+      locales.forEach(locale => {
+        // 构建替代链接的完整 URL
+        const altPath = locale.code === defaultLocale ? data.loc : `/${locale.code}${data.loc}`;
+        const altHref = `${base}${altPath}`;
 
-      //   // 1. 添加该语言本身的 hreflang 标签
-      //   // 注意：这里没有多余的空格
-      //   urlXml += `<xhtml:link rel="alternate" hreflang="${locale.code}" href="${altHref}"/>\n`;
-      // });
+        // 1. 添加该语言本身的 hreflang 标签
+        // 注意：这里没有多余的空格
+        urlXml += `<xhtml:link rel="alternate" hreflang="${locale.code}" href="${altHref}"/>\n`;
+      });
       const defaultUrl = `${base}${allRoutes.find(r => r.loc === data.loc)?.loc || data.loc}`;
       // **添加 x-default 标签** const defaultUrl = `${base}${allRoutes.find(r => r.loc === data.loc)?.loc || data.loc}`;
       urlXml += `<xhtml:link rel="alternate" hreflang="x-default" href="${defaultUrl}"/>\n`;
