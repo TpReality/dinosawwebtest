@@ -29,6 +29,7 @@ const hidePanel = () => {
     .wx-app{
       display:none;
         .wx-panel{
+          
           position:fixed;
           top:50%;
           left:50%;
