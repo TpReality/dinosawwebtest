@@ -6,7 +6,7 @@ import { createHash } from 'node:crypto'
 const defaultLocale = 'en';
 const locales = [
   { code: 'en', iso: 'en-US', name: 'English' },
-  { code: 'zh', iso: 'zh-CN', name: '中文' },
+  // { code: 'zh', iso: 'zh-CN', name: '中文' },
   // { code: 'ru', iso: 'ru-RU', name: 'Русский' },
   // { code: 'tr', iso: 'tr-TR', name: 'Türkçe' },
   // { code: 'pt', iso: 'pt-BR', name: 'Português' },
@@ -65,14 +65,15 @@ export default defineNuxtConfig({
     ],
     routeRules: {
        '/blog/**': {
-      // max-age=1 确保浏览器不缓存，s-maxage=60 确保 CDN 缓存 60 秒。
-      isr: true,
-      swr: 600
+      headers: {
+        'Cache-Control': 'public, s-maxage=1, stale-while-revalidate=31536000',
+      }
     },
 
     '/Products/**': {
-      isr: true,
-      swr: 600
+      headers: {
+        'Cache-Control': 'public, s-maxage=1, stale-while-revalidate=31536000',
+      }
     },
     '/': { prerender: true }, 
     '/Products': {  isr: true, swr: 600 }, 
@@ -93,7 +94,7 @@ export default defineNuxtConfig({
     // '/fr/**': {  isr: true, swr: 600 }, '/pl/**': {  isr: true, swr: 600 },
     '/api/**': { proxy: 'https://cms.stoneboss.vip/api/**', headers: { 'cache-control': 's-maxage=60' } },
     '/sitemap.xml': {  isr: true, swr: 600 }, 
-    '/zh/sitemap.xml': { prerender: true }, 
+    // '/zh/sitemap.xml': { prerender: true }, 
     // '/ru/sitemap.xml': { prerender: true },
   },
     prerender: {
@@ -139,17 +140,17 @@ export default defineNuxtConfig({
   // },
   
   routeRules: {
-    '/blog/**': { headers: { 'cache-control': 'public, max-age=1, s-maxage=60, stale-while-revalidate=59' } },
-    '/Products/**': { headers: { 'cache-control': 'public, max-age=1, s-maxage=60, stale-while-revalidate=59' } },
+    '/blog/**': { headers: { 'Cache-Control': 'public, s-maxage=1, stale-while-revalidate=31536000' } },
+    '/Products/**': { headers: { 'Cache-Control': 'public, s-maxage=1, stale-while-revalidate=31536000' } },
     '/': { prerender: true }, '/Products': { prerender: true }, '/projects': { prerender: true }, '/support': { prerender: true },
     '/blog': { prerender: true }, '/About-us': { prerender: true }, '/video': { prerender: true }, '/contact': { prerender: true },
     '/stoneidentification': { prerender: true }, '/ai': { prerender: true },
-    '/zh/**': { prerender: true }, '/tr/**': { prerender: true }, '/pt/**': { prerender: true }, '/es/**': { prerender: true },
-    '/ru/**': { prerender: true }, '/de/**': { prerender: true }, '/ar/**': { prerender: true }, '/vi/**': { prerender: true },
-    '/fr/**': { prerender: true }, '/pl/**': { prerender: true },
-    '/api/**': { proxy: 'https://cms.stoneboss.vip/api/**', headers: { 'cache-control': 's-maxage=60' } },
+    // '/zh/**': { prerender: true }, '/tr/**': { prerender: true }, '/pt/**': { prerender: true }, '/es/**': { prerender: true },
+    // '/ru/**': { prerender: true }, '/de/**': { prerender: true }, '/ar/**': { prerender: true }, '/vi/**': { prerender: true },
+    // '/fr/**': { prerender: true }, '/pl/**': { prerender: true },
+    '/api/**': { proxy: 'https://cms.stoneboss.vip/api/**', headers: { 'Cache-Control': 'public, s-maxage=1, stale-while-revalidate=31536000', } },
     '/sitemap.xml': { prerender: true }, 
-    '/zh/sitemap.xml': { prerender: true }, 
+    // '/zh/sitemap.xml': { prerender: true }, 
     // '/ru/sitemap.xml': { prerender: true },
   },
 
