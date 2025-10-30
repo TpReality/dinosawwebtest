@@ -173,7 +173,7 @@
 
                                         <!-- Phone Input -->
                                         <div class="form-group">
-                                            <h4 class="form-title">手机号 <span class="required">*</span></h4>
+                                            <h4 class="form-title">手机号</h4>
                                             <div class="phone-input-container">
                                                 <div class="country-code-wrapper">
                                                     <select class="country-code-select" v-model="form.countryCode">
@@ -191,7 +191,7 @@
 
                                         <!-- Email Input -->
                                         <div class="form-group">
-                                            <h4 class="form-title">邮箱 <span class="required">*</span></h4>
+                                            <h4 class="form-title">邮箱</h4>
                                             <div class="input-container">
                                                 <input type="email" placeholder="请输入邮箱地址" class="form-input" v-model="form.email" />
                                             </div>
@@ -266,7 +266,7 @@
 
                                         <!-- Phone Input -->
                                         <div class="form-group">
-                                            <h4 class="form-title">手机号 <span class="required">*</span></h4>
+                                            <h4 class="form-title">手机号</h4>
                                             <div class="phone-input-container">
                                                 <div class="country-code-wrapper">
                                                     <select class="country-code-select" v-model="form.countryCode">
@@ -284,7 +284,7 @@
 
                                         <!-- Email Input -->
                                         <div class="form-group">
-                                            <h4 class="form-title">邮箱 <span class="required">*</span></h4>
+                                            <h4 class="form-title">邮箱</h4>
                                             <div class="input-container">
                                                 <input type="email" placeholder="请输入邮箱地址" class="form-input" v-model="form.email" />
                                             </div>

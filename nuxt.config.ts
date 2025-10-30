@@ -6,7 +6,7 @@ import { createHash } from 'node:crypto'
 const defaultLocale = 'en';
 const locales = [
   { code: 'en', iso: 'en-US', name: 'English' },
-  // { code: 'zh', iso: 'zh-CN', name: '中文' },
+  { code: 'zh', iso: 'zh-CN', name: '中文' },
   // { code: 'ru', iso: 'ru-RU', name: 'Русский' },
   // { code: 'tr', iso: 'tr-TR', name: 'Türkçe' },
   // { code: 'pt', iso: 'pt-BR', name: 'Português' },
@@ -93,7 +93,7 @@ export default defineNuxtConfig({
     // '/fr/**': {  isr: true, swr: 600 }, '/pl/**': {  isr: true, swr: 600 },
     '/api/**': { proxy: 'https://cms.stoneboss.vip/api/**', headers: { 'cache-control': 's-maxage=60' } },
     '/sitemap.xml': {  isr: true, swr: 600 }, 
-    // '/zh/sitemap.xml': { prerender: true }, 
+    '/zh/sitemap.xml': { prerender: true }, 
     // '/ru/sitemap.xml': { prerender: true },
   },
     prerender: {
