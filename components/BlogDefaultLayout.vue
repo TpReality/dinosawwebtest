@@ -285,6 +285,8 @@
 <script setup>
 import { useRequestURL } from '#app';
 import { formatDateEN } from '~/utils/dateUtils';
+import { localizeLinksInHtmlRobust } from '~/utils/richText';
+import { navigateTo404 } from '~/utils/navigation';
 import { useI18n } from 'vue-i18n'
 import { useLocalePath } from '#i18n'
 const { locale, locales,defaultLocale } = useI18n()
@@ -327,7 +329,7 @@ const { data: blogDetailRes, pending, error } = await useApi('/blogs?filters[slu
 watch(error, (newError) => {
   // console.log(newError)
   //  throw createError({ statusCode: 404, statusMessage: '文章不存在' });
-  window.location.href = '/404'
+  navigateTo404(locale.value, defaultLocale)
 })
 watch(blogDetailRes, (newPosts) => {
 
@@ -344,33 +346,12 @@ watch(blogDetailRes, (newPosts) => {
 
 
   } else {
-    window.location.href = '/404'
+    navigateTo404(locale.value, defaultLocale)
   }
 
 
 
 }, { immediate: true })
-
-function localizeLinksInHtmlRobust(htmlString, currentLocale, defaultLocale) {
-  if (!htmlString || currentLocale === defaultLocale) {
-    return htmlString;
-  }
-  // 检查是否在服务器端环境，如果是，则无法使用 DOM API，直接返回
-  if (typeof document === 'undefined') {
-    return htmlString;
-  }
-  const tempDiv = document.createElement('div');
-  tempDiv.innerHTML = htmlString;
-  const anchors = tempDiv.querySelectorAll('a');
-  anchors.forEach(anchor => {
-    const oldHref = anchor.getAttribute('href');
-    if (oldHref && oldHref.startsWith('/')) {
-      const newHref = `/${currentLocale}${oldHref}`;
-      anchor.setAttribute('href', newHref);
-    }
-  });
-  return tempDiv.innerHTML;
-}
 
 const localizedContent = computed(() => {
   // 使用更健壮的函数

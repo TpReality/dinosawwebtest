@@ -40,6 +40,32 @@ function replaceAttributeValue(tag: string, attributeName: string, oldValue: str
  * @param html - 富文本 HTML 字符串。
  * @returns 修改后的 HTML 字符串。
  */
+/**
+ * 服务端版本的链接本地化函数，使用正则表达式处理 HTML 字符串
+ * @param htmlString - HTML 字符串
+ * @param currentLocale - 当前语言环境
+ * @param defaultLocale - 默认语言环境
+ * @returns 处理后的 HTML 字符串
+ */
+export function localizeLinksInHtmlRobust(htmlString: string, currentLocale: string, defaultLocale: string): string {
+  if (!htmlString || currentLocale === defaultLocale) {
+    return htmlString
+  }
+
+  // 使用正则表达式匹配 <a> 标签的 href 属性
+  // 匹配 href="/path" 或 href='/path' 格式的链接
+  const linkRegex = /<a\s+([^>]*\s+)?href\s*=\s*(['"])(\/[^'"]*)\2([^>]*)>/gi
+
+  return htmlString.replace(linkRegex, (match, beforeHref, quote, hrefValue, afterHref) => {
+    // 只处理以 / 开头的相对路径
+    if (hrefValue && hrefValue.startsWith('/')) {
+      const newHref = `/${currentLocale}${hrefValue}`
+      return `<a ${beforeHref || ''}href=${quote}${newHref}${quote}${afterHref || ''}>`
+    }
+    return match
+  })
+}
+
 export function enhanceRichTextHtml(html?: string | null): string {
   if (!html || typeof html !== 'string') {
     return html || ''

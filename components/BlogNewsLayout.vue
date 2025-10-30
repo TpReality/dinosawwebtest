@@ -188,6 +188,9 @@
 
 <script setup>
 import { useLocalePath } from '#i18n'
+import { navigateTo404 } from '~/utils/navigation'
+import { useI18n } from 'vue-i18n'
+const { locale, defaultLocale } = useI18n()
 const localePath = useLocalePath()
 // Props
 const props = defineProps({
@@ -243,7 +246,7 @@ watch(newsRes, (newPosts) => {
 }, { immediate: true })
 watch(error, (newError) => {
     //  throw createError({ statusCode: 404, statusMessage: '文章不存在' });
-    window.location.href = '/404'
+    navigateTo404(locale.value, defaultLocale)
 })
 
 const page = ref(1)

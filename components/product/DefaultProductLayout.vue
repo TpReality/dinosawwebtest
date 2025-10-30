@@ -942,10 +942,11 @@
 import { ref, onMounted, onUnmounted, computed, nextTick, watch } from 'vue'
 import { useRequestURL } from '#app';
 import { enhanceRichTextHtml } from '~/utils/richText'
+import { navigateTo404 } from '~/utils/navigation'
 import { useLocalePath } from '#i18n'
 import { useI18n } from 'vue-i18n'
 const localePath = useLocalePath()
-const { locale } = useI18n()
+const { locale, defaultLocale } = useI18n()
 const fullUrlString = useRequestURL().href;
 
 const props = defineProps({
@@ -1088,7 +1089,7 @@ watch(productDetail, async (pd) => {
     if (pd.link_3) relatedFirstImages.value.link_3 = results[2] || ''
   } catch (e) {
     console.warn('Fetch related product first images failed', e)
-    window.location.href = '/404'
+    navigateTo404(locale.value, defaultLocale)
   } finally {
     relatedFetched = true
   }
@@ -1096,7 +1097,7 @@ watch(productDetail, async (pd) => {
 
  watch(error, (newError) => {
     //  throw createError({ statusCode: 404, statusMessage: '文章不存在' });
-    window.location.href = '/404'
+    navigateTo404(locale.value, defaultLocale)
 })
 
 
