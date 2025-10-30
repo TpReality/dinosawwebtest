@@ -281,7 +281,7 @@
 
         <div class="blog-section">
         <!-- Profiling Machine 部分 -->
-        <div class="wire-saw-machine-section" v-if="prductDetail.the_most_popular_related_process_cases_blogs && productDetail.the_most_popular_related_process_cases_blogs.length > 0">
+        <div class="wire-saw-machine-section" v-if="productDetail.the_most_popular_related_process_cases_blogs && productDetail.the_most_popular_related_process_cases_blogs.length > 0">
             <div class="wire-saw-container">
                 <div class="wire-saw-frame">
                     <div class="content-container">

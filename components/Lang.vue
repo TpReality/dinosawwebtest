@@ -40,7 +40,7 @@ const isOptionsVisible = ref(false)
 const allLocales = [
   { code: 'en', name: 'English', flag: 'en-us' },
   { code: 'zh', name: '中文', flag: 'zh-cn' },
-  { code: 'ru', name: 'Русский', flag: 'ru' },
+  // { code: 'ru', name: 'Русский', flag: 'ru' },
   // { code: 'tr', name: 'Türkçe', flag: 'tr' },
   // { code: 'pt', name: 'Português', flag: 'pt' },
   // { code: 'es', name: 'Español', flag: 'es' },
