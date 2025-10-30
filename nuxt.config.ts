@@ -34,25 +34,25 @@ export default defineNuxtConfig({
     }
   },
 
-  hooks: {
-    async 'prerender:routes'(ctx) {
-      const addLocalized = (path: string) => {
-        ctx.routes.add(path)
-        for (const code of localeCodes) {
-          ctx.routes.add(`/${code}${path}`)
-        }
-      }
-      const authToken = "8f80d6094edcd486411ddc90d4fa4f18ed87f9fe9edae7fe7cb423e3ce261b23ce76afdedfc3cf2e3689bd1b03e9f504cbded28e7645eed305db44f61e914053e9fb4b4999d30c743b67fe2a052bff812b6165825f1502f22f991ff41a44536c67a88f99ae0f525ee710ee010834ffddaa1501dc60c7da7dac18060f46612708"
-      const blogs = await $fetch('/blogs?pagination[pageSize]=100000', { baseURL: 'https://cms.stoneboss.vip/api', headers: { Authorization: `Bearer ${authToken}` } });
-      for (const blog of blogs.data) {
-        addLocalized(`/blog/${blog.slug}`)
-      }
-      const products = await $fetch('/products?pagination[pageSize]=100000', { baseURL: 'https://cms.stoneboss.vip/api', headers: { Authorization: `Bearer ${authToken}` } });
-      for (const product of products.data) {
-        addLocalized(`/Products/${product.url}`)
-      }
-    }
-  },
+  // hooks: {
+  //   async 'prerender:routes'(ctx) {
+  //     const addLocalized = (path: string) => {
+  //       ctx.routes.add(path)
+  //       for (const code of localeCodes) {
+  //         ctx.routes.add(`/${code}${path}`)
+  //       }
+  //     }
+  //     const authToken = "8f80d6094edcd486411ddc90d4fa4f18ed87f9fe9edae7fe7cb423e3ce261b23ce76afdedfc3cf2e3689bd1b03e9f504cbded28e7645eed305db44f61e914053e9fb4b4999d30c743b67fe2a052bff812b6165825f1502f22f991ff41a44536c67a88f99ae0f525ee710ee010834ffddaa1501dc60c7da7dac18060f46612708"
+  //     const blogs = await $fetch('/blogs?pagination[pageSize]=100000', { baseURL: 'https://cms.stoneboss.vip/api', headers: { Authorization: `Bearer ${authToken}` } });
+  //     for (const blog of blogs.data) {
+  //       addLocalized(`/blog/${blog.slug}`)
+  //     }
+  //     const products = await $fetch('/products?pagination[pageSize]=100000', { baseURL: 'https://cms.stoneboss.vip/api', headers: { Authorization: `Bearer ${authToken}` } });
+  //     for (const product of products.data) {
+  //       addLocalized(`/Products/${product.url}`)
+  //     }
+  //   }
+  // },
 
   nitro: {
     preset: 'cloudflare_pages',
