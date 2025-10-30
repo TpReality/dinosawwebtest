@@ -134,6 +134,9 @@ export default defineNuxtConfig({
   ],
 
    
+  routeRules: {
+    '/sitemap.xml': { prerender: true }
+  },
   
   // routeRules: {
   //   '/blog/**': { headers: { 'cache-control': 'public, max-age=1, s-maxage=60, stale-while-revalidate=59' } },
