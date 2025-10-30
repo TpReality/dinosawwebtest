@@ -1,5 +1,5 @@
 <template>
-  <div id="gt_float_wrapper" style="display:none; position:fixed;bottom:20px;left:20px;z-index:999999;" v-if="contentDetail">
+  <div id="gt_float_wrapper" style="position:fixed;bottom:20px;left:20px;z-index:999999;" v-if="contentDetail">
     <div class="gt_float_switcher notranslate">
 
       <div class="gt_options" :class="isOptionsVisible ? 'gt-open' : ''" :style="{ display: isOptionsVisible ? 'block' : 'none' }">
