@@ -1,2 +1,0 @@
-const t=".default-layout[data-v-1e6508bb],.main[data-v-1e6508bb]{background-color:#fff;min-height:100vh;width:100%}.loading-container[data-v-1e6508bb]{align-items:center;display:flex;justify-content:center;min-height:60vh;width:100%}.loading-spinner[data-v-1e6508bb]{animation:spin-1e6508bb 1s linear infinite;border:4px solid #f3f3f3;border-radius:50%;border-top-color:#3498db;height:40px;width:40px}@keyframes spin-1e6508bb{0%{transform:rotate(0)}to{transform:rotate(1turn)}}";export{t as _};
-//# sourceMappingURL=_slug_-styles-1.mjs-H8EdZCon.mjs.map
