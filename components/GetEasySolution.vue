@@ -171,13 +171,51 @@
                                             </div>
                                         </div>
 
-                                        <!-- Contact Input -->
+                                        <!-- Phone Input -->
                                         <div class="form-group">
-                                            <h4 class="form-title">{{ contentDetail.what_is_your_Whatsapp_or_email_title }}
-                                            </h4>
+                                            <h4 class="form-title">手机号 <span class="required">*</span></h4>
+                                            <div class="phone-input-container">
+                                                <div class="country-code-wrapper">
+                                                    <select class="country-code-select" v-model="form.countryCode">
+                                                        <option v-for="country in countryCodes" :key="country.code" :value="country.code">
+                                                            <template v-if="supportsEmoji">{{ country.flag }} {{ country.code }}</template>
+                                                            <template v-else>[{{ country.name.substring(0,2).toUpperCase() }}] {{ country.code }}</template>
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                                <div class="phone-number-wrapper">
+                                                    <input type="tel" placeholder="请输入手机号" class="form-input phone-input" v-model="form.phone" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Email Input -->
+                                        <div class="form-group">
+                                            <h4 class="form-title">邮箱 <span class="required">*</span></h4>
                                             <div class="input-container">
-                                                <input type="text" :placeholder="contentDetail.what_is_your_Whatsapp_or_email_placeholder_text"
-                                                    class="form-input" v-model="form.contactInfo" />
+                                                <input type="email" placeholder="请输入邮箱地址" class="form-input" v-model="form.email" />
+                                            </div>
+                                        </div>
+
+                                        <!-- Country Selection -->
+                                        <div class="form-group">
+                                            <h4 class="form-title">国家/地区</h4>
+                                            <div class="select-container">
+                                                <div class="select-wrapper">
+                                                    <select class="select-display" v-model="form.country">
+                                                        <option value="" disabled selected>请选择您的国家/地区</option>
+                                                        <option v-for="country in countries" :key="country.code" :value="country.name">
+                                                            <template v-if="supportsEmoji">{{ country.flag }} {{ country.chinese }}</template>
+                                                            <template v-else>[{{ country.code }}] {{ country.chinese }}</template>
+                                                        </option>
+                                                    </select>
+                                                    <div class="select-icon">
+                                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                            <path d="M4 6L8 10L12 6" stroke="#999999" stroke-width="1.5"
+                                                                stroke-linecap="round" stroke-linejoin="round" />
+                                                        </svg>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 
@@ -226,13 +264,51 @@
                                             </div>
                                         </div>
 
-                                        <!-- Contact Input -->
+                                        <!-- Phone Input -->
                                         <div class="form-group">
-                                            <h4 class="form-title">{{ contentDetail.what_is_your_Whatsapp_or_email_title }}
-                                            </h4>
+                                            <h4 class="form-title">手机号 <span class="required">*</span></h4>
+                                            <div class="phone-input-container">
+                                                <div class="country-code-wrapper">
+                                                    <select class="country-code-select" v-model="form.countryCode">
+                                                        <option v-for="country in countryCodes" :key="country.code" :value="country.code">
+                                                            <template v-if="supportsEmoji">{{ country.flag }} {{ country.code }}</template>
+                                                            <template v-else>[{{ country.name.substring(0,2).toUpperCase() }}] {{ country.code }}</template>
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                                <div class="phone-number-wrapper">
+                                                    <input type="tel" placeholder="请输入手机号" class="form-input phone-input" v-model="form.phone" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Email Input -->
+                                        <div class="form-group">
+                                            <h4 class="form-title">邮箱 <span class="required">*</span></h4>
                                             <div class="input-container">
-                                                <input type="text" :placeholder="contentDetail.what_is_your_Whatsapp_or_email_placeholder_text"
-                                                    class="form-input" v-model="form.contactInfo" />
+                                                <input type="email" placeholder="请输入邮箱地址" class="form-input" v-model="form.email" />
+                                            </div>
+                                        </div>
+
+                                        <!-- Country Selection -->
+                                        <div class="form-group">
+                                            <h4 class="form-title">国家/地区</h4>
+                                            <div class="select-container">
+                                                <div class="select-wrapper">
+                                                    <select class="select-display" v-model="form.country">
+                                                        <option value="" disabled selected>请选择您的国家/地区</option>
+                                                        <option v-for="country in countries" :key="country.code" :value="country.name">
+                                                            <template v-if="supportsEmoji">{{ country.flag }} {{ country.chinese }}</template>
+                                                            <template v-else>[{{ country.code }}] {{ country.chinese }}</template>
+                                                        </option>
+                                                    </select>
+                                                    <div class="select-icon">
+                                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                            <path d="M4 6L8 10L12 6" stroke="#999999" stroke-width="1.5"
+                                                                stroke-linecap="round" stroke-linejoin="round" />
+                                                        </svg>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 
@@ -343,10 +419,324 @@ const form = ref({
   types: "",
   materials: "",
   name: "",
-  contactInfo: "",
+  countryCode: "+86",
+  phone: "",
+  email: "",
+  country: "",
   yourRequirements: ""
 })
 const isSubmitting = ref(false)
+
+// 完整的国家代码列表
+const countryCodes = ref([
+  { code: "+86", flag: "🇨🇳", name: "China", short: "CN" },
+  { code: "+1", flag: "🇺🇸", name: "United States", short: "US" },
+  { code: "+44", flag: "🇬🇧", name: "United Kingdom", short: "GB" },
+  { code: "+49", flag: "🇩🇪", name: "Germany" },
+  { code: "+33", flag: "🇫🇷", name: "France" },
+  { code: "+39", flag: "🇮🇹", name: "Italy" },
+  { code: "+34", flag: "🇪🇸", name: "Spain" },
+  { code: "+81", flag: "🇯🇵", name: "Japan" },
+  { code: "+82", flag: "🇰🇷", name: "South Korea" },
+  { code: "+91", flag: "🇮🇳", name: "India" },
+  { code: "+61", flag: "🇦🇺", name: "Australia" },
+  { code: "+55", flag: "🇧🇷", name: "Brazil" },
+  { code: "+7", flag: "🇷🇺", name: "Russia" },
+  { code: "+90", flag: "🇹🇷", name: "Turkey" },
+  { code: "+971", flag: "🇦🇪", name: "United Arab Emirates" },
+  { code: "+966", flag: "🇸🇦", name: "Saudi Arabia" },
+  { code: "+60", flag: "🇲🇾", name: "Malaysia" },
+  { code: "+65", flag: "🇸🇬", name: "Singapore" },
+  { code: "+66", flag: "🇹🇭", name: "Thailand" },
+  { code: "+84", flag: "🇻🇳", name: "Vietnam" },
+  { code: "+1", flag: "🇨🇦", name: "Canada" },
+  { code: "+52", flag: "🇲🇽", name: "Mexico" },
+  { code: "+54", flag: "🇦🇷", name: "Argentina" },
+  { code: "+56", flag: "🇨🇱", name: "Chile" },
+  { code: "+27", flag: "🇿🇦", name: "South Africa" },
+  { code: "+20", flag: "🇪🇬", name: "Egypt" },
+  { code: "+234", flag: "🇳🇬", name: "Nigeria" },
+  { code: "+254", flag: "🇰🇪", name: "Kenya" },
+  { code: "+93", flag: "🇦🇫", name: "Afghanistan" },
+  { code: "+355", flag: "🇦🇱", name: "Albania" },
+  { code: "+213", flag: "🇩🇿", name: "Algeria" },
+  { code: "+376", flag: "🇦🇩", name: "Andorra" },
+  { code: "+244", flag: "🇦🇴", name: "Angola" },
+  { code: "+374", flag: "🇦🇲", name: "Armenia" },
+  { code: "+43", flag: "🇦🇹", name: "Austria" },
+  { code: "+994", flag: "🇦🇿", name: "Azerbaijan" },
+  { code: "+973", flag: "🇧🇭", name: "Bahrain" },
+  { code: "+880", flag: "🇧🇩", name: "Bangladesh" },
+  { code: "+375", flag: "🇧🇾", name: "Belarus" },
+  { code: "+32", flag: "🇧🇪", name: "Belgium" },
+  { code: "+501", flag: "🇧🇿", name: "Belize" },
+  { code: "+229", flag: "🇧🇯", name: "Benin" },
+  { code: "+975", flag: "🇧🇹", name: "Bhutan" },
+  { code: "+591", flag: "🇧🇴", name: "Bolivia" },
+  { code: "+387", flag: "🇧🇦", name: "Bosnia and Herzegovina" },
+  { code: "+267", flag: "🇧🇼", name: "Botswana" },
+  { code: "+673", flag: "🇧🇳", name: "Brunei" },
+  { code: "+359", flag: "🇧🇬", name: "Bulgaria" },
+  { code: "+226", flag: "🇧🇫", name: "Burkina Faso" },
+  { code: "+257", flag: "🇧🇮", name: "Burundi" },
+  { code: "+855", flag: "🇰🇭", name: "Cambodia" },
+  { code: "+237", flag: "🇨🇲", name: "Cameroon" },
+  { code: "+238", flag: "🇨🇻", name: "Cape Verde" },
+  { code: "+236", flag: "🇨🇫", name: "Central African Republic" },
+  { code: "+235", flag: "🇹🇩", name: "Chad" },
+  { code: "+57", flag: "🇨🇴", name: "Colombia" },
+  { code: "+269", flag: "🇰🇲", name: "Comoros" },
+  { code: "+242", flag: "🇨🇬", name: "Congo" },
+  { code: "+243", flag: "🇨🇩", name: "Congo (DRC)" },
+  { code: "+506", flag: "🇨🇷", name: "Costa Rica" },
+  { code: "+385", flag: "🇭🇷", name: "Croatia" },
+  { code: "+53", flag: "🇨🇺", name: "Cuba" },
+  { code: "+357", flag: "🇨🇾", name: "Cyprus" },
+  { code: "+420", flag: "🇨🇿", name: "Czech Republic" },
+  { code: "+45", flag: "🇩🇰", name: "Denmark" },
+  { code: "+253", flag: "🇩🇯", name: "Djibouti" },
+  { code: "+593", flag: "🇪🇨", name: "Ecuador" },
+  { code: "+503", flag: "🇸🇻", name: "El Salvador" },
+  { code: "+240", flag: "🇬🇶", name: "Equatorial Guinea" },
+  { code: "+291", flag: "🇪🇷", name: "Eritrea" },
+  { code: "+372", flag: "🇪🇪", name: "Estonia" },
+  { code: "+251", flag: "🇪🇹", name: "Ethiopia" },
+  { code: "+679", flag: "🇫🇯", name: "Fiji" },
+  { code: "+358", flag: "🇫🇮", name: "Finland" },
+  { code: "+241", flag: "🇬🇦", name: "Gabon" },
+  { code: "+220", flag: "🇬🇲", name: "Gambia" },
+  { code: "+995", flag: "🇬🇪", name: "Georgia" },
+  { code: "+233", flag: "🇬🇭", name: "Ghana" },
+  { code: "+30", flag: "🇬🇷", name: "Greece" },
+  { code: "+502", flag: "🇬🇹", name: "Guatemala" },
+  { code: "+224", flag: "🇬🇳", name: "Guinea" },
+  { code: "+245", flag: "🇬🇼", name: "Guinea-Bissau" },
+  { code: "+592", flag: "🇬🇾", name: "Guyana" },
+  { code: "+509", flag: "🇭🇹", name: "Haiti" },
+  { code: "+504", flag: "🇭🇳", name: "Honduras" },
+  { code: "+852", flag: "🇭🇰", name: "Hong Kong" },
+  { code: "+36", flag: "🇭🇺", name: "Hungary" },
+  { code: "+354", flag: "🇮🇸", name: "Iceland" },
+  { code: "+62", flag: "🇮🇩", name: "Indonesia" },
+  { code: "+98", flag: "🇮🇷", name: "Iran" },
+  { code: "+964", flag: "🇮🇶", name: "Iraq" },
+  { code: "+353", flag: "🇮🇪", name: "Ireland" },
+  { code: "+972", flag: "🇮🇱", name: "Israel" },
+  { code: "+225", flag: "🇨🇮", name: "Ivory Coast" },
+  { code: "+962", flag: "🇯🇴", name: "Jordan" },
+  { code: "+7", flag: "🇰🇿", name: "Kazakhstan" },
+  { code: "+686", flag: "🇰🇮", name: "Kiribati" },
+  { code: "+965", flag: "🇰🇼", name: "Kuwait" },
+  { code: "+996", flag: "🇰🇬", name: "Kyrgyzstan" },
+  { code: "+856", flag: "🇱🇦", name: "Laos" },
+  { code: "+371", flag: "🇱🇻", name: "Latvia" },
+  { code: "+961", flag: "🇱🇧", name: "Lebanon" },
+  { code: "+266", flag: "🇱🇸", name: "Lesotho" },
+  { code: "+231", flag: "🇱🇷", name: "Liberia" },
+  { code: "+218", flag: "🇱🇾", name: "Libya" },
+  { code: "+423", flag: "🇱🇮", name: "Liechtenstein" },
+  { code: "+370", flag: "🇱🇹", name: "Lithuania" },
+  { code: "+352", flag: "🇱🇺", name: "Luxembourg" },
+  { code: "+853", flag: "🇲🇴", name: "Macau" },
+  { code: "+389", flag: "🇲🇰", name: "Macedonia" },
+  { code: "+261", flag: "🇲🇬", name: "Madagascar" },
+  { code: "+265", flag: "🇲🇼", name: "Malawi" },
+  { code: "+960", flag: "🇲🇻", name: "Maldives" },
+  { code: "+223", flag: "🇲🇱", name: "Mali" },
+  { code: "+356", flag: "🇲🇹", name: "Malta" },
+  { code: "+692", flag: "🇲🇭", name: "Marshall Islands" },
+  { code: "+222", flag: "🇲🇷", name: "Mauritania" },
+  { code: "+230", flag: "🇲🇺", name: "Mauritius" },
+  { code: "+691", flag: "🇫🇲", name: "Micronesia" },
+  { code: "+373", flag: "🇲🇩", name: "Moldova" },
+  { code: "+377", flag: "🇲🇨", name: "Monaco" },
+  { code: "+976", flag: "🇲🇳", name: "Mongolia" },
+  { code: "+382", flag: "🇲🇪", name: "Montenegro" },
+  { code: "+212", flag: "🇲🇦", name: "Morocco" },
+  { code: "+258", flag: "🇲🇿", name: "Mozambique" },
+  { code: "+95", flag: "🇲🇲", name: "Myanmar" },
+  { code: "+264", flag: "🇳🇦", name: "Namibia" },
+  { code: "+674", flag: "🇳🇷", name: "Nauru" },
+  { code: "+977", flag: "🇳🇵", name: "Nepal" },
+  { code: "+31", flag: "🇳🇱", name: "Netherlands" },
+  { code: "+64", flag: "🇳🇿", name: "New Zealand" },
+  { code: "+505", flag: "🇳🇮", name: "Nicaragua" },
+  { code: "+227", flag: "🇳🇪", name: "Niger" },
+  { code: "+850", flag: "🇰🇵", name: "North Korea" },
+  { code: "+47", flag: "🇳🇴", name: "Norway" },
+  { code: "+968", flag: "🇴🇲", name: "Oman" },
+  { code: "+92", flag: "🇵🇰", name: "Pakistan" },
+  { code: "+680", flag: "🇵🇼", name: "Palau" },
+  { code: "+970", flag: "🇵🇸", name: "Palestine" },
+  { code: "+507", flag: "🇵🇦", name: "Panama" },
+  { code: "+675", flag: "🇵🇬", name: "Papua New Guinea" },
+  { code: "+595", flag: "🇵🇾", name: "Paraguay" },
+  { code: "+51", flag: "🇵🇪", name: "Peru" },
+  { code: "+63", flag: "🇵🇭", name: "Philippines" },
+  { code: "+48", flag: "🇵🇱", name: "Poland" },
+  { code: "+351", flag: "🇵🇹", name: "Portugal" },
+  { code: "+974", flag: "🇶🇦", name: "Qatar" },
+  { code: "+40", flag: "🇷🇴", name: "Romania" },
+  { code: "+250", flag: "🇷🇼", name: "Rwanda" },
+  { code: "+685", flag: "🇼🇸", name: "Samoa" },
+  { code: "+378", flag: "🇸🇲", name: "San Marino" },
+  { code: "+239", flag: "🇸🇹", name: "Sao Tome and Principe" },
+  { code: "+221", flag: "🇸🇳", name: "Senegal" },
+  { code: "+381", flag: "🇷🇸", name: "Serbia" },
+  { code: "+248", flag: "🇸🇨", name: "Seychelles" },
+  { code: "+232", flag: "🇸🇱", name: "Sierra Leone" },
+  { code: "+421", flag: "🇸🇰", name: "Slovakia" },
+  { code: "+386", flag: "🇸🇮", name: "Slovenia" },
+  { code: "+677", flag: "🇸🇧", name: "Solomon Islands" },
+  { code: "+252", flag: "🇸🇴", name: "Somalia" },
+  { code: "+211", flag: "🇸🇸", name: "South Sudan" },
+  { code: "+94", flag: "🇱🇰", name: "Sri Lanka" },
+  { code: "+249", flag: "🇸🇩", name: "Sudan" },
+  { code: "+597", flag: "🇸🇷", name: "Suriname" },
+  { code: "+268", flag: "🇸🇿", name: "Swaziland" },
+  { code: "+46", flag: "🇸🇪", name: "Sweden" },
+  { code: "+41", flag: "🇨🇭", name: "Switzerland" },
+  { code: "+963", flag: "🇸🇾", name: "Syria" },
+  { code: "+886", flag: "🇹🇼", name: "Taiwan" },
+  { code: "+992", flag: "🇹🇯", name: "Tajikistan" },
+  { code: "+255", flag: "🇹🇿", name: "Tanzania" },
+  { code: "+670", flag: "🇹🇱", name: "Timor-Leste" },
+  { code: "+228", flag: "🇹🇬", name: "Togo" },
+  { code: "+676", flag: "🇹🇴", name: "Tonga" },
+  { code: "+216", flag: "🇹🇳", name: "Tunisia" },
+  { code: "+993", flag: "🇹🇲", name: "Turkmenistan" },
+  { code: "+688", flag: "🇹🇻", name: "Tuvalu" },
+  { code: "+256", flag: "🇺🇬", name: "Uganda" },
+  { code: "+380", flag: "🇺🇦", name: "Ukraine" },
+  { code: "+598", flag: "🇺🇾", name: "Uruguay" },
+  { code: "+998", flag: "🇺🇿", name: "Uzbekistan" },
+  { code: "+678", flag: "🇻🇺", name: "Vanuatu" },
+  { code: "+379", flag: "🇻🇦", name: "Vatican City" },
+  { code: "+58", flag: "🇻🇪", name: "Venezuela" },
+  { code: "+967", flag: "🇾🇪", name: "Yemen" },
+  { code: "+260", flag: "🇿🇲", name: "Zambia" },
+  { code: "+263", flag: "🇿🇼", name: "Zimbabwe" }
+])
+
+// Emoji 支持检测
+const supportsEmoji = ref(true)
+
+// 检测浏览器是否支持 emoji
+const checkEmojiSupport = () => {
+  if (process.client) {
+    const canvas = document.createElement('canvas')
+    const ctx = canvas.getContext('2d')
+    ctx.fillText('🇨🇳', 0, 0)
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+    const hasPixels = imageData.data.some(pixel => pixel !== 0)
+    supportsEmoji.value = hasPixels
+    console.log('Emoji support detected:', hasPixels)
+  }
+}
+
+// 页面加载后检测
+onMounted(() => {
+  checkEmojiSupport()
+})
+
+// 完整的国家列表
+const countries = ref([
+  { code: "CN", flag: "🇨🇳", name: "China", chinese: "中国" },
+  { code: "US", flag: "🇺🇸", name: "United States", chinese: "美国" },
+  { code: "GB", flag: "🇬🇧", name: "United Kingdom", chinese: "英国" },
+  { code: "DE", flag: "🇩🇪", name: "Germany", chinese: "德国" },
+  { code: "FR", flag: "🇫🇷", name: "France", chinese: "法国" },
+  { code: "IT", flag: "🇮🇹", name: "Italy", chinese: "意大利" },
+  { code: "ES", flag: "🇪🇸", name: "Spain", chinese: "西班牙" },
+  { code: "JP", flag: "🇯🇵", name: "Japan", chinese: "日本" },
+  { code: "KR", flag: "🇰🇷", name: "South Korea", chinese: "韩国" },
+  { code: "IN", flag: "🇮🇳", name: "India", chinese: "印度" },
+  { code: "AU", flag: "🇦🇺", name: "Australia", chinese: "澳大利亚" },
+  { code: "BR", flag: "🇧🇷", name: "Brazil", chinese: "巴西" },
+  { code: "RU", flag: "🇷🇺", name: "Russia", chinese: "俄罗斯" },
+  { code: "TR", flag: "🇹🇷", name: "Turkey", chinese: "土耳其" },
+  { code: "AE", flag: "🇦🇪", name: "United Arab Emirates", chinese: "阿联酋" },
+  { code: "SA", flag: "🇸🇦", name: "Saudi Arabia", chinese: "沙特阿拉伯" },
+  { code: "MY", flag: "🇲🇾", name: "Malaysia", chinese: "马来西亚" },
+  { code: "SG", flag: "🇸🇬", name: "Singapore", chinese: "新加坡" },
+  { code: "TH", flag: "🇹🇭", name: "Thailand", chinese: "泰国" },
+  { code: "VN", flag: "🇻🇳", name: "Vietnam", chinese: "越南" },
+  { code: "CA", flag: "🇨🇦", name: "Canada", chinese: "加拿大" },
+  { code: "MX", flag: "🇲🇽", name: "Mexico", chinese: "墨西哥" },
+  { code: "AR", flag: "🇦🇷", name: "Argentina", chinese: "阿根廷" },
+  { code: "CL", flag: "🇨🇱", name: "Chile", chinese: "智利" },
+  { code: "ZA", flag: "🇿🇦", name: "South Africa", chinese: "南非" },
+  { code: "EG", flag: "🇪🇬", name: "Egypt", chinese: "埃及" },
+  { code: "NG", flag: "🇳🇬", name: "Nigeria", chinese: "尼日利亚" },
+  { code: "KE", flag: "🇰🇪", name: "Kenya", chinese: "肯尼亚" },
+  { code: "AF", flag: "🇦🇫", name: "Afghanistan", chinese: "阿富汗" },
+  { code: "AL", flag: "🇦🇱", name: "Albania", chinese: "阿尔巴尼亚" },
+  { code: "DZ", flag: "🇩🇿", name: "Algeria", chinese: "阿尔及利亚" },
+  { code: "AM", flag: "🇦🇲", name: "Armenia", chinese: "亚美尼亚" },
+  { code: "AT", flag: "🇦🇹", name: "Austria", chinese: "奥地利" },
+  { code: "AZ", flag: "🇦🇿", name: "Azerbaijan", chinese: "阿塞拜疆" },
+  { code: "BH", flag: "🇧🇭", name: "Bahrain", chinese: "巴林" },
+  { code: "BD", flag: "🇧🇩", name: "Bangladesh", chinese: "孟加拉国" },
+  { code: "BY", flag: "🇧🇾", name: "Belarus", chinese: "白俄罗斯" },
+  { code: "BE", flag: "🇧🇪", name: "Belgium", chinese: "比利时" },
+  { code: "BG", flag: "🇧🇬", name: "Bulgaria", chinese: "保加利亚" },
+  { code: "KH", flag: "🇰🇭", name: "Cambodia", chinese: "柬埔寨" },
+  { code: "CO", flag: "🇨🇴", name: "Colombia", chinese: "哥伦比亚" },
+  { code: "HR", flag: "🇭🇷", name: "Croatia", chinese: "克罗地亚" },
+  { code: "CZ", flag: "🇨🇿", name: "Czech Republic", chinese: "捷克" },
+  { code: "DK", flag: "🇩🇰", name: "Denmark", chinese: "丹麦" },
+  { code: "EC", flag: "🇪🇨", name: "Ecuador", chinese: "厄瓜多尔" },
+  { code: "EE", flag: "🇪🇪", name: "Estonia", chinese: "爱沙尼亚" },
+  { code: "FI", flag: "🇫🇮", name: "Finland", chinese: "芬兰" },
+  { code: "GE", flag: "🇬🇪", name: "Georgia", chinese: "格鲁吉亚" },
+  { code: "GH", flag: "🇬🇭", name: "Ghana", chinese: "加纳" },
+  { code: "GR", flag: "🇬🇷", name: "Greece", chinese: "希腊" },
+  { code: "HK", flag: "🇭🇰", name: "Hong Kong", chinese: "香港" },
+  { code: "HU", flag: "🇭🇺", name: "Hungary", chinese: "匈牙利" },
+  { code: "IS", flag: "🇮🇸", name: "Iceland", chinese: "冰岛" },
+  { code: "ID", flag: "🇮🇩", name: "Indonesia", chinese: "印度尼西亚" },
+  { code: "IR", flag: "🇮🇷", name: "Iran", chinese: "伊朗" },
+  { code: "IQ", flag: "🇮🇶", name: "Iraq", chinese: "伊拉克" },
+  { code: "IE", flag: "🇮🇪", name: "Ireland", chinese: "爱尔兰" },
+  { code: "IL", flag: "🇮🇱", name: "Israel", chinese: "以色列" },
+  { code: "JO", flag: "🇯🇴", name: "Jordan", chinese: "约旦" },
+  { code: "KZ", flag: "🇰🇿", name: "Kazakhstan", chinese: "哈萨克斯坦" },
+  { code: "KW", flag: "🇰🇼", name: "Kuwait", chinese: "科威特" },
+  { code: "LV", flag: "🇱🇻", name: "Latvia", chinese: "拉脱维亚" },
+  { code: "LB", flag: "🇱🇧", name: "Lebanon", chinese: "黎巴嫩" },
+  { code: "LT", flag: "🇱🇹", name: "Lithuania", chinese: "立陶宛" },
+  { code: "LU", flag: "🇱🇺", name: "Luxembourg", chinese: "卢森堡" },
+  { code: "MO", flag: "🇲🇴", name: "Macau", chinese: "澳门" },
+  { code: "MA", flag: "🇲🇦", name: "Morocco", chinese: "摩洛哥" },
+  { code: "NL", flag: "🇳🇱", name: "Netherlands", chinese: "荷兰" },
+  { code: "NZ", flag: "🇳🇿", name: "New Zealand", chinese: "新西兰" },
+  { code: "KP", flag: "🇰🇵", name: "North Korea", chinese: "朝鲜" },
+  { code: "NO", flag: "🇳🇴", name: "Norway", chinese: "挪威" },
+  { code: "OM", flag: "🇴🇲", name: "Oman", chinese: "阿曼" },
+  { code: "PK", flag: "🇵🇰", name: "Pakistan", chinese: "巴基斯坦" },
+  { code: "PE", flag: "🇵🇪", name: "Peru", chinese: "秘鲁" },
+  { code: "PH", flag: "🇵🇭", name: "Philippines", chinese: "菲律宾" },
+  { code: "PL", flag: "🇵🇱", name: "Poland", chinese: "波兰" },
+  { code: "PT", flag: "🇵🇹", name: "Portugal", chinese: "葡萄牙" },
+  { code: "QA", flag: "🇶🇦", name: "Qatar", chinese: "卡塔尔" },
+  { code: "RO", flag: "🇷🇴", name: "Romania", chinese: "罗马尼亚" },
+  { code: "SK", flag: "🇸🇰", name: "Slovakia", chinese: "斯洛伐克" },
+  { code: "SI", flag: "🇸🇮", name: "Slovenia", chinese: "斯洛文尼亚" },
+  { code: "LK", flag: "🇱🇰", name: "Sri Lanka", chinese: "斯里兰卡" },
+  { code: "SE", flag: "🇸🇪", name: "Sweden", chinese: "瑞典" },
+  { code: "CH", flag: "🇨🇭", name: "Switzerland", chinese: "瑞士" },
+  { code: "TW", flag: "🇹🇼", name: "Taiwan", chinese: "台湾" },
+  { code: "UA", flag: "🇺🇦", name: "Ukraine", chinese: "乌克兰" },
+  { code: "UY", flag: "🇺🇾", name: "Uruguay", chinese: "乌拉圭" },
+  { code: "VE", flag: "🇻🇪", name: "Venezuela", chinese: "委内瑞拉" },
+  { code: "YE", flag: "🇾🇪", name: "Yemen", chinese: "也门" },
+  { code: "OTHER", flag: "🌍", name: "Other", chinese: "其他" }
+])
+
+// 调试：输出前几个国家以验证 emoji
+if (process.client) {
+  console.log('Countries sample:', countries.value.slice(0, 5))
+}
 
 // 获取产品数据
 const { data: topProductDetailRes, pending: topPending, error: topError } = await useApi('/product-categories?filters[parent_category_value][$eq]=Products&fields=sort,parent_category_value,category_name,menu_select_down_panel_is_show,column_attr_name,category_value')
@@ -423,7 +813,7 @@ const submitForm = async () => {
 }
 
 const validateForm = () => {
-  const { types, materials, name, contactInfo } = form.value;
+  const { types, materials, name, phone, email } = form.value;
   
   // 对于产品询价表单（类型1和3），需要验证 types 和 materials
   if (props.getEasySolutionType === 1 || props.getEasySolutionType === 3) {
@@ -443,26 +833,48 @@ const validateForm = () => {
     return false;
   }
   
-  if (!contactInfo.trim()) {
-    showMessage('warning', 'Please enter your contact information.');
+  // 验证手机号和邮箱，至少填写一个
+  const hasPhone = phone && phone.trim() !== '';
+  const hasEmail = email && email.trim() !== '';
+  
+  if (!hasPhone && !hasEmail) {
+    showMessage('warning', '请至少填写手机号或邮箱其中一项');
     return false;
   }
   
-  // 验证邮箱或电话格式
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
-  const cleanContact = contactInfo.replace(/[\s\-]/g, '');
+  // 如果填写了手机号，验证格式
+  if (hasPhone) {
+    const phoneRegex = /^[1-9]\d{6,14}$/; // 简化的手机号验证
+    if (!phoneRegex.test(phone.replace(/[\s\-]/g, ''))) {
+      showMessage('warning', '请输入有效的手机号');
+      return false;
+    }
+  }
   
-  if (!emailRegex.test(contactInfo) && !phoneRegex.test(cleanContact)) {
-    showMessage('warning', 'Please enter a valid email address or phone number.');
-    return false;
+  // 如果填写了邮箱，验证格式
+  if (hasEmail) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      showMessage('warning', '请输入有效的邮箱地址');
+      return false;
+    }
   }
   
   return true;
 }
 
 const buildEmailContent = () => {
-  const { types, materials, name, contactInfo, yourRequirements } = form.value;
+  const { types, materials, name, countryCode, phone, email, country, yourRequirements } = form.value;
+  
+  // 构建联系方式信息
+  const contactInfo = [];
+  if (phone && phone.trim()) {
+    contactInfo.push(`Phone: ${countryCode} ${phone}`);
+  }
+  if (email && email.trim()) {
+    contactInfo.push(`Email: ${email}`);
+  }
+  const contactString = contactInfo.join('\n');
   
   let subject = '';
   let content = '';
@@ -473,7 +885,8 @@ const buildEmailContent = () => {
 New Support Request:
 
 Name: ${name}
-Contact: ${contactInfo}
+${contactString}
+Country: ${country || 'Not specified'}
 Support Needed: ${yourRequirements || 'Not specified'}
 
 Submitted at: ${new Date().toLocaleString()}
@@ -484,7 +897,8 @@ Submitted at: ${new Date().toLocaleString()}
 New Customer Inquiry:
 
 Name: ${name}
-Contact: ${contactInfo}
+${contactString}
+Country: ${country || 'Not specified'}
 CNC Type: ${types || 'Not specified'}
 Materials: ${materials || 'Not specified'}
 Requirements: ${yourRequirements || 'Not specified'}
@@ -506,13 +920,16 @@ const sendEmail = async ({ subject, content }) => {
       to_email: EMAIL_CONFIG.RECIPIENT_EMAIL,  // jun524404@gmail.com
       to_name: EMAIL_CONFIG.RECIPIENT_NAME,
       from_name: form.value.name,
-      from_email: form.value.contactInfo,
+      from_email: form.value.email || 'noreply@dinosawmachine.com',
       subject: subject,
       message: content,
       cnc_type: form.value.types || '',
       raw_materials: form.value.materials || '',
       requirements: form.value.yourRequirements || '',
-      contact_info: form.value.contactInfo,
+      contact_info: `${form.value.countryCode || ''} ${form.value.phone || ''} | ${form.value.email || ''}`,
+      phone: `${form.value.countryCode || ''} ${form.value.phone || ''}`,
+      email: form.value.email || '',
+      country: form.value.country || '',
       submit_time: new Date().toLocaleString(),
       // 额外的表单类型标识
       form_type: props.getEasySolutionType === 2 ? 'Support Request' : 'Product Inquiry',
@@ -520,8 +937,9 @@ const sendEmail = async ({ subject, content }) => {
       recipient_email: 'jun524404@gmail.com'
     };
 
-    // console.log('📧 发送邮件参数:', templateParams);
+    console.log('📧 发送邮件参数:', templateParams);
 
+    return
     // 使用配置文件发送邮件
     const response = await sendEmailViaEmailJS(templateParams);
     
@@ -545,7 +963,10 @@ const resetForm = () => {
     types: "",
     materials: "",
     name: "",
-    contactInfo: "",
+    countryCode: "+86",
+    phone: "",
+    email: "",
+    country: "",
     yourRequirements: ""
   };
 }
@@ -687,13 +1108,19 @@ const showMessage = (type, message) => {
                             outline:none;
                             box-sizing: border-box;
                             color:#666;
+                            font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", Inter, sans-serif;
 
                             .select-text {
-                                font-family: Inter;
+                                font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", Inter, sans-serif;
                                 font-weight: 300;
                                 font-size: 14px;
                                 line-height: 1.2;
                                 color: #666666;
+                            }
+
+                            option {
+                                font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", Inter, sans-serif;
+                                padding: 4px 8px;
                             }
                         }
 
@@ -736,6 +1163,74 @@ const showMessage = (type, message) => {
                             border-color: #439DF1;
                         }
                     }
+                }
+
+                .phone-input-container {
+                    height: 50px;
+                    display: flex;
+                    gap: 8px;
+
+                    .country-code-wrapper {
+                        width: 120px;
+                        flex-shrink: 0;
+
+                        .country-code-select {
+                            width: 100%;
+                            height: 100%;
+                            background: white;
+                            border: 1px solid rgba(136, 136, 136, 0.1);
+                            border-radius: 10px;
+                            padding: 0 8px;
+                            font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", Inter, sans-serif;
+                            font-weight: 300;
+                            font-size: 14px;
+                            color: #666666;
+                            appearance: none;
+                            cursor: pointer;
+
+                            &:focus {
+                                outline: none;
+                                border-color: #439DF1;
+                            }
+
+                            option {
+                                font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", Inter, sans-serif;
+                                padding: 4px 8px;
+                            }
+                        }
+                    }
+
+                    .phone-number-wrapper {
+                        flex: 1;
+
+                        .phone-input {
+                            width: 100%;
+                            height: 100%;
+                            background: white;
+                            border: 1px solid rgba(136, 136, 136, 0.1);
+                            border-radius: 10px;
+                            padding: 16.5px 12px;
+                            font-family: Inter;
+                            font-weight: 300;
+                            font-size: 14px;
+                            line-height: 1.21;
+                            color: #666666;
+
+                            &::placeholder {
+                                color: #666666;
+                            }
+
+                            &:focus {
+                                outline: none;
+                                border-color: #439DF1;
+                            }
+                        }
+                    }
+                }
+
+                .required {
+                    color: #e53e3e;
+                    font-weight: 500;
                 }
 
                 .textarea-container {
@@ -1050,8 +1545,15 @@ const showMessage = (type, message) => {
                     }
 
                     .select-container,
-                    .input-container {
+                    .input-container,
+                    .phone-input-container {
                         height: 44px;
+                    }
+
+                    .phone-input-container {
+                        .country-code-wrapper {
+                            width: 100px;
+                        }
                     }
 
                     .textarea-container {

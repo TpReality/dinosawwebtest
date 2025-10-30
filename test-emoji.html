@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emoji 测试</title>
+    <style>
+        body {
+            font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", Arial, sans-serif;
+            padding: 20px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        select {
+            font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", Arial, sans-serif;
+            font-size: 14px;
+            padding: 8px;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <h1>国旗 Emoji 兼容性测试</h1>
+    
+    <div class="test-section">
+        <h3>直接显示测试：</h3>
+        <p>🇨🇳 中国 | 🇺🇸 美国 | 🇬🇧 英国 | 🇩🇪 德国 | 🇫🇷 法国</p>
+        <p>🇯🇵 日本 | 🇰🇷 韩国 | 🇮🇳 印度 | 🇦🇺 澳大利亚 | 🇧🇷 巴西</p>
+    </div>
+
+    <div class="test-section">
+        <h3>下拉选择器测试：</h3>
+        <select>
+            <option>🇨🇳 +86 - China</option>
+            <option>🇺🇸 +1 - United States</option>
+            <option>🇬🇧 +44 - United Kingdom</option>
+            <option>🇩🇪 +49 - Germany</option>
+            <option>🇫🇷 +33 - France</option>
+            <option>🇯🇵 +81 - Japan</option>
+            <option>🇰🇷 +82 - South Korea</option>
+        </select>
+    </div>
+
+    <div class="test-section">
+        <h3>备用方案（无 emoji）：</h3>
+        <select>
+            <option>CN +86 - China</option>
+            <option>US +1 - United States</option>
+            <option>GB +44 - United Kingdom</option>
+            <option>DE +49 - Germany</option>
+            <option>FR +33 - France</option>
+            <option>JP +81 - Japan</option>
+            <option>KR +82 - South Korea</option>
+        </select>
+    </div>
+
+    <script>
+        console.log('测试页面加载完成');
+        console.log('用户代理:', navigator.userAgent);
+        console.log('平台:', navigator.platform);
+    </script>
+</body>
+</html>
