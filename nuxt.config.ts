@@ -65,12 +65,14 @@ export default defineNuxtConfig({
     ],
     routeRules: {
        '/blog/**': {
+        isr: true, swr: 600,
       headers: {
         'Cache-Control': 'public, s-maxage=1, stale-while-revalidate=31536000',
       }
     },
 
     '/Products/**': {
+      isr: true, swr: 600,
       headers: {
         'Cache-Control': 'public, s-maxage=1, stale-while-revalidate=31536000',
       }
