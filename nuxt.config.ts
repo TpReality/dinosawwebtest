@@ -134,24 +134,24 @@ export default defineNuxtConfig({
   ],
 
    
-  routeRules: {
-    '/sitemap.xml': { prerender: true }
-  },
-  
   // routeRules: {
-  //   '/blog/**': { headers: { 'cache-control': 'public, max-age=1, s-maxage=60, stale-while-revalidate=59' } },
-  //   '/Products/**': { headers: { 'cache-control': 'public, max-age=1, s-maxage=60, stale-while-revalidate=59' } },
-  //   '/': { prerender: true }, '/Products': { prerender: true }, '/projects': { prerender: true }, '/support': { prerender: true },
-  //   '/blog': { prerender: true }, '/About-us': { prerender: true }, '/video': { prerender: true }, '/contact': { prerender: true },
-  //   '/stoneidentification': { prerender: true }, '/ai': { prerender: true },
-  //   '/zh/**': { prerender: true }, '/tr/**': { prerender: true }, '/pt/**': { prerender: true }, '/es/**': { prerender: true },
-  //   '/ru/**': { prerender: true }, '/de/**': { prerender: true }, '/ar/**': { prerender: true }, '/vi/**': { prerender: true },
-  //   '/fr/**': { prerender: true }, '/pl/**': { prerender: true },
-  //   '/api/**': { proxy: 'https://cms.stoneboss.vip/api/**', headers: { 'cache-control': 's-maxage=60' } },
-  //   '/sitemap.xml': { prerender: true }, 
-  //   '/zh/sitemap.xml': { prerender: true }, 
-  //   '/ru/sitemap.xml': { prerender: true },
+  //   '/sitemap.xml': { prerender: true }
   // },
+  
+  routeRules: {
+    '/blog/**': { headers: { 'cache-control': 'public, max-age=1, s-maxage=60, stale-while-revalidate=59' } },
+    '/Products/**': { headers: { 'cache-control': 'public, max-age=1, s-maxage=60, stale-while-revalidate=59' } },
+    '/': { prerender: true }, '/Products': { prerender: true }, '/projects': { prerender: true }, '/support': { prerender: true },
+    '/blog': { prerender: true }, '/About-us': { prerender: true }, '/video': { prerender: true }, '/contact': { prerender: true },
+    '/stoneidentification': { prerender: true }, '/ai': { prerender: true },
+    '/zh/**': { prerender: true }, '/tr/**': { prerender: true }, '/pt/**': { prerender: true }, '/es/**': { prerender: true },
+    '/ru/**': { prerender: true }, '/de/**': { prerender: true }, '/ar/**': { prerender: true }, '/vi/**': { prerender: true },
+    '/fr/**': { prerender: true }, '/pl/**': { prerender: true },
+    '/api/**': { proxy: 'https://cms.stoneboss.vip/api/**', headers: { 'cache-control': 's-maxage=60' } },
+    '/sitemap.xml': { prerender: true }, 
+    '/zh/sitemap.xml': { prerender: true }, 
+    // '/ru/sitemap.xml': { prerender: true },
+  },
 
   i18n: {
     strategy: 'prefix_except_default',
