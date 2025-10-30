@@ -281,7 +281,7 @@
 
         <div class="blog-section">
         <!-- Profiling Machine 部分 -->
-        <div class="wire-saw-machine-section">
+        <div class="wire-saw-machine-section" v-if="prductDetail.the_most_popular_related_process_cases_blogs && productDetail.the_most_popular_related_process_cases_blogs.length > 0">
             <div class="wire-saw-container">
                 <div class="wire-saw-frame">
                     <div class="content-container">
@@ -587,6 +587,7 @@
             </div>
         </div>
 
+        <Wxpic></Wxpic>
         <Lang :contentDetail="contentDetail" />
         <ContactType :contentDetail="contentDetail" />
         <WhatsApp :contentDetail="contentDetail" />
@@ -684,9 +685,12 @@ watch(productDetailRes, (newPosts) => {
     if (newPosts) {
         let data = newPosts.data[0].product_main_page
 
-        data.the_most_popular_related_process_cases_blogs = formatArrayDatesLong(
-            data.the_most_popular_related_process_cases_blogs
-        )
+        if(data.the_most_popular_related_process_cases_blogs){
+            data.the_most_popular_related_process_cases_blogs = formatArrayDatesLong(
+                data.the_most_popular_related_process_cases_blogs
+            )
+        }
+        
         data.the_practical_videos_on_blogs = formatArrayDatesLong(
             data.the_practical_videos_on_blogs
         )
@@ -707,6 +711,14 @@ watch(productDetailRes, (newPosts) => {
         })
     }
 }, { immediate: true })
+
+if(error.value){
+    throw createError({
+    statusCode: 404,
+    statusMessage: 'Page Not Found or Required Data Missing',
+    fatal: true // 致命错误，会跳转到错误页
+  })
+}
 
 watch(topProductDetailRes, (newPosts) => {
     if (newPosts) {

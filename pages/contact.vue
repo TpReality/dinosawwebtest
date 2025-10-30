@@ -85,6 +85,8 @@
                 </div>
             </div>
         </div>
+
+        <Wxpic></Wxpic>
         <Lang :contentDetail="contentDetail" />
         <ContactType :contentDetail="contentDetail" />
         <WhatsApp :contentDetail="contentDetail" />

@@ -26,6 +26,7 @@
         <div v-else class="loading-container">
             <div class="loading-spinner"></div>
         </div>
+        <Wxpic></Wxpic>
         <Lang :contentDetail="contentDetail" />
         <ContactType :contentDetail="contentDetail" />
         <WhatsApp :contentDetail="contentDetail" />

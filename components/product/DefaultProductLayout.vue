@@ -3699,6 +3699,7 @@ onUnmounted(() => {
         }
     }
     .benefits-features{
+        width:100%;
         text-align:center;
     }
 }

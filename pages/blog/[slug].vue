@@ -16,6 +16,7 @@
       @headdata-loaded="handleHead"
     />
     <Lang :contentDetail="contentDetail" />
+    <Wxpic></Wxpic>
     <ContactType :contentDetail="contentDetail" />
         <WhatsApp :contentDetail="contentDetail" />
         <DinosawFooter :menuItems="menuItems" :contentDetail="contentDetail" />

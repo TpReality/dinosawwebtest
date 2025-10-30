@@ -951,6 +951,8 @@ watch(productDetailRes, (newPosts) => {
                     )
                 }
 
+console.log('productDetail',productDetail.value.cnc_mono_wire_saw_machine_products)
+
                 dynamicContent.value = [
                     { 
                         id: 1, 
