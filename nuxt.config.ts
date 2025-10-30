@@ -112,9 +112,9 @@ export default defineNuxtConfig({
     '/ru/**': { prerender: true }, '/de/**': { prerender: true }, '/ar/**': { prerender: true }, '/vi/**': { prerender: true },
     '/fr/**': { prerender: true }, '/pl/**': { prerender: true },
     '/api/**': { proxy: 'https://cms.stoneboss.vip/api/**', headers: { 'cache-control': 's-maxage=60' } },
-    '/sitemap.xml': { prerender: true }, 
-    '/zh/sitemap.xml': { prerender: true }, 
-    '/ru/sitemap.xml': { prerender: true },
+    '/sitemap.xml': { headers: { 'content-type': 'application/xml; charset=UTF-8' } }, 
+    '/zh/sitemap.xml': { headers: { 'content-type': 'application/xml; charset=UTF-8' } }, 
+    '/ru/sitemap.xml': { headers: { 'content-type': 'application/xml; charset=UTF-8' } },
   },
 
   i18n: {
