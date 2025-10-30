@@ -1,6 +1,6 @@
 <template>
     <div class="main">
-        <DinosawHeader :menuItems="menuItems" :contentDetail="contentDetail" />
+        <DinosawHeader :menuItems="menuItems" :contentDetail="contentDetail" @showWx="showWx" />
         <div>
             <div class="index-banner">111
                 <div class="banner-text">
@@ -1134,11 +1134,11 @@
             </section>
         </div>
 
-        <Wxpic></Wxpic>
+        <Wxpic ref="wxpicRef"></Wxpic>
         <Lang :contentDetail="contentDetail" />
-        <ContactType :contentDetail="contentDetail" />
-        <WhatsApp :contentDetail="contentDetail" />
-        <DinosawFooter :menuItems="menuItems" :contentDetail="contentDetail" />
+        <ContactType :contentDetail="contentDetail" @showWx="showWx" />
+        <WhatsApp :contentDetail="contentDetail" @showWx="showWx" />
+        <DinosawFooter :menuItems="menuItems" :contentDetail="contentDetail" @showWx="showWx" />
     </div>
 </template>
 
@@ -1146,14 +1146,19 @@
 import { ref, onMounted, computed, watch } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Autoplay, FreeMode, Navigation, Pagination } from 'swiper'
-import qs from 'qs'
 import 'swiper/css'
 import 'swiper/css/free-mode' // ✅ 引入 free-mode 的样式
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import { useLocalePath } from '#i18n'
+import Wxpic from '~/components/Wxpic.vue'
 const localePath = useLocalePath()
 
+const wxpicRef = ref(null)
+
+const showWx = ()=>{
+    wxpicRef.value.showPanel()
+}
 // 使用全局 contentDetail
 const { contentDetail, isLoaded, initializeContentDetail } = useContentDetail();
 

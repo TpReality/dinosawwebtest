@@ -1,6 +1,6 @@
 <template>
     <div class="main">
-        <DinosawHeader :menuItems="menuItems" :contentDetail="contentDetail" />
+        <DinosawHeader :menuItems="menuItems" :contentDetail="contentDetail" @showWx="showWx" />
         <!-- 面包屑导航 - 对应Figma节点 19:13863 -->
         <div class="breadcrumb-container">
             <div class="breadcrumb-wrapper">
@@ -86,18 +86,24 @@
             </div>
         </div>
 
-        <Wxpic></Wxpic>
+        <Wxpic ref="wxpicRef"></Wxpic>
         <Lang :contentDetail="contentDetail" />
-        <ContactType :contentDetail="contentDetail" />
-        <WhatsApp :contentDetail="contentDetail" />
-        <DinosawFooter :menuItems="menuItems" :contentDetail="contentDetail" />
+        <ContactType :contentDetail="contentDetail" @showWx="showWx" />
+        <WhatsApp :contentDetail="contentDetail" @showWx="showWx" />
+        <DinosawFooter :menuItems="menuItems" :contentDetail="contentDetail" @showWx="showWx" />
     </div>
 </template>
 
 <script setup>
+import Wxpic from '~/components/Wxpic.vue'
 import { ref, onMounted, computed } from 'vue'
 import { useLocalePath } from '#i18n'
 const localePath = useLocalePath()
+const wxpicRef = ref(null)
+
+const showWx = ()=>{
+    wxpicRef.value.showPanel()
+}
 // 使用菜单数据composable
 const { menuItems, initializeMenuData } = useMenuData()
 

@@ -1,6 +1,6 @@
 <template>
     <div class="main">
-        <DinosawHeader :menuItems="menuItems" :contentDetail="contentDetail"/>
+        <DinosawHeader :menuItems="menuItems" :contentDetail="contentDetail" @showWx="showWx"/>
         <div class="projects-banner">
             <div class="banner-background">
                 <div class="banner-image">
@@ -158,20 +158,26 @@
                 </div>
             </div>
         </div>
-        <Wxpic></Wxpic>
+        <Wxpic ref="wxpicRef"></Wxpic>
         <Lang :contentDetail="contentDetail" />
-        <ContactType :contentDetail="contentDetail" />
-        <WhatsApp :contentDetail="contentDetail" />
-        <DinosawFooter :menuItems="menuItems" :contentDetail="contentDetail" />
+        <ContactType :contentDetail="contentDetail" @showWx="showWx" />
+        <WhatsApp :contentDetail="contentDetail" @showWx="showWx" />
+        <DinosawFooter :menuItems="menuItems" :contentDetail="contentDetail" @showWx="showWx" />
     </div>
 </template>
 
 <script setup>
+import Wxpic from '~/components/Wxpic.vue'
 import { ref, onMounted, computed } from 'vue'
 // 导入日期格式化工具函数
 import {formatArrayDatesShort } from '~/utils/dateFormatter'
 import { useLocalePath } from '#i18n'
 const localePath = useLocalePath()
+const wxpicRef = ref(null)
+
+const showWx = ()=>{
+    wxpicRef.value.showPanel()
+}
 // 使用菜单数据composable
 const { menuItems, initializeMenuData } = useMenuData()
 const curMenuItems = computed(() => menuItems.value.filter(item => item.title === 'Projects'))

@@ -123,7 +123,13 @@
                                     </NuxtLink>
                                 </button>
                                 <button class="btn-whatsapp">
-                                    <div class="btn-content" @click="goWhatsApp(productDetail.h1_page_inner_title)">
+                                    <div class="btn-content" v-if="locale == 'zh'" @click="showWx()">
+                                        <div class="whatsapp-icon">
+                                            <NuxtImg sizes="sm:100vw" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/Gvfk53Mm3Aro3nRYf1sD677a4.png" />
+                                        </div>
+                                        <span>{{ contentDetail.whats_app_title }}</span>
+                                    </div>
+                                    <div class="btn-content" v-else @click="goWhatsApp(productDetail.h1_page_inner_title)">
                                         <div class="whatsapp-icon">
                                             <NuxtImg sizes="sm:100vw" src="https://honghaieim.obs.cn-east-3.myhuaweicloud.com/strapicms/images/Gvfk53Mm3Aro3nRYf1sD677a4.png" />
                                         </div>
@@ -273,7 +279,11 @@
 
                     <!-- Consult Expert Button -->
                     <div class="expert-consultation">
-                        <button class="expert-btn">
+                         
+                         <button class="expert-btn" v-if="locale == 'zh'" @click="showWx()">
+                            <span>{{contentDetail.product_detail_consult_dinosaw_material_expert_btn_text}}</span>
+                        </button>
+                        <button v-else class="expert-btn">
                             <NuxtLink :to="'https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information'+fullUrlString" target="_blank">
                                 <span>{{contentDetail.product_detail_consult_dinosaw_material_expert_btn_text}}</span>
                             </NuxtLink>
@@ -302,12 +312,18 @@
                                             <span class="title-main">{{productDetail.application_scenario_title_1}}</span>
                                         </h3>
                                         <div class="case-description" v-html="productDetail.application_scenario_description_1"></div>
-                                        <NuxtLink :to="'https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information'+fullUrlString" target="_blank"> 
-                                        <div class="case-action">
+
+                                        <div class="case-action" v-if="locale == 'zh'" @click="showWx()">
                                             <button class="case-btn">
                                                 <span>{{productDetail.button_text_1}}</span>
                                             </button>
                                         </div>
+                                        <NuxtLink v-else :to="'https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information'+fullUrlString" target="_blank"> 
+                                            <div class="case-action">
+                                                <button class="case-btn">
+                                                    <span>{{productDetail.button_text_1}}</span>
+                                                </button>
+                                            </div>
                                         </NuxtLink>
                                         <div class="case-image">
                                             <NuxtImg sizes="sm:100vw" loading="lazy" :src="productDetail.application_scenario_background_1_url" />
@@ -421,13 +437,19 @@
                     </div>
 
                     <!-- Contact Button -->
-                    <div class="expert-consultation">
+                    <div class="expert-consultation" v-if="locale == 'zh'" @click="showWx()">
+                        <button class="expert-btn">
+                            <span>{{ contentDetail.product_detail_contact_dinosaw_technical_btn_text }}</span>
+                        </button>
+                    </div>
+                    <div class="expert-consultation" v-else>
                         <button class="expert-btn">
                             <NuxtLink :to="'https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information'+fullUrlString" target="_blank">
                                 <span>{{ contentDetail.product_detail_contact_dinosaw_technical_btn_text }}</span>
                             </NuxtLink>
                         </button>
                     </div>
+                    
                 </div>
             </div>
 
@@ -518,7 +540,12 @@
                             </div>
                         </div>
 
-                        <div class="expert-consultation">
+                        <div class="expert-consultation" v-if="locale == 'zh'" @click="showWx()">
+                            <button class="expert-btn">
+                                 <span>{{ contentDetail.product_detail_inqury_for_details_btn_text }}</span>
+                            </button>
+                        </div>
+                        <div class="expert-consultation" v-else>
                             <button class="expert-btn">
                                 <NuxtLink :to="'https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information'+fullUrlString" target="_blank">
                                     <span>{{ contentDetail.product_detail_inqury_for_details_btn_text }}</span>
@@ -614,7 +641,13 @@
                         </div>
                     </template>
                 </div>
-                <div class="expert-consultation">
+                <div class="expert-consultation" v-if="locale == 'zh'" @click="showWx()">
+                    <button class="expert-btn">
+                        <span>{{contentDetail.product_detail_need_more_assistance_link_btn_text}}</span>
+                    </button>
+                </div>
+                 
+                <div class="expert-consultation" v-else>
                     <button class="expert-btn">
                         <NuxtLink :to="'https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information'+fullUrlString" target="_blank">
                         <span>{{contentDetail.product_detail_need_more_assistance_link_btn_text}}</span>
@@ -815,7 +848,13 @@
                     </div>
 
                     <!-- Custom Solution Button -->
-                    <div class="expert-consultation">
+                      
+                    <div class="expert-consultation" v-if="locale == 'zh'" @click="showWx()">
+                        <button class="expert-btn">
+                            <span>{{ contentDetail.get_a_custom_solution_text }}</span>
+                        </button>
+                    </div>
+                    <div class="expert-consultation" v-else>
                         <button class="expert-btn">
                             <NuxtLink :to="'https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information'+fullUrlString" target="_blank">
                                 <span>{{ contentDetail.get_a_custom_solution_text }}</span>
@@ -847,7 +886,11 @@
                                     <div class="card-description">
                                         <p>{{contentDetail.contact_dinosaw_description}}</p>
                                     </div>
-                                    <button class="contact-btn">
+                                     
+                                     <button class="contact-btn" v-if="locale == 'zh'" @click="showWx()">
+                                        <span>{{ contentDetail.get_a_quote_text }}</span>
+                                    </button>
+                                    <button class="contact-btn" v-else>
                                         <NuxtLink :to="'https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information'+fullUrlString" target="_blank">
                                         <span>{{ contentDetail.get_a_quote_text }}</span>
                                         </NuxtLink>
@@ -965,10 +1008,13 @@ const props = defineProps({
 });
 
 // 添加 emit 定义
-const emit = defineEmits(['headdata-loaded']);
+const emit = defineEmits(['headdata-loaded', 'showWx']);
 
 const goWhatsApp = (message) => { 
     window.open('https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information '+message, '_blank');
+}
+const showWx = () => {
+    emit('showWx')
 }
 
 // 轮播相关状态

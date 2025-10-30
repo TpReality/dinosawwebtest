@@ -27,7 +27,8 @@
               </div>
           </div>
           <div class="whats-button">
-              <a target="_blank" :href="'https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information'+fullUrlString">{{ contentDetail.chat_online_dialog_btn_whatapp_text}}</a>
+              <span v-if="locale == 'zh'" @click="showWx()">{{ contentDetail.chat_online_dialog_btn_whatapp_text}}</span>
+              <a v-else target="_blank" :href="'https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information'+fullUrlString">{{ contentDetail.chat_online_dialog_btn_whatapp_text}}</a>
           </div>
           <div class="contact-button">
             <NuxtLink :to="localePath('/contact')" target="_blank">{{ contentDetail.chat_online_dialog_btn_contact_us_text }}</NuxtLink>
@@ -47,6 +48,8 @@
 import { ref } from 'vue'
 import { useRequestURL } from '#app';
 import { useLocalePath } from '#i18n'
+import { useI18n } from 'vue-i18n'
+const { locale } = useI18n()
 const localePath = useLocalePath()
 const fullUrlString = useRequestURL().href;
 const props = defineProps({
@@ -70,6 +73,12 @@ const showPanel = () => {
 const hidePanel = () => {
   isPanelVisible.value = false
 }
+
+const emit = defineEmits(['showWx']);
+const showWx = ()=>{
+    emit('showWx')
+}
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

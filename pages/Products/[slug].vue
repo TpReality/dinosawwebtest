@@ -1,6 +1,6 @@
 <template>
     <div class="main">
-        <DinosawHeader :menuItems="menuItems" :contentDetail="contentDetail" />
+        <DinosawHeader :menuItems="menuItems" :contentDetail="contentDetail" @showWx="showWx" />
         
         <!-- 只有在 isSpecialMachine 状态确定后才渲染对应的布局组件 -->
         <template v-if="isLayoutReady">
@@ -10,6 +10,7 @@
                 :slug="slug"
                 :topProduct="topProduct"
                 @headdata-loaded="handleHead"
+                
             />
             
             <!-- 非特殊机器类型的样式 -->
@@ -19,6 +20,7 @@
                 :topProduct="topProduct"
                 :contentDetail="contentDetail"
                 @headdata-loaded="handleHead"
+                @showWx="showWx"
             />
         </template>
         
@@ -26,18 +28,24 @@
         <div v-else class="loading-container">
             <div class="loading-spinner"></div>
         </div>
-        <Wxpic></Wxpic>
+        <Wxpic ref="wxpicRef"></Wxpic>
         <Lang :contentDetail="contentDetail" />
-        <ContactType :contentDetail="contentDetail" />
-        <WhatsApp :contentDetail="contentDetail" />
-        <DinosawFooter :menuItems="menuItems" :contentDetail="contentDetail" />
+        <ContactType :contentDetail="contentDetail" @showWx="showWx" />
+        <WhatsApp :contentDetail="contentDetail" @showWx="showWx" />
+        <DinosawFooter :menuItems="menuItems" :contentDetail="contentDetail" @showWx="showWx" />
     </div>
 </template>
 
 <script setup>
+import Wxpic from '~/components/Wxpic.vue'
 const route = useRoute();
 const slug = route.params.slug;
 
+const wxpicRef = ref(null)
+
+const showWx = ()=>{
+    wxpicRef.value.showPanel()
+}
 // 使用菜单数据composable
 const { menuItems, initializeMenuData } = useMenuData()
 

@@ -1,6 +1,6 @@
 <template>
     <div class="main">
-        <DinosawHeader :menuItems="menuItems" :contentDetail="contentDetail" />
+        <DinosawHeader :menuItems="menuItems" :contentDetail="contentDetail" @showWx="showWx" />
         <div class="main-content">
             <div class="upload-guide">
                 <div class="file-input-bg">
@@ -267,17 +267,22 @@
             </div>
         </div>
 
-        <Wxpic></Wxpic>
+        <Wxpic ref="wxpicRef"></Wxpic>
         <Lang :contentDetail="contentDetail" />
-        <ContactType :contentDetail="contentDetail" />
-        <WhatsApp :contentDetail="contentDetail" />
-        <DinosawFooter :menuItems="menuItems" :contentDetail="contentDetail" />
+        <ContactType :contentDetail="contentDetail" @showWx="showWx" />
+        <WhatsApp :contentDetail="contentDetail" @showWx="showWx" />
+        <DinosawFooter :menuItems="menuItems" :contentDetail="contentDetail" @showWx="showWx" />
     </div>
 </template>
 
 <script setup>
 import { ref, onMounted, watch } from 'vue'
+import Wxpic from '~/components/Wxpic.vue'
+const wxpicRef = ref(null)
 
+const showWx = ()=>{
+    wxpicRef.value.showPanel()
+}
 // 使用菜单数据composable
 const { menuItems, initializeMenuData } = useMenuData()
 

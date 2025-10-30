@@ -26,7 +26,8 @@
                       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" style="width: 24px; height: 24px;"><path d="M 19.92 1.2 L 4.08 1.2 C 2.489 1.2 1.2 2.489 1.2 4.08 L 1.2 19.92 C 1.2 21.511 2.489 22.8 4.08 22.8 L 19.92 22.8 C 21.511 22.8 22.8 21.511 22.8 19.92 L 22.8 4.08 C 22.8 2.489 21.511 1.2 19.92 1.2 Z M 12 19.2 L 11.998 19.2 C 10.706 19.2 9.438 18.853 8.333 18.197 L 8.07 18.041 L 5.345 18.755 L 6.072 16.1 L 5.901 15.827 C 5.18 14.68 4.798 13.352 4.8 11.997 C 4.802 8.028 8.032 4.8 12.003 4.8 C 13.926 4.8 15.733 5.55 17.093 6.91 C 18.453 8.271 19.2 10.079 19.2 12.002 C 19.199 15.972 15.969 19.2 12 19.2 Z" fill="rgb(179, 179, 179)"></path><path d="M 15.949 13.81 C 15.733 13.701 14.669 13.178 14.47 13.106 C 14.272 13.034 14.127 12.998 13.983 13.214 C 13.839 13.431 13.424 13.918 13.297 14.062 C 13.171 14.207 13.045 14.225 12.828 14.117 C 12.612 14.008 11.915 13.78 11.088 13.043 C 10.445 12.469 10.01 11.761 9.884 11.544 C 9.757 11.328 9.87 11.211 9.979 11.102 C 10.076 11.005 10.195 10.85 10.304 10.723 C 10.412 10.597 10.448 10.506 10.52 10.362 C 10.592 10.218 10.556 10.091 10.502 9.983 C 10.448 9.875 10.028 8.804 9.835 8.376 C 9.673 8.016 9.502 8.009 9.348 8.002 C 9.221 7.997 9.077 7.997 8.933 7.997 C 8.789 7.997 8.554 8.051 8.356 8.268 C 8.157 8.485 7.598 9.008 7.598 10.073 C 7.598 11.138 8.373 12.167 8.482 12.311 C 8.59 12.456 9.979 14.711 12.179 15.578 C 14.007 16.299 14.379 16.156 14.776 16.12 C 15.174 16.084 16.057 15.597 16.237 15.091 C 16.418 14.586 16.418 14.153 16.364 14.063 C 16.31 13.972 16.165 13.918 15.949 13.81 Z" fill="rgb(185, 185, 185)"></path></svg>
                       <p>
                         <span class="dinosaw-text">{{ props.contentDetail.whats_app_title }}: </span>
-                        <a class="c-blue" :href="'https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information'+fullUrlString" target="_blank">+86 198-5901-3937</a>
+                        <span v-if="locale == 'zh'" @click="showWx()" class="c-blue" >+86 198-5901-3937</span>
+                        <a v-else class="c-blue" :href="'https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information'+fullUrlString" target="_blank">+86 198-5901-3937</a>
                       </p>
                     </div>
                 </div>
@@ -45,7 +46,10 @@
                   </div>
                   <div class="mobile-right">
                       <span class="dinosaw-text f12">{{ props.contentDetail.whats_app_title }}: </span>
-                      <div><a class="c-blue" :href="'https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information'+fullUrlString" target="_blank">+86 198-5901-3937</a></div>
+                      <div>
+                        <span v-if="locale == 'zh'" @click="showWx()" class="c-blue" >+86 198-5901-3937</span>
+                        <a v-else class="c-blue" :href="'https://api.whatsapp.com/send?phone=8619859013937&text=Hi%20Lizzy%2CI%20want%20to%20know%20more%20detail%20information'+fullUrlString" target="_blank">+86 198-5901-3937</a>
+                      </div>
                   </div>
                 </div>
                 <div class="mobile-bottom-row flex">
@@ -140,6 +144,8 @@
 <script setup>
 import { useRequestURL } from '#app';
 import { useLocalePath } from '#i18n'
+import { useI18n } from 'vue-i18n'
+const { locale } = useI18n()
 const localePath = useLocalePath()
 const fullUrlString = useRequestURL().href;
 const props = defineProps({
@@ -275,6 +281,10 @@ const activeSubMenus = ref({})
 //     }
 // }, { immediate: true })
 // 方法
+const emit = defineEmits(['showWx']);
+const showWx = ()=>{
+    emit('showWx')
+}
 
 const toggleMobileMenu = () => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value

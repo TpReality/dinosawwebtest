@@ -4,11 +4,13 @@
     <!-- <NuxtRouteAnnouncer />
     <NuxtWelcome />
     <NuxtPage /> -->
-    <NuxtPage />
+    <NuxtPage :key="$route.fullPath" />
   </div>
 </template>
 <script setup>
 const { public: { gtmId } } = useRuntimeConfig()
+import { useRoute } from '#app';
+const route = useRoute();
 
 // 仅在生产环境并且配置了 gtmId 时启用
 const enableGTM = import.meta.env.PROD && !!gtmId

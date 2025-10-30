@@ -207,7 +207,7 @@
                                                             <div class="dropdown-options">
                                                                 <div 
                                                                     v-for="country in filteredCountriesForCode" 
-                                                                    :key="country.country_phone_code"
+                                                                    :key="country.country_code"
                                                                     class="dropdown-option"
                                                                     @click="selectCountryCode(country)"
                                                                 >
@@ -376,7 +376,7 @@
                                                             <div class="dropdown-options">
                                                                 <div 
                                                                     v-for="country in filteredCountriesForCode" 
-                                                                    :key="country.country_phone_code"
+                                                                    :key="country.country_code"
                                                                     class="dropdown-option"
                                                                     @click="selectCountryCode(country)"
                                                                 >
@@ -679,7 +679,7 @@ const { data: countryDetailRes, pending: countryPending, error: countryError } =
 // 监听产品数据变化
 watch(countryDetailRes, (newPosts) => {
   if (newPosts) {
-    // console.log('Country',newPosts)
+    console.log('Country',newPosts)
     let data = newPosts.data
     
     countries.value = data
