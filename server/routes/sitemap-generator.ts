@@ -5,21 +5,6 @@ import { $fetch } from 'ofetch';
 const base = 'https://www.dinosawmachine.com';
 const defaultLocale = 'en';
 
-// 定义你的语言配置 (与 nuxt.config.ts 保持一致)
-const locales = [
-  { code: 'en', iso: 'en-US', name: 'English' },
-  { code: 'zh', iso: 'zh-CN', name: '中文' },
-  { code: 'ru', iso: 'ru-RU', name: 'Русский' }
-  // { code: 'tr', iso: 'tr-TR', name: 'Türkçe' },
-  // { code: 'pt', iso: 'pt-BR', name: 'Português' },
-  // { code: 'es', iso: 'es-ES', name: 'Español' },
-  // { code: 'de', iso: 'de-DE', name: 'Deutsch' },
-  // { code: 'ar', iso: 'ar-AR', name: 'العربية' },
-  // { code: 'vi', iso: 'vi-VN', name: 'Tiếng Việt' },
-  // { code: 'fr', iso: 'fr-FR', name: 'Français' },
-  // { code: 'pl', iso: 'pl-PL', name: 'Polski' },
-];
-
 interface RouteData {
   loc: string; // 默认语言的路径 (如 /blog/post)
   lastmod: string;
@@ -35,8 +20,6 @@ export async function generateSitemapXml(currentLocaleCode: string): Promise<str
   const token = config.public.apiToken || '';
   const headers = token ? { Authorization: `Bearer ${token}` } : undefined;
 
-  // 1. 获取所有路由的【默认语言路径】和【最后修改时间】
-
   // 固定路由 (只写默认语言路径)
   const staticRoutes: RouteData[] = [
     { loc: '/', lastmod: today, changefreq: 'weekly', priority: '1.0' },
@@ -48,13 +31,11 @@ export async function generateSitemapXml(currentLocaleCode: string): Promise<str
     { loc: '/Products', lastmod: today, changefreq: 'weekly', priority: '0.7' },
     { loc: '/projects', lastmod: today, changefreq: 'weekly', priority: '0.7' },
     { loc: '/support', lastmod: today, changefreq: 'weekly', priority: '0.7' },
-    // ... (二级静态路由)
     { loc: '/support/user-manual', lastmod: today, changefreq: 'weekly', priority: '0.6' },
     { loc: '/support/faqs', lastmod: today, changefreq: 'weekly', priority: '0.6' },
     { loc: '/blog', lastmod: today, changefreq: 'weekly', priority: '0.7' },
     { loc: '/blog/news-events', lastmod: today, changefreq: 'weekly', priority: '0.6' },
     { loc: '/blog/industry-news', lastmod: today, changefreq: 'weekly', priority: '0.6' },
-    // ... (所有 Products 和 projects 的二级静态路由)
     { loc: '/Products/wire-saw-machine', lastmod: today, changefreq: 'weekly', priority: '0.6' },
     { loc: '/Products/diamond-tools', lastmod: today, changefreq: 'weekly', priority: '0.6' },
     { loc: '/Products/circle-saw-machine', lastmod: today, changefreq: 'weekly', priority: '0.6' },
@@ -100,7 +81,7 @@ export async function generateSitemapXml(currentLocaleCode: string): Promise<str
 
   const allRoutes = [...staticRoutes, ...dynamicRoutes];
 
-  // 生成 XML 内容
+  // 生成 XML 内容 - 移除所有 xhtml 内容
   const urlsXml = allRoutes
     .map(data => {
       // 获取当前语言的正确 URL 路径
@@ -110,39 +91,21 @@ export async function generateSitemapXml(currentLocaleCode: string): Promise<str
       // 确保 lastmod 格式正确 (YYYY-MM-DD)
       const lastmodDate = data.lastmod.split('T')[0];
 
-      // 使用真正的换行符
+      // 生成简单的 URL 条目，不包含 xhtml 标签
       let urlXml = '<url>\n';
-
-      // <loc> 标签
       urlXml += `  <loc>${base}${locPath}</loc>\n`;
-
-      // <lastmod>, <changefreq>, <priority> 标签
       urlXml += `  <lastmod>${lastmodDate}</lastmod>\n`;
       urlXml += `  <changefreq>${data.changefreq}</changefreq>\n`;
       urlXml += `  <priority>${data.priority}</priority>\n`;
-
-      // <xhtml:link> 标签 (hreflang)
-      locales.forEach(locale => {
-        // 构建替代链接的完整 URL
-        const altPath = locale.code === defaultLocale ? data.loc : `/${locale.code}${data.loc}`;
-        const altHref = `${base}${altPath}`;
-
-        // 添加该语言本身的 hreflang 标签
-        urlXml += `  <xhtml:link rel="alternate" hreflang="${locale.code}" href="${altHref}"/>\n`;
-      });
-      
-      // 添加 x-default 标签
-      const defaultUrl = `${base}${data.loc}`;
-      urlXml += `  <xhtml:link rel="alternate" hreflang="x-default" href="${defaultUrl}"/>\n`;
-
       urlXml += '</url>';
+      
       return urlXml;
     })
-    .join('\n'); // 使用真正的换行符连接每个 <url> 块
+    .join('\n');
 
-  // XML 头部和命名空间 (确保包含 xhtml 命名空间)
+  // XML 头部 - 移除 xhtml 命名空间
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urlsXml}
 </urlset>`;
 
