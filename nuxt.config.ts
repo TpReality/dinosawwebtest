@@ -6,8 +6,8 @@ import { createHash } from 'node:crypto'
 const defaultLocale = 'en';
 const locales = [
   { code: 'en', iso: 'en-US', name: 'English' },
-  // { code: 'zh', iso: 'zh-CN', name: '中文' },
-  // { code: 'ru', iso: 'ru-RU', name: 'Русский' },
+  { code: 'zh', iso: 'zh-CN', name: '中文' },
+  { code: 'ru', iso: 'ru-RU', name: 'Русский' },
   // { code: 'tr', iso: 'tr-TR', name: 'Türkçe' },
   // { code: 'pt', iso: 'pt-BR', name: 'Português' },
   // { code: 'es', iso: 'es-ES', name: 'Español' },
@@ -108,26 +108,26 @@ export default defineNuxtConfig({
     '/': { prerender: true }, '/Products': { prerender: true }, '/projects': { prerender: true }, '/support': { prerender: true },
     '/blog': { prerender: true }, '/About-us': { prerender: true }, '/video': { prerender: true }, '/contact': { prerender: true },
     '/stoneidentification': { prerender: true }, '/ai': { prerender: true },
-    // '/zh/**': { prerender: true }, '/tr/**': { prerender: true }, '/pt/**': { prerender: true }, '/es/**': { prerender: true },
-    // '/ru/**': { prerender: true }, '/de/**': { prerender: true }, '/ar/**': { prerender: true }, '/vi/**': { prerender: true },
-    // '/fr/**': { prerender: true }, '/pl/**': { prerender: true },
+    '/zh/**': { prerender: true }, '/tr/**': { prerender: true }, '/pt/**': { prerender: true }, '/es/**': { prerender: true },
+    '/ru/**': { prerender: true }, '/de/**': { prerender: true }, '/ar/**': { prerender: true }, '/vi/**': { prerender: true },
+    '/fr/**': { prerender: true }, '/pl/**': { prerender: true },
     '/api/**': { proxy: 'https://cms.stoneboss.vip/api/**', headers: { 'cache-control': 's-maxage=60' } },
     '/sitemap.xml': { prerender: true }, 
-    // '/zh/sitemap.xml': { prerender: true }, 
-    // '/ru/sitemap.xml': { prerender: true },
+    '/zh/sitemap.xml': { prerender: true }, 
+    '/ru/sitemap.xml': { prerender: true },
   },
 
   i18n: {
     strategy: 'prefix_except_default',
     locales: locales, // 使用上面定义的常量
     defaultLocale: defaultLocale, // 使用上面定义的常量
-    // detectBrowserLanguage: {
-    //   useCookie: true,
-    //   cookieKey: 'i18n_redirected',
-    //   redirectOn: 'root',
-    //   useRedirect: true,
-    //   alwaysRedirect: false,
-    // }
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root',
+      useRedirect: true,
+      alwaysRedirect: false,
+    }
   },
 
   

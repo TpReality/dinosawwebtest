@@ -5,6 +5,7 @@ export default defineEventHandler(async (event) => {
     // 调用生成函数，传入 'zh' 语言代码
     const xml = await generateSitemapXml('ru');
     
-    setHeader(event, 'content-type', 'application/xml; charset=UTF-8');
+    setHeader(event, 'Content-Type', 'application/xml; charset=UTF-8');
+    setHeader(event, 'X-Content-Type-Options', 'nosniff');
     return xml;
 });
