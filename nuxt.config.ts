@@ -166,7 +166,7 @@ export default defineNuxtConfig({
       cookieKey: 'i18n_redirected',
       redirectOn: 'root',
       useRedirect: true,
-      alwaysRedirect: true,
+      alwaysRedirect: false,
     }
   },
 
