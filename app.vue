@@ -4,13 +4,23 @@
     <!-- <NuxtRouteAnnouncer />
     <NuxtWelcome />
     <NuxtPage /> -->
-    <NuxtPage :key="$route.fullPath" />
+    <NuxtPage :key="pageKey" />
   </div>
 </template>
 <script setup>
 const { public: { gtmId } } = useRuntimeConfig()
 import { useRoute } from '#app';
 const route = useRoute();
+
+// 添加语言变化监听，强制页面刷新
+const { $i18n } = useNuxtApp()
+const pageKey = ref(`${route.fullPath}-${$i18n.locale.value}`)
+
+// 监听语言变化
+watch(() => $i18n.locale.value, (newLocale) => {
+  // 更新页面 key，强制重新渲染
+  pageKey.value = `${route.fullPath}-${newLocale}-${Date.now()}`
+})
 
 // 仅在生产环境并且配置了 gtmId 时启用
 const enableGTM = import.meta.env.PROD && !!gtmId
