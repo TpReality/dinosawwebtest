@@ -4,13 +4,13 @@
     <!-- <NuxtRouteAnnouncer />
     <NuxtWelcome />
     <NuxtPage /> -->
-    <NuxtPage :key="`${$route.fullPath}-${$i18n.locale}`" />
+    <NuxtPage :key="$route.fullPath" />
+    <!-- <NuxtPage :key="`${$route.fullPath}-${$i18n.locale}`" /> -->
   </div>
 </template>
 <script setup>
 const { public: { gtmId } } = useRuntimeConfig()
 import { useRoute } from '#app';
-const { $i18n } = useNuxtApp()
 const route = useRoute();
 
 // 仅在生产环境并且配置了 gtmId 时启用

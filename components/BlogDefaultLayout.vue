@@ -132,6 +132,60 @@
 
         <!-- 右侧边栏 - 基于Figma设计 52:8225 -->
         <aside class="sidebar">
+          <!-- 文章目录导航 -->
+          <div class="toc-widget" v-if="tocItems.length > 0">
+            <h3 class="widget-title">{{ contentDetail.table_of_contents_text || '目录' }}</h3>
+            <nav class="toc-nav">
+              <ul class="toc-list">
+                <li 
+                  v-for="item in tocItems" 
+                  :key="item.id"
+                  :class="['toc-item', `toc-level-${item.level}`, { 'active': activeId === item.id }]"
+                >
+                  <a 
+                    :href="`#${item.id}`" 
+                    @click.prevent="scrollToHeading(item.id)"
+                    class="toc-link"
+                  >
+                    {{ item.text }}
+                  </a>
+                  <!-- 子级导航 -->
+                  <ul v-if="item.children && item.children.length > 0" class="toc-sublist">
+                    <li 
+                      v-for="child in item.children" 
+                      :key="child.id"
+                      :class="['toc-item', `toc-level-${child.level}`, { 'active': activeId === child.id }]"
+                    >
+                      <a 
+                        :href="`#${child.id}`" 
+                        @click.prevent="scrollToHeading(child.id)"
+                        class="toc-link"
+                      >
+                        {{ child.text }}
+                      </a>
+                      <!-- 三级子导航 -->
+                      <ul v-if="child.children && child.children.length > 0" class="toc-sublist">
+                        <li 
+                          v-for="grandchild in child.children" 
+                          :key="grandchild.id"
+                          :class="['toc-item', `toc-level-${grandchild.level}`, { 'active': activeId === grandchild.id }]"
+                        >
+                          <a 
+                            :href="`#${grandchild.id}`" 
+                            @click.prevent="scrollToHeading(grandchild.id)"
+                            class="toc-link"
+                          >
+                            {{ grandchild.text }}
+                          </a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+          </div>
+
           <!-- Hot Reads 热门文章区域 -->
           <div class="hot-reads-widget">
             <h3 class="widget-title">{{ contentDetail.hot_reads_text }}</h3>
@@ -357,6 +411,124 @@ const localizedContent = computed(() => {
   // 使用更健壮的函数
   return localizeLinksInHtmlRobust(blogDetail.value.content, locale.value, defaultLocale);
 });
+
+// 目录相关功能
+const tocItems = ref([])
+const activeId = ref('')
+
+// 生成唯一ID
+const generateId = (text) => {
+  return text
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, '') // 移除特殊字符
+    .replace(/\s+/g, '-') // 空格替换为连字符
+    .replace(/-+/g, '-') // 多个连字符合并为一个
+    .trim()
+}
+
+// 解析HTML内容生成目录
+const generateTOC = () => {
+  if (!localizedContent.value) return
+
+  // 创建临时DOM来解析HTML
+  const tempDiv = document.createElement('div')
+  tempDiv.innerHTML = localizedContent.value
+  
+  const headings = tempDiv.querySelectorAll('h2, h3, h4, h5')
+  const items = []
+  const stack = []
+
+  headings.forEach((heading, index) => {
+    const level = parseInt(heading.tagName.charAt(1))
+    const text = heading.textContent.trim()
+    const id = generateId(text) + '-' + index
+    
+    // 为原始HTML中的标题添加ID
+    heading.id = id
+    
+    const item = {
+      id,
+      text,
+      level,
+      children: []
+    }
+
+    // 构建树状结构
+    while (stack.length > 0 && stack[stack.length - 1].level >= level) {
+      stack.pop()
+    }
+
+    if (stack.length === 0) {
+      items.push(item)
+    } else {
+      stack[stack.length - 1].children.push(item)
+    }
+
+    stack.push(item)
+  })
+
+  tocItems.value = items
+  
+  // 更新DOM中的内容
+  nextTick(() => {
+    const articleContent = document.querySelector('.blog-article-details')
+    if (articleContent) {
+      articleContent.innerHTML = tempDiv.innerHTML
+    }
+  })
+}
+
+// 滚动到指定标题
+const scrollToHeading = (id) => {
+  const element = document.getElementById(id)
+  if (element) {
+    const offset = 100 // 顶部偏移量
+    const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
+    const offsetPosition = elementPosition - offset
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    })
+    
+    activeId.value = id
+  }
+}
+
+// 监听滚动，更新当前活跃的标题
+const handleScroll = () => {
+  const headings = document.querySelectorAll('.blog-article-details h2, .blog-article-details h3, .blog-article-details h4, .blog-article-details h5')
+  let currentId = ''
+  
+  headings.forEach(heading => {
+    const rect = heading.getBoundingClientRect()
+    if (rect.top <= 150) { // 当标题距离顶部150px时激活
+      currentId = heading.id
+    }
+  })
+  
+  if (currentId) {
+    activeId.value = currentId
+  }
+}
+
+// 监听内容变化，重新生成目录
+watch(localizedContent, () => {
+  nextTick(() => {
+    generateTOC()
+  })
+}, { immediate: true })
+
+// 组件挂载后设置滚动监听
+onMounted(() => {
+  generateTOC()
+  window.addEventListener('scroll', handleScroll)
+})
+
+// 组件卸载时移除监听
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
 
 const blogList = ref([])
 const { data: blogListRes, blogListPending, blogListError } = await useApi('/blogs?pagination[page]=1&pagination[pageSize]=10&sort[0]=date:desc')
@@ -702,6 +874,47 @@ watch(nextblogRes, (newPosts) => {
   max-width: 788px;
 }
 
+/* 文章内容中的标题样式优化 */
+.blog-article-details h2,
+.blog-article-details h3,
+.blog-article-details h4,
+.blog-article-details h5 {
+  scroll-margin-top: 100px; /* 滚动时的顶部偏移 */
+  position: relative;
+}
+
+.blog-article-details h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #000000;
+  margin: 32px 0 16px 0;
+  line-height: 1.3;
+}
+
+.blog-article-details h3 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #000000;
+  margin: 28px 0 14px 0;
+  line-height: 1.3;
+}
+
+.blog-article-details h4 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333333;
+  margin: 24px 0 12px 0;
+  line-height: 1.4;
+}
+
+.blog-article-details h5 {
+  font-size: 18px;
+  font-weight: 500;
+  color: #333333;
+  margin: 20px 0 10px 0;
+  line-height: 1.4;
+}
+
 .exhibition-details {
   margin-bottom: 42px;
 }
@@ -925,6 +1138,118 @@ watch(nextblogRes, (newPosts) => {
   gap: 32px;
   padding: 65px 0 40px;
   width: 340px;
+}
+
+/* 文章目录导航样式 */
+.toc-widget {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 16px;
+  width: 324px;
+  border: 1px solid rgba(136, 136, 136, 0.1);
+  margin-bottom: 32px;
+  // position: sticky;
+  // top: 20px;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+}
+
+.toc-nav {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.toc-sublist {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0 0;
+}
+
+.toc-item {
+  margin-bottom: 4px;
+}
+
+.toc-level-2 {
+  padding-left: 0;
+}
+
+.toc-level-3 {
+  padding-left: 16px;
+}
+
+.toc-level-4 {
+  padding-left: 32px;
+}
+
+.toc-level-5 {
+  padding-left: 48px;
+}
+
+.toc-link {
+  display: block;
+  padding: 8px 12px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #666666;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+}
+
+.toc-link:hover {
+  background: #f8f9fa;
+  color: #439DF1;
+}
+
+.toc-item.active > .toc-link {
+  background: #f0f7ff;
+  color: #439DF1;
+  border-left-color: #439DF1;
+  font-weight: 500;
+}
+
+/* 不同级别标题的样式差异 */
+.toc-level-2 > .toc-link {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.toc-level-3 > .toc-link {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.toc-level-4 > .toc-link,
+.toc-level-5 > .toc-link {
+  font-weight: 400;
+  font-size: 13px;
+  color: #888888;
+}
+
+/* 滚动条样式 */
+.toc-nav::-webkit-scrollbar {
+  width: 4px;
+}
+
+.toc-nav::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 2px;
+}
+
+.toc-nav::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 2px;
+}
+
+.toc-nav::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
 }
 
 /* Hot Reads 热门文章区域 */
@@ -1805,6 +2130,17 @@ watch(nextblogRes, (newPosts) => {
   .sidebar {
     position: static;
     width: auto;
+  }
+
+  .toc-widget {
+    width: 100%;
+    position: static;
+    max-height: none;
+    margin-bottom: 24px;
+  }
+
+  .toc-nav {
+    max-height: 300px;
   }
 
   .sidebar-content {
