@@ -695,6 +695,8 @@ watch(productDetailRes, (newPosts) => {
             data.the_most_popular_related_process_cases_blogs = formatArrayDatesLong(
                 data.the_most_popular_related_process_cases_blogs
             )
+        }else{
+            data.the_most_popular_related_process_cases_blogs = []
         }
         
         data.the_practical_videos_on_blogs = formatArrayDatesLong(

@@ -53,26 +53,7 @@ export default defineNuxtConfig({
   //     }
   //   }
   // },
-  hooks: {
-    async 'nitro:config'(nitroConfig) {
-      if (nitroConfig.dev) return
-      const addLocalized = (path: string) => {
-        nitroConfig.prerender.routes.push(path)
-        for (const code of localeCodes) {
-          nitroConfig.prerender.routes.push(`/${code}${path}`)
-        }
-      }
-      const authToken = "8f80d6094edcd486411ddc90d4fa4f18ed87f9fe9edae7fe7cb423e3ce261b23ce76afdedfc3cf2e3689bd1b03e9f504cbded28e7645eed305db44f61e914053e9fb4b4999d30c743b67fe2a052bff812b6165825f1502f22f991ff41a44536c67a88f99ae0f525ee710ee010834ffddaa1501dc60c7da7dac18060f46612708"
-      const blogs = await $fetch('/blogs?pagination[pageSize]=100000', { baseURL: 'https://cms.stoneboss.vip/api', headers: { Authorization: `Bearer ${authToken}` } });
-      for (const blog of blogs.data) {
-        addLocalized(`/blog/${blog.slug}`)
-      }
-      const products = await $fetch('/products?pagination[pageSize]=100000', { baseURL: 'https://cms.stoneboss.vip/api', headers: { Authorization: `Bearer ${authToken}` } });
-      for (const product of products.data) {
-        addLocalized(`/Products/${product.url}`)
-      }
-    }
-  },
+  
 
   nitro: {
     preset: 'cloudflare-pages',
