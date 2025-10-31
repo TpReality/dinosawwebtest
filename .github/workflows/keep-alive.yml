@@ -1,0 +1,78 @@
+# .github/workflows/keep-alive.yml
+
+name: 🌡️ Cloudflare Dynamic Cache Warmer
+
+# ======================= 1. 触发设置 =======================
+on:
+  # 每 5 分钟自动运行一次，用于保持 Function 活跃和缓存新鲜
+  schedule:
+    - cron: '*/5 * * * *'
+  # 允许在 GitHub Actions 界面手动运行，方便测试
+  workflow_dispatch:
+  
+# 工作流权限设置，这里设置为 none 确保安全
+permissions:
+  contents: none
+
+jobs:
+  ping_and_warm:
+    runs-on: ubuntu-latest
+    name: Get Routes and Warm Cache
+
+    # ======================= 2. 环境变量 =======================
+    env:
+      # ⚠️ 必须设置的 Secret: 您的 Cloudflare Pages 部署地址
+      BASE_URL: ${{ secrets.CLOUDFLARE_PAGES_URL }}
+      # ⚠️ 专用于获取路由列表的 API 路径（需在 Nuxt server/api 中实现）
+      ROUTES_API_PATH: /api/sitemap-routes 
+      # 额外添加少量关键的静态路由或必须确保缓存新鲜的路由
+      STATIC_ROUTES_TO_WARM: |
+        /
+        /about
+      
+    steps:
+      # ======================= 3. 动态获取路由列表 =======================
+      - name: ⬇️ Fetch Dynamic Routes from API
+        id: fetch_routes
+        run: |
+          # 确保安装 jq 工具来解析 JSON
+          sudo apt-get update && sudo apt-get install -y jq
+          
+          API_URL="${{ env.BASE_URL }}${{ env.ROUTES_API_PATH }}"
+          echo "Fetching routes from: $API_URL"
+          
+          # 使用 curl 获取 JSON 数组，并使用 jq 解析为换行符分隔的字符串
+          ROUTES=$(curl -s "$API_URL" | jq -r '.[]')
+          
+          if [ -z "$ROUTES" ]; then
+            echo "Warning: API returned an empty list of dynamic routes."
+          fi
+          
+          # 将动态路由列表设置为下一步可用的输出变量
+          echo "ROUTES_TO_WARM<<EOF" >> $GITHUB_OUTPUT
+          echo "$ROUTES" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+        
+      # ======================= 4. 循环并预热所有路由 =======================
+      - name: 🌐 Loop and Warm All Routes
+        run: |
+          # 组合静态列表和动态列表
+          STATIC_LIST="${{ env.STATIC_ROUTES_TO_WARM }}"
+          DYNAMIC_LIST="${{ steps.fetch_routes.outputs.ROUTES_TO_WARM }}"
+          
+          # 将所有路由合并为一个列表，用换行符分隔
+          ALL_ROUTES="$STATIC_LIST"$'\n'"$DYNAMIC_LIST"
+          
+          echo "Found the following routes to warm:"
+          echo "$ALL_ROUTES"
+          
+          # 遍历所有路由并发送请求
+          echo "$ALL_ROUTES" | while read -r route; do
+            # 确保路由非空
+            if [ -n "$route" ]; then
+              TARGET_URL="${{ env.BASE_URL }}$route"
+              echo "--- Warming: $TARGET_URL ---"
+              
+              # 发送预热请求
+              # -s: 静默模式 | -o /dev/null: 忽略响应体 | -w: 打印状态码和耗时
+              curl -
