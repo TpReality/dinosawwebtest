@@ -4,15 +4,15 @@ name: 🌡️ Cloudflare Dynamic Cache Warmer
 
 # ======================= 1. 触发设置 =======================
 on:
-  # 每 5 分钟自动运行一次，用于保持 Function 活跃和缓存新鲜
+  # 每 30 分钟自动运行一次，用于保持 Function 活跃和缓存新鲜
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '*/30 * * * *'
   # 允许在 GitHub Actions 界面手动运行，方便测试
   workflow_dispatch:
   
-# 工作流权限设置，这里设置为 none 确保安全
+# 工作流权限设置
 permissions:
-  contents: none
+  contents: read
 
 jobs:
   ping_and_warm:
@@ -22,18 +22,32 @@ jobs:
     # ======================= 2. 环境变量 =======================
     env:
       # ⚠️ 必须设置的 Secret: 您的 Cloudflare Pages 部署地址
-      BASE_URL: ${{ secrets.CLOUDFLARE_PAGES_URL }}
+      BASE_URL: ${{ secrets.CLOUDFLARE_PAGES_URL || 'https://www.dinosawmachine.com' }}
       # ⚠️ 专用于获取路由列表的 API 路径（需在 Nuxt server/api 中实现）
       ROUTES_API_PATH: /api/sitemap-routes 
       # 额外添加少量关键的静态路由或必须确保缓存新鲜的路由
       STATIC_ROUTES_TO_WARM: |
         /
-        /about
+        /Products
+        /blog
+        /About-us
+        /contact
       
     steps:
-      # ======================= 3. 动态获取路由列表 =======================
+      # ======================= 3. 检查环境变量 =======================
+      - name: 🔍 Check Environment
+        run: |
+          echo "Base URL: ${{ env.BASE_URL }}"
+          echo "Routes API Path: ${{ env.ROUTES_API_PATH }}"
+          if [ -z "${{ env.BASE_URL }}" ]; then
+            echo "❌ BASE_URL is not set!"
+            exit 1
+          fi
+
+      # ======================= 4. 动态获取路由列表 =======================
       - name: ⬇️ Fetch Dynamic Routes from API
         id: fetch_routes
+        continue-on-error: true
         run: |
           # 确保安装 jq 工具来解析 JSON
           sudo apt-get update && sudo apt-get install -y jq
@@ -42,10 +56,13 @@ jobs:
           echo "Fetching routes from: $API_URL"
           
           # 使用 curl 获取 JSON 数组，并使用 jq 解析为换行符分隔的字符串
-          ROUTES=$(curl -s "$API_URL" | jq -r '.[]')
+          ROUTES=$(curl -s --max-time 30 --retry 3 "$API_URL" | jq -r '.[]' 2>/dev/null || echo "")
           
           if [ -z "$ROUTES" ]; then
-            echo "Warning: API returned an empty list of dynamic routes."
+            echo "⚠️ Warning: API returned an empty list of dynamic routes or failed."
+            ROUTES=""
+          else
+            echo "✅ Successfully fetched $(echo "$ROUTES" | wc -l) dynamic routes"
           fi
           
           # 将动态路由列表设置为下一步可用的输出变量
@@ -53,7 +70,7 @@ jobs:
           echo "$ROUTES" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
         
-      # ======================= 4. 循环并预热所有路由 =======================
+      # ======================= 5. 循环并预热所有路由 =======================
       - name: 🌐 Loop and Warm All Routes
         run: |
           # 组合静态列表和动态列表
@@ -63,16 +80,55 @@ jobs:
           # 将所有路由合并为一个列表，用换行符分隔
           ALL_ROUTES="$STATIC_LIST"$'\n'"$DYNAMIC_LIST"
           
-          echo "Found the following routes to warm:"
-          echo "$ALL_ROUTES"
+          echo "📋 Found the following routes to warm:"
+          echo "$ALL_ROUTES" | grep -v '^$' | head -20  # 显示前20个非空路由
+          
+          # 计数器
+          SUCCESS_COUNT=0
+          FAIL_COUNT=0
+          TOTAL_COUNT=0
           
           # 遍历所有路由并发送请求
           echo "$ALL_ROUTES" | while read -r route; do
             # 确保路由非空
-            if [ -n "$route" ]; then
+            if [ -n "$route" ] && [ "$route" != " " ]; then
               TARGET_URL="${{ env.BASE_URL }}$route"
-              echo "--- Warming: $TARGET_URL ---"
+              echo "🔥 Warming: $TARGET_URL"
               
               # 发送预热请求
               # -s: 静默模式 | -o /dev/null: 忽略响应体 | -w: 打印状态码和耗时
-              curl -
+              RESPONSE=$(curl -s -o /dev/null -w "%{http_code}|%{time_total}" \
+                --max-time 15 \
+                --retry 2 \
+                --user-agent "GitHub-Actions-Cache-Warmer/1.0" \
+                "$TARGET_URL" 2>/dev/null || echo "000|0")
+              
+              HTTP_CODE=$(echo "$RESPONSE" | cut -d'|' -f1)
+              TIME_TOTAL=$(echo "$RESPONSE" | cut -d'|' -f2)
+              
+              TOTAL_COUNT=$((TOTAL_COUNT + 1))
+              
+              if [ "$HTTP_CODE" -ge 200 ] && [ "$HTTP_CODE" -lt 400 ]; then
+                SUCCESS_COUNT=$((SUCCESS_COUNT + 1))
+                echo "  ✅ Status: $HTTP_CODE | Time: ${TIME_TOTAL}s"
+              else
+                FAIL_COUNT=$((FAIL_COUNT + 1))
+                echo "  ❌ Status: $HTTP_CODE | Time: ${TIME_TOTAL}s"
+              fi
+              
+              # 添加小延迟避免过于频繁的请求
+              sleep 0.5
+            fi
+          done
+          
+          echo ""
+          echo "📊 Summary:"
+          echo "  Total routes processed: $TOTAL_COUNT"
+          echo "  Successful: $SUCCESS_COUNT"
+          echo "  Failed: $FAIL_COUNT"
+          
+          # 如果失败率过高，标记为失败
+          if [ $TOTAL_COUNT -gt 0 ] && [ $((FAIL_COUNT * 100 / TOTAL_COUNT)) -gt 50 ]; then
+            echo "❌ Too many failures (>50%), marking workflow as failed"
+            exit 1
+          fi

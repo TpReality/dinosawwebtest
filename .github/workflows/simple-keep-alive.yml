@@ -1,0 +1,75 @@
+# 简化版本的 keep-alive 工作流，用于测试
+name: 🚀 Simple Keep Alive
+
+on:
+  # 每小时运行一次（更合理的频率）
+  schedule:
+    - cron: '0 * * * *'
+  # 手动触发
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  keep-alive:
+    runs-on: ubuntu-latest
+    name: Keep Site Alive
+    
+    steps:
+      - name: 🔥 Warm Up Key Pages
+        run: |
+          # 设置网站 URL（如果没有设置 secret，使用默认值）
+          SITE_URL="${{ secrets.CLOUDFLARE_PAGES_URL }}"
+          if [ -z "$SITE_URL" ]; then
+            SITE_URL="https://www.dinosawmachine.com"
+          fi
+          
+          echo "🌐 Warming up site: $SITE_URL"
+          
+          # 要预热的关键页面
+          PAGES=(
+            "/"
+            "/Products"
+            "/blog"
+            "/About-us"
+            "/contact"
+            "/Products/wire-saw-machine"
+            "/Products/diamond-tools"
+          )
+          
+          SUCCESS=0
+          TOTAL=${#PAGES[@]}
+          
+          for page in "${PAGES[@]}"; do
+            URL="$SITE_URL$page"
+            echo "🔥 Warming: $URL"
+            
+            # 发送请求并获取状态码
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+              --max-time 30 \
+              --retry 2 \
+              --user-agent "GitHub-Actions-Keep-Alive/1.0" \
+              "$URL" || echo "000")
+            
+            if [ "$STATUS" -ge 200 ] && [ "$STATUS" -lt 400 ]; then
+              echo "  ✅ Success: $STATUS"
+              SUCCESS=$((SUCCESS + 1))
+            else
+              echo "  ❌ Failed: $STATUS"
+            fi
+            
+            # 短暂延迟
+            sleep 2
+          done
+          
+          echo ""
+          echo "📊 Results: $SUCCESS/$TOTAL pages warmed successfully"
+          
+          # 如果成功率低于 50%，标记为失败
+          if [ $SUCCESS -lt $((TOTAL / 2)) ]; then
+            echo "❌ Too many failures, marking as failed"
+            exit 1
+          else
+            echo "✅ Keep alive completed successfully"
+          fi
