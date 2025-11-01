@@ -23,7 +23,7 @@ export default defineEventHandler(async (event) => {
     <loc>https://www.dinosawmachine.com/</loc>
     <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <priority>1.1</priority>
   </url>
 </urlset>`;
         

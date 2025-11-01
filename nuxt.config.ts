@@ -96,8 +96,8 @@ export default defineNuxtConfig({
     //  '/de/**': {  isr: true, swr: 600 }, '/ar/**': {  isr: true, swr: 600 }, '/vi/**': {  isr: true, swr: 600 },
     // '/fr/**': {  isr: true, swr: 600 }, '/pl/**': {  isr: true, swr: 600 },
     '/api/**': { proxy: 'https://cms.stoneboss.vip/api/**', headers: { 'cache-control': 's-maxage=60' } },
-    '/sitemap.xml': {  isr: true, swr: 600 }, 
-    '/zh/sitemap.xml': { isr: true, swr: 600 }, 
+    '/sitemap.xml': {  prerender: true }, 
+    '/zh/sitemap.xml': { prerender: true }, 
     // '/ru/sitemap.xml': { prerender: true },
   },
     prerender: {
@@ -142,20 +142,20 @@ export default defineNuxtConfig({
   //   '/sitemap.xml': { prerender: true }
   // },
   
-  routeRules: {
-    '/blog/**': { headers: { 'Cache-Control': 'public, s-maxage=1, stale-while-revalidate=31536000' } },
-    '/Products/**': { headers: { 'Cache-Control': 'public, s-maxage=1, stale-while-revalidate=31536000' } },
-    '/': { prerender: true }, '/Products': { prerender: true }, '/projects': { prerender: true }, '/support': { prerender: true },
-    '/blog': { prerender: true }, '/About-us': { prerender: true }, '/video': { prerender: true }, '/contact': { prerender: true },
-    '/stoneidentification': { prerender: true }, '/ai': { prerender: true },
-    // '/zh/**': { prerender: true }, '/tr/**': { prerender: true }, '/pt/**': { prerender: true }, '/es/**': { prerender: true },
-    // '/ru/**': { prerender: true }, '/de/**': { prerender: true }, '/ar/**': { prerender: true }, '/vi/**': { prerender: true },
-    // '/fr/**': { prerender: true }, '/pl/**': { prerender: true },
-    '/api/**': { proxy: 'https://cms.stoneboss.vip/api/**', headers: { 'Cache-Control': 'public, s-maxage=1, stale-while-revalidate=31536000', } },
-    '/sitemap.xml': { prerender: true }, 
-    // '/zh/sitemap.xml': { prerender: true }, 
-    // '/ru/sitemap.xml': { prerender: true },
-  },
+  // routeRules: {
+  //   '/blog/**': { headers: { 'Cache-Control': 'public, s-maxage=1, stale-while-revalidate=31536000' } },
+  //   '/Products/**': { headers: { 'Cache-Control': 'public, s-maxage=1, stale-while-revalidate=31536000' } },
+  //   '/': { prerender: true }, '/Products': { prerender: true }, '/projects': { prerender: true }, '/support': { prerender: true },
+  //   '/blog': { prerender: true }, '/About-us': { prerender: true }, '/video': { prerender: true }, '/contact': { prerender: true },
+  //   '/stoneidentification': { prerender: true }, '/ai': { prerender: true },
+  //   // '/zh/**': { prerender: true }, '/tr/**': { prerender: true }, '/pt/**': { prerender: true }, '/es/**': { prerender: true },
+  //   // '/ru/**': { prerender: true }, '/de/**': { prerender: true }, '/ar/**': { prerender: true }, '/vi/**': { prerender: true },
+  //   // '/fr/**': { prerender: true }, '/pl/**': { prerender: true },
+  //   '/api/**': { proxy: 'https://cms.stoneboss.vip/api/**', headers: { 'Cache-Control': 'public, s-maxage=1, stale-while-revalidate=31536000', } },
+  //   '/sitemap.xml': { prerender: true }, 
+  //   // '/zh/sitemap.xml': { prerender: true }, 
+  //   // '/ru/sitemap.xml': { prerender: true },
+  // },
 
   i18n: {
     strategy: 'prefix_except_default',
